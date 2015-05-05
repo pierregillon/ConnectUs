@@ -2,16 +2,16 @@
 
 namespace ConnectUs.ClientSide
 {
-    public class Client
+    public class RequestProcessor : IRequestProcessor
     {
         private readonly IClientInformationService _clientInformationService;
 
-        public Client(IClientInformationService clientInformationService)
+        public RequestProcessor(IClientInformationService clientInformationService)
         {
             _clientInformationService = clientInformationService;
         }
 
-        public Response Execute(Request request)
+        public Response Process(Request request)
         {
             if (request.Name == "GetClientInformation") {
                 return new Response
@@ -22,16 +22,5 @@ namespace ConnectUs.ClientSide
 
             throw new Exception("request invalid");
         }
-    }
-
-    public class Response
-    {
-        public string Content { get; set; }
-    }
-
-    public class Request
-    {
-        public string Name { get; set; }
-        public object[] Parameters { get; set; }
     }
 }

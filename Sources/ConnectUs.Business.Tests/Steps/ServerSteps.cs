@@ -1,5 +1,4 @@
-﻿using System.Net;
-using ConnectUs.Business.Tests.Mocks;
+﻿using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -27,8 +26,8 @@ namespace ConnectUs.Business.Tests.Steps
         }
         public Client Client
         {
-            get { return ScenarioContext.Current.Get<Client>("Client"); }
-            set { ScenarioContext.Current.Add("Client", value); }
+            get { return ScenarioContext.Current.Get<Client>("RequestProcessor"); }
+            set { ScenarioContext.Current.Add("RequestProcessor", value); }
         }
 
         [Given(@"A server")]

@@ -5,11 +5,11 @@ namespace ConnectUs.Business.Tests.Mocks
 {
     public class FakeConnection : IConnection
     {
-        private readonly Client _client;
+        private readonly RequestProcessor _requestProcessor;
 
-        public FakeConnection(Client client)
+        public FakeConnection(RequestProcessor requestProcessor)
         {
-            _client = client;
+            _requestProcessor = requestProcessor;
         }
 
         public TResponse Execute<TRequest, TResponse>(TRequest request)

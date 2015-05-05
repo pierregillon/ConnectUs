@@ -17,7 +17,7 @@ namespace ConnectUs.Business.Tests.Mocks
 
         public IConnection Connect(string host, int port)
         {
-            //var connection = new FakeConnection(new Client());
+            //var connection = new FakeConnection(new RequestProcessor());
             //_ports[port].Add(connection);
             //OnClientConnected(new ConnectionEstablishedEventArgs(connection));
             //return connection;

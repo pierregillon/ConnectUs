@@ -5,16 +5,16 @@ namespace ConnectUs.ServerSide
 {
     public class Client
     {
-        private readonly ClientSide.Client _client;
+        private readonly IRequestProcessor _requestProcessor;
 
-        public Client(ClientSide.Client client)
+        public Client(IRequestProcessor requestProcessor)
         {
-            _client = client;
+            _requestProcessor = requestProcessor;
         }
 
         public ClientInformationResponse GetClientInformation()
         {
-            var response = _client.Execute(new Request {Name = "GetClientInformation"});
+            var response = _requestProcessor.Process(new Request {Name = "GetClientInformation"});
             return response.To<ClientInformationResponse>();
         }
     }
