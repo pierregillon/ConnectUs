@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿using System.Net;
+using System.Threading;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 using System.Linq;
+using Client = ConnectUs.ClientSide.Client;
 
 namespace ConnectUs.Business.Tests.Steps
 {
@@ -20,37 +22,55 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<FakeConnector>("FakeConnector"); }
             set { ScenarioContext.Current.Add("FakeConnector", value); }
         }
+        public ClientInformationResponse ClientInformation
+        {
+            get { return ScenarioContext.Current.Get<ClientInformationResponse>("ClientInformation"); }
+            set { ScenarioContext.Current.Add("ClientInformation", value); }
+        }
+        public Client Client
+        {
+            get { return ScenarioContext.Current.Get<Client>("Client"); }
+            set { ScenarioContext.Current.Add("Client", value); }
+        }
 
         [Given(@"A server")]
         public void GivenAServer()
         {
             Connector = new FakeConnector();
-            Server = new Server(Connector);
+            Server = new Server();
         }
 
-        [When(@"The server start at the port (.*)")]
-        public void WhenTheServerStartAtThePort(int port)
+        [When(@"The server requests to the client (.*) its information")]
+        public void WhenTheServerRequestsToTheClientItsInformation(int index)
         {
-            Server.Start(port);
+            ClientInformation = Server
+                .GetConnectedClients()
+                .ElementAt(index - 1)
+                .Execute<ClientInformationRequest, ClientInformationResponse>(new ClientInformationRequest());
+        }
+
+        [When(@"The client connects the server")]
+        public void WhenTheClientConnectsTheServer()
+        {
+            Server.AddConnectedClient(Client);
         }
 
         [Then(@"The client list of the server has (.*) element")]
         public void ThenTheClientListOfTheServerHasElement(int clientCount)
         {
-            Check.That(Server.Clients.Count()).IsEqualTo(clientCount);
+            Check.That(Server.GetConnectedClients().Count()).IsEqualTo(clientCount);
         }
 
-        [Then(@"The (.*) client has the ip ""(.*)""")]
-        public void ThenTheClientHasTheIp(int index, string ip)
+        [Then(@"The received information contains an ip to ""(.*)""")]
+        public void ThenTheReceivedInformationContainsAnIpTo(string ip)
         {
-            Check.That(Server.Clients.ElementAt(index-1).Ip.ToString()).IsEqualTo(ip);
+            Check.That(ClientInformation.Ip).IsEqualTo(IPAddress.Parse(ip));
         }
 
-        [When(@"I wait (.*) seconds")]
-        public void WhenIWaitSeconds(int seconds)
+        [Then(@"The received information contains a machine name to ""(.*)""")]
+        public void ThenTheReceivedInformationContainsAMachineNameTo(string machineName)
         {
-            Thread.Sleep(seconds * 1000);
+            Check.That(ClientInformation.MachineName).IsEqualTo(machineName);
         }
-
     }
 }

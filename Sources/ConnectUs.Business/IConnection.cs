@@ -2,7 +2,6 @@
 {
     public interface IConnection
     {
-        void Send<T>(T message) where T : Message;
-        T Read<T>() where T : Message;
+        TResponse Execute<TRequest, TResponse>(TRequest request);
     }
 }

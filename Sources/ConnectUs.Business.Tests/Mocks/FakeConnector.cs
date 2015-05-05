@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ConnectUs.ClientSide;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
@@ -16,10 +17,11 @@ namespace ConnectUs.Business.Tests.Mocks
 
         public IConnection Connect(string host, int port)
         {
-            var connection = new FakeConnection();
-            _ports[port].Add(connection);
-            OnClientConnected(new ConnectionEstablishedEventArgs(connection));
-            return connection;
+            //var connection = new FakeConnection(new Client());
+            //_ports[port].Add(connection);
+            //OnClientConnected(new ConnectionEstablishedEventArgs(connection));
+            //return connection;
+            throw new NotImplementedException();
         }
         public void StartListening(int port)
         {

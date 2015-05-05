@@ -22,19 +22,13 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client")]
         public void GivenAClient()
         {
-            Client = new Client(Connector, new MessageProcessor(new FakeClientInformationService(IPAddress.None)));
+            Client = new Client(new FakeClientInformationService(IPAddress.None, string.Empty));
         }
 
-        [Given(@"A client with ip ""(.*)""")]
-        public void GivenAClientWithIp(string ip)
+        [Given(@"A client with an ip to '(.*)' and a machine name to '(.*)'")]
+        public void GivenAClientWithAnIpToAndAMachineNameTo(string ip, string machineName)
         {
-            Client = new Client(Connector, new MessageProcessor(new FakeClientInformationService(IPAddress.Parse(ip))));
-        }
-
-        [When(@"The client connects the server at the port (.*)")]
-        public void WhenTheClientConnectsTheServerAtThePort(int p0)
-        {
-            Client.StartProcessRequest("localhost", 9000);
+            Client = new Client(new FakeClientInformationService(IPAddress.Parse(ip), machineName));
         }
     }
 }

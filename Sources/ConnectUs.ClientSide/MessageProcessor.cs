@@ -13,12 +13,7 @@ namespace ConnectUs.ClientSide
 
         public void Process(IConnection connection, Message message)
         {
-            if (message is ClientInformationRequest) {
-                connection.Send(new ClientInformationResponse
-                {
-                    Ip = _clientInformationService.GetIp()
-                });
-            }
+            
         }
     }
 }

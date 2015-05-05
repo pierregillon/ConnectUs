@@ -5,5 +5,6 @@ namespace ConnectUs.ClientSide
     public interface IClientInformationService
     {
         IPAddress GetIp();
+        string GetMachineName();
     }
 }

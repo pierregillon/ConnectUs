@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using ConnectUs.ClientSide;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
     public class FakeConnection : IConnection
     {
-        private readonly Queue<Message> _messages = new Queue<Message>();
+        private readonly Client _client;
 
-        public void Send<T>(T message) where T : Message
+        public FakeConnection(Client client)
         {
-            _messages.Enqueue(message);
+            _client = client;
         }
 
-        public T Read<T>() where T : Message
+        public TResponse Execute<TRequest, TResponse>(TRequest request)
         {
-            return (T) _messages.Dequeue();
+            return _client.Execute<TRequest, TResponse>(request);
         }
     }
 }
