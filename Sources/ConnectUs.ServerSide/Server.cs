@@ -5,19 +5,30 @@ namespace ConnectUs.ServerSide
 {
     public class Server
     {
-        private readonly IConnector _connector;
+        private readonly IConnectionListener _connectionListener;
+        private readonly List<Client> _clients = new List<Client>();
 
-        public Server(IConnector connector)
+        public IEnumerable<Client> Clients
         {
-            _connector = connector;
-            _connector.ClientConnected
+            get { return _clients; }
+        }
+
+        public Server(IConnectionListener connectionListener)
+        {
+            _connectionListener = connectionListener;
+            _connectionListener.ConnectionEstablished += ConnectorOnConnectionEstablished;
         }
 
         public void Start(int port)
         {
-            _connector.Listen(port);
+            _connectionListener.StartListening(port);
         }
 
-        public IEnumerable<Client> Clients { get; set; }
+        private void ConnectorOnConnectionEstablished(object sender, ConnectionEstablishedEventArgs args)
+        {
+            var client = new Client(args.Connection);
+            _clients.Add(client);
+            client.RefreshData();
+        }
     }
 }

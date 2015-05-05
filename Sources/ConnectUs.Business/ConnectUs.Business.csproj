@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientInformationRequest.cs" />
+    <Compile Include="ClientInformationResponse.cs" />
+    <Compile Include="ConnectionEstablishedEventArgs.cs" />
+    <Compile Include="IConnection.cs" />
+    <Compile Include="IConnectionListener.cs" />
     <Compile Include="IConnector.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="NothingToReadException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

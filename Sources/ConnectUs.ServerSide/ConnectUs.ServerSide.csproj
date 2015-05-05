@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="ClientDisconnectedEventArgs.cs" />
     <Compile Include="ClientDisconnectedEventHandler.cs" />
     <Compile Include="ClientInfo.cs" />
