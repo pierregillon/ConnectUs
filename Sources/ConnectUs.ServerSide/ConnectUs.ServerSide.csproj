@@ -45,12 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ClientConnectedEventArgs.cs" />
     <Compile Include="ClientDisconnectedEventArgs.cs" />
     <Compile Include="ClientDisconnectedEventHandler.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="IClient.cs" />
+    <Compile Include="IClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteRequestProcessor.cs" />
     <Compile Include="ResponseExtensions.cs" />
     <Compile Include="Server.cs" />
   </ItemGroup>

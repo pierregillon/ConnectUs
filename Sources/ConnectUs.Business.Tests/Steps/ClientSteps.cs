@@ -8,11 +8,6 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ClientSteps
     {
-        public FakeConnector Connector
-        {
-            get { return ScenarioContext.Current.Get<FakeConnector>("FakeConnector"); }
-            set { ScenarioContext.Current.Add("FakeConnector", value); }
-        }
         public Client Client
         {
             get { return ScenarioContext.Current.Get<Client>("RequestProcessor"); }

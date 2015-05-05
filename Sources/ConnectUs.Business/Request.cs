@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.ClientSide
+﻿namespace ConnectUs.Business
 {
     public class Request
     {

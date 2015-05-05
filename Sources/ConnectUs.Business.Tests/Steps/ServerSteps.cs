@@ -14,11 +14,6 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<Server>("Server"); }
             set { ScenarioContext.Current.Add("Server", value); }
         }
-        public FakeConnector Connector
-        {
-            get { return ScenarioContext.Current.Get<FakeConnector>("FakeConnector"); }
-            set { ScenarioContext.Current.Add("FakeConnector", value); }
-        }
         public ClientInformationResponse ClientInformation
         {
             get { return ScenarioContext.Current.Get<ClientInformationResponse>("ClientInformation"); }
@@ -29,12 +24,17 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<Client>("RequestProcessor"); }
             set { ScenarioContext.Current.Add("RequestProcessor", value); }
         }
+        public FakeClientListener ClientListener
+        {
+            get { return ScenarioContext.Current.Get<FakeClientListener>("ClientListener"); }
+            set { ScenarioContext.Current.Add("ClientListener", value); }
+        }
 
         [Given(@"A server")]
         public void GivenAServer()
         {
-            Connector = new FakeConnector();
-            Server = new Server();
+            ClientListener = new FakeClientListener();
+            Server = new Server(ClientListener);
         }
 
         [When(@"The server requests to the client (.*) its information")]
@@ -49,7 +49,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"The client connects the server")]
         public void WhenTheClientConnectsTheServer()
         {
-            Server.AddConnectedClient(Client);
+            ClientListener.AddClient(Client);
         }
 
         [Then(@"The client list of the server has (.*) element")]
