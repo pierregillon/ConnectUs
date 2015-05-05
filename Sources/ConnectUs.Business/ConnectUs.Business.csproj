@@ -43,6 +43,7 @@
     <Compile Include="ClientInformationRequest.cs" />
     <Compile Include="ClientInformationResponse.cs" />
     <Compile Include="ConnectionEstablishedEventArgs.cs" />
+    <Compile Include="ConnectionLostEventArgs.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionListener.cs" />
     <Compile Include="IConnector.cs" />

@@ -5,8 +5,9 @@ namespace ConnectUs.Business
     public interface IConnectionListener
     {
         event EventHandler<ConnectionEstablishedEventArgs> ConnectionEstablished;
+        event EventHandler<ConnectionLostEventArgs> ConnectionLost;
 
-        void StartListening(int port);
-        void StopListening();
+        void Start(int port);
+        void Stop();
     }
 }

@@ -21,8 +21,8 @@ namespace ConnectUs.Business.Tests.Steps
         }
         public Client Client
         {
-            get { return ScenarioContext.Current.Get<Client>("RequestProcessor"); }
-            set { ScenarioContext.Current.Add("RequestProcessor", value); }
+            get { return ScenarioContext.Current.Get<Client>("Client"); }
+            set { ScenarioContext.Current.Add("Client", value); }
         }
         public FakeClientListener ClientListener
         {

@@ -49,6 +49,7 @@
     <Compile Include="ClientDisconnectedEventArgs.cs" />
     <Compile Include="ClientDisconnectedEventHandler.cs" />
     <Compile Include="ClientInfo.cs" />
+    <Compile Include="ClientListener.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="IClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="RemoteRequestProcessor.cs" />
     <Compile Include="ResponseExtensions.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="ServerConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
