@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ConnectUs.ClientSide;
 
 namespace ConnectUs.ServerSide
 {
@@ -11,6 +10,7 @@ namespace ConnectUs.ServerSide
         {
             _clients.Add(client);
         }
+
         public IEnumerable<Client> GetConnectedClients()
         {
             return _clients;

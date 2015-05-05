@@ -1,11 +1,9 @@
 ﻿using System.Net;
-using System.Threading;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 using System.Linq;
-using Client = ConnectUs.ClientSide.Client;
 
 namespace ConnectUs.Business.Tests.Steps
 {
@@ -46,7 +44,7 @@ namespace ConnectUs.Business.Tests.Steps
             ClientInformation = Server
                 .GetConnectedClients()
                 .ElementAt(index - 1)
-                .Execute<ClientInformationRequest, ClientInformationResponse>(new ClientInformationRequest());
+                .GetClientInformation();
         }
 
         [When(@"The client connects the server")]
@@ -64,7 +62,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Then(@"The received information contains an ip to ""(.*)""")]
         public void ThenTheReceivedInformationContainsAnIpTo(string ip)
         {
-            Check.That(ClientInformation.Ip).IsEqualTo(IPAddress.Parse(ip));
+            Check.That(ClientInformation.Ip).IsEqualTo(ip);
         }
 
         [Then(@"The received information contains a machine name to ""(.*)""")]

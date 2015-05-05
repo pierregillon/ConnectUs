@@ -1,9 +1,8 @@
 ﻿using System;
-using ConnectUs.Business;
 
 namespace ConnectUs.ClientSide
 {
-    public class Client : IConnection
+    public class Client
     {
         private readonly IClientInformationService _clientInformationService;
 
@@ -12,17 +11,27 @@ namespace ConnectUs.ClientSide
             _clientInformationService = clientInformationService;
         }
 
-        public TResponse Execute<TRequest, TResponse>(TRequest request)
+        public Response Execute(Request request)
         {
-            if (request is ClientInformationRequest) {
-                return (TResponse) (object) new ClientInformationResponse
+            if (request.Name == "GetClientInformation") {
+                return new Response
                 {
-                    Ip = _clientInformationService.GetIp(),
-                    MachineName = _clientInformationService.GetMachineName(),
+                    Content = "{" + string.Format("\"Ip\": \"{0}\", \"MachineName\": \"{1}\"", _clientInformationService.GetIp(), _clientInformationService.GetMachineName()) + "}"
                 };
             }
 
             throw new Exception("request invalid");
         }
+    }
+
+    public class Response
+    {
+        public string Content { get; set; }
+    }
+
+    public class Request
+    {
+        public string Name { get; set; }
+        public object[] Parameters { get; set; }
     }
 }

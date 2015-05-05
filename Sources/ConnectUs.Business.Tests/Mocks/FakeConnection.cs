@@ -1,4 +1,5 @@
-﻿using ConnectUs.ClientSide;
+﻿using System;
+using ConnectUs.ClientSide;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
@@ -13,7 +14,7 @@ namespace ConnectUs.Business.Tests.Mocks
 
         public TResponse Execute<TRequest, TResponse>(TRequest request)
         {
-            return _client.Execute<TRequest, TResponse>(request);
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.Net;
-
-namespace ConnectUs.Business
+﻿namespace ConnectUs.Business
 {
     public class ClientInformationResponse : Message
     {
-        public IPAddress Ip { get; set; }
+        public string Ip { get; set; }
         public string MachineName { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using ConnectUs.Business.Tests.Mocks;
-using ConnectUs.ClientSide;
+using ConnectUs.ServerSide;
 using TechTalk.SpecFlow;
 
 namespace ConnectUs.Business.Tests.Steps
@@ -22,13 +22,13 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client")]
         public void GivenAClient()
         {
-            Client = new Client(new FakeClientInformationService(IPAddress.None, string.Empty));
+            Client = new Client(new ClientSide.Client(new FakeClientInformationService(IPAddress.None, string.Empty)));
         }
 
         [Given(@"A client with an ip to '(.*)' and a machine name to '(.*)'")]
         public void GivenAClientWithAnIpToAndAMachineNameTo(string ip, string machineName)
         {
-            Client = new Client(new FakeClientInformationService(IPAddress.Parse(ip), machineName));
+            Client = new Client(new ClientSide.Client(new FakeClientInformationService(IPAddress.Parse(ip), machineName)));
         }
     }
 }
