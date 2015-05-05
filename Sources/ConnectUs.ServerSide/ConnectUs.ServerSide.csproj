@@ -62,10 +62,6 @@
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ClientSide\ConnectUs.ClientSide.csproj">
-      <Project>{666554C4-D914-43E3-8B79-004B5DC63454}</Project>
-      <Name>ConnectUs.ClientSide</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

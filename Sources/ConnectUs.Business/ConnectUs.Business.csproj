@@ -46,6 +46,7 @@
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionListener.cs" />
     <Compile Include="IConnector.cs" />
+    <Compile Include="IRequestProcessor.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="NothingToReadException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

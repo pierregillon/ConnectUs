@@ -1,6 +1,4 @@
-﻿using ConnectUs.Business;
-
-namespace ConnectUs.ClientSide
+﻿namespace ConnectUs.Business
 {
     public interface IRequestProcessor
     {

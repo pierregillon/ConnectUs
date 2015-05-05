@@ -1,5 +1,4 @@
 ﻿using ConnectUs.Business;
-using ConnectUs.ClientSide;
 using Newtonsoft.Json;
 
 namespace ConnectUs.ServerSide

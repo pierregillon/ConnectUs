@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRequestProcessor.cs" />
     <Compile Include="RequestProcessor.cs" />
     <Compile Include="IClientInformationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
