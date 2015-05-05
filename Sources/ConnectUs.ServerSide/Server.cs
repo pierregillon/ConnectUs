@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConnectUs.ServerSide
 {
@@ -10,12 +11,17 @@ namespace ConnectUs.ServerSide
         public Server(IClientListener clientListener)
         {
             _clientListener = clientListener;
-            _clientListener.ClientConnected+=ClientListenerOnClientConnected;
+            _clientListener.ClientConnected += ClientListenerOnClientConnected;
+            _clientListener.ClientDisconnected += ClientListenerOnClientDisconnected;
         }
 
         private void ClientListenerOnClientConnected(object sender, ClientConnectedEventArgs args)
         {
             _clients.Add(args.Client);
+        }
+        private void ClientListenerOnClientDisconnected(object sender, ClientDisconnectedEventArgs args)
+        {
+            _clients.Remove(args.Client);
         }
 
         public IEnumerable<Client> GetConnectedClients()

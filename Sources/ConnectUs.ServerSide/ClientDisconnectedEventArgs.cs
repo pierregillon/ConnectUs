@@ -4,6 +4,10 @@ namespace ConnectUs.ServerSide
 {
     public class ClientDisconnectedEventArgs : EventArgs
     {
-        public string Reason { get; set; }
+        public Client Client { get; private set; }
+        public ClientDisconnectedEventArgs(Client client)
+        {
+            Client = client;
+        }
     }
 }

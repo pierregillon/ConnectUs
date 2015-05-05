@@ -52,8 +52,14 @@ namespace ConnectUs.Business.Tests.Steps
             ClientListener.AddClient(Client);
         }
 
-        [Then(@"The client list of the server has (.*) element")]
-        public void ThenTheClientListOfTheServerHasElement(int clientCount)
+        [When(@"The client disconnects from the server")]
+        public void WhenTheClientDisconnectsFromTheServer()
+        {
+            ClientListener.RemoveClient(Client);
+        }
+
+        [Then(@"The server has (.*) client")]
+        public void ThenTheServerHasClient(int clientCount)
         {
             Check.That(Server.GetConnectedClients().Count()).IsEqualTo(clientCount);
         }

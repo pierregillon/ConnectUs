@@ -84,7 +84,29 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.When("The client connects the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.Then("The client list of the server has 1 element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The server has 1 client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Disconnection of a client to a server")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Communication")]
+        public virtual void DisconnectionOfAClientToAServer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Disconnection of a client to a server", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+ testRunner.Given("A server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 14
+  testRunner.And("A client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+ testRunner.When("The client connects the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+ testRunner.And("The client disconnects from the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+ testRunner.Then("The server has 0 client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -95,19 +117,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerRequestsClientInformation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server requests client information", ((string[])(null)));
-#line 12
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 13
+#line 20
  testRunner.Given("A server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
+#line 21
   testRunner.And("A client with an ip to \'192.168.1.25\' and a machine name to \'FsTivit3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 22
  testRunner.When("The client connects the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
+#line 23
   testRunner.And("The server requests to the client 1 its information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 24
  testRunner.Then("The received information contains an ip to \"192.168.1.25\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 18
+#line 25
   testRunner.And("The received information contains a machine name to \"FsTivit3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
