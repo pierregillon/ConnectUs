@@ -50,9 +50,11 @@
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStoppedException.cs" />
     <Compile Include="Connections\ConnectionLostEventArgs.cs" />
+    <Compile Include="Encodings\JsonEncoder.cs" />
     <Compile Include="Connections\IConnection.cs" />
     <Compile Include="Connections\IConnectionListener.cs" />
     <Compile Include="Connections\IConnector.cs" />
+    <Compile Include="Encodings\IEncoder.cs" />
     <Compile Include="Connections\TcpClientConnectionListener.cs" />
     <Compile Include="IRequestProcessor.cs" />
     <Compile Include="Message.cs" />

@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunicationWithTcpClientConnections.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\EncodeData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EncodeData.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ListenClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,7 +96,9 @@
     <Compile Include="Steps\ConnectionListenerSteps.cs" />
     <Compile Include="Mocks\FakeConnection.cs" />
     <Compile Include="Steps\ConnectionSteps.cs" />
+    <Compile Include="Steps\EncoderSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
+    <Compile Include="Steps\ResponseSteps.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
     <Compile Include="Steps\ServerSteps.cs" />
     <Compile Include="Steps\TcpClientSteps.cs" />
@@ -105,6 +112,10 @@
     <None Include="Features\CommunicationWithTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CommunicationWithTcpClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\EncodeData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EncodeData.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ListenClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

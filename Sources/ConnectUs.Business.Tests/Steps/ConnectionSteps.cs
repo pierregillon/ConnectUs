@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using ConnectUs.Business.Connections;
+using ConnectUs.Business.Encodings;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -51,14 +52,14 @@ namespace ConnectUs.Business.Tests.Steps
                 listener.Start();
                 var client = listener.AcceptTcpClient();
                 listener.Stop();
-                return new TcpClientConnection(client);
+                return new TcpClientConnection(client, new JsonEncoder());
             });
 
             var clientTask = Task.Run<IConnection>(() =>
             {
                 var client = new TcpClient();
                 client.Connect("localhost", port);
-                return new TcpClientConnection(client);
+                return new TcpClientConnection(client, new JsonEncoder());
             });
 
             Task.WaitAll(serverTask, clientTask);

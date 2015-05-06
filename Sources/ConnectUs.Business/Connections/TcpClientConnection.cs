@@ -1,35 +1,32 @@
 ﻿using System.Net.Sockets;
-using System.Text;
-using Newtonsoft.Json;
+using ConnectUs.Business.Encodings;
 
 namespace ConnectUs.Business.Connections
 {
     public class TcpClientConnection : IConnection
     {
         private readonly TcpClient _client;
+        private readonly IEncoder _encoder;
 
-        public TcpClientConnection(TcpClient client)
+        public TcpClientConnection(TcpClient client, IEncoder encoder)
         {
             _client = client;
+            _encoder = encoder;
         }
 
         public void Send<T>(T request)
         {
-            var encoding = new UTF8Encoding();
-            var json = JsonConvert.SerializeObject(request);
-            var bytes = encoding.GetBytes(json);
+            var bytes = _encoder.Encode(request);
             var networkStream = _client.GetStream();
             networkStream.Write(bytes, 0, bytes.Length);
         }
 
         public T Read<T>()
         {
-            var encoding = new UTF8Encoding();
             var networkStream = _client.GetStream();
             var buffer = new byte[1024];
             networkStream.Read(buffer, 0, buffer.Length);
-            var json = encoding.GetString(buffer);
-            return JsonConvert.DeserializeObject<T>(json);
+            return _encoder.Decode<T>(buffer);
         }
     }
 }

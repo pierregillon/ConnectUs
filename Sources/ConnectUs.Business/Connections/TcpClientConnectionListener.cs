@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using ConnectUs.Business.Encodings;
 
 namespace ConnectUs.Business.Connections
 {
@@ -35,7 +36,7 @@ namespace ConnectUs.Business.Connections
         private void Callback(IAsyncResult result)
         {
             var client = _listener.EndAcceptTcpClient(result);
-            OnConnectionEstablished(new ConnectionEstablishedEventArgs(new TcpClientConnection(client)));
+            OnConnectionEstablished(new ConnectionEstablishedEventArgs(new TcpClientConnection(client, new JsonEncoder())));
             _listener.BeginAcceptTcpClient(Callback, _listener);
         }
 
