@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConnectUs.Business
+namespace ConnectUs.Business.Connections
 {
     public interface IConnectionListener
     {

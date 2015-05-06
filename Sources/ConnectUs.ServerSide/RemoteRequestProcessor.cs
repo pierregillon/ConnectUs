@@ -1,4 +1,5 @@
 ﻿using ConnectUs.Business;
+using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide
 {

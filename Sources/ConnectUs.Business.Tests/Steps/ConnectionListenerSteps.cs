@@ -1,4 +1,5 @@
-﻿using ConnectUs.Business.Tests.Mocks;
+﻿using ConnectUs.Business.Connections;
+using ConnectUs.Business.Tests.Mocks;
 using Moq;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -28,6 +29,12 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IConnection>("Connection"); }
             set { ScenarioContext.Current.Add("Connection", value); }
         }
+        public ConnectionEstablishedEventArgs ConnectionEstablishedEventArgs
+        {
+            get { return ScenarioContext.Current.Get<ConnectionEstablishedEventArgs>("ConnectionEstablishedEventArgs"); }
+            set { ScenarioContext.Current.Add("ConnectionEstablishedEventArgs", value); }
+        }
+
 
         [Given(@"A connection listener")]
         public void GivenAConnectionListener()
@@ -35,6 +42,13 @@ namespace ConnectUs.Business.Tests.Steps
             MockConnectionListener = new Mock<IConnectionListener>();
             MockConnectionListener.Setup(listener => listener.Start(It.IsAny<int>())).Callback<int>(port => PortUsed = port);
             ConnectionListener = MockConnectionListener.Object;
+        }
+
+        [Given(@"A socket connection listener")]
+        public void GivenASocketConnectionListener()
+        {
+            ConnectionListener = new TcpClientConnectionListener();
+            ConnectionListener.ConnectionEstablished += (sender, args) => ConnectionEstablishedEventArgs = args;
         }
 
         [When(@"a connection is established")]
@@ -50,10 +64,42 @@ namespace ConnectUs.Business.Tests.Steps
             MockConnectionListener.Raise(listener => listener.ConnectionLost += null, new ConnectionLostEventArgs(Connection));
         }
 
+        [When(@"The connection listener starts listening on the port (.*)")]
+        public void WhenTheConnectionListenerStartsListeningOnThePort(int port)
+        {
+            ConnectionListener.Start(port);
+        }
+
+        [When(@"I send the request '(.*)' through the connection of the connection established event")]
+        public void WhenISendTheRequestThroughTheConnectionOfTheConnectionEstablishedEvent(string requestName)
+        {
+            ConnectionEstablishedEventArgs.Connection.Send(new Request { Name = requestName});
+        }
+
         [Then(@"The connection listener is started on port (.*)")]
         public void ThenTheConnectionListenerIsStartedOnPort(int port)
         {
             Check.That(PortUsed).IsEqualTo(port);
+        }
+
+        [Then(@"The connection listener raises a connection established event")]
+        public void ThenTheConnectionListenerRaisesAConnectionEstablishedEvent()
+        {
+            Check.That(ConnectionEstablishedEventArgs).IsNotNull();
+        }
+
+        [Then(@"The connection established raised contains a connection")]
+        public void ThenTheConnectionEstablishedRaisedContainsAConnection()
+        {
+            Check.That(ConnectionEstablishedEventArgs.Connection).IsNotNull();
+        }
+
+        [AfterScenario("ConnectionListener")]
+        public void Clean()
+        {
+            if (ConnectionListener != null) {
+                ConnectionListener.Stop();
+            }
         }
     }
 }

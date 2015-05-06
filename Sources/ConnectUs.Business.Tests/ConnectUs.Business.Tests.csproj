@@ -38,6 +38,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NFluent">
       <HintPath>..\packages\NFluent.1.3.1.0\lib\net40\NFluent.dll</HintPath>
     </Reference>
@@ -69,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListenClientConnections.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ListenTcpClientConnections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListenTcpClientConnections.feature</DependentUpon>
+    </Compile>
     <Compile Include="Mocks\FakeClientInformationService.cs" />
     <Compile Include="Mocks\FakeClientListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +87,7 @@
     <Compile Include="Mocks\FakeConnection.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
     <Compile Include="Steps\ServerSteps.cs" />
+    <Compile Include="Steps\TcpClientSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,6 +98,10 @@
     <None Include="Features\ListenClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListenClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ListenTcpClientConnections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ListenTcpClientConnections.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

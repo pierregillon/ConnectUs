@@ -1,4 +1,6 @@
-﻿namespace ConnectUs.Business.Tests.Mocks
+﻿using ConnectUs.Business.Connections;
+
+namespace ConnectUs.Business.Tests.Mocks
 {
     public class FakeConnection : IConnection
     {
