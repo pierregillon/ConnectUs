@@ -4,11 +4,11 @@ namespace ConnectUs.Business.Tests.Mocks
 {
     public class FakeConnection : IConnection
     {
-        public void Send(Request request)
+        public void Send<T>(T request)
         {
             throw new System.NotImplementedException();
         }
-        public Response Read()
+        public T Read<T>()
         {
             throw new System.NotImplementedException();
         }

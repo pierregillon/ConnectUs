@@ -15,7 +15,7 @@ namespace ConnectUs.ServerSide
         public Response Process(Request request)
         {
             _connection.Send(request);
-            return _connection.Read();
+            return _connection.Read<Response>();
         }
     }
 }

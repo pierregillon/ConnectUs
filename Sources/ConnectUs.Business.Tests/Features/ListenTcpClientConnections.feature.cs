@@ -118,7 +118,7 @@ this.ScenarioSetup(scenarioInfo);
   testRunner.And("I send the request \'ping\' through the connection of the connection established ev" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
- testRunner.Then("the tcp client received the request \'ping\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the tcp client received the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

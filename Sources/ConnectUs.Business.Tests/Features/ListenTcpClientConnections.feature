@@ -18,4 +18,4 @@ Scenario: Connection of tcp client provide a connection to communicate with it
 	When The connection listener starts listening on the port 9000
 		And The tcp client connect to the host 'localhost' and the port 9000
 		And I send the request 'ping' through the connection of the connection established event
-	Then the tcp client received the request 'ping'
+	Then the tcp client received the request

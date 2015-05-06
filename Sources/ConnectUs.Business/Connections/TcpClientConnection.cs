@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Connections
 {
-    internal class TcpClientConnection : IConnection
+    public class TcpClientConnection : IConnection
     {
         private readonly TcpClient _client;
 
@@ -14,7 +13,7 @@ namespace ConnectUs.Business.Connections
             _client = client;
         }
 
-        public void Send(Request request)
+        public void Send<T>(T request)
         {
             var encoding = new UTF8Encoding();
             var json = JsonConvert.SerializeObject(request);
@@ -22,9 +21,15 @@ namespace ConnectUs.Business.Connections
             var networkStream = _client.GetStream();
             networkStream.Write(bytes, 0, bytes.Length);
         }
-        public Response Read()
+
+        public T Read<T>()
         {
-            throw new NotImplementedException();
+            var encoding = new UTF8Encoding();
+            var networkStream = _client.GetStream();
+            var buffer = new byte[1024];
+            networkStream.Read(buffer, 0, buffer.Length);
+            var json = encoding.GetString(buffer);
+            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }

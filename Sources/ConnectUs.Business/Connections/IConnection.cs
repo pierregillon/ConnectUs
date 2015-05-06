@@ -2,7 +2,7 @@
 {
     public interface IConnection
     {
-        void Send(Request request);
-        Response Read();
+        void Send<T>(T request);
+        T Read<T>();
     }
 }

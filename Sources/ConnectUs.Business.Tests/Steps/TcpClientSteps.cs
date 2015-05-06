@@ -29,15 +29,12 @@ namespace ConnectUs.Business.Tests.Steps
             Thread.Sleep(50);
         }
 
-        [Then(@"the tcp client received the request '(.*)'")]
-        public void ThenTheTcpClientReceivedTheRequest(string requestName)
+        [Then(@"the tcp client received the request")]
+        public void ThenTheTcpClientReceivedTheRequest()
         {
             var buffer = new byte[33];
             var bytesReadCount = TcpClient.GetStream().Read(buffer, 0, buffer.Length);
-            Check.That(bytesReadCount).IsEqualTo(33);
-            var encoding = new UTF8Encoding();
-            var request = JsonConvert.DeserializeObject<Request>(encoding.GetString(buffer));
-            Check.That(request.Name).IsEqualTo(requestName);
+            Check.That(bytesReadCount).IsNotEqualTo(0);
         }
     }
 }
