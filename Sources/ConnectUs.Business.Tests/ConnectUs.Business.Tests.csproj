@@ -102,6 +102,8 @@
     <Compile Include="Mocks\FakeClientListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\ClientListenerSteps.cs" />
+    <Compile Include="Steps\ClientRequestHandlerSteps.cs" />
+    <Compile Include="Steps\ClientRequestProcessorSteps.cs" />
     <Compile Include="Steps\ClientSteps.cs" />
     <Compile Include="Steps\ConcurrentRequestExecutionSteps.cs" />
     <Compile Include="Steps\ConnectionListenerSteps.cs" />
@@ -109,10 +111,13 @@
     <Compile Include="Steps\ConnectionSteps.cs" />
     <Compile Include="Steps\EncoderSteps.cs" />
     <Compile Include="Mocks\FakeRequestProcessor.cs" />
+    <Compile Include="Mocks\MockedClientRequestProcess.cs" />
+    <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
     <Compile Include="Steps\RequestProcessorSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
     <Compile Include="Steps\ResponseSteps.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
+    <Compile Include="Steps\ServerRequestCommunicatorSteps.cs" />
     <Compile Include="Steps\ServerSteps.cs" />
     <Compile Include="Steps\TcpClientSteps.cs" />
   </ItemGroup>

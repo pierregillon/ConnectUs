@@ -1,4 +1,5 @@
-﻿using ConnectUs.Business;
+﻿using System;
+using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide
@@ -14,11 +15,12 @@ namespace ConnectUs.ServerSide
 
         public ClientInformation GetClientInformation()
         {
-            var response = _requestProcessor.Process(new Request("GetClientInformation"));
-            if (response.Error != null) {
-                throw new ClientException(response.Error);
-            }
-            return response.To<ClientInformation>();
+            throw new NotImplementedException();
+            //var response = _requestProcessor.Process(new Request("GetClientInformation"));
+            //if (response.Error != null) {
+            //    throw new ClientException(response.Error);
+            //}
+            //return response.To<ClientInformation>();
         }
         public void CloseConnection()
         {
@@ -26,11 +28,13 @@ namespace ConnectUs.ServerSide
         }
         public void Ping()
         {
-            try {
-                var response = _requestProcessor.Process(new Request("Ping"));
-                if (response.Error != null) {
-                    throw new ClientException(response.Error);
-                }
+            throw new NotImplementedException();
+            try
+            {
+                //var response = _requestProcessor.Process(new Request("Ping"));
+                //if (response.Error != null) {
+                //    throw new ClientException(response.Error);
+                //}
             }
             catch (ConnectionException ex) {
                 throw new ClientException("Unable to execute the command 'Ping', the connection has been closed.", ex);
@@ -38,16 +42,18 @@ namespace ConnectUs.ServerSide
         }
         public Response Execute(Request request)
         {
-            try {
-                var response = _requestProcessor.Process(request);
-                if (response.Error != null) {
-                    throw new ClientException(response.Error);
-                }
-                return response;
-            }
-            catch (ConnectionException ex) {
-                throw new ClientException(string.Format("Unable to execute the request '{0}', the connection has been closed.", request.Name), ex);
-            }
+            throw new NotImplementedException();
+            //try
+            //{
+            //    var response = _requestProcessor.Process(request);
+            //    if (response.Error != null) {
+            //        throw new ClientException(response.Error);
+            //    }
+            //    return response;
+            //}
+            //catch (ConnectionException ex) {
+            //    throw new ClientException(string.Format("Unable to execute the request '{0}', the connection has been closed.", request.Name), ex);
+            //}
         }
     }
 }

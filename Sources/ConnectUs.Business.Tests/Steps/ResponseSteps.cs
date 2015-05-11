@@ -1,3 +1,4 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -12,23 +13,27 @@ namespace ConnectUs.Business.Tests.Steps
             set { ScenarioContext.Current.Add("Response", value); }
         }
 
-        [Given(@"A response with the content ""(.*)""")]
-        public void GivenAResponseWithTheContent(string content)
+        [Then(@"The response is a ""(.*)"" response")]
+        public void ThenTheResponseIsAResponse(string responseType)
         {
-            Response = new Response {Result = content};
+            if (responseType == "GetClientInformation") {
+                Check.That(Response).IsInstanceOf<GetClientInformationResponse>();
+            }
+            else {
+                Assert.Fail("Unknown response");
+            }
         }
 
-        [Then(@"I get a response with the error ""(.*)""")]
-        public void ThenIGetAResponseWithTheError(string message)
+        [Then(@"The ip of the GetClientInformation response is ""(.*)""")]
+        public void ThenTheIpOfTheGetClientInformationResponseIs(string ip)
         {
-            Check.That(Response.Error).IsEqualTo(message);
+            Check.That(((GetClientInformationResponse) Response).Ip).IsEqualTo(ip);
         }
 
-        [Then(@"I get a response with the result ""(.*)""")]
-        public void ThenIGetAResponseWithTheResult(string expectedResult)
+        [Then(@"The machine name of the GetClientInformation response is ""(.*)""")]
+        public void ThenTheMachineNameOfTheGetClientInformationResponseIs(string machineName)
         {
-            Check.That(Response.Result).IsEqualTo(expectedResult);
+            Check.That(((GetClientInformationResponse)Response).MachineName).IsEqualTo(machineName);
         }
-
     }
 }

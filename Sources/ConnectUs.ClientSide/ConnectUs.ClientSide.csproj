@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />
+    <Compile Include="NoRequestToProcessException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

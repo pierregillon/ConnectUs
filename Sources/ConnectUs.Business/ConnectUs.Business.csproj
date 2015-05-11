@@ -62,7 +62,9 @@
     <Compile Include="Connections\IConnector.cs" />
     <Compile Include="Encodings\IEncoder.cs" />
     <Compile Include="Connections\TcpClientConnectionListener.cs" />
+    <Compile Include="IRequestParser.cs" />
     <Compile Include="IRequestProcessor.cs" />
+    <Compile Include="JsonRequestParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="RequestParameter.cs" />

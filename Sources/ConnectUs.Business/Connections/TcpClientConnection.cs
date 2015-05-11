@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using ConnectUs.Business.Encodings;
 
@@ -68,7 +69,8 @@ namespace ConnectUs.Business.Connections
                     Close();
                     throw new SocketException((int)SocketError.ConnectionAborted);
                 }
-                return _encoder.Decode(buffer);
+                var exactBuffer = buffer.Take(bytesReceived).ToArray();
+                return _encoder.Decode(exactBuffer);
             }
             catch (IOException ex) {
                 if (ex.InnerException != null) {

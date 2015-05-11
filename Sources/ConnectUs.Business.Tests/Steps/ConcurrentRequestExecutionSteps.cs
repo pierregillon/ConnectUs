@@ -22,14 +22,14 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<List<Task>>("Tasks"); }
             set { ScenarioContext.Current.Add("Tasks", value); }
         }
-        private List<Response> MainThreadResponses
+        private List<EchoResponse> MainThreadResponses
         {
-            get { return ScenarioContext.Current.Get<List<Response>>("MainThreadResponses"); }
+            get { return ScenarioContext.Current.Get<List<EchoResponse>>("MainThreadResponses"); }
             set { ScenarioContext.Current.Add("MainThreadResponses", value); }
         }
-        private ConcurrentDictionary<int, Response> ResponseByThread
+        private ConcurrentDictionary<int, EchoResponse> ResponseByThread
         {
-            get { return ScenarioContext.Current.Get<ConcurrentDictionary<int, Response>>("ResponseByThread"); }
+            get { return ScenarioContext.Current.Get<ConcurrentDictionary<int, EchoResponse>>("ResponseByThread"); }
             set { ScenarioContext.Current.Add("ResponseByThread", value); }
         }
 
@@ -37,8 +37,8 @@ namespace ConnectUs.Business.Tests.Steps
         public void BeforeScenario()
         {
             Tasks = new List<Task>();
-            MainThreadResponses = new List<Response>();
-            ResponseByThread = new ConcurrentDictionary<int, Response>();
+            MainThreadResponses = new List<EchoResponse>();
+            ResponseByThread = new ConcurrentDictionary<int, EchoResponse>();
         }
 
         [When(@"I send the request ""(.*)"" through the server request processor on the thread (.*)")]
@@ -46,7 +46,7 @@ namespace ConnectUs.Business.Tests.Steps
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = ServerRequestProcessor.Process(new Request(requestName));
+                var response = (EchoResponse)ServerRequestProcessor.Process(new EchoRequest());
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
@@ -54,7 +54,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the request ""(.*)"" through the server request processor on main thread")]
         public void WhenISendTheRequestThroughTheServerRequestProcessorOnMainThread(string requestName)
         {
-            MainThreadResponses.Add(ServerRequestProcessor.Process(new Request (requestName)));
+            MainThreadResponses.Add((EchoResponse)ServerRequestProcessor.Process(new EchoRequest()));
         }
 
         [Then(@"I get a response with the result ""(.*)"" on thread (.*)")]
@@ -76,6 +76,18 @@ namespace ConnectUs.Business.Tests.Steps
         public void ThenIGetAResponseWithTheResultOnMainThreadIndex(string result, int index)
         {
             Check.That(MainThreadResponses.ElementAt(index).Result).IsEqualTo(result);
+        }
+    }
+
+    public class EchoResponse : Response
+    {
+        public string Result { get; set; }
+    }
+
+    public class EchoRequest : Request
+    {
+        public EchoRequest() : base("Echo")
+        {
         }
     }
 }

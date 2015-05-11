@@ -4,20 +4,36 @@ Feature: ProcessRemoteRequest
 	As a server
 	I want to execute a request on the client side
 
-Scenario: Execute remotely a unknown request throw exception
+Scenario: Sending request from server get correct json in client side
 	Given A connection is established between server and client on port 9000
-		And A client request processor is initialized
-		And A server request processor is initialized
-		And A request with the name "unknownRequest"
-	When I start the client continuous request processor
-		And I process the request in the server request processor
-	Then I get a response with the error "The request 'unknownRequest' is unknown on the client."
+		And A server request communicator
+		And A mocked client request processor
+		And A client request handler
+		And A "GetClientInformation" request
+	When I send the request by the server request communicator
+		And I process the request from the client request handler
+	Then I get the request name "GetClientInformation" and the data "{"Name":"GetClientInformation"}" on the mocked client request processor
 
-Scenario: Execute remotely a known request throw exception
+Scenario: Process request in client side get the correct response in server side.
 	Given A connection is established between server and client on port 9000
-		And A client request processor is initialized
-		And A server request processor is initialized
-		And A request with the name "GetClientInformation"
-	When I start the client continuous request processor
-		And I process the request in the server request processor
-	Then I get a response with the result "{"Ip" : "192.168.1.1", "MachineName" : "mycomputer"}"
+		And A server request communicator
+		And A mocked client request processor
+		And A client request handler
+		And A "GetClientInformation" request
+	When I send the request by the server request communicator
+		And I process the request from the client request handler
+		And I read the response from the server request communicator
+	Then The response is a "GetClientInformation" response
+		And The ip of the GetClientInformation response is "127.0.0.1"
+		And The machine name of the GetClientInformation response is "my machine"
+
+Scenario: Throw exception when processing request in client side throw exception on server side.
+	Given A connection is established between server and client on port 9000
+		And A server request communicator
+		And A mocked client request processor that returns error "Error occured on client side"
+		And A client request handler
+		And A "GetClientInformation" request
+	When I send the request by the server request communicator
+		And I process the request from the client request handler
+		And I read the response from the server request communicator
+	Then An exception is thrown with the message "Error occured on client side"

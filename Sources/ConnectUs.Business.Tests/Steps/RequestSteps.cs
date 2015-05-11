@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -19,30 +20,15 @@ namespace ConnectUs.Business.Tests.Steps
             Request = new Request(requestName);
         }
 
-        [Given(@"The request has a parameter ""(.*)"" with the value ""(.*)""")]
-        public void GivenTheRequestHasAParameterWithTheValue(string name, string value)
+        [Given(@"A ""(.*)"" request")]
+        public void GivenARequest(string requestType)
         {
-            Request.Parameters.Add(new RequestParameter(name, value));
-        }
-
-        [Then(@"The request has the name ""(.*)""")]
-        public void ThenTheRequestReceivedHasTheName(string name)
-        {
-            Check.That(Request.Name).IsEqualTo(name);
-        }
-
-        [Then(@"The request contains (.*) parameters")]
-        public void ThenTheRequestReceivedContainsParameters(int parameterCount)
-        {
-            Check.That(Request.Parameters.Count).IsEqualTo(parameterCount);
-        }
-
-        [Then(@"The request contains a parameter ""(.*)"" with the value ""(.*)""")]
-        public void ThenTheRequestReceivedContainsAParameterWithTheValue(string parameterName, string parameterValue)
-        {
-            var parameter = Request.Parameters.First(requestParameter => requestParameter.Name == parameterName);
-            Check.That(parameter).IsNotNull();
-            Check.That(parameter.Value).IsEqualTo(parameterValue);
+            if (requestType == "GetClientInformation") {
+                Request = new GetClientInformationRequest();
+            }
+            else {
+                Assert.Fail("Unknown request");
+            }
         }
     }
 }
