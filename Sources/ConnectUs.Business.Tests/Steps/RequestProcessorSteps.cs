@@ -2,6 +2,7 @@
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
 using ConnectUs.ServerSide;
+using Moq;
 using TechTalk.SpecFlow;
 
 namespace ConnectUs.Business.Tests.Steps
@@ -43,6 +44,34 @@ namespace ConnectUs.Business.Tests.Steps
         {
             get { return ScenarioContext.Current.Get<Response>("Response"); }
             set { ScenarioContext.Current.Add("Response", value); }
+        }
+
+        [Given(@"A request processor")]
+        public void GivenARequestProcessor()
+        {
+            var mock = new Mock<IRequestProcessor>();
+            mock.Setup(processor => processor.Process(It.IsAny<Request>())).Callback<Request>(request => Request = request);
+            ServerRequestProcessor = mock.Object;
+        }
+
+        [Given(@"A request processor that returns a response with error ""(.*)""")]
+        public void GivenARequestProcessorThatReturnsAResponseWithError(string errorMessage)
+        {
+            var mock = new Mock<IRequestProcessor>();
+            mock.Setup(processor => processor.Process(It.IsAny<Request>()))
+                .Callback<Request>(request => Request = request)
+                .Returns(new Response{Error = errorMessage});
+            ServerRequestProcessor = mock.Object;
+        }
+
+        [Given(@"A request processor that returns a response with result ""(.*)""")]
+        public void GivenARequestProcessorThatReturnsAResponseWithResult(string result)
+        {
+            var mock = new Mock<IRequestProcessor>();
+            mock.Setup(processor => processor.Process(It.IsAny<Request>()))
+                .Callback<Request>(request => Request = request)
+                .Returns(new Response { Result = result });
+            ServerRequestProcessor = mock.Object;
         }
 
         [Given(@"A client request processor is initialized")]

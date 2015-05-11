@@ -17,7 +17,7 @@ Scenario: Execute remotely a known request throw exception
 	Given A connection is established between server and client on port 9000
 		And A client request processor is initialized
 		And A server request processor is initialized
-		And A request with the name "dir"
+		And A request with the name "GetClientInformation"
 	When I start the client continuous request processor
 		And I process the request in the server request processor
-	Then I get a response with the result "my result"
+	Then I get a response with the result "{"Ip" : "192.168.1.1", "MachineName" : "mycomputer"}"

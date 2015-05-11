@@ -24,7 +24,7 @@ namespace ConnectUs.Business.Tests.Features
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Communication.feature"
+#line 1 "ManageClientsOnServer.feature"
 #line hidden
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
@@ -107,30 +107,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("The client disconnects from the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
  testRunner.Then("The server has 0 client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Server requests client information")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Communication")]
-        public virtual void ServerRequestsClientInformation()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server requests client information", ((string[])(null)));
-#line 19
-this.ScenarioSetup(scenarioInfo);
-#line 20
- testRunner.Given("A server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
-  testRunner.And("A client with an ip to \'192.168.1.25\' and a machine name to \'FsTivit3\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
- testRunner.When("The client connects the server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 23
-  testRunner.And("The server requests to the client 1 its information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
- testRunner.Then("The received information contains an ip to \"192.168.1.25\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
-  testRunner.And("The received information contains a machine name to \"FsTivit3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

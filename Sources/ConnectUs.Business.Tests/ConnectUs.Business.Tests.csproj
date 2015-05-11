@@ -63,10 +63,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Features\Communication.feature.cs">
+    <Compile Include="Features\ExecuteClientCommandOnServerSide.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Communication.feature</DependentUpon>
+      <DependentUpon>ExecuteClientCommandOnServerSide.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ManageClientsOnServer.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageClientsOnServer.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\CommunicationWithTcpClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
@@ -112,9 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Communication.feature">
+    <None Include="Features\ExecuteClientCommandOnServerSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Communication.feature.cs</LastGenOutput>
+      <LastGenOutput>ExecuteClientCommandOnServerSide.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ManageClientsOnServer.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ManageClientsOnServer.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\CommunicationWithTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

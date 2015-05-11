@@ -14,9 +14,9 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<Server>("Server"); }
             set { ScenarioContext.Current.Add("Server", value); }
         }
-        public ClientInformationResponse ClientInformation
+        public ClientInformation ClientInformation
         {
-            get { return ScenarioContext.Current.Get<ClientInformationResponse>("ClientInformation"); }
+            get { return ScenarioContext.Current.Get<ClientInformation>("ClientInformation"); }
             set { ScenarioContext.Current.Add("ClientInformation", value); }
         }
         public Client Client

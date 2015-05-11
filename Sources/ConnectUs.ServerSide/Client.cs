@@ -11,10 +11,13 @@ namespace ConnectUs.ServerSide
             _requestProcessor = requestProcessor;
         }
 
-        public ClientInformationResponse GetClientInformation()
+        public ClientInformation GetClientInformation()
         {
             var response = _requestProcessor.Process(new Request {Name = "GetClientInformation"});
-            return response.To<ClientInformationResponse>();
+            if (response.Error != null) {
+                throw new ClientException(response.Error);
+            }
+            return response.To<ClientInformation>();
         }
     }
 }

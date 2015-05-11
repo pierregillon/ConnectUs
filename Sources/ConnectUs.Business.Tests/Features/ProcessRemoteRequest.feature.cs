@@ -114,13 +114,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
   testRunner.And("A server request processor is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
-  testRunner.And("A request with the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("A request with the name \"GetClientInformation\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
  testRunner.When("I start the client continuous request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
   testRunner.And("I process the request in the server request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
- testRunner.Then("I get a response with the result \"my result\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I get a response with the result \"{\"Ip\" : \"192.168.1.1\", \"MachineName\" : \"mycompu" +
+                    "ter\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

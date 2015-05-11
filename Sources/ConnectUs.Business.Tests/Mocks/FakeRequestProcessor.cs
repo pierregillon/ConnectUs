@@ -4,10 +4,10 @@
     {
         public Response Process(Request request)
         {
-            if (request.Name == "dir") {
+            if (request.Name == "GetClientInformation") {
                 return new Response
                 {
-                    Result = "my result"
+                    Result = "{\"Ip\" : \"192.168.1.1\", \"MachineName\" : \"mycomputer\"}"
                 };
             }
             return new Response
