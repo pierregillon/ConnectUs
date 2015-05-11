@@ -1,7 +1,9 @@
-﻿using ConnectUs.Business.Connections;
+﻿using ConnectUs.Business.Commands;
+using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
 using ConnectUs.ServerSide;
+using Moq;
 using TechTalk.SpecFlow;
 
 namespace ConnectUs.Business.Tests.Steps
@@ -51,6 +53,16 @@ namespace ConnectUs.Business.Tests.Steps
         {
             ServerRequestProcessor = new RemoteRequestProcessor(new ServerRequestCommunicator(ServerConnection, new JsonRequestParser()));
         }
+
+        [Given(@"A mocked server request processor that returns the response")]
+        public void GivenAMockedServerRequestProcessorThatReturnsTheResponse()
+        {
+            var mock = new Mock<IServerRequestProcessor>();
+            mock.Setup(processor => processor.Process<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
+                .Returns((GetClientInformationResponse)Response);
+            ServerRequestProcessor = mock.Object;
+        }
+
 
         [When(@"I start the echo process on client")]
         public void WhenIStartTheEchoProcessOnClient()

@@ -1,6 +1,5 @@
-using System.Linq;
+using ConnectUs.Business.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NFluent;
 using TechTalk.SpecFlow;
 
 namespace ConnectUs.Business.Tests.Steps

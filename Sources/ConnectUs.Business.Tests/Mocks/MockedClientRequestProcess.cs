@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ConnectUs.Business.Commands;
 using ConnectUs.ClientSide;
 
 namespace ConnectUs.Business.Tests.Mocks

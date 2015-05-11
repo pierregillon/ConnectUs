@@ -115,8 +115,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
   testRunner.And("The tcp client connect to the host \'localhost\' and the port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
-  testRunner.And("I send the request \'ping\' through the connection of the connection established ev" +
-                    "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I send the \'ping\' through the connection of the connection established event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
  testRunner.Then("the tcp client received the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

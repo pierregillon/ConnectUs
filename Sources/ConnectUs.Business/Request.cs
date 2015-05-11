@@ -10,12 +10,4 @@ namespace ConnectUs.Business
             Name = name;
         }
     }
-
-    public class GetClientInformationRequest : Request
-    {
-        public GetClientInformationRequest()
-            : base("GetClientInformation")
-        {
-        }
-    }
 }

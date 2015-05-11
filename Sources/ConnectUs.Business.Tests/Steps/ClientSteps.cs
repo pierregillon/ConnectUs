@@ -1,4 +1,5 @@
-﻿using ConnectUs.ServerSide;
+﻿using ConnectUs.Business.Commands;
+using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -17,10 +18,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IServerRequestProcessor>("ServerRequestProcessor"); }
             set { ScenarioContext.Current.Add("ServerRequestProcessor", value); }
         }
-        public ClientInformation ClientInformation
+        public GetClientInformationResponse GetClientInformationResponse
         {
-            get { return ScenarioContext.Current.Get<ClientInformation>("ClientInformation"); }
-            set { ScenarioContext.Current.Add("ClientInformation", value); }
+            get { return ScenarioContext.Current.Get<GetClientInformationResponse>("GetClientInformationResponse"); }
+            set { ScenarioContext.Current.Add("GetClientInformationResponse", value); }
         }
         public ClientException Exception
         {
@@ -38,7 +39,7 @@ namespace ConnectUs.Business.Tests.Steps
         public void WhenIAskTheClientInformation()
         {
             try {
-                ClientInformation = Client.GetClientInformation();
+                GetClientInformationResponse = Client.GetClientInformation();
             }
             catch (ClientException ex) {
                 Exception = ex;
@@ -54,19 +55,19 @@ namespace ConnectUs.Business.Tests.Steps
         [Then(@"I get a client information")]
         public void ThenIGetAClientInformation()
         {
-            Check.That(ClientInformation).IsNotNull();
+            Check.That(GetClientInformationResponse).IsNotNull();
         }
 
         [Then(@"the client information has the ip to ""(.*)""")]
         public void ThenTheClientInformationHasTheIpTo(string ip)
         {
-            Check.That(ClientInformation.Ip).IsEqualTo(ip);
+            Check.That(GetClientInformationResponse.Ip).IsEqualTo(ip);
         }
 
         [Then(@"the client information has the machine name to ""(.*)""")]
         public void ThenTheClientInformationHasTheMachineNameTo(string machineName)
         {
-            Check.That(ClientInformation.MachineName).IsEqualTo(machineName);
+            Check.That(GetClientInformationResponse.MachineName).IsEqualTo(machineName);
         }
     }
 }

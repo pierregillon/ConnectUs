@@ -1,5 +1,6 @@
 ﻿using System;
 using ConnectUs.Business;
+using ConnectUs.Business.Commands;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide
@@ -13,18 +14,13 @@ namespace ConnectUs.ServerSide
             _serverRequestProcessor = serverRequestProcessor;
         }
 
-        public ClientInformation GetClientInformation()
+        public GetClientInformationResponse GetClientInformation()
         {
-            throw new NotImplementedException();
-            //var response = _serverRequestProcessor.Process(new Request("GetClientInformation"));
-            //if (response.Error != null) {
-            //    throw new ClientException(response.Error);
-            //}
-            //return response.To<ClientInformation>();
+            return _serverRequestProcessor.Process<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
         }
         public void CloseConnection()
         {
-            //_serverRequestProcessor.Close();
+            _serverRequestProcessor.Close();
         }
         public void Ping()
         {
