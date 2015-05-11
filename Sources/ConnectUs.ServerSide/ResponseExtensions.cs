@@ -7,7 +7,7 @@ namespace ConnectUs.ServerSide
     {
         public static T To<T>(this Response response)
         {
-            return JsonConvert.DeserializeObject<T>(response.Content);
+            return JsonConvert.DeserializeObject<T>(response.Result);
         }
     }
 }

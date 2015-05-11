@@ -88,6 +88,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListenTcpClientConnections.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ProcessRemoteRequest.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessRemoteRequest.feature</DependentUpon>
+    </Compile>
     <Compile Include="Mocks\FakeClientInformationService.cs" />
     <Compile Include="Mocks\FakeClientListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +102,8 @@
     <Compile Include="Mocks\FakeConnection.cs" />
     <Compile Include="Steps\ConnectionSteps.cs" />
     <Compile Include="Steps\EncoderSteps.cs" />
+    <Compile Include="Mocks\FakeRequestProcessor.cs" />
+    <Compile Include="Steps\RequestProcessorSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
     <Compile Include="Steps\ResponseSteps.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
@@ -124,6 +131,10 @@
     <None Include="Features\ListenTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListenTcpClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ProcessRemoteRequest.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProcessRemoteRequest.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

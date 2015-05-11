@@ -127,7 +127,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Then(@"The response received contains contains the value ""(.*)""")]
         public void ThenTheResponseReceivedContainsContainsTheValue(string expectedContent)
         {
-            Check.That(ResponseReceived.Content).IsEqualTo(expectedContent);
+            Check.That(ResponseReceived.Result).IsEqualTo(expectedContent);
         }
 
     }

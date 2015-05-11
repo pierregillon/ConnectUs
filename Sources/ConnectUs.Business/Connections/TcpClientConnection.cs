@@ -25,6 +25,7 @@ namespace ConnectUs.Business.Connections
         {
             var networkStream = _client.GetStream();
             var buffer = new byte[1024];
+            networkStream.ReadTimeout = 1000;
             networkStream.Read(buffer, 0, buffer.Length);
             return _encoder.Decode<T>(buffer);
         }

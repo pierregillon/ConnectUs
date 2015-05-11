@@ -17,7 +17,7 @@ namespace ConnectUs.ClientSide
             if (request.Name == "GetClientInformation") {
                 return new Response
                 {
-                    Content = "{" + string.Format("\"Ip\": \"{0}\", \"MachineName\": \"{1}\"", _clientInformationService.GetIp(), _clientInformationService.GetMachineName()) + "}"
+                    Result = "{" + string.Format("\"Ip\": \"{0}\", \"MachineName\": \"{1}\"", _clientInformationService.GetIp(), _clientInformationService.GetMachineName()) + "}"
                 };
             }
 

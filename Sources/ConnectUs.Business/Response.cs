@@ -2,6 +2,7 @@
 {
     public class Response
     {
-        public string Content { get; set; }
+        public string Error { get; set; }
+        public string Result { get; set; }
     }
 }
