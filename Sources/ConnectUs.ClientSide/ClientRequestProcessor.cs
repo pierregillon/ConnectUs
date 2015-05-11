@@ -1,5 +1,3 @@
-using System;
-
 namespace ConnectUs.ClientSide
 {
     public class ClientRequestProcessor : IClientRequestProcessor
@@ -15,7 +13,7 @@ namespace ConnectUs.ClientSide
         {
             var command = _moduleService.GetCommand(requestName);
             if (command == null) {
-                throw new Exception("");
+                throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));
             }
             return command.Execute(originalData);
         }

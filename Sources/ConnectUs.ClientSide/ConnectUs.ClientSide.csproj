@@ -55,6 +55,7 @@
     <Compile Include="IModuleService.cs" />
     <Compile Include="ModuleService.cs" />
     <Compile Include="NoRequestToProcessException.cs" />
+    <Compile Include="ProcessException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
