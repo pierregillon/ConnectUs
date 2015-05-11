@@ -11,15 +11,19 @@ namespace ConnectUs.ServerSide.Command
         {
             var server = new Server(new ClientListener(new TcpClientConnectionListener(), new ServerConfiguration {Port = 9000}));
             server.Start();
-            while (server.GetConnectedClients().Any() == false) {
+            while (true) {
+                foreach (var connectedClient in server.GetConnectedClients().ToList()) {
+                    try {
+                        var clientInformation = connectedClient.GetClientInformation();
+                        Console.WriteLine("client connecté : MachineName:{0}, Ip:{1}", clientInformation.MachineName, clientInformation.Ip);
+                    }
+                    catch (ConnectionException ex) {
+                        Console.WriteLine(ex.Message);
+                    }
+                    connectedClient.CloseConnection();
+                }
                 Thread.Sleep(1000);
             }
-            var client = server.GetConnectedClients().First();
-            Console.WriteLine("client connecté");
-            Console.ReadLine();
-            var clientInformation = client.GetClientInformation();
-            Console.WriteLine("MachineName:{0}, Ip:{1}", clientInformation.MachineName, clientInformation.Ip);
-            Console.ReadLine();
         }
     }
 }

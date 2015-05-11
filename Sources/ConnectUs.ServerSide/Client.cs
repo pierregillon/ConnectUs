@@ -19,5 +19,9 @@ namespace ConnectUs.ServerSide
             }
             return response.To<ClientInformation>();
         }
+        public void CloseConnection()
+        {
+            _requestProcessor.Close();
+        }
     }
 }

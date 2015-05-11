@@ -23,5 +23,9 @@ namespace ConnectUs.ClientSide
 
             throw new Exception("request invalid");
         }
+        public void Close()
+        {
+            
+        }
     }
 }

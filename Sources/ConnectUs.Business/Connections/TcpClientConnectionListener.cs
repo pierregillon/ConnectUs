@@ -23,6 +23,7 @@ namespace ConnectUs.Business.Connections
             if (handler != null) handler(this, e);
         }
 
+        // ----- Public methods
         public void Start(int port)
         {
             if (_listener != null) {
@@ -32,20 +33,30 @@ namespace ConnectUs.Business.Connections
             _listener.Start();
             _listener.BeginAcceptTcpClient(Callback, _listener);
         }
-
-        private void Callback(IAsyncResult result)
-        {
-            var client = _listener.EndAcceptTcpClient(result);
-            OnConnectionEstablished(new ConnectionEstablishedEventArgs(new TcpClientConnection(client, new JsonEncoder())));
-            _listener.BeginAcceptTcpClient(Callback, _listener);
-        }
-
         public void Stop()
         {
             if (_listener == null) {
                 throw new ConnectionListenerAlreadyStoppedException();
             }
             _listener.Stop();
+        }
+
+        // ----- Internal logics
+        private void Callback(IAsyncResult result)
+        {
+            var client = _listener.EndAcceptTcpClient(result);
+            var connection = new TcpClientConnection(client, new JsonEncoder());
+            connection.Disconnected += ConnectionOnDisconnected;
+            OnConnectionEstablished(new ConnectionEstablishedEventArgs(connection));
+            _listener.BeginAcceptTcpClient(Callback, _listener);
+        }
+
+        private void ConnectionOnDisconnected(object sender, EventArgs eventArgs)
+        {
+            var connection = sender as IConnection;
+            if (connection != null) {
+                OnConnectionLost(new ConnectionLostEventArgs(connection));
+            }
         }
     }
 }

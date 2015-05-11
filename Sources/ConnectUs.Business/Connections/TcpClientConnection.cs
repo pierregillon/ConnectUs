@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using ConnectUs.Business.Encodings;
 
@@ -17,6 +18,13 @@ namespace ConnectUs.Business.Connections
                 _client.ReceiveTimeout = value;
                 _client.SendTimeout = value;
             }
+        }
+
+        public event EventHandler Disconnected;
+        protected virtual void OnDisconnected()
+        {
+            EventHandler handler = Disconnected;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
 
         // ----- Constructors
@@ -52,7 +60,11 @@ namespace ConnectUs.Business.Connections
             try {
                 var networkStream = _client.GetStream();
                 var buffer = new byte[1024];
-                networkStream.Read(buffer, 0, buffer.Length);
+                var bytesReceived = networkStream.Read(buffer, 0, buffer.Length);
+                if (bytesReceived == 0) {
+                    Dispose();
+                    throw new SocketException((int)SocketError.ConnectionAborted);
+                }
                 return _encoder.Decode<T>(buffer);
             }
             catch (IOException ex) {
@@ -74,6 +86,7 @@ namespace ConnectUs.Business.Connections
         public void Dispose()
         {
             _client.Close();
+            OnDisconnected();
         }
     }
 }

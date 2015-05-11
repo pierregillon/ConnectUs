@@ -55,6 +55,7 @@ namespace ConnectUs.ClientSide
         // ----- Event callbacks
         private void ContinuousRequestProcessorOnConnectionLost(object sender, EventArgs args)
         {
+            _continuousRequestProcessor.StopProcessingRequestFromConnection();
             OnClientDisconnected();
             _resetEvent.Set();
         }

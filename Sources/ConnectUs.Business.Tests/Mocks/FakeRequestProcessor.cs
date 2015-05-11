@@ -24,5 +24,9 @@
                 Error = string.Format("The request '{0}' is unknown on the client.", request.Name)
             };
         }
+        public void Close()
+        {
+            
+        }
     }
 }

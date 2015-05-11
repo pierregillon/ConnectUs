@@ -30,6 +30,10 @@ namespace ConnectUs.ServerSide
             }
             return parameter.Response;
         }
+        public void Close()
+        {
+            _connection.Dispose();
+        }
 
         // ----- Internal logics
         private void EnqueueRequest(RequestParameter parameter)
