@@ -52,6 +52,8 @@
     <Compile Include="ContinuousRequestProcessor.cs" />
     <Compile Include="IClientRequestHandler.cs" />
     <Compile Include="IClientRequestProcessor.cs" />
+    <Compile Include="IModuleService.cs" />
+    <Compile Include="ModuleService.cs" />
     <Compile Include="NoRequestToProcessException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

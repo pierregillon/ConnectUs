@@ -1,4 +1,5 @@
 ﻿using ConnectUs.Business.Commands;
+using ConnectUs.Business.Commands.ClientInformation;
 using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
@@ -59,7 +60,7 @@ namespace ConnectUs.Business.Tests.Steps
         {
             var mock = new Mock<IServerRequestProcessor>();
             mock.Setup(processor => processor.Process<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
-                .Returns((GetClientInformationResponse)Response);
+                .Returns((GetClientInformationResponse) Response);
             ServerRequestProcessor = mock.Object;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.Business.Commands
+﻿namespace ConnectUs.Business.Commands.ClientInformation
 {
     public class GetClientInformationResponse : Response
     {

@@ -44,10 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ClientInformationService.cs" />
-    <Compile Include="Commands\GetInformationCommand.cs" />
-    <Compile Include="Commands\IClientInformationService.cs" />
-    <Compile Include="Commands\ICommandExecutable.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\ClientInformation\GetInformationCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Connections\ConnectionEstablishedEventArgs.cs" />
     <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
@@ -61,8 +60,8 @@
     <Compile Include="Connections\IConnector.cs" />
     <Compile Include="Encodings\IEncoder.cs" />
     <Compile Include="Connections\TcpClientConnectionListener.cs" />
-    <Compile Include="Commands\GetClientInformationResponse.cs" />
-    <Compile Include="Commands\GetClientInformationRequest.cs" />
+    <Compile Include="Commands\ClientInformation\GetClientInformationResponse.cs" />
+    <Compile Include="Commands\ClientInformation\GetClientInformationRequest.cs" />
     <Compile Include="IRequestParser.cs" />
     <Compile Include="IRequestProcessor.cs" />
     <Compile Include="JsonRequestParser.cs" />

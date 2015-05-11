@@ -1,4 +1,5 @@
 using ConnectUs.Business.Commands;
+using ConnectUs.Business.Commands.ClientInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 

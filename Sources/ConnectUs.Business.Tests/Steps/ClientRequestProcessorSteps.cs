@@ -1,4 +1,6 @@
-﻿using ConnectUs.Business.Tests.Mocks;
+﻿using System;
+using ConnectUs.Business.Tests.Mocks;
+using ConnectUs.ClientSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -7,29 +9,41 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ClientRequestProcessorSteps
     {
-        public MockedClientRequestProcess MockedClientRequestProcess
+        public IClientRequestProcessor ClientRequestProcessor
         {
-            get { return ScenarioContext.Current.Get<MockedClientRequestProcess>("MockedClientRequestProcess"); }
-            set { ScenarioContext.Current.Add("MockedClientRequestProcess", value); }
+            get { return ScenarioContext.Current.Get<IClientRequestProcessor>("ClientRequestProcessor"); }
+            set { ScenarioContext.Current.Add("ClientRequestProcessor", value); }
         }
 
         [Given(@"A mocked client request processor")]
         public void GivenAMockedClientRequestProcessor()
         {
-            MockedClientRequestProcess = new MockedClientRequestProcess();
+            ClientRequestProcessor = new MockedClientRequestProcess();
         }
 
         [Given(@"A mocked client request processor that returns error ""(.*)""")]
         public void GivenAMockedClientRequestProcessorThatReturnsError(string message)
         {
-            MockedClientRequestProcess = new MockedErrorClientRequestProcess(message);
+            ClientRequestProcessor = new MockedErrorClientRequestProcess(message);
+        }
+
+        [Given(@"A client request processor")]
+        public void GivenAClientRequestProcessor()
+        {
+            ClientRequestProcessor = new ClientRequestProcessor(new ModuleService());
+        }
+
+        [When(@"I process the request with the client request processor")]
+        public void WhenIProcessTheRequestWithTheClientRequestProcessor()
+        {
+            ScenarioContext.Current.Pending();
+            ClientRequestProcessor.Process("", "");
         }
 
         [Then(@"I get the request name ""(.*)"" and the data ""(.*)"" on the mocked client request processor")]
         public void ThenIGetTheRequestNameAndTheDataOnTheMockedClientRequestProcessor(string requestName, string data)
         {
-            Check.That(MockedClientRequestProcess.GetData(requestName)).IsEqualTo(data);
+            Check.That(((MockedClientRequestProcess) ClientRequestProcessor).GetData(requestName)).IsEqualTo(data);
         }
-
     }
 }

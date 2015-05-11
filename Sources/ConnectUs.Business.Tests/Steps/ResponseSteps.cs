@@ -1,4 +1,5 @@
 using ConnectUs.Business.Commands;
+using ConnectUs.Business.Commands.ClientInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -12,17 +13,6 @@ namespace ConnectUs.Business.Tests.Steps
         {
             get { return ScenarioContext.Current.Get<Response>("Response"); }
             set { ScenarioContext.Current.Add("Response", value); }
-        }
-
-        [Then(@"The response is a ""(.*)"" response")]
-        public void ThenTheResponseIsAResponse(string responseType)
-        {
-            if (responseType == "GetClientInformation") {
-                Check.That(Response).IsInstanceOf<GetClientInformationResponse>();
-            }
-            else {
-                Assert.Fail("Unknown response");
-            }
         }
 
         [Given(@"A response with the name ""(.*)""")]
@@ -41,6 +31,19 @@ namespace ConnectUs.Business.Tests.Steps
         public void GivenTheGetClientInformationResponseHasTheMachineName(string machineName)
         {
             ((GetClientInformationResponse)Response).MachineName = machineName;
+        }
+
+        [Then(@"The response is a ""(.*)"" response")]
+        public void ThenTheResponseIsAResponse(string responseType)
+        {
+            if (responseType == "GetClientInformation")
+            {
+                Check.That(Response).IsInstanceOf<GetClientInformationResponse>();
+            }
+            else
+            {
+                Assert.Fail("Unknown response");
+            }
         }
 
         [Then(@"The ip of the GetClientInformation response is ""(.*)""")]

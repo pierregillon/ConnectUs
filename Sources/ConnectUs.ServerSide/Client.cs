@@ -1,6 +1,7 @@
 ﻿using System;
 using ConnectUs.Business;
 using ConnectUs.Business.Commands;
+using ConnectUs.Business.Commands.ClientInformation;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide

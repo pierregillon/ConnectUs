@@ -98,7 +98,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcessRemoteRequest.feature</DependentUpon>
     </Compile>
-    <Compile Include="Mocks\FakeClientInformationService.cs" />
+    <Compile Include="Features\ProcessRequestsOnClientSide.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessRequestsOnClientSide.feature</DependentUpon>
+    </Compile>
     <Compile Include="Mocks\FakeClientListener.cs" />
     <Compile Include="Mocks\MockedEchoClientRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,6 +155,10 @@
     <None Include="Features\ProcessRemoteRequest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProcessRemoteRequest.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ProcessRequestsOnClientSide.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProcessRequestsOnClientSide.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

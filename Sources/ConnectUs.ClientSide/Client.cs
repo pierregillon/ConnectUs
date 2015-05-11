@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using ConnectUs.Business.Commands;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ClientSide
@@ -8,7 +7,7 @@ namespace ConnectUs.ClientSide
     public class Client
     {
         private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
-        private readonly ContinuousRequestProcessor _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor());
+        private readonly ContinuousRequestProcessor _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new ModuleService()));
 
         public event EventHandler ClientDisconnected;
         protected virtual void OnClientDisconnected()
