@@ -47,12 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ClientRequestHandler.cs" />
+    <Compile Include="ClientRequestProcessor.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />
+    <Compile Include="IClientRequestHandler.cs" />
+    <Compile Include="IClientRequestProcessor.cs" />
     <Compile Include="NoRequestToProcessException.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestProcessorFromConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
