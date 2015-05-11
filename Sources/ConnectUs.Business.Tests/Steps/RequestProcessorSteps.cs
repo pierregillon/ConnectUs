@@ -89,8 +89,8 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I start the client continuous request processor")]
         public void WhenIStartTheClientContinuousRequestProcessor()
         {
-            ContinuousRequestProcessor = new ContinuousRequestProcessor(ClientConnection, ClientRequestProcessor);
-            ContinuousRequestProcessor.StartProcessingRequestFromConnection();
+            ContinuousRequestProcessor = new ContinuousRequestProcessor(ClientRequestProcessor);
+            ContinuousRequestProcessor.StartProcessingRequestFromConnection(ClientConnection);
         }
 
         [When(@"I process the request in the server request processor")]

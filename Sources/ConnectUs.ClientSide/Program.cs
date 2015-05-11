@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ClientSide
 {
@@ -11,21 +9,23 @@ namespace ConnectUs.ClientSide
             const string hostName = "localhost";
             const int port = 9000;
 
+            var client = new Client();
+            client.ClientConnected+=ClientOnClientConnected;
+            client.ClientDisconnected += ClientOnClientDisconnected;
+
             while (true) {
-                try {
-                    Console.WriteLine("Trying to connect to the host '{0}' on port '{1}'", hostName, port);
-                    var manualResetEvent = new ManualResetEvent(false);
-                    var connection = TcpClientConnectionFactory.Build(hostName, port);
-                    var continuous = new ContinuousRequestProcessor(connection, new RequestProcessor(new ClientInformationService()));
-                    continuous.ConnectionLost += (sender, eventArgs) => manualResetEvent.Set();
-                    Console.WriteLine("Client connecté");
-                    continuous.StartProcessingRequestFromConnection();
-                    manualResetEvent.WaitOne();
-                }
-                catch (ConnectionException) {
-                    Thread.Sleep(1000);
-                }
+                Console.WriteLine("Trying to connect to the host '{0}' on port '{1}'", hostName, port);
+                client.ConnectToServer(hostName, port);
             }
+        }
+        private static void ClientOnClientConnected(object sender, EventArgs eventArgs)
+        {
+            Console.WriteLine("Client connected.");
+        }
+
+        private static void ClientOnClientDisconnected(object sender, EventArgs eventArgs)
+        {
+            Console.WriteLine("Client disconnected.");
         }
     }
 }

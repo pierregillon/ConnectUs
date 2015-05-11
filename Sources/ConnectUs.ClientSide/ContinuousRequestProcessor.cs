@@ -7,56 +7,59 @@ namespace ConnectUs.ClientSide
 {
     public class ContinuousRequestProcessor
     {
-        private readonly IConnection _connection;
         private readonly IRequestProcessor _requestProcessor;
         private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
         private bool _continueProcessing = true;
 
-        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
-        protected virtual void OnConnectionLost(ConnectionLostEventArgs e)
+        public event EventHandler ConnectionLost;
+        protected virtual void OnConnectionLost()
         {
-            EventHandler<ConnectionLostEventArgs> handler = ConnectionLost;
-            if (handler != null) handler(this, e);
+            EventHandler handler = ConnectionLost;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        public ContinuousRequestProcessor(IConnection connection, IRequestProcessor requestProcessor)
+        // ----- Constructors
+        public ContinuousRequestProcessor(IRequestProcessor requestProcessor)
         {
-            _connection = connection;
             _requestProcessor = requestProcessor;
         }
 
-        public void Process()
-        {
-            try {
-                while (_continueProcessing) {
-                    try {
-                        var request = _connection.Read<Request>();
-                        var response = _requestProcessor.Process(request);
-                        _connection.Send(response);
-                    }
-                    catch (NoDataToReadFromConnectionException) {
-                        Thread.Sleep(1000);
-                    }
-                }
-                _resetEvent.Set();
-            }
-            catch (ConnectionException) {
-                _connection.Dispose();
-                _resetEvent.Close();
-                OnConnectionLost(new ConnectionLostEventArgs(_connection));
-            }
-        }
-
-        public void StartProcessingRequestFromConnection()
+        // ----- Public methods
+        public void StartProcessingRequestFromConnection(IConnection connection)
         {
             _continueProcessing = true;
-            var thread = new Thread(Process);
+            var thread = new Thread(() => ExecuteMultipleRequestOnConnection(connection));
             thread.Start();
         }
         public void StopProcessingRequestFromConnection()
         {
             _continueProcessing = false;
             _resetEvent.WaitOne();
+        }
+
+        // ----- Internal logics
+        private void ExecuteMultipleRequestOnConnection(IConnection connection)
+        {
+            try {
+                while (_continueProcessing) {
+                    ExecuteRequestOnConnection(connection);
+                }
+                _resetEvent.Set();
+            }
+            catch (ConnectionException) {
+                _resetEvent.Close();
+            }
+        }
+        private void ExecuteRequestOnConnection(IConnection connection)
+        {
+            try {
+                var request = connection.Read<Request>();
+                var response = _requestProcessor.Process(request);
+                connection.Send(response);
+            }
+            catch (NoDataToReadFromConnectionException) {
+                Thread.Sleep(1000);
+            }
         }
     }
 }
