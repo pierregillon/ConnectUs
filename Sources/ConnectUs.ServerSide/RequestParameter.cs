@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using ConnectUs.Business;
 
@@ -8,6 +9,7 @@ namespace ConnectUs.ServerSide
         private readonly ManualResetEvent _manualResetEvent;
         public Request Request { get; private set; }
         public Response Response { get; set; }
+        public Exception Error { get; set; }
 
         public RequestParameter(Request request)
         {
@@ -15,10 +17,9 @@ namespace ConnectUs.ServerSide
             Request = request;
         }
 
-        public Response WaitResponse()
+        public void WaitResponse()
         {
             _manualResetEvent.WaitOne();
-            return Response;
         }
         public void Notify()
         {

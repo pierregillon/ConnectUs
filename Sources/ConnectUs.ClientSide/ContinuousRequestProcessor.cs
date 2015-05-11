@@ -8,7 +8,7 @@ namespace ConnectUs.ClientSide
     public class ContinuousRequestProcessor
     {
         private readonly IRequestProcessor _requestProcessor;
-        private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
+        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private bool _continueProcessing = true;
 
         public event EventHandler ConnectionLost;
@@ -47,7 +47,7 @@ namespace ConnectUs.ClientSide
                 _resetEvent.Set();
             }
             catch (ConnectionException) {
-                _resetEvent.Close();
+                OnConnectionLost();
             }
         }
         private void ExecuteRequestOnConnection(IConnection connection)

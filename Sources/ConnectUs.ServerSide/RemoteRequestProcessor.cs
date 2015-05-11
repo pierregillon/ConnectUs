@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using ConnectUs.Business;
@@ -23,7 +24,11 @@ namespace ConnectUs.ServerSide
         {
             var parameter = new RequestParameter(request);
             EnqueueRequest(parameter);
-            return parameter.WaitResponse();
+            parameter.WaitResponse();
+            if (parameter.Error != null) {
+                throw parameter.Error;
+            }
+            return parameter.Response;
         }
 
         // ----- Internal logics
@@ -49,8 +54,19 @@ namespace ConnectUs.ServerSide
         {
             while (_requests.Any()) {
                 var parameter = DequeueRequest();
+                ExecuteRequest(parameter);
+            }
+        }
+        private void ExecuteRequest(RequestParameter parameter)
+        {
+            try {
                 _connection.Send(parameter.Request);
                 parameter.Response = _connection.Read<Response>();
+            }
+            catch (Exception e) {
+                parameter.Error = e;
+            }
+            finally {
                 parameter.Notify();
             }
         }

@@ -6,7 +6,7 @@ namespace ConnectUs.ClientSide
 {
     public class Client
     {
-        private readonly ManualResetEvent _manualResetEvent;
+        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private readonly ContinuousRequestProcessor _continuousRequestProcessor = new ContinuousRequestProcessor(new RequestProcessor(new ClientInformationService()));
 
         public event EventHandler ClientDisconnected;
@@ -26,7 +26,6 @@ namespace ConnectUs.ClientSide
         // ----- Constructors
         public Client()
         {
-            _manualResetEvent = new ManualResetEvent(false);
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
 
@@ -36,7 +35,7 @@ namespace ConnectUs.ClientSide
             var connection = GetConnection(hostName, port);
             if (connection != null) {
                 _continuousRequestProcessor.StartProcessingRequestFromConnection(connection);
-                _manualResetEvent.WaitOne();
+                _resetEvent.WaitOne();
             }
         }
 
@@ -56,8 +55,8 @@ namespace ConnectUs.ClientSide
         // ----- Event callbacks
         private void ContinuousRequestProcessorOnConnectionLost(object sender, EventArgs args)
         {
-            _manualResetEvent.Set();
             OnClientDisconnected();
+            _resetEvent.Set();
         }
     }
 }
