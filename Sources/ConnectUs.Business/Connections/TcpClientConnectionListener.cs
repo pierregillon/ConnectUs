@@ -44,11 +44,14 @@ namespace ConnectUs.Business.Connections
         // ----- Internal logics
         private void Callback(IAsyncResult result)
         {
-            var client = _listener.EndAcceptTcpClient(result);
-            var connection = new TcpClientConnection(client, new JsonEncoder());
-            connection.Disconnected += ConnectionOnDisconnected;
-            OnConnectionEstablished(new ConnectionEstablishedEventArgs(connection));
-            _listener.BeginAcceptTcpClient(Callback, _listener);
+            try {
+                var client = _listener.EndAcceptTcpClient(result);
+                var connection = new TcpClientConnection(client, new JsonEncoder());
+                connection.Disconnected += ConnectionOnDisconnected;
+                OnConnectionEstablished(new ConnectionEstablishedEventArgs(connection));
+                _listener.BeginAcceptTcpClient(Callback, _listener);
+            }
+            catch (ObjectDisposedException) {}
         }
 
         private void ConnectionOnDisconnected(object sender, EventArgs eventArgs)

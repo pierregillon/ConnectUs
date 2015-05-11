@@ -7,12 +7,14 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
     {
         static ViewModelLocator()
         {
-            SimpleIoc.Default.Register(() => new ServerConfiguration { Port = 9000 });
-            SimpleIoc.Default.Register<IServer, Server>();
-            SimpleIoc.Default.Register<IClientViewModelService, ClientViewModelService>();
-            SimpleIoc.Default.Register<ClientListViewModel>();
+            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic == false) {
+                SimpleIoc.Default.Register(() => new ServerConfiguration { Port = 9000 });
+                SimpleIoc.Default.Register<IServer, Server>();
+                SimpleIoc.Default.Register<IClientViewModelService, ClientViewModelService>();
+                SimpleIoc.Default.Register<ClientListViewModel>();
 
-            SimpleIoc.Default.GetInstance<ClientListViewModel>().Boot();
+                SimpleIoc.Default.GetInstance<ClientListViewModel>().Boot();
+            }
         }
 
         public ClientListViewModel ClientListViewModel
