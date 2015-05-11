@@ -8,10 +8,13 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic == false) {
-                SimpleIoc.Default.Register(() => new ServerConfiguration { Port = 9000 });
+                SimpleIoc.Default.Register(() => new ServerConfiguration {Port = 9000});
+                SimpleIoc.Default.Register<IViewModelBuilder, ViewModelBuilder>();
                 SimpleIoc.Default.Register<IServer, Server>();
+                SimpleIoc.Default.Register<IClientCommandService, ClientCommandService>();
                 SimpleIoc.Default.Register<IClientViewModelService, ClientViewModelService>();
                 SimpleIoc.Default.Register<ClientListViewModel>();
+                SimpleIoc.Default.Register<MainViewModel>();
 
                 SimpleIoc.Default.GetInstance<ClientListViewModel>().Boot();
             }
@@ -21,6 +24,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
         {
             get { return SimpleIoc.Default.GetInstance<ClientListViewModel>(); }
         }
+
         public ClientCommandViewModel ClientCommandViewModel
         {
             get
@@ -29,6 +33,14 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
                 return vm;
             }
         }
-    }
 
+        public MainViewModel MainViewModel
+        {
+            get
+            {
+                var viewModel = new MainViewModel(new ViewModelBuilder());
+                return viewModel;
+            }
+        }
+    }
 }

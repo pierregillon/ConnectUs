@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ConnectUs.ServerSide.Application.Views
 {
     /// <summary>
-    /// Interaction logic for ClientView.xaml
+    /// Interaction logic for ClientCommandView.xaml
     /// </summary>
-    public partial class ClientView : UserControl
+    public partial class ClientCommandView : UserControl
     {
-        public ClientView()
+        public ClientCommandView()
         {
             InitializeComponent();
         }

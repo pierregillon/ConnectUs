@@ -9,7 +9,6 @@ namespace ConnectUs.ClientSide
     {
         private const int DelayBeforeNewConnectionRead = 1000;
         private readonly IClientRequestHandler _clientRequestHandler;
-        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private bool _continueProcessing = true;
 
         public event EventHandler ConnectionLost;
@@ -35,7 +34,6 @@ namespace ConnectUs.ClientSide
         public void StopProcessingRequestFromConnection()
         {
             _continueProcessing = false;
-            _resetEvent.WaitOne();
         }
 
         // ----- Internal logics
@@ -50,7 +48,6 @@ namespace ConnectUs.ClientSide
                         Thread.Sleep(DelayBeforeNewConnectionRead);
                     }
                 }
-                _resetEvent.Set();
             }
             catch (ConnectionException) {
                 OnConnectionLost();

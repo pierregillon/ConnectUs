@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="222" d:DesignWidth="263"
              DataContext="{Binding Source={StaticResource Locator}, Path=ClientListViewModel}"
              d:DataContext="{Binding Source={StaticResource DesignTimeLocator}, Path=ClientListViewModel}">
-
     <DataGrid ItemsSource="{Binding Path=Clients, Mode=OneWay}" 
               SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}" 
               AutoGenerateColumns="False"
@@ -19,6 +19,11 @@
             <DataGridTextColumn Header="Machine name" Binding="{Binding Path=MachineName}" Width="*"/>
             <DataGridTextColumn Header="Ping" Binding="{Binding Path=Ping}" Width="50" />
         </DataGrid.Columns>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="PreviewMouseDoubleClick" >
+                <i:InvokeCommandAction Command="{Binding Path=OpenNewClientCommandViewModelCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
     </DataGrid>
 
 </UserControl>

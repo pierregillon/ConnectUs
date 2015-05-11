@@ -7,6 +7,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
     public class ClientViewModel : ViewModelBase
     {
         private readonly Client _client;
+        private bool _continuePinging;
 
         public string Ip
         {
@@ -35,6 +36,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
             var information = _client.GetClientInformation();
             Ip = information.Ip;
             MachineName = information.MachineName;
+            _continuePinging = true;
             new Thread(PingProcess).Start();
         }
 
@@ -42,7 +44,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         {
             try {
                 var watch = new Stopwatch();
-                while (true) {
+                while (_continuePinging) {
                     watch.Start();
                     _client.Ping();
                     watch.Stop();
@@ -54,6 +56,11 @@ namespace ConnectUs.ServerSide.Application.ViewModels
             catch (ClientException) {
                 _client.CloseConnection();
             }
+        }
+        public void Close()
+        {
+            _continuePinging = false;
+            _client.CloseConnection();
         }
     }
 }

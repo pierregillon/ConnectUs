@@ -86,11 +86,16 @@
     <Compile Include="Services\IClientViewModelService.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="Services\IClientCommandService.cs" />
+    <Compile Include="ViewModels\Base\IViewModelBuilder.cs" />
+    <Compile Include="ViewModels\Messages\CloseCommandViewModelMessage.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBuilder.cs" />
+    <Compile Include="ViewModels\Messages\OpenNewCommandViewModelMessage.cs" />
     <Compile Include="Views\ClientListView.xaml.cs">
       <DependentUpon>ClientListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ClientView.xaml.cs">
-      <DependentUpon>ClientView.xaml</DependentUpon>
+    <Compile Include="Views\ClientCommandView.xaml.cs">
+      <DependentUpon>ClientCommandView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,7 +113,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ClientView.xaml">
+    <Page Include="Views\ClientCommandView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

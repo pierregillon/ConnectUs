@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ConnectUs.ServerSide.Application.ViewModels;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace ConnectUs.ServerSide.Application
@@ -13,6 +14,7 @@ namespace ConnectUs.ServerSide.Application
             base.OnExit(e);
 
             SimpleIoc.Default.GetInstance<IServer>().Stop();
+            SimpleIoc.Default.GetInstance<ClientListViewModel>().Dispose();
         }
     }
 }
