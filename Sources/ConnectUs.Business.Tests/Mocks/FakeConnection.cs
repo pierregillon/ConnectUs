@@ -13,7 +13,7 @@ namespace ConnectUs.Business.Tests.Mocks
         {
             throw new System.NotImplementedException();
         }
-        public void Dispose()
+        public void Close()
         {
         }
     }

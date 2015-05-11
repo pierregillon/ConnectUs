@@ -32,7 +32,7 @@ namespace ConnectUs.ServerSide
         }
         public void Close()
         {
-            _connection.Dispose();
+            _connection.Close();
         }
 
         // ----- Internal logics

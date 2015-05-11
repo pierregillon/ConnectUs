@@ -38,6 +38,9 @@ namespace ConnectUs.Business.Connections
         public void Send<T>(T request)
         {
             try {
+                if (_client.Client.Poll(0, SelectMode.SelectError)) {
+                    throw new SocketException((int)SocketError.ConnectionAborted);
+                }
                 var bytes = _encoder.Encode(request);
                 var networkStream = _client.GetStream();
                 networkStream.Write(bytes, 0, bytes.Length);
@@ -62,7 +65,7 @@ namespace ConnectUs.Business.Connections
                 var buffer = new byte[1024];
                 var bytesReceived = networkStream.Read(buffer, 0, buffer.Length);
                 if (bytesReceived == 0) {
-                    Dispose();
+                    Close();
                     throw new SocketException((int)SocketError.ConnectionAborted);
                 }
                 return _encoder.Decode<T>(buffer);
@@ -83,7 +86,7 @@ namespace ConnectUs.Business.Connections
                 throw new ConnectionException("An error occured while reading data from connection.", ex);
             }
         }
-        public void Dispose()
+        public void Close()
         {
             _client.Close();
             OnDisconnected();

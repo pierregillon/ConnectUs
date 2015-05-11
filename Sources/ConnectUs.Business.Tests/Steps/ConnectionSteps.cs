@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -42,7 +43,12 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<Response>("ResponseReceived"); }
             set { ScenarioContext.Current.Add("ResponseReceived", value); }
         }
-
+        public ConnectionException ConnectionException
+        {
+            get { return ScenarioContext.Current.Get<ConnectionException>("ConnectionException"); }
+            set { ScenarioContext.Current.Add("ConnectionException", value); }
+        }
+        
         [Given(@"A connection is established between server and client on port (.*)")]
         public void GivenAConnectionIsEstablishedBetweenServerAndClientOnPort(int port)
         {
@@ -66,13 +72,24 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the request through the server connection")]
         public void WhenISendTheRequestThroughTheServerConnection()
         {
-            ServerConnection.Send(Request);
+            try {
+                ServerConnection.Send(Request);
+            }
+            catch (ConnectionException ex) {
+                ConnectionException = ex;
+            }
         }
 
         [When(@"I send the response through the client connection")]
         public void WhenISendTheResponseThroughTheClientConnection()
         {
             ClientConnection.Send(Response);
+        }
+
+        [When(@"I close the client connection")]
+        public void WhenICloseTheClientConnection()
+        {
+            ClientConnection.Close();
         }
 
         [Then(@"A client connection is instancied")]
@@ -125,5 +142,11 @@ namespace ConnectUs.Business.Tests.Steps
             Check.That(ResponseReceived.Result).IsEqualTo(expectedContent);
         }
 
+        [Then(@"I get a client connection exception")]
+        public void ThenIGetAClientConnectionException()
+        {
+            ScenarioContext.Current.Pending();
+            Check.That(ConnectionException).IsNotNull();
+        }
     }
 }

@@ -43,3 +43,10 @@ Scenario: Response sending by the client is received by the server
 	When I send the response through the client connection
 	Then The server connection receives the response
 		And The response received contains contains the value "OK"
+
+Scenario: Client connection closed throw connection exception
+	Given A connection is established between server and client on port 9000
+		And A request with the name "dir"
+	When I close the client connection
+		And I send the request through the server connection
+	Then I get a client connection exception
