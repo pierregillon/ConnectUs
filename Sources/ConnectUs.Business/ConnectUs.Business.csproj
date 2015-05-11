@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ClientInformation\PingCommand.cs" />
+    <Compile Include="Commands\ClientInformation\PingRequest.cs" />
+    <Compile Include="Commands\ClientInformation\PingResponse.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\ClientInformation\GetInformationCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />

@@ -1,8 +1,4 @@
-﻿using System;
-using ConnectUs.Business;
-using ConnectUs.Business.Commands;
-using ConnectUs.Business.Commands.ClientInformation;
-using ConnectUs.Business.Connections;
+﻿using ConnectUs.Business.Commands.ClientInformation;
 
 namespace ConnectUs.ServerSide
 {
@@ -25,32 +21,15 @@ namespace ConnectUs.ServerSide
         }
         public void Ping()
         {
-            throw new NotImplementedException();
-            try
-            {
-                //var response = _serverRequestProcessor.Process(new Request("Ping"));
-                //if (response.Error != null) {
-                //    throw new ClientException(response.Error);
-                //}
+            try {
+                var response = _serverRequestProcessor.Process<PingRequest, PingResponse>(new PingRequest());
+                if (response.Value != "OK") {
+                    throw new ClientException("An error occured during a ping. The value is invalid.");
+                }
             }
-            catch (ConnectionException ex) {
-                throw new ClientException("Unable to execute the command 'Ping', the connection has been closed.", ex);
+            catch (RequestException ex) {
+                throw new ClientException("An error occured during the ping request", ex);
             }
-        }
-        public Response Execute(Request request)
-        {
-            throw new NotImplementedException();
-            //try
-            //{
-            //    var response = _serverRequestProcessor.Process(request);
-            //    if (response.Error != null) {
-            //        throw new ClientException(response.Error);
-            //    }
-            //    return response;
-            //}
-            //catch (ConnectionException ex) {
-            //    throw new ClientException(string.Format("Unable to execute the request '{0}', the connection has been closed.", request.Name), ex);
-            //}
         }
     }
 }
