@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Command
     {
         private static void Main(string[] args)
         {
-            var server = new Server(new ClientListener(new TcpClientConnectionListener(), new ServerConfiguration {Port = 9000}));
+            var server = new Server(new ServerConfiguration {Port = 9000});
             server.Start();
             while (true) {
                 foreach (var connectedClient in server.GetConnectedClients().ToList()) {

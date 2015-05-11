@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.ServerSide", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.ServerSide.Command", "ConnectUs.ServerSide.Command\ConnectUs.ServerSide.Command.csproj", "{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.ServerSide.Application", "ConnectUs.ServerSide.Application\ConnectUs.ServerSide.Application.csproj", "{443E70B9-AD66-451F-B19D-136D4AAB01A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443E70B9-AD66-451F-B19D-136D4AAB01A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443E70B9-AD66-451F-B19D-136D4AAB01A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443E70B9-AD66-451F-B19D-136D4AAB01A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443E70B9-AD66-451F-B19D-136D4AAB01A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 		{666554C4-D914-43E3-8B79-004B5DC63454} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 		{A5ACF831-6303-45A6-BF03-2B85359CAFBA} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 		{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
+		{443E70B9-AD66-451F-B19D-136D4AAB01A1} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 	EndGlobalSection
 EndGlobal

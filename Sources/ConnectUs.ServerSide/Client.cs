@@ -1,4 +1,5 @@
 ﻿using ConnectUs.Business;
+using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide
 {
@@ -22,6 +23,18 @@ namespace ConnectUs.ServerSide
         public void CloseConnection()
         {
             _requestProcessor.Close();
+        }
+        public void Ping()
+        {
+            try {
+                var response = _requestProcessor.Process(new Request {Name = "Ping"});
+                if (response.Error != null) {
+                    throw new ClientException(response.Error);
+                }
+            }
+            catch (ConnectionException ex) {
+                throw new ClientException("Unable to execute the command 'Ping', the connection has been closed.", ex);
+            }
         }
     }
 }

@@ -69,6 +69,7 @@ namespace ConnectUs.ServerSide
             }
             catch (Exception e) {
                 parameter.Error = e;
+                _connection.Close();
             }
             finally {
                 parameter.Notify();

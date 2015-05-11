@@ -1,5 +1,4 @@
-﻿using ConnectUs.Business.Tests.Mocks;
-using ConnectUs.ServerSide;
+﻿using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 using System.Linq;
@@ -19,23 +18,6 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ClientInformation>("ClientInformation"); }
             set { ScenarioContext.Current.Add("ClientInformation", value); }
         }
-        public Client Client
-        {
-            get { return ScenarioContext.Current.Get<Client>("Client"); }
-            set { ScenarioContext.Current.Add("Client", value); }
-        }
-        public FakeClientListener ClientListener
-        {
-            get { return ScenarioContext.Current.Get<FakeClientListener>("ClientListener"); }
-            set { ScenarioContext.Current.Add("ClientListener", value); }
-        }
-
-        [Given(@"A server")]
-        public void GivenAServer()
-        {
-            ClientListener = new FakeClientListener();
-            Server = new Server(ClientListener);
-        }
 
         [When(@"The server requests to the client (.*) its information")]
         public void WhenTheServerRequestsToTheClientItsInformation(int index)
@@ -44,24 +26,6 @@ namespace ConnectUs.Business.Tests.Steps
                 .GetConnectedClients()
                 .ElementAt(index - 1)
                 .GetClientInformation();
-        }
-
-        [When(@"The client connects the server")]
-        public void WhenTheClientConnectsTheServer()
-        {
-            ClientListener.AddClient(Client);
-        }
-
-        [When(@"The client disconnects from the server")]
-        public void WhenTheClientDisconnectsFromTheServer()
-        {
-            ClientListener.RemoveClient(Client);
-        }
-
-        [Then(@"The server has (.*) client")]
-        public void ThenTheServerHasClient(int clientCount)
-        {
-            Check.That(Server.GetConnectedClients().Count()).IsEqualTo(clientCount);
         }
 
         [Then(@"The received information contains an ip to ""(.*)""")]

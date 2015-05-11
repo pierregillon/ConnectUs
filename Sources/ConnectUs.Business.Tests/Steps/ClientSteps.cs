@@ -1,5 +1,4 @@
-﻿using ConnectUs.Business.Tests.Mocks;
-using ConnectUs.ServerSide;
+﻿using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -27,12 +26,6 @@ namespace ConnectUs.Business.Tests.Steps
         {
             get { return ScenarioContext.Current.Get<ClientException>("Exception"); }
             set { ScenarioContext.Current.Add("Exception", value); }
-        }
-
-        [Given(@"A client")]
-        public void GivenAClient()
-        {
-            Client = new Client(new FakeRequestProcessor());
         }
 
         [Given(@"A client on the request processor")]

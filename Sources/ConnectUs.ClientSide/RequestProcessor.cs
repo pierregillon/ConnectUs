@@ -20,12 +20,15 @@ namespace ConnectUs.ClientSide
                     Result = "{" + string.Format("\"Ip\": \"{0}\", \"MachineName\": \"{1}\"", _clientInformationService.GetIp(), _clientInformationService.GetMachineName()) + "}"
                 };
             }
+            if (request.Name == "Ping") {
+                return new Response
+                {
+                    Result = "Ok"
+                };
+            }
 
             throw new Exception("request invalid");
         }
-        public void Close()
-        {
-            
-        }
+        public void Close() {}
     }
 }

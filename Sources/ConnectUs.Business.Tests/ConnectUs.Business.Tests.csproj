@@ -73,11 +73,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExecuteMultipleRequestOnMultipleThread.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ManageClientsOnServer.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ManageClientsOnServer.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\CommunicationWithTcpClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,10 +125,6 @@
     <None Include="Features\ExecuteMultipleRequestOnMultipleThread.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExecuteMultipleRequestOnMultipleThread.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\ManageClientsOnServer.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ManageClientsOnServer.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\CommunicationWithTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
