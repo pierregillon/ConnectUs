@@ -47,11 +47,8 @@
     <Compile Include="Client.cs" />
     <Compile Include="ClientConnectedEventArgs.cs" />
     <Compile Include="ClientDisconnectedEventArgs.cs" />
-    <Compile Include="ClientDisconnectedEventHandler.cs" />
     <Compile Include="ClientException.cs" />
-    <Compile Include="ClientInfo.cs" />
     <Compile Include="ClientListener.cs" />
-    <Compile Include="IClient.cs" />
     <Compile Include="IClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
