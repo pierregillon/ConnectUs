@@ -7,6 +7,6 @@
 
     public interface IBootable<in T>
     {
-        void Boot(T parameter);
+        void Boot(T clientViewModel);
     }
 }

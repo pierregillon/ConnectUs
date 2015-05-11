@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace ConnectUs.ClientSide
+namespace ConnectUs.Business.Commands
 {
     public class ClientInformationService : IClientInformationService
     {

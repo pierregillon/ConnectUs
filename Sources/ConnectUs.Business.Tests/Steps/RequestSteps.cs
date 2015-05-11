@@ -16,7 +16,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A request with the name ""(.*)""")]
         public void GivenARequestWithTheName(string requestName)
         {
-            Request = new Request{Name = requestName};
+            Request = new Request(requestName);
         }
 
         [Given(@"The request has a parameter ""(.*)"" with the value ""(.*)""")]

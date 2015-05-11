@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ConnectUs.ClientSide
+namespace ConnectUs.Business.Commands
 {
     public interface IClientInformationService
     {

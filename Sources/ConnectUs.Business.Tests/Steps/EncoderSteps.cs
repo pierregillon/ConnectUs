@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Text;
 using ConnectUs.Business.Encodings;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -18,15 +18,20 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<byte[]>("EncodedData"); }
             set { ScenarioContext.Current.Add("EncodedData", value); }
         }
-        public Request DecodedRequest
+        public string DecodedData
         {
-            get { return ScenarioContext.Current.Get<Request>("DecodedRequest"); }
-            set { ScenarioContext.Current.Add("DecodedRequest", value); }
+            get { return ScenarioContext.Current.Get<string>("DecodedData"); }
+            set { ScenarioContext.Current.Add("DecodedData", value); }
         }
-        public Request Request
+        public string DataToEncode
         {
-            get { return ScenarioContext.Current.Get<Request>("Request"); }
-            set { ScenarioContext.Current.Add("Request", value); }
+            get { return ScenarioContext.Current.Get<string>("DataToEncode"); }
+            set { ScenarioContext.Current.Add("DataToEncode", value); }
+        }
+        public byte[] DataToDecode
+        {
+            get { return ScenarioContext.Current.Get<byte[]>("DataToDecode"); }
+            set { ScenarioContext.Current.Add("DataToDecode", value); }
         }
 
         [Given(@"An encoder")]
@@ -35,48 +40,40 @@ namespace ConnectUs.Business.Tests.Steps
             Encoder = new JsonEncoder();
         }
 
-        [When(@"I encode the request with the encoder")]
-        public void WhenIEncodeTheRequestWithTheEncoder()
+        [Given(@"A data to encode ""(.*)""")]
+        public void GivenADataToEncode(string data)
         {
-            EncodedData = Encoder.Encode(Request);
+            DataToEncode = data;
         }
 
-        [When(@"I decode the request with the encoder")]
-        public void WhenIDecodeTheRequestWithTheEncoder()
+        [Given(@"A data to decode")]
+        public void GivenADataToDecode()
         {
-            DecodedRequest = Encoder.Decode<Request>(EncodedData);
+            DataToDecode = new UTF8Encoding().GetBytes("hello world");
         }
 
-        [Then(@"I got an encoded data")]
-        public void ThenIGotAnEncodedData()
+        [When(@"I encode the data with the encoder")]
+        public void WhenIEncodeTheDataWithTheEncoder()
+        {
+            EncodedData = Encoder.Encode(DataToEncode);
+        }
+
+        [When(@"I decode the encoded data with the encoder")]
+        public void WhenIDecodeTheEncodedDataWithTheEncoder()
+        {
+            DecodedData = Encoder.Decode(EncodedData);
+        }
+
+        [Then(@"I get an encoded data")]
+        public void ThenIGetAnEncodedData()
         {
             Check.That(EncodedData).IsNotNull();
         }
 
-        [Then(@"I got a decoded request")]
-        public void ThenIGotADecodedRequest()
+        [Then(@"I get the decoded data ""(.*)""")]
+        public void ThenIGetTheDecodedData(string decodedData)
         {
-            Check.That(DecodedRequest).IsNotNull();
+            Check.That(DecodedData).IsEqualTo(decodedData);
         }
-
-        [Then(@"The decoded request has the name ""(.*)""")]
-        public void ThenTheDecodedRequestHasTheName(string expectedName)
-        {
-            Check.That(DecodedRequest.Name).IsEqualTo(expectedName);
-        }
-
-        [Then(@"the decoded request has (.*) parameter")]
-        public void ThenTheDecodedRequestHasParameter(int expectedCount)
-        {
-            Check.That(DecodedRequest.Parameters.Count).IsEqualTo(expectedCount);
-        }
-
-        [Then(@"the decoded request has a parameter ""(.*)"" with the value ""(.*)""")]
-        public void ThenTheDecodedRequestHasAParameterWithTheValue(string expectedName, string expectedValue)
-        {
-            var parameter = DecodedRequest.Parameters.First(p => p.Name == expectedName);
-            Check.That(parameter.Value).IsEqualTo(expectedValue);
-        }
-
     }
 }

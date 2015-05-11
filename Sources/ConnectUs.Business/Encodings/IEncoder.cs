@@ -2,7 +2,7 @@
 {
     public interface IEncoder
     {
-        byte[] Encode<T>(T request);
-        T Decode<T>(byte[] buffer);
+        byte[] Encode(string data);
+        string Decode(byte[] encodedData);
     }
 }

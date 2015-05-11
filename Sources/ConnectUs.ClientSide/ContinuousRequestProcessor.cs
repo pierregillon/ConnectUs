@@ -2,6 +2,7 @@
 using System.Threading;
 using ConnectUs.Business;
 using ConnectUs.Business.Connections;
+using Newtonsoft.Json;
 
 namespace ConnectUs.ClientSide
 {
@@ -54,9 +55,11 @@ namespace ConnectUs.ClientSide
         private void ExecuteRequestOnConnection(IConnection connection)
         {
             try {
-                var request = connection.Read<Request>();
+                var jsonRequest = connection.Read();
+                var request = JsonConvert.DeserializeObject<Request>(jsonRequest);
                 var response = _requestProcessor.Process(request);
-                connection.Send(response);
+                var jsonResponse = JsonConvert.SerializeObject(response);
+                connection.Send(jsonResponse);
             }
             catch (NoDataToReadFromConnectionException) {
                 Thread.Sleep(DelayBeforeNewConnectionRead);

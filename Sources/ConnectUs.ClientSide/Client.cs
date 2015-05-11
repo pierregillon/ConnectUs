@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using ConnectUs.Business.Commands;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ClientSide

@@ -3,21 +3,15 @@
 	As server or client
 	I want to encode and decode data
 
-Scenario: Encode a request provide encoded data
-	Given A request with the name "test"
-		And The request has a parameter "test" with the value "test"
+Scenario: Encode data with encoder
+	Given A data to encode "hello world"
 		And An encoder
-	When I encode the request with the encoder
-	Then I got an encoded data
+	When I encode the data with the encoder
+	Then I get an encoded data
 
-Scenario: Encode and decode a request provide the same request
-	Given A request with the name "test"
-		And The request has a parameter "test" with the value "test"
+Scenario: Decode and encoded data with encoder
+	Given A data to encode "hello world"
 		And An encoder
-	When I encode the request with the encoder
-		And I decode the request with the encoder
-	Then I got a decoded request
-		And The decoded request has the name "test"
-		And the decoded request has 1 parameter
-		And the decoded request has a parameter "test" with the value "test"
-
+	When I encode the data with the encoder
+		And I decode the encoded data with the encoder
+	Then I get the decoded data "hello world"

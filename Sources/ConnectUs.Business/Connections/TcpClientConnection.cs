@@ -35,13 +35,13 @@ namespace ConnectUs.Business.Connections
         }
 
         // ----- Public methods
-        public void Send<T>(T request)
+        public void Send(string data)
         {
             try {
                 if (_client.Client.Poll(0, SelectMode.SelectError)) {
                     throw new SocketException((int)SocketError.ConnectionAborted);
                 }
-                var bytes = _encoder.Encode(request);
+                var bytes = _encoder.Encode(data);
                 var networkStream = _client.GetStream();
                 networkStream.Write(bytes, 0, bytes.Length);
             }
@@ -58,7 +58,7 @@ namespace ConnectUs.Business.Connections
                 throw new ConnectionException("An error occured while sending data to the connection.", ex);
             }
         }
-        public T Read<T>()
+        public string Read()
         {
             try {
                 var networkStream = _client.GetStream();
@@ -68,7 +68,7 @@ namespace ConnectUs.Business.Connections
                     Close();
                     throw new SocketException((int)SocketError.ConnectionAborted);
                 }
-                return _encoder.Decode<T>(buffer);
+                return _encoder.Decode(buffer);
             }
             catch (IOException ex) {
                 if (ex.InnerException != null) {

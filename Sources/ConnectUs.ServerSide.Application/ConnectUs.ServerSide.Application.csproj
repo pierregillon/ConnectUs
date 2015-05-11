@@ -78,13 +78,19 @@
     <Compile Include="ViewModels\Base\IBootable.cs" />
     <Compile Include="ViewModels\Base\LoadingViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Services\ClientCommandService.cs" />
+    <Compile Include="ViewModels\ClientCommandViewModel.cs" />
     <Compile Include="ViewModels\ClientListViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="Services\ClientViewModelService.cs" />
     <Compile Include="Services\IClientViewModelService.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="Services\IClientCommandService.cs" />
     <Compile Include="Views\ClientListView.xaml.cs">
       <DependentUpon>ClientListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientView.xaml.cs">
+      <DependentUpon>ClientView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ClientListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

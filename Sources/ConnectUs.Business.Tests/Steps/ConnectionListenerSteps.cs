@@ -73,7 +73,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the request '(.*)' through the connection of the connection established event")]
         public void WhenISendTheRequestThroughTheConnectionOfTheConnectionEstablishedEvent(string requestName)
         {
-            ConnectionEstablishedEventArgs.Connection.Send(new Request { Name = requestName});
+            //ConnectionEstablishedEventArgs.Connection.Send(new Request(requestName));
         }
 
         [Then(@"The connection listener is started on port (.*)")]

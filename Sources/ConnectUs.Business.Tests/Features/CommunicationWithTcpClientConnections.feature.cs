@@ -88,107 +88,37 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Request sending by the server is received by the client")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Send data from server connection to client connection")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CommunicationWithTcpClientConnections")]
-        public virtual void RequestSendingByTheServerIsReceivedByTheClient()
+        public virtual void SendDataFromServerConnectionToClientConnection()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request sending by the server is received by the client", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send data from server connection to client connection", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
-  testRunner.And("A request with the name \"hello world\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I send the data \"hello world\" through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
- testRunner.When("I send the request through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("The client connection receives the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The client connection receives the data \"hello world\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Send data from client connection to server connection")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CommunicationWithTcpClientConnections")]
+        public virtual void SendDataFromClientConnectionToServerConnection()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send data from client connection to server connection", ((string[])(null)));
 #line 16
-  testRunner.And("The request received has the name \"hello world\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Request with 1 parameter sending by the server is received by the client")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CommunicationWithTcpClientConnections")]
-        public virtual void RequestWith1ParameterSendingByTheServerIsReceivedByTheClient()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request with 1 parameter sending by the server is received by the client", ((string[])(null)));
+this.ScenarioSetup(scenarioInfo);
+#line 17
+ testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-this.ScenarioSetup(scenarioInfo);
+ testRunner.When("I send the data \"hello world\" through the client connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 19
- testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
-  testRunner.And("A request with the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-  testRunner.And("The request has a parameter \"directory\" with the value \"c:/MyDirectory\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
- testRunner.When("I send the request through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 23
- testRunner.Then("The client connection receives the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 24
-  testRunner.And("The request received contains 1 parameters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-  testRunner.And("The request received has the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
-  testRunner.And("The request received contains a parameter \"directory\" with the value \"c:/MyDirect" +
-                    "ory\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Request with 2 parameters sending by the server is received by the client")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CommunicationWithTcpClientConnections")]
-        public virtual void RequestWith2ParametersSendingByTheServerIsReceivedByTheClient()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request with 2 parameters sending by the server is received by the client", ((string[])(null)));
-#line 28
-this.ScenarioSetup(scenarioInfo);
-#line 29
- testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
-  testRunner.And("A request with the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
-  testRunner.And("The request has a parameter \"directory\" with the value \"c:/MyDirectory\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
-  testRunner.And("The request has a parameter \"mode\" with the value \"readonly\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
- testRunner.When("I send the request through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 34
- testRunner.Then("The client connection receives the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
-  testRunner.And("The request received has the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
-  testRunner.And("The request received contains 2 parameters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-  testRunner.And("The request received contains a parameter \"directory\" with the value \"c:/MyDirect" +
-                    "ory\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
-  testRunner.And("The request received contains a parameter \"mode\" with the value \"readonly\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Response sending by the client is received by the server")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CommunicationWithTcpClientConnections")]
-        public virtual void ResponseSendingByTheClientIsReceivedByTheServer()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Response sending by the client is received by the server", ((string[])(null)));
-#line 40
-this.ScenarioSetup(scenarioInfo);
-#line 41
- testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
-  testRunner.And("A response with the content \"OK\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
- testRunner.When("I send the response through the client connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 44
- testRunner.Then("The server connection receives the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 45
-  testRunner.And("The response received contains contains the value \"OK\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("The server connection receives the data \"hello world\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -199,18 +129,16 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClientConnectionClosedThrowConnectionException()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Client connection closed throw connection exception", ((string[])(null)));
-#line 47
+#line 21
 this.ScenarioSetup(scenarioInfo);
-#line 48
+#line 22
  testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
-  testRunner.And("A request with the name \"dir\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 23
  testRunner.When("I close the client connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 51
-  testRunner.And("I send the request through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
- testRunner.Then("I get a client connection exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 24
+  testRunner.And("I send the data \"hello world\" through the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.Then("I get a connection exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

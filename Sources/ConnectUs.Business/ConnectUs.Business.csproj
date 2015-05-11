@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientInformation.cs" />
+    <Compile Include="Commands\ClientInformationService.cs" />
+    <Compile Include="Commands\GetInformationCommand.cs" />
+    <Compile Include="Commands\IClientInformationService.cs" />
+    <Compile Include="Commands\ICommandExecutable.cs" />
     <Compile Include="Connections\ConnectionEstablishedEventArgs.cs" />
     <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />

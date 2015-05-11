@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
+using ConnectUs.Business;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
@@ -38,6 +40,11 @@ namespace ConnectUs.ServerSide.Application.ViewModels
             new Thread(PingProcess).Start();
         }
 
+        public Response Execute(Request request)
+        {
+            return _client.Execute(request);
+        }
+
         private void PingProcess()
         {
             try {
@@ -46,13 +53,12 @@ namespace ConnectUs.ServerSide.Application.ViewModels
                     watch.Start();
                     _client.Ping();
                     watch.Stop();
-                    Ping = (int)watch.ElapsedMilliseconds;
+                    Ping = (int) watch.ElapsedMilliseconds;
                     watch.Reset();
                     Thread.Sleep(5000);
                 }
             }
-            catch (ClientException) {
-            }
+            catch (ClientException) {}
         }
     }
 }

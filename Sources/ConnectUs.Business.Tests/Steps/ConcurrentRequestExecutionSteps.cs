@@ -46,7 +46,7 @@ namespace ConnectUs.Business.Tests.Steps
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = ServerRequestProcessor.Process(new Request {Name = requestName});
+                var response = ServerRequestProcessor.Process(new Request(requestName));
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
@@ -54,7 +54,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the request ""(.*)"" through the server request processor on main thread")]
         public void WhenISendTheRequestThroughTheServerRequestProcessorOnMainThread(string requestName)
         {
-            MainThreadResponses.Add(ServerRequestProcessor.Process(new Request {Name = requestName}));
+            MainThreadResponses.Add(ServerRequestProcessor.Process(new Request (requestName)));
         }
 
         [Then(@"I get a response with the result ""(.*)"" on thread (.*)")]

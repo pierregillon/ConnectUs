@@ -1,5 +1,6 @@
 ﻿using ConnectUs.Business;
 using ConnectUs.Business.Connections;
+using Newtonsoft.Json;
 
 namespace ConnectUs.ServerSide
 {
@@ -19,8 +20,10 @@ namespace ConnectUs.ServerSide
         {
             try {
                 lock (_locker) {
-                    _connection.Send(request);
-                    return _connection.Read<Response>();
+                    var jsonRequest = JsonConvert.SerializeObject(request);
+                    _connection.Send(jsonRequest);
+                    var jsonResponse = _connection.Read();
+                    return JsonConvert.DeserializeObject<Response>(jsonResponse);
                 }
             }
             catch (ConnectionException) {

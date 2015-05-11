@@ -7,8 +7,9 @@ namespace ConnectUs.Business
         public string Name { get; set; }
         public List<RequestParameter> Parameters { get; set; }
 
-        public Request()
+        public Request(string name)
         {
+            Name = name;
             Parameters = new List<RequestParameter>();
         }
     }

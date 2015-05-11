@@ -5,16 +5,17 @@ namespace ConnectUs.Business.Tests.Mocks
     public class FakeConnection : IConnection
     {
         public int TimeOut { get; set; }
-        public void Send<T>(T request)
+        public void Send(string data)
         {
             throw new System.NotImplementedException();
         }
-        public T Read<T>()
+        public string Read()
         {
             throw new System.NotImplementedException();
         }
         public void Close()
         {
+            throw new System.NotImplementedException();
         }
     }
 }

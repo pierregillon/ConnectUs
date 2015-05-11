@@ -1,4 +1,5 @@
 using System.Net;
+using ConnectUs.Business.Commands;
 using ConnectUs.ClientSide;
 
 namespace ConnectUs.Business.Tests.Mocks

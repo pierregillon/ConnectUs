@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using ConnectUs.Business.Connections;
 using ConnectUs.Business.Encodings;
+using ConnectUs.ClientSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -22,26 +23,6 @@ namespace ConnectUs.Business.Tests.Steps
         {
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
             set { ScenarioContext.Current.Add("ClientConnection", value); }
-        }
-        public Request Request
-        {
-            get { return ScenarioContext.Current.Get<Request>("Request"); }
-            set { ScenarioContext.Current.Add("Request", value); }
-        }
-        public Request RequestReceived
-        {
-            get { return ScenarioContext.Current.Get<Request>("RequestReceived"); }
-            set { ScenarioContext.Current.Add("RequestReceived", value); }
-        }
-        public Response Response
-        {
-            get { return ScenarioContext.Current.Get<Response>("Response"); }
-            set { ScenarioContext.Current.Add("Response", value); }
-        }
-        public Response ResponseReceived
-        {
-            get { return ScenarioContext.Current.Get<Response>("ResponseReceived"); }
-            set { ScenarioContext.Current.Add("ResponseReceived", value); }
         }
         public ConnectionException ConnectionException
         {
@@ -69,21 +50,17 @@ namespace ConnectUs.Business.Tests.Steps
             ClientConnection = clientTask.Result;
         }
 
-        [When(@"I send the request through the server connection")]
-        public void WhenISendTheRequestThroughTheServerConnection()
+
+        [When(@"I send the data ""(.*)"" through the server connection")]
+        public void WhenISendTheDataThroughTheServerConnection(string data)
         {
-            try {
-                ServerConnection.Send(Request);
-            }
-            catch (ConnectionException ex) {
-                ConnectionException = ex;
-            }
+            ServerConnection.Send(data);
         }
 
-        [When(@"I send the response through the client connection")]
-        public void WhenISendTheResponseThroughTheClientConnection()
+        [When(@"I send the data ""(.*)"" through the client connection")]
+        public void WhenISendTheDataThroughTheClientConnection(string data)
         {
-            ClientConnection.Send(Response);
+            ClientConnection.Send(data);
         }
 
         [When(@"I close the client connection")]
@@ -104,45 +81,19 @@ namespace ConnectUs.Business.Tests.Steps
             Check.That(ServerConnection).IsNotNull();
         }
 
-        [Then(@"The client connection receives the request")]
-        public void ThenTheClientConnectionReceivesTheRequest()
+        [Then(@"The client connection receives the data ""(.*)""")]
+        public void ThenTheClientConnectionReceivesTheData(string data)
         {
-            RequestReceived = ClientConnection.Read<Request>();
+            Check.That(ClientConnection.Read()).IsEqualTo(data);
         }
 
-        [Then(@"The request received has the name ""(.*)""")]
-        public void ThenTheRequestReceivedHasTheName(string name)
+        [Then(@"The server connection receives the data ""(.*)""")]
+        public void ThenTheServerConnectionReceivesTheData(string data)
         {
-            Check.That(RequestReceived.Name).IsEqualTo(name);
+            Check.That(ServerConnection.Read()).IsEqualTo(data);
         }
 
-        [Then(@"The request received contains (.*) parameters")]
-        public void ThenTheRequestReceivedContainsParameters(int parameterCount)
-        {
-            Check.That(RequestReceived.Parameters.Count).IsEqualTo(parameterCount);
-        }
-
-        [Then(@"The request received contains a parameter ""(.*)"" with the value ""(.*)""")]
-        public void ThenTheRequestReceivedContainsAParameterWithTheValue(string parameterName, string parameterValue)
-        {
-            var parameter = RequestReceived.Parameters.First(requestParameter => requestParameter.Name == parameterName);
-            Check.That(parameter).IsNotNull();
-            Check.That(parameter.Value).IsEqualTo(parameterValue);
-        }
-
-        [Then(@"The server connection receives the response")]
-        public void ThenTheServerConnectionReceivesTheResponse()
-        {
-            ResponseReceived = ServerConnection.Read<Response>();
-        }
-
-        [Then(@"The response received contains contains the value ""(.*)""")]
-        public void ThenTheResponseReceivedContainsContainsTheValue(string expectedContent)
-        {
-            Check.That(ResponseReceived.Result).IsEqualTo(expectedContent);
-        }
-
-        [Then(@"I get a client connection exception")]
+        [Then(@"I get a connection exception")]
         public void ThenIGetAClientConnectionException()
         {
             ScenarioContext.Current.Pending();

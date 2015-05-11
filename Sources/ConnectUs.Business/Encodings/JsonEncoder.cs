@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Encodings
 {
@@ -7,16 +6,13 @@ namespace ConnectUs.Business.Encodings
     {
         private readonly UTF8Encoding _encoding = new UTF8Encoding();
 
-        public byte[] Encode<T>(T request)
+        public byte[] Encode(string data)
         {
-            var json = JsonConvert.SerializeObject(request);
-            return _encoding.GetBytes(json);
+            return _encoding.GetBytes(data);
         }
-
-        public T Decode<T>(byte[] buffer)
+        public string Decode(byte[] encodedData)
         {
-            var json = _encoding.GetString(buffer);
-            return JsonConvert.DeserializeObject<T>(json);
+            return _encoding.GetString(encodedData);
         }
     }
 }
