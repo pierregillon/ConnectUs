@@ -7,6 +7,7 @@ namespace ConnectUs.ClientSide
 {
     public class ContinuousRequestProcessor
     {
+        private const int DelayBeforeNewConnectionRead = 1000;
         private readonly IRequestProcessor _requestProcessor;
         private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private bool _continueProcessing = true;
@@ -58,7 +59,7 @@ namespace ConnectUs.ClientSide
                 connection.Send(response);
             }
             catch (NoDataToReadFromConnectionException) {
-                Thread.Sleep(1000);
+                Thread.Sleep(DelayBeforeNewConnectionRead);
             }
         }
     }
