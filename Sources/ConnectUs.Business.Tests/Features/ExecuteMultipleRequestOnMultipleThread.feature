@@ -1,4 +1,5 @@
-﻿Feature: ExecuteMultipleRequestOnMultipleThread
+﻿@ConcurrentRequestExecution
+Feature: ExecuteMultipleRequestOnMultipleThread
 	In order to send pings
 	As server
 	I want to execute multiple request on multiple thread on a server request processor
