@@ -68,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExecuteClientCommandOnServerSide.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ExecuteMultipleRequestOnMultipleThread.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExecuteMultipleRequestOnMultipleThread.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ManageClientsOnServer.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +108,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\ClientListenerSteps.cs" />
     <Compile Include="Steps\ClientSteps.cs" />
+    <Compile Include="Steps\ConcurrentRequestExecutionSteps.cs" />
     <Compile Include="Steps\ConnectionListenerSteps.cs" />
     <Compile Include="Mocks\FakeConnection.cs" />
     <Compile Include="Steps\ConnectionSteps.cs" />
@@ -120,6 +126,10 @@
     <None Include="Features\ExecuteClientCommandOnServerSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExecuteClientCommandOnServerSide.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ExecuteMultipleRequestOnMultipleThread.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExecuteMultipleRequestOnMultipleThread.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ManageClientsOnServer.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
