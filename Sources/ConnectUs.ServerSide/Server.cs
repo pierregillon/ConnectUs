@@ -23,6 +23,14 @@ namespace ConnectUs.ServerSide
             _clients.Remove(args.Client);
         }
 
+        public void Start()
+        {
+            _clientListener.Start();
+        }
+        public void Stop()
+        {
+            _clientListener.Stop();
+        }
         public IEnumerable<Client> GetConnectedClients()
         {
             return _clients;

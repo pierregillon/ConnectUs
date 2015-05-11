@@ -12,6 +12,13 @@ namespace ConnectUs.ClientSide
         private readonly ManualResetEvent _resetEvent = new ManualResetEvent(false);
         private bool _continueProcessing = true;
 
+        public event EventHandler<ConnectionLostEventArgs> ConnectionLost;
+        protected virtual void OnConnectionLost(ConnectionLostEventArgs e)
+        {
+            EventHandler<ConnectionLostEventArgs> handler = ConnectionLost;
+            if (handler != null) handler(this, e);
+        }
+
         public ContinuousRequestProcessor(IConnection connection, IRequestProcessor requestProcessor)
         {
             _connection = connection;
@@ -20,21 +27,29 @@ namespace ConnectUs.ClientSide
 
         public void Process()
         {
-            while (_continueProcessing) {
-                try {
-                    var request = _connection.Read<Request>();
-                    var response = _requestProcessor.Process(request);
-                    _connection.Send(response);
+            try {
+                while (_continueProcessing) {
+                    try {
+                        var request = _connection.Read<Request>();
+                        var response = _requestProcessor.Process(request);
+                        _connection.Send(response);
+                    }
+                    catch (NoDataToReadFromConnectionException) {
+                        Thread.Sleep(1000);
+                    }
                 }
-                catch (Exception ex) {
-                    Console.WriteLine(ex);
-                }
+                _resetEvent.Set();
             }
-            _resetEvent.Set();
+            catch (ConnectionException) {
+                _connection.Dispose();
+                _resetEvent.Close();
+                OnConnectionLost(new ConnectionLostEventArgs(_connection));
+            }
         }
 
         public void StartProcessingRequestFromConnection()
         {
+            _continueProcessing = true;
             var thread = new Thread(Process);
             thread.Start();
         }

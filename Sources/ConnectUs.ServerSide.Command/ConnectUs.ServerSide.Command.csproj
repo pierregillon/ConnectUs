@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{666554C4-D914-43E3-8B79-004B5DC63454}</ProjectGuid>
+    <ProjectGuid>{DBA17D0D-5B52-48DF-98E3-8D44DEDEE1C2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConnectUs.ClientSide</RootNamespace>
-    <AssemblyName>ConnectUs.ClientSide</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>ConnectUs.ServerSide.Command</RootNamespace>
+    <AssemblyName>ConnectUs.ServerSide.Command</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,30 +31,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientInformationService.cs" />
-    <Compile Include="ContinuousRequestProcessor.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RequestProcessor.cs" />
-    <Compile Include="IClientInformationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
-      <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
+      <Project>{e8d6208b-fa4f-46ca-8226-e20343bf3d34}</Project>
       <Name>ConnectUs.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
+      <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
+      <Name>ConnectUs.ServerSide</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

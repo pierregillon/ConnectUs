@@ -55,12 +55,7 @@ namespace ConnectUs.Business.Tests.Steps
                 return new TcpClientConnection(client, new JsonEncoder());
             });
 
-            var clientTask = Task.Run<IConnection>(() =>
-            {
-                var client = new TcpClient();
-                client.Connect("localhost", port);
-                return new TcpClientConnection(client, new JsonEncoder());
-            });
+            var clientTask = Task.Run(() => TcpClientConnectionFactory.Build("localhost", port, 50));
 
             Task.WaitAll(serverTask, clientTask);
 
