@@ -9,7 +9,7 @@ namespace ConnectUs.ClientSide
     public class ContinuousRequestProcessor
     {
         private const int DelayBeforeNewConnectionRead = 1000;
-        private readonly IRequestProcessor _requestProcessor;
+        private IClientRequestHandler _clientRequestHandler;
         private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private bool _continueProcessing = true;
 
@@ -21,9 +21,9 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Constructors
-        public ContinuousRequestProcessor(IRequestProcessor requestProcessor)
+        public ContinuousRequestProcessor(IClientRequestProcessor clientRequestProcessor)
         {
-            _requestProcessor = requestProcessor;
+            _clientRequestHandler = new ClientRequestHandler(clientRequestProcessor, new JsonRequestParser());
         }
 
         // ----- Public methods
@@ -44,25 +44,17 @@ namespace ConnectUs.ClientSide
         {
             try {
                 while (_continueProcessing) {
-                    ExecuteRequestOnConnection(connection);
+                    try {
+                        _clientRequestHandler.ProcessNextRequestFrom(connection);
+                    }
+                    catch (NoRequestToProcessException) {
+                        Thread.Sleep(DelayBeforeNewConnectionRead);
+                    }
                 }
                 _resetEvent.Set();
             }
             catch (ConnectionException) {
                 OnConnectionLost();
-            }
-        }
-        private void ExecuteRequestOnConnection(IConnection connection)
-        {
-            try {
-                var jsonRequest = connection.Read();
-                var request = JsonConvert.DeserializeObject<Request>(jsonRequest);
-                var response = _requestProcessor.Process(request);
-                var jsonResponse = JsonConvert.SerializeObject(response);
-                connection.Send(jsonResponse);
-            }
-            catch (NoDataToReadFromConnectionException) {
-                Thread.Sleep(DelayBeforeNewConnectionRead);
             }
         }
     }
@@ -101,9 +93,16 @@ namespace ConnectUs.ClientSide
     }
 
 
-
     public interface IClientRequestProcessor
     {
         object Process(string requestName, string originalData);
+    }
+
+    public class ClientRequestProcessor : IClientRequestProcessor
+    {
+        public object Process(string requestName, string originalData)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

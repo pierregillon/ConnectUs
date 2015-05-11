@@ -12,9 +12,9 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<Client>("Client"); }
             set { ScenarioContext.Current.Add("Client", value); }
         }
-        public IRequestProcessor ServerRequestProcessor
+        public IServerRequestProcessor ServerRequestProcessor
         {
-            get { return ScenarioContext.Current.Get<IRequestProcessor>("ServerRequestProcessor"); }
+            get { return ScenarioContext.Current.Get<IServerRequestProcessor>("ServerRequestProcessor"); }
             set { ScenarioContext.Current.Add("ServerRequestProcessor", value); }
         }
         public ClientInformation ClientInformation

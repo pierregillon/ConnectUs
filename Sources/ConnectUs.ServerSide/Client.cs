@@ -6,17 +6,17 @@ namespace ConnectUs.ServerSide
 {
     public class Client
     {
-        private readonly IRequestProcessor _requestProcessor;
+        private readonly IServerRequestProcessor _serverRequestProcessor;
 
-        public Client(IRequestProcessor requestProcessor)
+        public Client(IServerRequestProcessor serverRequestProcessor)
         {
-            _requestProcessor = requestProcessor;
+            _serverRequestProcessor = serverRequestProcessor;
         }
 
         public ClientInformation GetClientInformation()
         {
             throw new NotImplementedException();
-            //var response = _requestProcessor.Process(new Request("GetClientInformation"));
+            //var response = _serverRequestProcessor.Process(new Request("GetClientInformation"));
             //if (response.Error != null) {
             //    throw new ClientException(response.Error);
             //}
@@ -24,14 +24,14 @@ namespace ConnectUs.ServerSide
         }
         public void CloseConnection()
         {
-            _requestProcessor.Close();
+            //_serverRequestProcessor.Close();
         }
         public void Ping()
         {
             throw new NotImplementedException();
             try
             {
-                //var response = _requestProcessor.Process(new Request("Ping"));
+                //var response = _serverRequestProcessor.Process(new Request("Ping"));
                 //if (response.Error != null) {
                 //    throw new ClientException(response.Error);
                 //}
@@ -45,7 +45,7 @@ namespace ConnectUs.ServerSide
             throw new NotImplementedException();
             //try
             //{
-            //    var response = _requestProcessor.Process(request);
+            //    var response = _serverRequestProcessor.Process(request);
             //    if (response.Error != null) {
             //        throw new ClientException(response.Error);
             //    }

@@ -2,8 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using ConnectUs.Business.Tests.Mocks;
+using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -12,9 +13,9 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ConcurrentRequestExecutionSteps
     {
-        public IRequestProcessor ServerRequestProcessor
+        public IServerRequestProcessor ServerRequestProcessor
         {
-            get { return ScenarioContext.Current.Get<IRequestProcessor>("ServerRequestProcessor"); }
+            get { return ScenarioContext.Current.Get<IServerRequestProcessor>("ServerRequestProcessor"); }
             set { ScenarioContext.Current.Add("ServerRequestProcessor", value); }
         }
         private List<Task> Tasks
@@ -41,53 +42,41 @@ namespace ConnectUs.Business.Tests.Steps
             ResponseByThread = new ConcurrentDictionary<int, EchoResponse>();
         }
 
-        [When(@"I send the request ""(.*)"" through the server request processor on the thread (.*)")]
-        public void WhenISendTheRequestThroughTheServerConnectionOnTheThread(string requestName, int threadId)
+        [When(@"I send an echo request with value ""(.*)"" through the server request processor on the thread (.*)")]
+        public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnTheThread(int value, int threadId)
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = (EchoResponse)ServerRequestProcessor.Process(new EchoRequest());
+                var response = ServerRequestProcessor.Process<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
 
-        [When(@"I send the request ""(.*)"" through the server request processor on main thread")]
-        public void WhenISendTheRequestThroughTheServerRequestProcessorOnMainThread(string requestName)
+        [When(@"I send an echo request with value ""(.*)"" through the server request processor on main thread")]
+        public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnMainThread(int value)
         {
-            MainThreadResponses.Add((EchoResponse)ServerRequestProcessor.Process(new EchoRequest()));
+            MainThreadResponses.Add(ServerRequestProcessor.Process<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
         }
 
-        [Then(@"I get a response with the result ""(.*)"" on thread (.*)")]
-        public void ThenIGetAResponseWithTheResultFromClientConnectionOnThread(string result, int threadId)
+        [Then(@"I get an echo response with the result ""(.*)"" on thread (.*)")]
+        public void ThenIGetAnEchoResponseWithTheResultOnThread(int result, int threadId)
         {
             try {
                 if (Tasks.Any()) {
                     Task.WaitAll(Tasks.ToArray());
                     Tasks.Clear();
                 }
-                Check.That(ResponseByThread[threadId].Result).IsEqualTo(result);
+                Check.That(ResponseByThread[threadId].Result).IsEqualTo(result.ToString());
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
             }
         }
 
-        [Then(@"I get a response with the result ""(.*)"" on main thread index (.*)")]
-        public void ThenIGetAResponseWithTheResultOnMainThreadIndex(string result, int index)
+        [Then(@"I get an echo response with the result ""(.*)"" on main thread index (.*)")]
+        public void ThenIGetAnEchoResponseWithTheResultOnMainThreadIndex(int result, int index)
         {
-            Check.That(MainThreadResponses.ElementAt(index).Result).IsEqualTo(result);
-        }
-    }
-
-    public class EchoResponse : Response
-    {
-        public string Result { get; set; }
-    }
-
-    public class EchoRequest : Request
-    {
-        public EchoRequest() : base("Echo")
-        {
+            Check.That(MainThreadResponses.ElementAt(index).Result).IsEqualTo(result.ToString());
         }
     }
 }
