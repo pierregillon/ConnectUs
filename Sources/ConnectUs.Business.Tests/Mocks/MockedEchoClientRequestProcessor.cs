@@ -8,9 +8,9 @@ namespace ConnectUs.Business.Tests.Mocks
     {
         public object Process(string requestName, string originalData)
         {
-            if (requestName == "Echo") {
+            if (requestName == typeof (EchoRequest).Name) {
                 var request = JsonConvert.DeserializeObject<EchoRequest>(originalData);
-                return new EchoResponse{Result =  request.Value};
+                return new EchoResponse {Result = request.Value};
             }
             throw new Exception("invalid requestname");
         }
@@ -25,7 +25,6 @@ namespace ConnectUs.Business.Tests.Mocks
     {
         public string Value { get; set; }
         public EchoRequest(string value)
-            : base("Echo")
         {
             Value = value;
         }

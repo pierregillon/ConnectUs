@@ -6,7 +6,7 @@ namespace ConnectUs.Business
     {
         public string GetRequestName(string data)
         {
-            var request = JsonConvert.DeserializeObject<Request>(data);
+            var request = JsonConvert.DeserializeObject<RequestBase>(data);
             return request.Name;
         }
         public string GetError(string data)

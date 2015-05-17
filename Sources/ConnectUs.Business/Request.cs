@@ -1,13 +1,7 @@
-﻿
-namespace ConnectUs.Business
+﻿namespace ConnectUs.Business
 {
-    public class Request
+    public class Request : RequestBase
     {
-        public string Name { get; set; }
-
-        public Request(string name)
-        {
-            Name = name;
-        }
+        public override string Name { get { return GetType().Name; } set { } }
     }
 }

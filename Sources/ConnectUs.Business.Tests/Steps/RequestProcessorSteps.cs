@@ -32,10 +32,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ContinuousRequestProcessor>("ContinuousRequestProcessor"); }
             set { ScenarioContext.Current.Add("ContinuousRequestProcessor", value); }
         }
-        public Request Request
+        public RequestBase Request
         {
-            get { return ScenarioContext.Current.Get<Request>("Request"); }
-            set { ScenarioContext.Current.Add("Request", value); }
+            get { return ScenarioContext.Current.Get<RequestBase>("RequestBase"); }
+            set { ScenarioContext.Current.Add("RequestBase", value); }
         }
         public Response Response
         {

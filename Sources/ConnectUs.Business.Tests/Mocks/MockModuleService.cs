@@ -7,7 +7,7 @@ namespace ConnectUs.Business.Tests.Mocks
     {
         public ICommand GetCommand(string requestName)
         {
-            if (requestName == "echoRequest") {
+            if (requestName == typeof(EchoRequest).Name) {
                 return new EchoCommand();
             }
             return null;

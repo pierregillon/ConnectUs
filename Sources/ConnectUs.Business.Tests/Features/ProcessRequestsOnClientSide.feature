@@ -6,7 +6,7 @@
 Scenario: Execute known request on the client request processor returns correct data.
 	Given A mocked module service
 		And A client request processor
-	When I process the request "echoRequest" with the data "myData"
+	When I process the request "EchoRequest" with the data "myData"
 	Then I get the response "myData"
 
 Scenario: Execute unknown request on the client request processor throws exception.

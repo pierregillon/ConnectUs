@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
   testRunner.And("A client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.When("I process the request \"echoRequest\" with the data \"myData\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I process the request \"EchoRequest\" with the data \"myData\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("I get the response \"myData\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

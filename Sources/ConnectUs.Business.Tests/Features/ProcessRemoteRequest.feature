@@ -12,7 +12,7 @@ Scenario: Sending request from server get correct json in client side
 		And A "GetClientInformation" request
 	When I send the request by the server request communicator
 		And I process the request from the client request handler
-	Then I get the request name "GetClientInformation" and the data "{"Name":"GetClientInformation"}" on the mocked client request processor
+	Then I get the request name "GetClientInformationRequest" and the data "{"Name":"GetClientInformationRequest"}" on the mocked client request processor
 
 Scenario: Process request in client side get the correct response in server side.
 	Given A connection is established between server and client on port 9000

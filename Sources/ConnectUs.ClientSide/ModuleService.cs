@@ -8,8 +8,8 @@ namespace ConnectUs.ClientSide
     {
         private readonly Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>
         {
-            {"GetClientInformation", new GetInformationCommand()},
-            {"Ping", new PingCommand()},
+            {typeof(GetClientInformationRequest).Name, new GetInformationCommand()},
+            {typeof(PingRequest).Name, new PingCommand()},
         }; 
 
         public ICommand GetCommand(string requestName)
