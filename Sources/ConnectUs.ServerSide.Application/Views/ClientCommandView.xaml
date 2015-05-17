@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:ConnectUs.ServerSide.Application.Controls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=ClientCommandViewModel}">
+             d:DataContext="{Binding Source={StaticResource DesignTimeLocator}, Path=ClientCommandViewModel}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="25"/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" AcceptsReturn="True" IsReadOnly="True" Text="{Binding Path=History, Mode=OneWay}"/>
-        <TextBox Grid.Row="1" Text="{Binding Path=CurrentCommand, Mode=TwoWay}" />
+        <controls:CommandLineTextBox CommandLines="{Binding Path=CommandLines, Mode=TwoWay}"
+                                     VerticalScrollBarVisibility="Auto"
+                                     FontFamily="Consola"
+                                     FontSize="14"
+                                     Background="Black"
+                                     Foreground="LawnGreen"
+                                     FontWeight="SemiBold"/>
     </Grid>
 </UserControl>

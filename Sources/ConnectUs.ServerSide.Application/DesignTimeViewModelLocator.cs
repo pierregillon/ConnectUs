@@ -27,6 +27,14 @@ namespace ConnectUs.ServerSide.Application
                 return vm;
             }
         }
-
+        public ClientCommandViewModel ClientCommandViewModel
+        {
+            get
+            {
+                var mock = new Mock<IClientCommandService>();
+                var vm = new ClientCommandViewModel(mock.Object);
+                return vm;
+            }
+        }
     }
 }

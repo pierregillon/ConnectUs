@@ -25,15 +25,6 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
             get { return SimpleIoc.Default.GetInstance<ClientListViewModel>(); }
         }
 
-        public ClientCommandViewModel ClientCommandViewModel
-        {
-            get
-            {
-                var vm = new ClientCommandViewModel(new ClientCommandService());
-                return vm;
-            }
-        }
-
         public MainViewModel MainViewModel
         {
             get
