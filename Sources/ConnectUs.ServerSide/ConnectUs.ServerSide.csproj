@@ -49,6 +49,8 @@
     <Compile Include="ClientDisconnectedEventArgs.cs" />
     <Compile Include="ClientException.cs" />
     <Compile Include="ClientListener.cs" />
+    <Compile Include="CommandLines\ICommandLine.cs" />
+    <Compile Include="CommandLines\PingCommandLine.cs" />
     <Compile Include="IClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
     <Compile Include="IServer.cs" />

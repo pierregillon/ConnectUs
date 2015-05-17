@@ -31,5 +31,9 @@ namespace ConnectUs.ServerSide
                 throw new ClientException("An error occured during the ping request", ex);
             }
         }
+        public TResponse ExecuteCommand<TRequest, TResponse>(TRequest request)
+        {
+            return _serverRequestProcessor.Process<TRequest, TResponse>(request);
+        }
     }
 }

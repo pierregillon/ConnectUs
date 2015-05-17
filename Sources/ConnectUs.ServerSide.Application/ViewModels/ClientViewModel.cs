@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
+using ConnectUs.ServerSide.CommandLines;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
 {
@@ -61,6 +63,11 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         {
             _continuePinging = false;
             _client.CloseConnection();
+        }
+
+        public string ExecuteCommand(ICommandLine commandLine, IEnumerable<string> parameters)
+        {
+            return commandLine.ExecuteCommand(_client, parameters);
         }
     }
 }
