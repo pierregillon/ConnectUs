@@ -48,6 +48,5 @@
         <TabControl Grid.Column="1" 
                     ItemsSource="{Binding Path=ClientCommandViewModels}" 
                     SelectedItem="{Binding Path=SelectedClientCommandViewModel, Mode=TwoWay}"/>
-        <controls:ConsoleLineTextBox Grid.Column="1"/>
     </Grid>
 </Window>
