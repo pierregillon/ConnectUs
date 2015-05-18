@@ -7,7 +7,7 @@ namespace ConnectUs.ClientSide
     public class Client
     {
         private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
-        private readonly ContinuousRequestProcessor _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new ModuleService()));
+        private readonly ContinuousRequestProcessor _continuousRequestProcessor;
 
         public event EventHandler ClientDisconnected;
         protected virtual void OnClientDisconnected()
@@ -26,6 +26,9 @@ namespace ConnectUs.ClientSide
         // ----- Constructors
         public Client()
         {
+            var moduleService = new ModuleService();
+            moduleService.LoadModules();
+            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(moduleService));
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
 
