@@ -1,4 +1,6 @@
-﻿namespace ConnectUs.Business.Tests.Mocks
+﻿using Newtonsoft.Json;
+
+namespace ConnectUs.Business.Tests.Mocks
 {
     public class MockedErrorClientRequestProcess : MockedClientRequestProcess
     {
@@ -7,12 +9,12 @@
         {
             ErrorMessage = message;
         }
-        public override object Process(string requestName, string originalData)
+        public override string Process(string requestName, string originalData)
         {
-            return new ErrorResponse
+            return JsonConvert.SerializeObject(new ErrorResponse
             {
                 Error = ErrorMessage
-            };
+            });
         }
     }
 }

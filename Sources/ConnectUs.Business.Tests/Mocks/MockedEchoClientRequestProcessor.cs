@@ -6,11 +6,11 @@ namespace ConnectUs.Business.Tests.Mocks
 {
     public class MockedEchoClientRequestProcessor : IClientRequestProcessor
     {
-        public object Process(string requestName, string originalData)
+        public string Process(string requestName, string originalData)
         {
             if (requestName == typeof (EchoRequest).Name) {
                 var request = JsonConvert.DeserializeObject<EchoRequest>(originalData);
-                return new EchoResponse {Result = request.Value};
+                return JsonConvert.SerializeObject(new EchoResponse {Result = request.Value});
             }
             throw new Exception("invalid requestname");
         }

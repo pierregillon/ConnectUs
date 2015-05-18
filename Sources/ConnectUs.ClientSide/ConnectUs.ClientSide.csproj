@@ -64,6 +64,10 @@
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.FileExplorer\ConnectUs.FileExplorer.csproj">
+      <Project>{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}</Project>
+      <Name>ConnectUs.FileExplorer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

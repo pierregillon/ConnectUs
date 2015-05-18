@@ -2,9 +2,9 @@
 
 namespace ConnectUs.Business.Commands.ClientInformation
 {
-    public class GetInformationCommand : CommandBase<GetClientInformationRequest, GetClientInformationResponse>
+    public class GetInformationCommand
     {
-        protected override GetClientInformationResponse ExecuteRequest(GetClientInformationRequest request)
+        public GetClientInformationResponse Execute(GetClientInformationRequest request)
         {
             return new GetClientInformationResponse
             {

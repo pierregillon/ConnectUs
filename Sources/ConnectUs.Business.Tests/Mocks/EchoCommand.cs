@@ -1,12 +1,10 @@
-﻿using ConnectUs.Business.Commands;
-
-namespace ConnectUs.Business.Tests.Mocks
+﻿namespace ConnectUs.Business.Tests.Mocks
 {
-    public class EchoCommand : ICommand
+    public class EchoCommand
     {
-        public object Execute(string data)
+        public EchoResponse Execute(EchoRequest request)
         {
-            return data;
+            return new EchoResponse{Result = request.Value};
         }
     }
 }

@@ -22,8 +22,7 @@ namespace ConnectUs.ClientSide
             try {
                 var jsonRequest = connection.Read();
                 var requestName = _requestParser.GetRequestName(jsonRequest);
-                var response = _clientRequestProcessor.Process(requestName, jsonRequest);
-                var jsonResponse = JsonConvert.SerializeObject(response);
+                var jsonResponse = _clientRequestProcessor.Process(requestName, jsonRequest);
                 connection.Send(jsonResponse);
             }
             catch (NoDataToReadFromConnectionException ex) {

@@ -1,8 +1,8 @@
 ﻿namespace ConnectUs.Business.Commands.ClientInformation
 {
-    public class PingCommand : CommandBase<PingRequest, PingResponse>
+    public class PingCommand
     {
-        protected override PingResponse ExecuteRequest(PingRequest request)
+        public PingResponse Execute(PingRequest request)
         {
             return new PingResponse {Value = "OK"};
         }

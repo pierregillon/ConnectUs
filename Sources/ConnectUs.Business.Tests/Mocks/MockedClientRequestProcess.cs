@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using ConnectUs.Business.Commands.ClientInformation;
 using ConnectUs.ClientSide;
+using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
     public class MockedClientRequestProcess : IClientRequestProcessor
     {
-        private readonly Dictionary<string, string> _processedData = new Dictionary<string, string>(); 
+        private readonly Dictionary<string, string> _processedData = new Dictionary<string, string>();
 
-        public virtual object Process(string requestName, string originalData)
+        public virtual string Process(string requestName, string originalData)
         {
             _processedData.Add(requestName, originalData);
 
-            if (requestName == typeof(GetClientInformationRequest).Name) {
-                return new GetClientInformationResponse
+            if (requestName == typeof (GetClientInformationRequest).Name) {
+                return JsonConvert.SerializeObject(new GetClientInformationResponse
                 {
                     Ip = "127.0.0.1",
                     MachineName = "my machine"
-                };
+                });
             }
-            return new object();
+            return "{}";
         }
         public string GetData(string requestName)
         {

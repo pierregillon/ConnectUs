@@ -1,6 +1,6 @@
-﻿using System;
-using ConnectUs.Business.Tests.Mocks;
+﻿using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
+using Newtonsoft.Json;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -19,15 +19,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IModuleService>("ModuleService"); }
             set { ScenarioContext.Current.Add("ModuleService", value); }
         }
-        public object Result
+        public string Result
         {
-            get { return ScenarioContext.Current.Get<object>("Result"); }
+            get { return ScenarioContext.Current.Get<string>("Result"); }
             set { ScenarioContext.Current.Add("Result", value); }
-        }
-        public ProcessException ProcessError
-        {
-            get { return ScenarioContext.Current.Get<ProcessException>("ProcessError"); }
-            set { ScenarioContext.Current.Add("ProcessError", value); }
         }
 
         [Given(@"A mocked client request processor")]
@@ -51,12 +46,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I process the request ""(.*)"" with the data ""(.*)""")]
         public void WhenIProcessTheRequestWithTheData(string requestName, string data)
         {
-            try {
-                Result = ClientRequestProcessor.Process(requestName, data);
-            }
-            catch (ProcessException ex) {
-                ProcessError = ex;
-            }
+            Result = ClientRequestProcessor.Process(requestName, data);
         }
 
         [Then(@"I get the request name ""(.*)"" and the data ""(.*)"" on the mocked client request processor")]
@@ -74,8 +64,8 @@ namespace ConnectUs.Business.Tests.Steps
         [Then(@"I get a process exception ""(.*)""")]
         public void ThenIGetAProcessException(string message)
         {
-            Check.That(ProcessError).IsNotNull();
-            Check.That(ProcessError.Message).IsEqualTo(message);
+            var expectedMessage = new ErrorResponse {Error = message};
+            Check.That(Result).IsEqualTo(JsonConvert.SerializeObject(expectedMessage));
         }
     }
 }

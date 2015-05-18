@@ -10,22 +10,28 @@ namespace ConnectUs.ServerSide.Application.Services
     {
         private readonly List<ICommandLine> _commandLines = new List<ICommandLine>
         {
-            new PingCommandLine()
+            new PingCommandLine(),
+            new ExploreDirectoryCommandLine()
         };
 
         public string ExecuteCommand(ClientViewModel clientViewModel, string[] arguments)
         {
-            var commandName = arguments.First();
-            var command = _commandLines.FirstOrDefault(x => string.Equals(x.Name, commandName, StringComparison.CurrentCultureIgnoreCase));
-            if (command == null) {
-                return "Unknown command.";
-            }
-            else {
-                var parameters = Enumerable.Empty<string>();
-                if (arguments.Length > 1) {
-                    parameters = arguments.Skip(1);
+            try {
+                var commandName = arguments.First();
+                var command = _commandLines.FirstOrDefault(x => string.Equals(x.Name, commandName, StringComparison.CurrentCultureIgnoreCase));
+                if (command == null) {
+                    return "Unknown command.";
                 }
-                return clientViewModel.ExecuteCommand(command, parameters);
+                else {
+                    var parameters = Enumerable.Empty<string>();
+                    if (arguments.Length > 1) {
+                        parameters = arguments.Skip(1);
+                    }
+                    return clientViewModel.ExecuteCommand(command, parameters);
+                }
+            }
+            catch (Exception ex) {
+                return ex.Message;
             }
         }
     }
