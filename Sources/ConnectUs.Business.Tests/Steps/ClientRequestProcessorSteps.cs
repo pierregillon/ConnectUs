@@ -14,10 +14,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IClientRequestProcessor>("ClientRequestProcessor"); }
             set { ScenarioContext.Current.Add("ClientRequestProcessor", value); }
         }
-        public IModuleService ModuleService
+        public ICommandLocator CommandLocator
         {
-            get { return ScenarioContext.Current.Get<IModuleService>("ModuleService"); }
-            set { ScenarioContext.Current.Add("ModuleService", value); }
+            get { return ScenarioContext.Current.Get<ICommandLocator>("CommandLocator"); }
+            set { ScenarioContext.Current.Add("CommandLocator", value); }
         }
         public string Result
         {
@@ -40,7 +40,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client request processor")]
         public void GivenAClientRequestProcessor()
         {
-            ClientRequestProcessor = new ClientRequestProcessor(ModuleService);
+            ClientRequestProcessor = new ClientRequestProcessor(CommandLocator);
         }
 
         [When(@"I process the request ""(.*)"" with the data ""(.*)""")]

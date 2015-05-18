@@ -2,7 +2,7 @@
 
 namespace ConnectUs.Business.Tests.Mocks
 {
-    public class MockModuleService : IModuleService
+    public class MockCommandLocator : ICommandLocator
     {
         public object GetCommand(string requestName)
         {

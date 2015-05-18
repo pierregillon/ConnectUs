@@ -1,6 +1,6 @@
 namespace ConnectUs.ClientSide
 {
-    public interface IModuleService
+    public interface ICommandLocator
     {
         object GetCommand(string requestName);
     }

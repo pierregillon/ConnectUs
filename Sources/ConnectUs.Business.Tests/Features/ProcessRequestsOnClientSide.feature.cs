@@ -78,7 +78,7 @@ namespace ConnectUs.Business.Tests.Features
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("A mocked module service", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A mocked command locator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
   testRunner.And("A client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
@@ -98,7 +98,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
 this.ScenarioSetup(scenarioInfo);
 #line 13
- testRunner.Given("A mocked module service", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A mocked command locator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
   testRunner.And("A client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15

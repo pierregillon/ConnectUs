@@ -7,17 +7,17 @@ namespace ConnectUs.ClientSide
 {
     public class ClientRequestProcessor : IClientRequestProcessor
     {
-        private readonly IModuleService _moduleService;
+        private readonly ICommandLocator _commandLocator;
 
-        public ClientRequestProcessor(IModuleService moduleService)
+        public ClientRequestProcessor(ICommandLocator commandLocator)
         {
-            _moduleService = moduleService;
+            _commandLocator = commandLocator;
         }
 
         public string Process(string requestName, string originalData)
         {
             try {
-                var command = _moduleService.GetCommand(requestName);
+                var command = _commandLocator.GetCommand(requestName);
                 if (command == null) {
                     throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));
                 }

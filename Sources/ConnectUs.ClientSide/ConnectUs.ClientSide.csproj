@@ -52,12 +52,18 @@
     <Compile Include="ContinuousRequestProcessor.cs" />
     <Compile Include="IClientRequestHandler.cs" />
     <Compile Include="IClientRequestProcessor.cs" />
-    <Compile Include="IModuleService.cs" />
-    <Compile Include="ModuleService.cs" />
+    <Compile Include="ICommandLocator.cs" />
+    <Compile Include="CommandLocator.cs" />
+    <Compile Include="Modules\IModuleManager.cs" />
+    <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleAddedEventArgs.cs" />
+    <Compile Include="Modules\ModuleManager.cs" />
+    <Compile Include="Modules\ModuleRemovedEventArgs.cs" />
     <Compile Include="NoRequestToProcessException.cs" />
     <Compile Include="ProcessException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Proxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">

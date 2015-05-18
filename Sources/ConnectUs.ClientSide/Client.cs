@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using ConnectUs.Business.Connections;
+using ConnectUs.ClientSide.Modules;
 
 namespace ConnectUs.ClientSide
 {
@@ -26,9 +27,9 @@ namespace ConnectUs.ClientSide
         // ----- Constructors
         public Client()
         {
-            var moduleService = new ModuleService();
-            moduleService.LoadModules();
-            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(moduleService));
+            var moduleManager = new ModuleManager();
+            moduleManager.AddModule(@"C:\Dev\Perso\ConnectUs\Sources\ConnectUs.FileExplorer\bin\Debug\ConnectUs.FileExplorer.dll");
+            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new CommandLocator(moduleManager)));
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
 

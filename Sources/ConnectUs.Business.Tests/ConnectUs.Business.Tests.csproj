@@ -119,8 +119,8 @@
     <Compile Include="Mocks\FakeRequestProcessor.cs" />
     <Compile Include="Mocks\MockedClientRequestProcess.cs" />
     <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
-    <Compile Include="Mocks\MockModuleService.cs" />
-    <Compile Include="Steps\ModuleServiceSteps.cs" />
+    <Compile Include="Mocks\MockCommandLocator.cs" />
+    <Compile Include="Steps\CommandLocatorSteps.cs" />
     <Compile Include="Steps\RequestProcessorSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
     <Compile Include="Steps\ResponseSteps.cs" />
