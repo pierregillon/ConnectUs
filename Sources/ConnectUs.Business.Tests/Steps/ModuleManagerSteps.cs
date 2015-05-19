@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ConnectUs.ClientSide.Modules;
+using ConnectUs.ClientSide.ModuleManagement;
 using NFluent;
 using TechTalk.SpecFlow;
 using System.Linq;
@@ -15,15 +15,15 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ModuleManager>("ModuleManager"); }
             set { ScenarioContext.Current.Set(value, "ModuleManager"); }
         }
-        public ModuleAddedEventArgs ModuleAddedEventArgs
+        public ModuleLoadedEventArgs ModuleLoadedEventArgs
         {
-            get { return ScenarioContext.Current.Get<ModuleAddedEventArgs>("ModuleAddedEventArgs"); }
-            set { ScenarioContext.Current.Set(value, "ModuleAddedEventArgs"); }
+            get { return ScenarioContext.Current.Get<ModuleLoadedEventArgs>("ModuleLoadedEventArgs"); }
+            set { ScenarioContext.Current.Set(value, "ModuleLoadedEventArgs"); }
         }
-        public ModuleRemovedEventArgs ModuleRemovedEventArgs
+        public ModuleUnloadedEventArgs ModuleUnloadedEventArgs
         {
-            get { return ScenarioContext.Current.Get<ModuleRemovedEventArgs>("ModuleRemovedEventArgs"); }
-            set { ScenarioContext.Current.Set(value, "ModuleRemovedEventArgs"); }
+            get { return ScenarioContext.Current.Get<ModuleUnloadedEventArgs>("ModuleUnloadedEventArgs"); }
+            set { ScenarioContext.Current.Set(value, "ModuleUnloadedEventArgs"); }
         }
         public ModuleException ModuleException
         {
@@ -35,20 +35,25 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IEnumerable<Module>>("Modules"); }
             set { ScenarioContext.Current.Set(value, "Modules"); }
         }
+        public ModuleName ModuleName
+        {
+            get { return ScenarioContext.Current.Get<ModuleName>("ModuleName"); }
+            set { ScenarioContext.Current.Set(value, "ModuleName"); }
+        }
 
         [Given(@"A module manager")]
         public void GivenAModuleManager()
         {
             ModuleManager = new ModuleManager();
-            ModuleManager.ModuleAdded += (sender, args) => { ModuleAddedEventArgs = args; };
-            ModuleManager.ModuleRemoved += (sender, args) => { ModuleRemovedEventArgs = args; };
+            ModuleManager.ModuleLoaded += (sender, args) => { ModuleLoadedEventArgs = args; };
+            ModuleManager.ModuleUnloaded += (sender, args) => { ModuleUnloadedEventArgs = args; };
         }
 
         [When(@"I add the module ""(.*)"" in the module manager")]
         public void WhenIAddTheModuleInTheModuleManager(string modulePath)
         {
             try {
-                ModuleManager.AddModule(modulePath);
+                ModuleName = ModuleManager.AddModule(modulePath);
             }
             catch (ModuleException ex) {
                 ModuleException = ex;
@@ -62,32 +67,64 @@ namespace ConnectUs.Business.Tests.Steps
         }
 
         [When(@"I remove the module ""(.*)"" in the module manager")]
-        public void WhenIRemoveTheModuleInTheModuleManager(string modulePath)
+        public void WhenIRemoveTheModuleInTheModuleManager(string name)
         {
             try {
-                ModuleManager.RemoveModule(modulePath);
+                ModuleManager.RemoveModule(new ModuleName(name));
             }
             catch (ModuleException ex) {
                 ModuleException = ex;
             }
         }
 
-        [Then(@"I get a module added event with the name ""(.*)"" and the version ""(.*)""")]
-        public void ThenIGetAModuleAddedEventWithTheNameAndTheVersion(string moduleName, string version)
+        [When(@"I load the module ""(.*)"" in the module manager")]
+        public void WhenILoadTheModuleInTheModuleManager(string name)
         {
-            Check.That(ModuleAddedEventArgs).IsNotNull();
-            Check.That(ModuleAddedEventArgs.Module).IsNotNull();
-            Check.That(ModuleAddedEventArgs.Module.Name).IsEqualTo(moduleName);
-            Check.That(ModuleAddedEventArgs.Module.Version).IsEqualTo(new Version(version));
+            try {
+                ModuleManager.LoadModule(new ModuleName(name));
+            }
+            catch (ModuleException ex) {
+                ModuleException = ex;
+            }
         }
 
-        [Then(@"I get a module removed event with the name ""(.*)"" and the version ""(.*)""")]
-        public void ThenIGetAModuleRemovedEventWithTheNameAndTheVersion(string moduleName, string version)
+        [When(@"I unload the module ""(.*)"" in the module manager")]
+        public void WhenIUnloadTheModuleInTheModuleManager(string name)
         {
-            Check.That(ModuleRemovedEventArgs).IsNotNull();
-            Check.That(ModuleRemovedEventArgs.Module).IsNotNull();
-            Check.That(ModuleRemovedEventArgs.Module.Name).IsEqualTo(moduleName);
-            Check.That(ModuleRemovedEventArgs.Module.Version).IsEqualTo(new Version(version));
+            try
+            {
+                ModuleManager.UnloadModule(new ModuleName(name));
+            }
+            catch (ModuleException ex)
+            {
+                ModuleException = ex;
+            }
+        }
+
+        // ----- Then
+
+        [Then(@"I get a module name ""(.*)""")]
+        public void ThenIGetAModuleName(string name)
+        {
+            Check.That(ModuleName).IsEqualTo(new ModuleName(name));
+        }
+
+        [Then(@"I get a module loaded event with the name ""(.*)"" and the version ""(.*)""")]
+        public void ThenIGetAModuleLoadedEventWithTheNameAndTheVersion(string moduleName, string version)
+        {
+            Check.That(ModuleLoadedEventArgs).IsNotNull();
+            Check.That(ModuleLoadedEventArgs.Module).IsNotNull();
+            Check.That(ModuleLoadedEventArgs.Module.Name).IsEqualTo(new ModuleName(moduleName));
+            Check.That(ModuleLoadedEventArgs.Module.Version).IsEqualTo(new Version(version));
+        }
+
+        [Then(@"I get a module unloaded event with the name ""(.*)"" and the version ""(.*)""")]
+        public void ThenIGetAModuleUnloadedEventWithTheNameAndTheVersion(string moduleName, string version)
+        {
+            Check.That(ModuleUnloadedEventArgs).IsNotNull();
+            Check.That(ModuleUnloadedEventArgs.Module).IsNotNull();
+            Check.That(ModuleUnloadedEventArgs.Module.Name).IsEqualTo(new ModuleName(moduleName));
+            Check.That(ModuleUnloadedEventArgs.Module.Version).IsEqualTo(new Version(version));
         }
 
         [Then(@"I get a module exception with the message ""(.*)""")]
@@ -108,7 +145,7 @@ namespace ConnectUs.Business.Tests.Steps
         public void ThenTheModuleHasTheNameAndTheVersion(int index, string moduleName, string version)
         {
             var module = Modules.ElementAt(index - 1);
-            Check.That(module.Name).IsEqualTo(moduleName);
+            Check.That(module.Name).IsEqualTo(new ModuleName(moduleName));
             Check.That(module.Version).IsEqualTo(new Version(version));
         }
     }

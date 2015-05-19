@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace ConnectUs.ClientSide.Modules
+namespace ConnectUs.ClientSide.ModuleManagement
 {
     public class Proxy : MarshalByRefObject
     {

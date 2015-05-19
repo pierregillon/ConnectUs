@@ -11,7 +11,7 @@
 
         public LoadModuleResponse Execute(LoadModuleRequest request)
         {
-            _moduleManager.AddModule(@"C:\Dev\Perso\ConnectUs\Sources\ConnectUs.FileExplorer\bin\Debug\ConnectUs.FileExplorer.dll");
+            _moduleManager.InstallModule(@"Modules\ConnectUs.FileExplorer.dll");
             return new LoadModuleResponse();
         }
     }

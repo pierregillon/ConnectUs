@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using ConnectUs.ClientSide.Modules;
+using ConnectUs.ClientSide.ModuleManagement;
 using ConnectUs.Common.GetClientInformation;
 using ConnectUs.Common.LoadModule;
 using ConnectUs.Common.Ping;
-using IModuleManager = ConnectUs.ClientSide.Modules.IModuleManager;
+using IModuleManager = ConnectUs.ClientSide.ModuleManagement.IModuleManager;
 
 namespace ConnectUs.ClientSide
 {
     public class CommandLocator : ICommandLocator
     {
         private readonly IModuleManager _moduleManager;
-        private readonly Dictionary<string, Dictionary<string, object>> _moduleCommands = new Dictionary<string, Dictionary<string, object>>();
+        private readonly Dictionary<ModuleName, Dictionary<string, object>> _moduleCommands = new Dictionary<ModuleName, Dictionary<string, object>>();
         private readonly Dictionary<string, object> _defaultCommands = new Dictionary<string, object>
         {
             {typeof (GetClientInformationRequest).Name, new GetInformationCommand()},
@@ -25,10 +25,10 @@ namespace ConnectUs.ClientSide
             foreach (var module in _moduleManager.GetModules()) {
                 LoadCommandsFromModule(module);
             }
-            _moduleManager.ModuleAdded += ModuleManagerOnModuleAdded;
-            _moduleManager.ModuleRemoved += ModuleManagerOnModuleRemoved;
+            _moduleManager.ModuleLoaded += ModuleManagerOnModuleLoaded;
+            _moduleManager.ModuleUnloaded += ModuleManagerOnModuleUnloaded;
 
-            _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
+            _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand((Common.LoadModule.IModuleManager)_moduleManager));
         }
 
         // ----- Public methods
@@ -42,11 +42,11 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Event callbacks
-        private void ModuleManagerOnModuleAdded(object sender, ModuleAddedEventArgs args)
+        private void ModuleManagerOnModuleLoaded(object sender, ModuleLoadedEventArgs args)
         {
             LoadCommandsFromModule(args.Module);
         }
-        private void ModuleManagerOnModuleRemoved(object sender, ModuleRemovedEventArgs args)
+        private void ModuleManagerOnModuleUnloaded(object sender, ModuleUnloadedEventArgs args)
         {
             _moduleCommands.Remove(args.Module.Name);
         }

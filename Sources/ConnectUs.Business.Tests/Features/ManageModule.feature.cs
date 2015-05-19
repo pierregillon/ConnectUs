@@ -70,37 +70,76 @@ namespace ConnectUs.Business.Tests.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add a module sends module added event")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add invalid module path throws exception")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
-        public virtual void AddAModuleSendsModuleAddedEvent()
+        public virtual void AddInvalidModulePathThrowsException()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a module sends module added event", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add invalid module path throws exception", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I add the module \"toto/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9
- testRunner.Then("I get a module added event with the name \"ConnectUs.FileExplorer\" and the version" +
-                    " \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I get a module exception with the message \"Unable to add the module \'toto/FileExp" +
+                    "lorer.dll\' : file was not found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add an invalid module throw exception")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add a module gets a new module name")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
-        public virtual void AddAnInvalidModuleThrowException()
+        public virtual void AddAModuleGetsANewModuleName()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add an invalid module throw exception", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a module gets a new module name", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
- testRunner.When("I add the module \"Modules/ConnectUs.Common.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
+ testRunner.Then("I get a module name \"ConnectUs.FileExplorer\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Load an unknown module throw exception")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void LoadAnUnknownModuleThrowException()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load an unknown module throw exception", ((string[])(null)));
+#line 16
+this.ScenarioSetup(scenarioInfo);
+#line 17
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 18
+ testRunner.When("I load the module \"ConnectUs.Common\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 19
+ testRunner.Then("I get a module exception with the message \"The module \'ConnectUs.Common\' was not " +
+                    "found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Load an invalid module throw exception")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void LoadAnInvalidModuleThrowException()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load an invalid module throw exception", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+ testRunner.When("I add the module \"Modules/ConnectUs.Common.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
+  testRunner.And("I load the module \"ConnectUs.Common\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
  testRunner.Then("I get a module exception with the message \"The assembly \'ConnectUs.Common\' is not" +
                     " a valid module. No \'Module\' class has been found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -108,41 +147,128 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Remove a unknown module throw exception")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Load a valid module sends module loaded event")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
-        public virtual void RemoveAUnknownModuleThrowException()
+        public virtual void LoadAValidModuleSendsModuleLoadedEvent()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a unknown module throw exception", ((string[])(null)));
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load a valid module sends module loaded event", ((string[])(null)));
+#line 27
 this.ScenarioSetup(scenarioInfo);
-#line 17
+#line 28
  testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
- testRunner.When("I remove the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
- testRunner.Then("I get a module exception with the message \"Unable to remove the module \'Modules/F" +
-                    "ileExplorer.dll\' : it was not found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
+ testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 30
+  testRunner.And("I load the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.Then("I get a module loaded event with the name \"ConnectUs.FileExplorer\" and the versio" +
+                    "n \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Remove an added module sends module removed event")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Unload an unknown module throw exception")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
-        public virtual void RemoveAnAddedModuleSendsModuleRemovedEvent()
+        public virtual void UnloadAnUnknownModuleThrowException()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove an added module sends module removed event", ((string[])(null)));
-#line 21
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unload an unknown module throw exception", ((string[])(null)));
+#line 33
 this.ScenarioSetup(scenarioInfo);
-#line 22
+#line 34
  testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
+#line 35
+ testRunner.When("I unload the module \"ConnectUs.Common\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 36
+ testRunner.Then("I get a module exception with the message \"The module \'ConnectUs.Common\' was not " +
+                    "found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Unload a valid module sends module loaded event")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void UnloadAValidModuleSendsModuleLoadedEvent()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unload a valid module sends module loaded event", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 40
  testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
-  testRunner.And("I remove the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
- testRunner.Then("I get a module removed event with the name \"ConnectUs.FileExplorer\" and the versi" +
-                    "on \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+  testRunner.And("I load the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+  testRunner.And("I unload the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+ testRunner.Then("I get a module unloaded event with the name \"ConnectUs.FileExplorer\" and the vers" +
+                    "ion \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Remove an unknown module throw exception")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void RemoveAnUnknownModuleThrowException()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove an unknown module throw exception", ((string[])(null)));
+#line 45
+this.ScenarioSetup(scenarioInfo);
+#line 46
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 47
+ testRunner.When("I remove the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 48
+ testRunner.Then("I get a module exception with the message \"The module \'Modules/FileExplorer.dll\' " +
+                    "was not found.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Remove an added module")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void RemoveAnAddedModule()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove an added module", ((string[])(null)));
+#line 50
+this.ScenarioSetup(scenarioInfo);
+#line 51
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 52
+ testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 53
+  testRunner.And("I remove the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+  testRunner.And("I get the modules of the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+ testRunner.Then("I get 0 module", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Remove a loaded module unload it before removing")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ManageModule")]
+        public virtual void RemoveALoadedModuleUnloadItBeforeRemoving()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove a loaded module unload it before removing", ((string[])(null)));
+#line 57
+this.ScenarioSetup(scenarioInfo);
+#line 58
+ testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+ testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
+  testRunner.And("I load the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 61
+  testRunner.And("I remove the module \"ConnectUs.FileExplorer\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
+ testRunner.Then("I get a module unloaded event with the name \"ConnectUs.FileExplorer\" and the vers" +
+                    "ion \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -153,17 +279,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void GetModulesReturnsCorrectValues()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get modules returns correct values", ((string[])(null)));
-#line 27
+#line 64
 this.ScenarioSetup(scenarioInfo);
-#line 28
+#line 65
  testRunner.Given("A module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 66
  testRunner.When("I add the module \"Modules/FileExplorer.dll\" in the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
+#line 67
   testRunner.And("I get the modules of the module manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 68
  testRunner.Then("I get 1 module", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
+#line 69
   testRunner.And("The 1 module has the name \"ConnectUs.FileExplorer\" and the version \"1.0.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

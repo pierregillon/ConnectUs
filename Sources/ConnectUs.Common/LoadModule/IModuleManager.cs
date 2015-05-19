@@ -2,6 +2,6 @@
 {
     public interface IModuleManager
     {
-        void AddModule(string moduleName);
+        void InstallModule(string moduleName);
     }
 }

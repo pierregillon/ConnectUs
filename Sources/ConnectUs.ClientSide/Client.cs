@@ -2,7 +2,7 @@
 using System.Threading;
 using ConnectUs.Business;
 using ConnectUs.Business.Connections;
-using ConnectUs.ClientSide.Modules;
+using ConnectUs.ClientSide.ModuleManagement;
 
 namespace ConnectUs.ClientSide
 {
