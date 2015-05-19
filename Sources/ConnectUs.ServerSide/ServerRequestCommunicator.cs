@@ -1,6 +1,7 @@
 ﻿using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ConnectUs.ServerSide
 {
@@ -18,7 +19,7 @@ namespace ConnectUs.ServerSide
         public void SendToClient<TRequest>(TRequest request)
         {
             try {
-                var jsonRequest = JsonConvert.SerializeObject(request);
+                var jsonRequest = GetJson(request);
                 _connection.Send(jsonRequest);
             }
             catch (ConnectionException ex) {
@@ -42,6 +43,14 @@ namespace ConnectUs.ServerSide
         public void Close()
         {
             _connection.Close();
+        }
+
+        // ----- Utils
+        private static string GetJson<TRequest>(TRequest request)
+        {
+            var jsonObject = JObject.FromObject(request);
+            jsonObject.Add("Name", request.GetType().Name);
+            return jsonObject.ToString(Formatting.None);
         }
     }
 }

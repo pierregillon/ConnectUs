@@ -103,6 +103,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcessRequestsOnClientSide.feature</DependentUpon>
     </Compile>
+    <Compile Include="Mocks\EchoRequest.cs" />
+    <Compile Include="Mocks\EchoResponse.cs" />
     <Compile Include="Mocks\FakeClientListener.cs" />
     <Compile Include="Mocks\MockedEchoClientRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
