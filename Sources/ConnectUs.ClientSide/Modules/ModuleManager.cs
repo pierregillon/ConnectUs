@@ -34,7 +34,7 @@ namespace ConnectUs.ClientSide.Modules
         {
             var module = _modules.FirstOrDefault(x => x.Path == modulePath);
             if (module == null) {
-                throw new Exception("Module not found");
+                throw new ModuleException(string.Format("Unable to remove the module '{0}' : it was not found.", modulePath));
             }
             module.Unload();
             _modules.Remove(module);

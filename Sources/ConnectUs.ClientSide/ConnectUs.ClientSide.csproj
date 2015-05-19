@@ -57,6 +57,7 @@
     <Compile Include="Modules\IModuleManager.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModuleAddedEventArgs.cs" />
+    <Compile Include="Modules\ModuleException.cs" />
     <Compile Include="Modules\ModuleManager.cs" />
     <Compile Include="Modules\ModuleRemovedEventArgs.cs" />
     <Compile Include="NoRequestToProcessException.cs" />

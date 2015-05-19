@@ -93,6 +93,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListenTcpClientConnections.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ManageModule.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageModule.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ProcessRemoteRequest.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +127,7 @@
     <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
     <Compile Include="Mocks\MockCommandLocator.cs" />
     <Compile Include="Steps\CommandLocatorSteps.cs" />
+    <Compile Include="Steps\ModuleManagerSteps.cs" />
     <Compile Include="Steps\RequestProcessorSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
     <Compile Include="Steps\ResponseSteps.cs" />
@@ -156,6 +162,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListenTcpClientConnections.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\ManageModule.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ManageModule.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\ProcessRemoteRequest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProcessRemoteRequest.feature.cs</LastGenOutput>
@@ -183,6 +193,15 @@
       <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
       <Name>ConnectUs.ServerSide</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Modules\ConnectUs.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Modules\FileExplorer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

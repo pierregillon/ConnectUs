@@ -16,6 +16,7 @@ namespace ConnectUs.ClientSide.Modules
         }
         public string Name { get; private set; }
         public IEnumerable<object> Commands { get; private set; }
+        public Version Version { get; private set; }
 
         // ----- Constructors
         public Module(string modulepath)
@@ -28,12 +29,19 @@ namespace ConnectUs.ClientSide.Modules
         public void Load()
         {
             _moduleDomain = AppDomain.CreateDomain("ModuleDomain");
-            
-            var assembly = _moduleDomain.Load(AssemblyName.GetAssemblyName(_modulepath));
-            var moduleType = GetModuleFromAssembly(assembly);
 
-            Name = assembly.GetName().Name;
-            Commands = GetCommands(moduleType);
+            try {
+                var assembly = _moduleDomain.Load(AssemblyName.GetAssemblyName(_modulepath));
+                var moduleType = GetModuleClassFromAssembly(assembly);
+
+                Name = assembly.GetName().Name;
+                Version = assembly.GetName().Version;
+                Commands = GetCommands(moduleType);
+            }
+            catch (Exception) {
+                AppDomain.Unload(_moduleDomain);
+                throw;
+            }
         }
         public void Unload()
         {
@@ -47,11 +55,11 @@ namespace ConnectUs.ClientSide.Modules
         }
 
         // ----- Internal logics
-        private static Type GetModuleFromAssembly(Assembly assembly)
+        private static Type GetModuleClassFromAssembly(Assembly assembly)
         {
             var moduleType = assembly.GetTypes().FirstOrDefault(x => x.Name == "Module");
             if (moduleType == null) {
-                throw new Exception(string.Format("Unable to instanciate module '{0}'.", assembly.FullName));
+                throw new ModuleException(string.Format("The assembly '{0}' is not a valid module. No 'Module' class has been found.", assembly.GetName().Name));
             }
             return moduleType;
         }
