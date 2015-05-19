@@ -40,7 +40,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client request processor")]
         public void GivenAClientRequestProcessor()
         {
-            ClientRequestProcessor = new ClientRequestProcessor(CommandLocator);
+            ClientRequestProcessor = new ClientRequestProcessor(CommandLocator, new JsonRequestParser());
         }
 
         [When(@"I process the request ""(.*)"" with the data ""(.*)""")]
@@ -62,10 +62,9 @@ namespace ConnectUs.Business.Tests.Steps
         }
 
         [Then(@"I get a process exception ""(.*)""")]
-        public void ThenIGetAProcessException(string message)
+        public void ThenIGetAProcessException(string text)
         {
-            var expectedMessage = new ErrorResponse {Error = message};
-            Check.That(Result).IsEqualTo(JsonConvert.SerializeObject(expectedMessage));
+            Check.That(Result).IsEqualTo(text);
         }
     }
 }

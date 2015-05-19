@@ -1,6 +1,5 @@
 ﻿using ConnectUs.Business;
 using ConnectUs.Business.Connections;
-using Newtonsoft.Json;
 
 namespace ConnectUs.ClientSide
 {
@@ -20,10 +19,10 @@ namespace ConnectUs.ClientSide
         public void ProcessNextRequestFrom(IConnection connection)
         {
             try {
-                var jsonRequest = connection.Read();
-                var requestName = _requestParser.GetRequestName(jsonRequest);
-                var jsonResponse = _clientRequestProcessor.Process(requestName, jsonRequest);
-                connection.Send(jsonResponse);
+                var dataRead = connection.Read();
+                var requestName = _requestParser.GetRequestName(dataRead);
+                var resultData = _clientRequestProcessor.Process(requestName, dataRead);
+                connection.Send(resultData);
             }
             catch (NoDataToReadFromConnectionException ex) {
                 throw new NoRequestToProcessException("No request is available to process.", ex);

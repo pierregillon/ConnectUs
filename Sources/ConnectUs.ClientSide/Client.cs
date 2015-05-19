@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 using ConnectUs.ClientSide.Modules;
 
@@ -28,7 +29,7 @@ namespace ConnectUs.ClientSide
         public Client()
         {
             var moduleManager = new ModuleManager();
-            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new CommandLocator(moduleManager)));
+            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new CommandLocator(moduleManager), new JsonRequestParser()));
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
 

@@ -84,7 +84,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.When("I process the request \"EchoRequest\" with the data \"{\"Value\":\"test\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.Then("I get the response \"{\"Result\":\"test\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I get the response \"{\"Result\":\"test\",\"Name\":\"EchoResponse\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -104,7 +104,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 15
  testRunner.When("I process the request \"unknownRequest\" with the data \"{}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
- testRunner.Then("I get a process exception \"The request \'unknownRequest\' is unknown.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I get a process exception \"{\"Error\":\"The request \'unknownRequest\' is unknown.\",\"N" +
+                    "ame\":\"ErrorResponse\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
