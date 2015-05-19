@@ -116,7 +116,6 @@
     <Compile Include="Steps\ConnectionSteps.cs" />
     <Compile Include="Mocks\EchoCommand.cs" />
     <Compile Include="Steps\EncoderSteps.cs" />
-    <Compile Include="Mocks\FakeRequestProcessor.cs" />
     <Compile Include="Mocks\MockedClientRequestProcess.cs" />
     <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
     <Compile Include="Mocks\MockCommandLocator.cs" />

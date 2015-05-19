@@ -16,13 +16,14 @@ namespace ConnectUs.Business.Tests.Mocks
         }
     }
 
-    public class EchoResponse : Response
+    public class EchoResponse
     {
         public string Result { get; set; }
     }
 
-    public class EchoRequest : Request
+    public class EchoRequest
     {
+        public string Name { get { return GetType().Name; }set{} }
         public string Value { get; set; }
         public EchoRequest(string value)
         {
