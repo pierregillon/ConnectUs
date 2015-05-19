@@ -11,7 +11,8 @@ namespace ConnectUs.ServerSide.Application.Services
         private readonly List<ICommandLine> _commandLines = new List<ICommandLine>
         {
             new PingCommandLine(),
-            new ExploreDirectoryCommandLine()
+            new ExploreDirectoryCommandLine(),
+            new LoadAssemblyCommandLine()
         };
 
         public string ExecuteCommand(ClientViewModel clientViewModel, string[] arguments)

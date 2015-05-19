@@ -1,4 +1,4 @@
-using ConnectUs.Business.Commands.ClientInformation;
+using ConnectUs.Common.GetClientInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 
@@ -7,10 +7,10 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class RequestSteps
     {
-        public RequestBase Request
+        public object Request
         {
-            get { return ScenarioContext.Current.Get<RequestBase>("RequestBase"); }
-            set { ScenarioContext.Current.Add("RequestBase", value); }
+            get { return ScenarioContext.Current.Get<object>("Request"); }
+            set { ScenarioContext.Current.Add("Request", value); }
         }
 
         [Given(@"A ""(.*)"" request")]

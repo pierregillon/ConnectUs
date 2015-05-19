@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace ConnectUs.ClientSide.Modules
 {
-    public interface IModuleManager
+    public interface IModuleManager : Common.LoadModule.IModuleManager
     {
         event EventHandler<ModuleAddedEventArgs> ModuleAdded;
         event EventHandler<ModuleRemovedEventArgs> ModuleRemoved;
         IEnumerable<Module> GetModules();
-        void AddModule(string modulePath);
+        //void AddModule(string modulePath);
         void RemoveModule(string modulePath);
     }
 }

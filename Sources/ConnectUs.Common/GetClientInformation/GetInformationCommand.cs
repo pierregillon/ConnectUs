@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConnectUs.Business.Commands.ClientInformation
+namespace ConnectUs.Common.GetClientInformation
 {
     public class GetInformationCommand
     {

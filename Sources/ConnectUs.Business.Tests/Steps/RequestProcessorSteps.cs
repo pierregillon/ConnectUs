@@ -1,8 +1,7 @@
-﻿using ConnectUs.Business.Commands;
-using ConnectUs.Business.Commands.ClientInformation;
-using ConnectUs.Business.Connections;
+﻿using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
+using ConnectUs.Common.GetClientInformation;
 using ConnectUs.ServerSide;
 using Moq;
 using TechTalk.SpecFlow;
@@ -32,14 +31,14 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ContinuousRequestProcessor>("ContinuousRequestProcessor"); }
             set { ScenarioContext.Current.Add("ContinuousRequestProcessor", value); }
         }
-        public RequestBase Request
+        public object Request
         {
-            get { return ScenarioContext.Current.Get<RequestBase>("RequestBase"); }
-            set { ScenarioContext.Current.Add("RequestBase", value); }
+            get { return ScenarioContext.Current.Get<object>("Request"); }
+            set { ScenarioContext.Current.Add("Request", value); }
         }
-        public Response Response
+        public object Response
         {
-            get { return ScenarioContext.Current.Get<Response>("Response"); }
+            get { return ScenarioContext.Current.Get<object>("Response"); }
             set { ScenarioContext.Current.Add("Response", value); }
         }
 

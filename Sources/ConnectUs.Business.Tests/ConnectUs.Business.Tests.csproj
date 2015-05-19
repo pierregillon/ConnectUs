@@ -174,6 +174,10 @@
       <Project>{666554c4-d914-43e3-8b79-004b5dc63454}</Project>
       <Name>ConnectUs.ClientSide</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.Common\ConnectUs.Common.csproj">
+      <Project>{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}</Project>
+      <Name>ConnectUs.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
       <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
       <Name>ConnectUs.ServerSide</Name>

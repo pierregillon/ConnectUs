@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using ConnectUs.Business.Commands.ClientInformation;
 using ConnectUs.ClientSide;
+using ConnectUs.Common.GetClientInformation;
 using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Tests.Mocks

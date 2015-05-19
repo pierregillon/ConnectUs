@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using ConnectUs.Business.Commands.ClientInformation;
 using ConnectUs.ClientSide.Modules;
+using ConnectUs.Common.GetClientInformation;
+using ConnectUs.Common.LoadModule;
+using ConnectUs.Common.Ping;
+using IModuleManager = ConnectUs.ClientSide.Modules.IModuleManager;
 
 namespace ConnectUs.ClientSide
 {
@@ -24,6 +27,8 @@ namespace ConnectUs.ClientSide
             }
             _moduleManager.ModuleAdded += ModuleManagerOnModuleAdded;
             _moduleManager.ModuleRemoved += ModuleManagerOnModuleRemoved;
+
+            _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
         }
 
         // ----- Public methods

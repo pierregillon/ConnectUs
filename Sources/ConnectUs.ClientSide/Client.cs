@@ -28,7 +28,6 @@ namespace ConnectUs.ClientSide
         public Client()
         {
             var moduleManager = new ModuleManager();
-            moduleManager.AddModule(@"C:\Dev\Perso\ConnectUs\Sources\ConnectUs.FileExplorer\bin\Debug\ConnectUs.FileExplorer.dll");
             _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new CommandLocator(moduleManager)));
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }

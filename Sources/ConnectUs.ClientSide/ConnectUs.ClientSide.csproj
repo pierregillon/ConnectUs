@@ -70,6 +70,10 @@
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.Common\ConnectUs.Common.csproj">
+      <Project>{5e203aa8-bcfa-4439-8b4f-e3d159db1ee6}</Project>
+      <Name>ConnectUs.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

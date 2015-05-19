@@ -40,10 +40,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ClientInformation\PingCommand.cs" />
-    <Compile Include="Commands\ClientInformation\PingRequest.cs" />
-    <Compile Include="Commands\ClientInformation\PingResponse.cs" />
-    <Compile Include="Commands\ClientInformation\GetInformationCommand.cs" />
     <Compile Include="Connections\ConnectionEstablishedEventArgs.cs" />
     <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
@@ -57,8 +53,6 @@
     <Compile Include="Connections\IConnector.cs" />
     <Compile Include="Encodings\IEncoder.cs" />
     <Compile Include="Connections\TcpClientConnectionListener.cs" />
-    <Compile Include="Commands\ClientInformation\GetClientInformationResponse.cs" />
-    <Compile Include="Commands\ClientInformation\GetClientInformationRequest.cs" />
     <Compile Include="IRequestParser.cs" />
     <Compile Include="IRequestProcessor.cs" />
     <Compile Include="JsonRequestParser.cs" />

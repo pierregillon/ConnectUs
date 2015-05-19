@@ -1,5 +1,4 @@
-using ConnectUs.Business.Commands;
-using ConnectUs.Business.Commands.ClientInformation;
+using ConnectUs.Common.GetClientInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -9,9 +8,9 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ResponseSteps
     {
-        public Response Response
+        public object Response
         {
-            get { return ScenarioContext.Current.Get<Response>("Response"); }
+            get { return ScenarioContext.Current.Get<object>("Response"); }
             set { ScenarioContext.Current.Add("Response", value); }
         }
 

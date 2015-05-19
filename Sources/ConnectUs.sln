@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{9920
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.FileExplorer", "ConnectUs.FileExplorer\ConnectUs.FileExplorer.csproj", "{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.Common", "ConnectUs.Common\ConnectUs.Common.csproj", "{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{443E70B9-AD66-451F-B19D-136D4AAB01A1} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 		{9920928A-578D-4F3E-A18B-388F175F3B84} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 		{671D76D7-BEE3-4BCD-923E-C09A4484F3FF} = {9920928A-578D-4F3E-A18B-388F175F3B84}
+		{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6} = {9920928A-578D-4F3E-A18B-388F175F3B84}
 	EndGlobalSection
 EndGlobal
