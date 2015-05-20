@@ -45,8 +45,10 @@
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStoppedException.cs" />
     <Compile Include="Connections\ConnectionLostEventArgs.cs" />
+    <Compile Include="Connections\Downloader.cs" />
     <Compile Include="Connections\NoDataToReadFromConnectionException.cs" />
     <Compile Include="Connections\TcpClientConnectionFactory.cs" />
+    <Compile Include="Connections\Uploader.cs" />
     <Compile Include="Encodings\JsonEncoder.cs" />
     <Compile Include="Connections\IConnection.cs" />
     <Compile Include="Connections\IConnectionListener.cs" />
