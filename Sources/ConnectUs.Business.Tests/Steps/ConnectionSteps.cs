@@ -81,19 +81,19 @@ namespace ConnectUs.Business.Tests.Steps
         }
 
         [Then(@"The client connection receives the data ""(.*)""")]
-        public void ThenTheClientConnectionReceivesTheData(string expectedJson)
+        public void ThenTheClientConnectionReceivesTheData(string expectedText)
         {
             var encoding = new UTF8Encoding();
-            var json = encoding.GetString(ClientConnection.Read());
-            Check.That(json).IsEqualTo(expectedJson);
+            var text = encoding.GetString(ClientConnection.Read());
+            Check.That(text).IsEqualTo(expectedText);
         }
 
         [Then(@"The server connection receives the data ""(.*)""")]
-        public void ThenTheServerConnectionReceivesTheData(string expectedJson)
+        public void ThenTheServerConnectionReceivesTheData(string expectedText)
         {
             var encoding = new UTF8Encoding();
-            var json = encoding.GetString(ServerConnection.Read());
-            Check.That(json).IsEqualTo(expectedJson);
+            var text = encoding.GetString(ServerConnection.Read());
+            Check.That(text).IsEqualTo(expectedText);
         }
 
         [Then(@"I get a connection exception")]
