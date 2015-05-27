@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
@@ -9,12 +10,14 @@ namespace ConnectUs.Business.Tests.Mocks
         {
             ErrorMessage = message;
         }
-        public override string Process(string requestName, string originalData)
+        public override byte[] Process(string requestName, byte[] originalData)
         {
-            return JsonConvert.SerializeObject(new ErrorResponse
+            var encoding = new UTF8Encoding();
+            var json = JsonConvert.SerializeObject(new ErrorResponse
             {
                 Error = ErrorMessage
             });
+            return encoding.GetBytes(json);
         }
     }
 }

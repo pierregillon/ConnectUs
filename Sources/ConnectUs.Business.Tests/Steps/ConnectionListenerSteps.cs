@@ -1,4 +1,5 @@
-﻿using ConnectUs.Business.Connections;
+﻿using System.Text;
+using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using Moq;
 using NFluent;
@@ -73,7 +74,8 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the '(.*)' through the connection of the connection established event")]
         public void WhenISendTheThroughTheConnectionOfTheConnectionEstablishedEvent(string data)
         {
-            ConnectionEstablishedEventArgs.Connection.Send(data);
+            var encoding = new UTF8Encoding();
+            ConnectionEstablishedEventArgs.Connection.Send(encoding.GetBytes(data));
         }
 
         [Then(@"The connection listener is started on port (.*)")]

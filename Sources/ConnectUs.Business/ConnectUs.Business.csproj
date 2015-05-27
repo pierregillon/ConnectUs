@@ -50,7 +50,7 @@
     <Compile Include="Connections\StreamExtensions.cs" />
     <Compile Include="Connections\TcpClientConnectionFactory.cs" />
     <Compile Include="Connections\Uploader.cs" />
-    <Compile Include="Encodings\JsonEncoder.cs" />
+    <Compile Include="Encodings\CustomEncoder.cs" />
     <Compile Include="Connections\IConnection.cs" />
     <Compile Include="Connections\IConnectionListener.cs" />
     <Compile Include="Connections\IConnector.cs" />

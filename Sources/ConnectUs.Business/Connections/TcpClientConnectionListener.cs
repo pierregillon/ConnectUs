@@ -46,7 +46,7 @@ namespace ConnectUs.Business.Connections
         {
             try {
                 var client = _listener.EndAcceptTcpClient(result);
-                var connection = new TcpClientConnection(client, new JsonEncoder());
+                var connection = new TcpClientConnection(client);
                 connection.Disconnected += ConnectionOnDisconnected;
                 OnConnectionEstablished(new ConnectionEstablishedEventArgs(connection));
                 _listener.BeginAcceptTcpClient(Callback, _listener);

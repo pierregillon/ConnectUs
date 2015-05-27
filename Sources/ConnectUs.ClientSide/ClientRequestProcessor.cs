@@ -15,7 +15,7 @@ namespace ConnectUs.ClientSide
             _requestParser = requestParser;
         }
 
-        public string Process(string requestName, string originalData)
+        public byte[] Process(string requestName, byte[] data)
         {
             object result;
             try {
@@ -23,22 +23,22 @@ namespace ConnectUs.ClientSide
                 if (command == null) {
                     throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));
                 }
-                result = ExecuteCommand(command, originalData);
+                result = ExecuteCommand(command, data);
             }
             catch (Exception ex) {
                 result = new ErrorResponse {Error = ex.Message};
             }
-            return _requestParser.ConvertToString(result);
+            return _requestParser.ConvertToBytes(result);
         }
 
-        private object ExecuteCommand(object command, string originalData)
+        private object ExecuteCommand(object command, byte[] data)
         {
             var methodInfo = command.GetType().GetMethod("Execute");
             if (methodInfo == null) {
                 throw new ProcessException(string.Format("Unable to find the method 'Execute' on the command '{0}'.", command.GetType().Name));
             }
             var requestType = methodInfo.GetParameters().Single().ParameterType;
-            var request = _requestParser.FromString(originalData, requestType);
+            var request = _requestParser.FromBytes(requestType, data);
             return methodInfo.Invoke(command, new[] {request});
         }
     }

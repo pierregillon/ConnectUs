@@ -1,6 +1,6 @@
-﻿using ConnectUs.Business.Tests.Mocks;
+﻿using System.Text;
+using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
-using Newtonsoft.Json;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -44,9 +44,12 @@ namespace ConnectUs.Business.Tests.Steps
         }
 
         [When(@"I process the request ""(.*)"" with the data ""(.*)""")]
-        public void WhenIProcessTheRequestWithTheData(string requestName, string data)
+        public void WhenIProcessTheRequestWithTheData(string requestName, string json)
         {
-            Result = ClientRequestProcessor.Process(requestName, data);
+            var encoding = new UTF8Encoding();
+            var data = encoding.GetBytes(json);
+            var bytes = ClientRequestProcessor.Process(requestName, data);
+            Result = encoding.GetString(bytes);
         }
 
         [Then(@"I get the request name ""(.*)"" and the data ""(.*)"" on the mocked client request processor")]

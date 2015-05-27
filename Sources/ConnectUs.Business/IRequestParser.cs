@@ -4,10 +4,11 @@ namespace ConnectUs.Business
 {
     public interface IRequestParser
     {
-        string GetRequestName(string data);
-        string GetError(string data);
-        string ConvertToString(object request);
-        T FromString<T>(string text);
-        object FromString(string text, Type type);
+        string GetRequestName(byte[] data);
+        string GetError(byte[] data);
+
+        object FromBytes(Type type, byte[] data);
+        T FromBytes<T>(byte[] data);
+        byte[] ConvertToBytes(object request);
     }
 }

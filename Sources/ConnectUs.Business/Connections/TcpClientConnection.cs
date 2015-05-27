@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using ConnectUs.Business.Encodings;
 
 namespace ConnectUs.Business.Connections
 {
@@ -13,7 +12,6 @@ namespace ConnectUs.Business.Connections
         private const int ReadBufferSize = 1024;
 
         private readonly TcpClient _client;
-        private readonly IEncoder _encoder;
 
         public int TimeOut
         {
@@ -33,34 +31,30 @@ namespace ConnectUs.Business.Connections
         }
 
         // ----- Constructors
-        public TcpClientConnection(TcpClient client, IEncoder encoder)
+        public TcpClientConnection(TcpClient client)
         {
             _client = client;
-            _encoder = encoder;
         }
 
         // ----- Public methods
-        public void Send(string data)
+        public void Send(byte[] data)
         {
-            var bytes = _encoder.Encode(data);
             var networkStream = _client.GetStream();
-            Send(networkStream, bytes);
+            Send(networkStream, data);
         }
         public void Send(Stream stream)
         {
-            var networkStream = _client.GetStream();
-            stream.ForeachRead(StreamBufferSize, buffer => Send(networkStream, buffer));
+            stream.ForeachRead(StreamBufferSize, Send);
         }
-        public string Read()
+        public byte[] Read()
         {
-            var networkStream = _client.GetStream();
-            var buffer = ReadAll(networkStream);
-            return _encoder.Decode(buffer);
+            var buffers = new List<byte[]>();
+            WhileDataAvailable(ReadBufferSize, buffers.Add);
+            return buffers.SelectMany(bytes => bytes).ToArray();
         }
         public void Read(Stream stream)
         {
-            var networkStream = _client.GetStream();
-            WhileDataAvailable(networkStream, ReadBufferSize, buffer => stream.Write(buffer, 0, buffer.Length));
+            WhileDataAvailable(ReadBufferSize, buffer => stream.Write(buffer, 0, buffer.Length));
         }
         public void Close()
         {
@@ -69,12 +63,6 @@ namespace ConnectUs.Business.Connections
         }
 
         // ----- Internal logics
-        private static byte[] ReadAll(NetworkStream networkStream)
-        {
-            var buffers = new List<byte[]>();
-            WhileDataAvailable(networkStream, ReadBufferSize, buffers.Add);
-            return buffers.SelectMany(bytes => bytes).ToArray();
-        }
         private static byte[] Read(Stream stream, int bufferSize)
         {
             try {
@@ -121,8 +109,9 @@ namespace ConnectUs.Business.Connections
         }
 
         // ----- Utils
-        private static void WhileDataAvailable(NetworkStream networkStream, int bufferSize, Action<byte[]> callback)
+        private void WhileDataAvailable(int bufferSize, Action<byte[]> callback)
         {
+            var networkStream = _client.GetStream();
             do {
                 var buffer = Read(networkStream, bufferSize);
                 callback(buffer);

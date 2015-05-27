@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -8,30 +9,36 @@ namespace ConnectUs.Business
     public class JsonRequestParser : IRequestParser
     {
         private const string RequestTypePropertyName = "Name";
+        private static readonly UTF8Encoding Encoding = new UTF8Encoding();
 
-        public string GetRequestName(string data)
+        public string GetRequestName(byte[] data)
         {
-            var jsonObject = JToken.ReadFrom(new JsonTextReader(new StringReader(data)));
+            var json = Encoding.GetString(data);
+            var jsonObject = JToken.ReadFrom(new JsonTextReader(new StringReader(json)));
             return jsonObject[RequestTypePropertyName].ToString();
         }
-        public string GetError(string data)
+        public string GetError(byte[] data)
         {
-            var request = JsonConvert.DeserializeObject<ErrorResponse>(data);
+            var json = Encoding.GetString(data);
+            var request = JsonConvert.DeserializeObject<ErrorResponse>(json);
             return request.Error;
         }
-        public string ConvertToString(object request)
+        public object FromBytes(Type type, byte[] data)
+        {
+            var json = Encoding.GetString(data);
+            return JsonConvert.DeserializeObject(json, type);
+        }
+        public T FromBytes<T>(byte[] data)
+        {
+            var json = Encoding.GetString(data);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        public byte[] ConvertToBytes(object request)
         {
             var jsonObject = JObject.FromObject(request);
             jsonObject.Add(RequestTypePropertyName, request.GetType().Name);
-            return jsonObject.ToString(Formatting.None);
-        }
-        public T FromString<T>(string text)
-        {
-            return JsonConvert.DeserializeObject<T>(text);
-        }
-        public object FromString(string text, Type type)
-        {
-            return JsonConvert.DeserializeObject(text, type);
+            var json = jsonObject.ToString(Formatting.None);
+            return Encoding.GetBytes(json);
         }
     }
 }

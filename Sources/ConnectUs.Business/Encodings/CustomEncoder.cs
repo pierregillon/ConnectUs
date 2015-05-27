@@ -2,7 +2,7 @@
 
 namespace ConnectUs.Business.Encodings
 {
-    public class JsonEncoder : IEncoder
+    public class CustomEncoder : IEncoder
     {
         private readonly UTF8Encoding _encoding = new UTF8Encoding();
 

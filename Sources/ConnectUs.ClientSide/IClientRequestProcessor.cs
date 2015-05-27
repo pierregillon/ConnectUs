@@ -2,6 +2,6 @@
 {
     public interface IClientRequestProcessor
     {
-        string Process(string requestName, string originalData);
+        byte[] Process(string requestName, byte[] data);
     }
 }

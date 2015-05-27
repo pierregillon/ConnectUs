@@ -37,7 +37,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"An encoder")]
         public void GivenAnEncoder()
         {
-            Encoder = new JsonEncoder();
+            Encoder = new CustomEncoder();
         }
 
         [Given(@"A data to encode ""(.*)""")]

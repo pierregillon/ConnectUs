@@ -17,7 +17,7 @@ namespace ConnectUs.ServerSide
         public void SendToClient<TRequest>(TRequest request)
         {
             try {
-                var jsonRequest = _requestParser.ConvertToString(request);
+                var jsonRequest = _requestParser.ConvertToBytes(request);
                 _connection.Send(jsonRequest);
             }
             catch (ConnectionException ex) {
@@ -32,7 +32,7 @@ namespace ConnectUs.ServerSide
                 if (string.IsNullOrEmpty(error) == false) {
                     throw new RequestException(error);
                 }
-                return _requestParser.FromString<TResponse>(jsonResponse);
+                return _requestParser.FromBytes<TResponse>(jsonResponse);
             }
             catch (ConnectionException ex) {
                 throw new RequestException("Unable to receive the request.", ex);

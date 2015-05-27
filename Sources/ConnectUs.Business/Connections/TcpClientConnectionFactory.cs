@@ -10,7 +10,7 @@ namespace ConnectUs.Business.Connections
             try {
                 var client = new TcpClient();
                 client.Connect(hostName, port);
-                var connection = new TcpClientConnection(client, new JsonEncoder());
+                var connection = new TcpClientConnection(client);
                 connection.TimeOut = timeout;
                 return connection;
             }

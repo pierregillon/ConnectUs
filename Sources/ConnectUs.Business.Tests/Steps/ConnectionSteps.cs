@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using ConnectUs.Business.Connections;
-using ConnectUs.Business.Encodings;
-using ConnectUs.ClientSide;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -39,7 +36,7 @@ namespace ConnectUs.Business.Tests.Steps
                 listener.Start();
                 var client = listener.AcceptTcpClient();
                 listener.Stop();
-                return new TcpClientConnection(client, new JsonEncoder());
+                return new TcpClientConnection(client);
             });
 
             var clientTask = Task.Run(() => TcpClientConnectionFactory.Build("localhost", port, 50));
@@ -54,13 +51,15 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the data ""(.*)"" through the server connection")]
         public void WhenISendTheDataThroughTheServerConnection(string data)
         {
-            ServerConnection.Send(data);
+            var encoding = new UTF8Encoding();
+            ServerConnection.Send(encoding.GetBytes(data));
         }
 
         [When(@"I send the data ""(.*)"" through the client connection")]
         public void WhenISendTheDataThroughTheClientConnection(string data)
         {
-            ClientConnection.Send(data);
+            var encoding = new UTF8Encoding();
+            ClientConnection.Send(encoding.GetBytes(data));
         }
 
         [When(@"I close the client connection")]
@@ -82,15 +81,19 @@ namespace ConnectUs.Business.Tests.Steps
         }
 
         [Then(@"The client connection receives the data ""(.*)""")]
-        public void ThenTheClientConnectionReceivesTheData(string data)
+        public void ThenTheClientConnectionReceivesTheData(string expectedJson)
         {
-            Check.That(ClientConnection.Read()).IsEqualTo(data);
+            var encoding = new UTF8Encoding();
+            var json = encoding.GetString(ClientConnection.Read());
+            Check.That(json).IsEqualTo(expectedJson);
         }
 
         [Then(@"The server connection receives the data ""(.*)""")]
-        public void ThenTheServerConnectionReceivesTheData(string data)
+        public void ThenTheServerConnectionReceivesTheData(string expectedJson)
         {
-            Check.That(ServerConnection.Read()).IsEqualTo(data);
+            var encoding = new UTF8Encoding();
+            var json = encoding.GetString(ServerConnection.Read());
+            Check.That(json).IsEqualTo(expectedJson);
         }
 
         [Then(@"I get a connection exception")]
