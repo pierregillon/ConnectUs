@@ -1,4 +1,5 @@
-﻿using ConnectUs.Business.Connections;
+﻿using System.IO;
+using ConnectUs.Business.Connections;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
@@ -9,7 +10,15 @@ namespace ConnectUs.Business.Tests.Mocks
         {
             throw new System.NotImplementedException();
         }
+        public void Send(Stream stream)
+        {
+            throw new System.NotImplementedException();
+        }
         public string Read()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void Read(Stream stream)
         {
             throw new System.NotImplementedException();
         }

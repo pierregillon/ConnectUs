@@ -47,6 +47,7 @@
     <Compile Include="Connections\ConnectionLostEventArgs.cs" />
     <Compile Include="Connections\Downloader.cs" />
     <Compile Include="Connections\NoDataToReadFromConnectionException.cs" />
+    <Compile Include="Connections\StreamExtensions.cs" />
     <Compile Include="Connections\TcpClientConnectionFactory.cs" />
     <Compile Include="Connections\Uploader.cs" />
     <Compile Include="Encodings\JsonEncoder.cs" />

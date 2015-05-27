@@ -13,11 +13,12 @@ namespace ConnectUs.Business.Connections
 
         public void Download(string filePath)
         {
-            var fileContent = _connection.Read();
             if (File.Exists(filePath)) {
                 File.Delete(filePath);
             }
-            File.AppendAllText(filePath, fileContent);
+            using (var stream = File.OpenWrite(filePath)) {
+                _connection.Read(stream);
+            }
         }
     }
 }

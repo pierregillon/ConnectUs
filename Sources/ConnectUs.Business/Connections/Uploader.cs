@@ -13,8 +13,9 @@ namespace ConnectUs.Business.Connections
 
         public void Upload(string filePath)
         {
-            var fileContent = File.ReadAllText(filePath);
-            _connection.Send(fileContent);
+            using (var stream = File.OpenRead(filePath)) {
+                _connection.Send(stream);
+            }
         }
     }
 }
