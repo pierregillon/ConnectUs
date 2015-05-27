@@ -84,13 +84,41 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
   testRunner.And("An uploader with the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.When("I start the downloader to save the file \"Resources/save.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I start the download of the file \"Resources/downloadedFile.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
-  testRunner.And("I start the uploader to send the file \"Resources/source.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I start the upload to the file \"Resources/file.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
   testRunner.And("I wait the end of the file exchange", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.Then("The \"Resources/save.txt\" file and the \"Resources/source.txt\" file are equals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The \"Resources/downloadedFile.txt\" file and the \"Resources/file.txt\" file are equ" +
+                    "als", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Exchange a file between client and server with limit buffer size")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DownloadUploadFile")]
+        public virtual void ExchangeAFileBetweenClientAndServerWithLimitBufferSize()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Exchange a file between client and server with limit buffer size", ((string[])(null)));
+#line 15
+this.ScenarioSetup(scenarioInfo);
+#line 16
+ testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 17
+  testRunner.And("A downloader with the client connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+  testRunner.And("An uploader with the server connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+ testRunner.When("I start the download of the file \"Resources/downloadedFile.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+  testRunner.And("I start the upload to the file \"Resources/file_1024_bytes.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
+  testRunner.And("I wait the end of the file exchange", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.Then("The \"Resources/downloadedFile.txt\" file and the \"Resources/file_1024_bytes.txt\" f" +
+                    "ile are equals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

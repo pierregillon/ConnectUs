@@ -31,8 +31,8 @@ namespace ConnectUs.Business.Tests.Steps
             Downloader = new Downloader(ClientConnection);
         }
 
-        [When(@"I start the downloader to save the file ""(.*)""")]
-        public void WhenIStartTheDownloaderToSaveTheFile(string filePath)
+        [When(@"I start the download of the file ""(.*)""")]
+        public void WhenIStartTheDownloadOfTheFile(string filePath)
         {
             DownloadTask = Task.Run(() => Downloader.Download(filePath));
         }

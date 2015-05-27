@@ -29,8 +29,8 @@ namespace ConnectUs.Business.Tests.Steps
             Uploader = new Uploader(ServerConnection);
         }
 
-        [When(@"I start the uploader to send the file ""(.*)""")]
-        public void WhenIStartTheUploaderToSendTheFile(string filePath)
+        [When(@"I start the upload to the file ""(.*)""")]
+        public void WhenIStartTheUploadToTheFile(string filePath)
         {
             UploadTask = Task.Run(() => Uploader.Upload(filePath));
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -39,9 +40,6 @@ namespace ConnectUs.Business.Connections
         public void Send(string data)
         {
             try {
-                if (_client.Client.Poll(0, SelectMode.SelectError)) {
-                    throw new SocketException((int)SocketError.ConnectionAborted);
-                }
                 var bytes = _encoder.Encode(data);
                 var networkStream = _client.GetStream();
                 networkStream.Write(bytes, 0, bytes.Length);
@@ -63,14 +61,8 @@ namespace ConnectUs.Business.Connections
         {
             try {
                 var networkStream = _client.GetStream();
-                var buffer = new byte[1024];
-                var bytesReceived = networkStream.Read(buffer, 0, buffer.Length);
-                if (bytesReceived == 0) {
-                    Close();
-                    throw new SocketException((int)SocketError.ConnectionAborted);
-                }
-                var exactBuffer = buffer.Take(bytesReceived).ToArray();
-                return _encoder.Decode(exactBuffer);
+                var buffer = Read(networkStream);
+                return _encoder.Decode(buffer);
             }
             catch (IOException ex) {
                 if (ex.InnerException != null) {
@@ -92,6 +84,26 @@ namespace ConnectUs.Business.Connections
         {
             _client.Close();
             OnDisconnected();
+        }
+
+        // ----- Internal logics
+        private static byte[] Read(NetworkStream networkStream)
+        {
+            var buffers = new List<byte[]>();
+            do {
+                var buffer = Read(networkStream, 1024);
+                buffers.Add(buffer);
+            } while (networkStream.DataAvailable);
+            return buffers.SelectMany(bytes => bytes).ToArray();
+        }
+        private static byte[] Read(Stream stream, int bufferSize)
+        {
+            var buffer = new byte[bufferSize];
+            var bytesReceived = stream.Read(buffer, 0, buffer.Length);
+            if (bytesReceived == 0) {
+                throw new SocketException((int) SocketError.ConnectionAborted);
+            }
+            return buffer.Take(bytesReceived).ToArray();
         }
     }
 }

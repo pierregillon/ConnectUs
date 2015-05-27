@@ -1,0 +1,31 @@
+﻿Executive Bloggers Visual Studio Application Lifecycle Management Languages .NET Platform Development
+Parallel Programming with .NET
+
+All about Async/Await, System.Threading.Tasks, System.Collections.Concurrent, System.Linq, and more…
+
+
+
+Search this blog  Search all blogs
+Subscribe
+Comments
+Home
+Menu
+Atom
+Traduire cette page
+
+Microsoft® Translator
+Recent Posts
+New Task APIs in .NET 4.6
+Posted 3 months ago
+.NET memory allocation profiling and Tasks
+Posted over 2 years ago
+Tasks, Monads, and LINQ
+Posted over 2 years ago
+"Invoke the method with await"... ugh!
+Posted over 2 years ago
+Live Now on Developer Tools BlogsLive Now on Developer Tools Blogs Feed
+Git-deployable F# based Web Applications in the Azure Cloud with WebSharper
+Bringing Web Audio to Microsoft Edge for interoperable gaming and enthusiast media
+Migrating “My Map” from Google to Bing
+Tags
+.NET 4 .NET 4.5 Async Code Samples Coordination Data Structures Parallel Extensions ParallelExtensionsExtras12345678911234123
