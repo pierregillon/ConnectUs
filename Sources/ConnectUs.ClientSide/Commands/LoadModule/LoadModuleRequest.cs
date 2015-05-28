@@ -2,5 +2,6 @@
 {
     public class LoadModuleRequest
     {
+        public string ModuleName { get; set; }
     }
 }
