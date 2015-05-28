@@ -48,9 +48,20 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="ClientException.cs" />
+    <Compile Include="ClientInformation.cs" />
     <Compile Include="ClientRequestHandler.cs" />
     <Compile Include="ClientRequestProcessor.cs" />
+    <Compile Include="Commands\GetClientInformation\GetClientInformationRequest.cs" />
+    <Compile Include="Commands\GetClientInformation\GetClientInformationResponse.cs" />
+    <Compile Include="Commands\GetClientInformation\GetInformationCommand.cs" />
+    <Compile Include="Commands\LoadModule\LoadModuleCommand.cs" />
+    <Compile Include="Commands\LoadModule\LoadModuleRequest.cs" />
+    <Compile Include="Commands\LoadModule\LoadModuleResponse.cs" />
+    <Compile Include="Commands\Ping\PingCommand.cs" />
+    <Compile Include="Commands\Ping\PingRequest.cs" />
+    <Compile Include="Commands\Ping\PingResponse.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />
+    <Compile Include="IClientInformation.cs" />
     <Compile Include="IClientRequestHandler.cs" />
     <Compile Include="IClientRequestProcessor.cs" />
     <Compile Include="ICommandLocator.cs" />
@@ -74,10 +85,6 @@
     <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.Common\ConnectUs.Common.csproj">
-      <Project>{5e203aa8-bcfa-4439-8b4f-e3d159db1ee6}</Project>
-      <Name>ConnectUs.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

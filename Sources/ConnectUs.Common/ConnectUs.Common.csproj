@@ -35,16 +35,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetClientInformation\GetClientInformationRequest.cs" />
-    <Compile Include="GetClientInformation\GetClientInformationResponse.cs" />
-    <Compile Include="GetClientInformation\GetInformationCommand.cs" />
-    <Compile Include="LoadModule\IModuleManager.cs" />
-    <Compile Include="LoadModule\LoadModuleCommand.cs" />
-    <Compile Include="LoadModule\LoadModuleRequest.cs" />
-    <Compile Include="LoadModule\LoadModuleResponse.cs" />
-    <Compile Include="Ping\PingCommand.cs" />
-    <Compile Include="Ping\PingRequest.cs" />
-    <Compile Include="Ping\PingResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

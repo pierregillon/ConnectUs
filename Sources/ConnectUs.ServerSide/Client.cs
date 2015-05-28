@@ -1,5 +1,5 @@
-﻿using ConnectUs.Common.GetClientInformation;
-using ConnectUs.Common.Ping;
+﻿using ConnectUs.ClientSide.Commands.GetClientInformation;
+using ConnectUs.ClientSide.Commands.Ping;
 
 namespace ConnectUs.ServerSide
 {

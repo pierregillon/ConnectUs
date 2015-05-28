@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.Common.Ping
+﻿namespace ConnectUs.ClientSide.Commands.Ping
 {
     public class PingCommand
     {

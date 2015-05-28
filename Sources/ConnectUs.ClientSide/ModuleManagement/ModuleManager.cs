@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ConnectUs.ClientSide.ModuleManagement
 {
-    public class ModuleManager : IModuleManager, Common.LoadModule.IModuleManager
+    public class ModuleManager : IModuleManager
     {
         private readonly List<Module> _modules = new List<Module>();
 
@@ -53,12 +53,6 @@ namespace ConnectUs.ClientSide.ModuleManagement
             var module = FindModule(name);
             module.Unload();
             OnModuleUnloaded(new ModuleUnloadedEventArgs(module));
-        }
-
-        // Others
-        void Common.LoadModule.IModuleManager.InstallModule(string moduleName)
-        {
-            LoadModule(AddModule(Path.Combine(Directory.GetCurrentDirectory(), moduleName)));
         }
 
         // ----- Utils

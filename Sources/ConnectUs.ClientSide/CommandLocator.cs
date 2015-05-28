@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using ConnectUs.ClientSide.Commands.GetClientInformation;
+using ConnectUs.ClientSide.Commands.LoadModule;
+using ConnectUs.ClientSide.Commands.Ping;
 using ConnectUs.ClientSide.ModuleManagement;
-using ConnectUs.Common.GetClientInformation;
-using ConnectUs.Common.LoadModule;
-using ConnectUs.Common.Ping;
 using IModuleManager = ConnectUs.ClientSide.ModuleManagement.IModuleManager;
 
 namespace ConnectUs.ClientSide
@@ -28,7 +28,7 @@ namespace ConnectUs.ClientSide
             _moduleManager.ModuleLoaded += ModuleManagerOnModuleLoaded;
             _moduleManager.ModuleUnloaded += ModuleManagerOnModuleUnloaded;
 
-            _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand((Common.LoadModule.IModuleManager)_moduleManager));
+            _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
         }
 
         // ----- Public methods

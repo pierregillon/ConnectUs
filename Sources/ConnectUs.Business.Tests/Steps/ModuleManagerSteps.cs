@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using ConnectUs.ClientSide.ModuleManagement;
 using NFluent;
 using TechTalk.SpecFlow;

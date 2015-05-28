@@ -52,9 +52,9 @@
       <Project>{e8d6208b-fa4f-46ca-8226-e20343bf3d34}</Project>
       <Name>ConnectUs.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.Common\ConnectUs.Common.csproj">
-      <Project>{5E203AA8-BCFA-4439-8B4F-E3D159DB1EE6}</Project>
-      <Name>ConnectUs.Common</Name>
+    <ProjectReference Include="..\ConnectUs.ClientSide\ConnectUs.ClientSide.csproj">
+      <Project>{666554C4-D914-43E3-8B79-004B5DC63454}</Project>
+      <Name>ConnectUs.ClientSide</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
       <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>

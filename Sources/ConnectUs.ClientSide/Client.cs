@@ -8,6 +8,7 @@ namespace ConnectUs.ClientSide
     public class Client
     {
         private readonly IContinuousRequestProcessor _continuousRequestProcessor;
+        private readonly IClientInformation _clientInformation;
 
         public event EventHandler ClientDisconnected;
         protected virtual void OnClientDisconnected()
@@ -31,7 +32,9 @@ namespace ConnectUs.ClientSide
         public Client() : this(Ioc.Instance.GetInstance<IContinuousRequestProcessor>(), Ioc.Instance.GetInstance<IClientInformation>())
         {
         }
+        private Client(IContinuousRequestProcessor continuousRequestProcessor, IClientInformation clientInformation)
         {
+            _clientInformation = clientInformation;
             _continuousRequestProcessor = continuousRequestProcessor;
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
@@ -43,6 +46,7 @@ namespace ConnectUs.ClientSide
                 var connection = TcpClientConnectionFactory.Build(hostName, port);
                 OnClientConnected();
                 _continuousRequestProcessor.StartProcessingRequestFromConnection(connection);
+                _clientInformation.CurrentConnection = connection;
             }
             catch (ConnectionException) {
                 throw new ClientException(string.Format("Unable to connect to the host '{0}' on the port '{1}'.", hostName, port));
@@ -54,6 +58,7 @@ namespace ConnectUs.ClientSide
         {
             _continuousRequestProcessor.StopProcessingRequestFromConnection();
             OnClientDisconnected();
+            _clientInformation.CurrentConnection = null;
         }
 
         // ----- Utils
@@ -65,6 +70,7 @@ namespace ConnectUs.ClientSide
             Ioc.Instance.Register<ICommandLocator, CommandLocator>();
             Ioc.Instance.Register<IModuleManager, ModuleManager>();
             Ioc.Instance.Register<IRequestParser, JsonRequestParser>();
+            Ioc.Instance.RegisterSingle<IClientInformation, ClientInformation>();
         }
     }
 }

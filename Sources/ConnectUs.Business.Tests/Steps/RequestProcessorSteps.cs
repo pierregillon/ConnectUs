@@ -1,7 +1,7 @@
 ﻿using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
-using ConnectUs.Common.GetClientInformation;
+using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ServerSide;
 using Moq;
 using TechTalk.SpecFlow;

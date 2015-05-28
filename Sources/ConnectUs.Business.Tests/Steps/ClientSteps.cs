@@ -1,4 +1,4 @@
-﻿using ConnectUs.Common.GetClientInformation;
+﻿using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ServerSide;
 using NFluent;
 using TechTalk.SpecFlow;

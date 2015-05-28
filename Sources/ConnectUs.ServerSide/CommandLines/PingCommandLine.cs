@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using ConnectUs.Common.Ping;
+using ConnectUs.ClientSide.Commands.Ping;
 
 namespace ConnectUs.ServerSide.CommandLines
 {

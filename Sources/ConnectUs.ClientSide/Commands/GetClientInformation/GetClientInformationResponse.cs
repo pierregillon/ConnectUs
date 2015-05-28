@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.Common.GetClientInformation
+﻿namespace ConnectUs.ClientSide.Commands.GetClientInformation
 {
     public class GetClientInformationResponse
     {

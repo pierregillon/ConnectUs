@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.Common.LoadModule
+﻿namespace ConnectUs.ClientSide.Commands.LoadModule
 {
     public class LoadModuleResponse
     {

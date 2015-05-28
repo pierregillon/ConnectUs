@@ -1,4 +1,6 @@
-﻿namespace ConnectUs.Common.LoadModule
+﻿using ConnectUs.ClientSide.ModuleManagement;
+
+namespace ConnectUs.ClientSide.Commands.LoadModule
 {
     public class LoadModuleCommand
     {
@@ -11,7 +13,9 @@
 
         public LoadModuleResponse Execute(LoadModuleRequest request)
         {
-            _moduleManager.InstallModule(@"Modules\ConnectUs.FileExplorer.dll");
+            const string filePath = @"Modules\ConnectUs.FileExplorer.dll";
+            var name = _moduleManager.AddModule(filePath);
+            _moduleManager.LoadModule(name);
             return new LoadModuleResponse();
         }
     }

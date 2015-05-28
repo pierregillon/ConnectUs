@@ -44,11 +44,6 @@ namespace ConnectUs.ClientSide.ModuleManagement
             catch (FileNotFoundException ex) {
                 throw new ModuleException(string.Format("Unable to add the module '{0}' : file was not found.", modulepath), ex);
             }
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainOnAssemblyResolve;
-        }
-        ~Module()
-        {
-            AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomainOnAssemblyResolve;
         }
 
         // ----- Public methods
@@ -57,7 +52,7 @@ namespace ConnectUs.ClientSide.ModuleManagement
             _moduleDomain = AppDomain.CreateDomain("ModuleDomain");
 
             try {
-                var assembly = _moduleDomain.Load(_assemblyName);
+                var assembly = LoadAssembly();
                 var moduleType = GetModuleClassFromAssembly(assembly);
                 Commands = GetCommands(moduleType);
             }
@@ -73,13 +68,14 @@ namespace ConnectUs.ClientSide.ModuleManagement
             IsLoaded = false;
         }
 
-        // ----- Event callbacks
-        private Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            return Assembly.LoadFile(Path);
-        }
-
         // ----- Internal logics
+        private Assembly LoadAssembly()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainOnAssemblyResolve;
+            var assembly = _moduleDomain.Load(_assemblyName);
+            AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomainOnAssemblyResolve;
+            return assembly;
+        }
         private static Type GetModuleClassFromAssembly(Assembly assembly)
         {
             var moduleType = assembly.GetTypes().FirstOrDefault(x => x.Name == "Module");
@@ -92,6 +88,18 @@ namespace ConnectUs.ClientSide.ModuleManagement
         {
             var module = Activator.CreateInstance(moduleType);
             return (IEnumerable<object>) moduleType.GetMethod("GetCommands").Invoke(module, new object[0]);
+        }
+
+        // ----- Event callbacks
+        private Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            if (System.IO.Path.IsPathRooted(Path)) {
+                return Assembly.LoadFile(Path);
+            }
+            else {
+                var absolutePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), Path);
+                return Assembly.LoadFile(absolutePath);
+            }
         }
     }
 }

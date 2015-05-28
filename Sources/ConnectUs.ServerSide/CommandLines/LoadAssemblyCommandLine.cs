@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ConnectUs.Common.LoadModule;
+using ConnectUs.ClientSide.Commands.LoadModule;
 
 namespace ConnectUs.ServerSide.CommandLines
 {
