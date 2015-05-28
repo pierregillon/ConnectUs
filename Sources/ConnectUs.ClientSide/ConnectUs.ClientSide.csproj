@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ClientException.cs" />
     <Compile Include="ClientRequestHandler.cs" />
     <Compile Include="ClientRequestProcessor.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />

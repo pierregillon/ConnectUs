@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 using ConnectUs.ClientSide.ModuleManagement;
@@ -8,7 +7,6 @@ namespace ConnectUs.ClientSide
 {
     public class Client
     {
-        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private readonly ContinuousRequestProcessor _continuousRequestProcessor;
 
         public event EventHandler ClientDisconnected;
@@ -36,23 +34,13 @@ namespace ConnectUs.ClientSide
         // ----- Public methods
         public void ConnectToServer(string hostName, int port)
         {
-            var connection = GetConnection(hostName, port);
-            if (connection != null) {
-                _continuousRequestProcessor.StartProcessingRequestFromConnection(connection);
-                _resetEvent.WaitOne();
-            }
-        }
-
-        // ----- Utils
-        private IConnection GetConnection(string hostName, int port)
-        {
             try {
                 var connection = TcpClientConnectionFactory.Build(hostName, port);
                 OnClientConnected();
-                return connection;
+                _continuousRequestProcessor.StartProcessingRequestFromConnection(connection);
             }
             catch (ConnectionException) {
-                return null;
+                throw new ClientException(string.Format("Unable to connect to the host '{0}' on the port '{1}'.", hostName, port));
             }
         }
 
@@ -61,7 +49,6 @@ namespace ConnectUs.ClientSide
         {
             _continuousRequestProcessor.StopProcessingRequestFromConnection();
             OnClientDisconnected();
-            _resetEvent.Set();
         }
     }
 }
