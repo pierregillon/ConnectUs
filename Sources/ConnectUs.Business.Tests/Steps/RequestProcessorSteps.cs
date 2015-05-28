@@ -51,7 +51,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A server request processor is initialized")]
         public void GivenAServerRequestProcessorIsInitialized()
         {
-            ServerRequestProcessor = new RemoteRequestProcessor(new ServerRequestCommunicator(ServerConnection, new JsonRequestParser()));
+            ServerRequestProcessor = new RemoteRequestProcessor(new ServerRequestCommunicator(ServerConnection, new JsonRequestParser()), new ServerFileCommunicator(ServerConnection));
         }
 
         [Given(@"A mocked server request processor that returns the response")]

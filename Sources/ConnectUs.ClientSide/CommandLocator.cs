@@ -3,6 +3,7 @@ using System.Linq;
 using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ClientSide.Commands.LoadModule;
 using ConnectUs.ClientSide.Commands.Ping;
+using ConnectUs.ClientSide.Commands.Upload;
 using ConnectUs.ClientSide.ModuleManagement;
 using IModuleManager = ConnectUs.ClientSide.ModuleManagement.IModuleManager;
 
@@ -11,6 +12,8 @@ namespace ConnectUs.ClientSide
     public class CommandLocator : ICommandLocator
     {
         private readonly IModuleManager _moduleManager;
+        private readonly IClientInformation _clientInformation;
+        
         private readonly Dictionary<ModuleName, Dictionary<string, object>> _moduleCommands = new Dictionary<ModuleName, Dictionary<string, object>>();
         private readonly Dictionary<string, object> _defaultCommands = new Dictionary<string, object>
         {
@@ -19,9 +22,10 @@ namespace ConnectUs.ClientSide
         };
 
         // ----- Constructors
-        public CommandLocator(IModuleManager moduleManager)
+        public CommandLocator(IModuleManager moduleManager, IClientInformation clientInformation)
         {
             _moduleManager = moduleManager;
+            _clientInformation = clientInformation;
             foreach (var module in _moduleManager.GetModules()) {
                 LoadCommandsFromModule(module);
             }
@@ -29,6 +33,7 @@ namespace ConnectUs.ClientSide
             _moduleManager.ModuleUnloaded += ModuleManagerOnModuleUnloaded;
 
             _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
+            _defaultCommands.Add(typeof(UploadRequest).Name, new UploadCommand(_clientInformation));
         }
 
         // ----- Public methods

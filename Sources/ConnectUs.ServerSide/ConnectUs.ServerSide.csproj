@@ -53,9 +53,11 @@
     <Compile Include="CommandLines\ICommandLine.cs" />
     <Compile Include="CommandLines\LoadAssemblyCommandLine.cs" />
     <Compile Include="CommandLines\PingCommandLine.cs" />
+    <Compile Include="CommandLines\UploadCommandLine.cs" />
     <Compile Include="IClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
     <Compile Include="IServer.cs" />
+    <Compile Include="IServerFileCommunicator.cs" />
     <Compile Include="IServerRequestCommunicator.cs" />
     <Compile Include="IServerRequestProcessor.cs" />
     <Compile Include="PackageClient.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="RequestException.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerConfiguration.cs" />
+    <Compile Include="ServerFileCommunicator.cs" />
     <Compile Include="ServerRequestCommunicator.cs" />
   </ItemGroup>
   <ItemGroup>

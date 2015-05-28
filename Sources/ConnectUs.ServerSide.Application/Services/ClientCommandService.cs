@@ -12,7 +12,8 @@ namespace ConnectUs.ServerSide.Application.Services
         {
             new PingCommandLine(),
             new ExploreDirectoryCommandLine(),
-            new LoadAssemblyCommandLine()
+            new LoadAssemblyCommandLine(),
+            new UploadCommandLine()
         };
 
         public string ExecuteCommand(ClientViewModel clientViewModel, string[] arguments)

@@ -17,8 +17,8 @@ namespace ConnectUs.ServerSide
         public void SendToClient<TRequest>(TRequest request)
         {
             try {
-                var jsonRequest = _requestParser.ConvertToBytes(request);
-                _connection.Send(jsonRequest);
+                var data = _requestParser.ConvertToBytes(request);
+                _connection.Send(data);
             }
             catch (ConnectionException ex) {
                 throw new RequestException("Unable to send the request.", ex);
@@ -27,12 +27,12 @@ namespace ConnectUs.ServerSide
         public TResponse ReceiveFromClient<TResponse>()
         {
             try {
-                var jsonResponse = _connection.Read();
-                var error =_requestParser.GetError(jsonResponse);
+                var data = _connection.Read();
+                var error =_requestParser.GetError(data);
                 if (string.IsNullOrEmpty(error) == false) {
                     throw new RequestException(error);
                 }
-                return _requestParser.FromBytes<TResponse>(jsonResponse);
+                return _requestParser.FromBytes<TResponse>(data);
             }
             catch (ConnectionException ex) {
                 throw new RequestException("Unable to receive the request.", ex);
