@@ -7,7 +7,7 @@ namespace ConnectUs.ClientSide
 {
     public class Client
     {
-        private readonly ContinuousRequestProcessor _continuousRequestProcessor;
+        private readonly IContinuousRequestProcessor _continuousRequestProcessor;
 
         public event EventHandler ClientDisconnected;
         protected virtual void OnClientDisconnected()
@@ -24,10 +24,15 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Constructors
-        public Client()
+        static Client()
         {
-            var moduleManager = new ModuleManager();
-            _continuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestProcessor(new CommandLocator(moduleManager), new JsonRequestParser()));
+            InitIoc();
+        }
+        public Client() : this(Ioc.Instance.GetInstance<IContinuousRequestProcessor>(), Ioc.Instance.GetInstance<IClientInformation>())
+        {
+        }
+        {
+            _continuousRequestProcessor = continuousRequestProcessor;
             _continuousRequestProcessor.ConnectionLost += ContinuousRequestProcessorOnConnectionLost;
         }
 
@@ -49,6 +54,17 @@ namespace ConnectUs.ClientSide
         {
             _continuousRequestProcessor.StopProcessingRequestFromConnection();
             OnClientDisconnected();
+        }
+
+        // ----- Utils
+        private static void InitIoc()
+        {
+            Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
+            Ioc.Instance.Register<IClientRequestProcessor, ClientRequestProcessor>();
+            Ioc.Instance.Register<IClientRequestHandler, ClientRequestHandler>();
+            Ioc.Instance.Register<ICommandLocator, CommandLocator>();
+            Ioc.Instance.Register<IModuleManager, ModuleManager>();
+            Ioc.Instance.Register<IRequestParser, JsonRequestParser>();
         }
     }
 }

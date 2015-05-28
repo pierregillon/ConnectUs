@@ -45,7 +45,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client request processor is initialized to echo requests")]
         public void GivenAClientRequestProcessorIsInitializedToEchoRequests()
         {
-            ContinuousRequestProcessor = new ContinuousRequestProcessor(new MockedEchoClientRequestProcessor());
+            ContinuousRequestProcessor = new ContinuousRequestProcessor(new ClientRequestHandler(new MockedEchoClientRequestProcessor(), new JsonRequestParser()));
         }
 
         [Given(@"A server request processor is initialized")]

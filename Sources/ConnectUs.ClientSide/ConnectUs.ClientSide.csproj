@@ -55,6 +55,8 @@
     <Compile Include="IClientRequestProcessor.cs" />
     <Compile Include="ICommandLocator.cs" />
     <Compile Include="CommandLocator.cs" />
+    <Compile Include="IContinuousRequestProcessor.cs" />
+    <Compile Include="Ioc.cs" />
     <Compile Include="ModuleManagement\IModuleManager.cs" />
     <Compile Include="ModuleManagement\Module.cs" />
     <Compile Include="ModuleManagement\ModuleLoadedEventArgs.cs" />

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading;
-using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ClientSide
 {
-    public class ContinuousRequestProcessor
+    public class ContinuousRequestProcessor : IContinuousRequestProcessor
     {
         private const int DelayBeforeNewConnectionRead = 1000;
         private readonly IClientRequestHandler _clientRequestHandler;
@@ -19,9 +18,9 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Constructors
-        public ContinuousRequestProcessor(IClientRequestProcessor clientRequestProcessor)
+        public ContinuousRequestProcessor(IClientRequestHandler clientRequestHandler)
         {
-            _clientRequestHandler = new ClientRequestHandler(clientRequestProcessor, new JsonRequestParser());
+            _clientRequestHandler = clientRequestHandler;
         }
 
         // ----- Public methods
