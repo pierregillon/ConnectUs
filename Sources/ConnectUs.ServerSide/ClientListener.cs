@@ -44,7 +44,7 @@ namespace ConnectUs.ServerSide
 
         private void ConnectionListenerOnConnectionEstablished(object sender, ConnectionEstablishedEventArgs args)
         {
-            var client = new Client(new RemoteRequestProcessor(new ServerRequestCommunicator(args.Connection, new JsonRequestParser()), new ServerFileCommunicator(args.Connection)));
+            var client = new Client(new RemoteRequestProcessor(new ServerRequestCommunicator(args.Connection, new JsonRequestParser())));
             _connectedClients.Add(args.Connection, client);
             OnClientConnected(new ClientConnectedEventArgs(client));
         }

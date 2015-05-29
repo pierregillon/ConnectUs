@@ -42,12 +42,14 @@ namespace ConnectUs.Business.Tests.Steps
             ResponseByThread = new ConcurrentDictionary<int, EchoResponse>();
         }
 
+        // When
+
         [When(@"I send an echo request with value ""(.*)"" through the server request processor on the thread (.*)")]
         public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnTheThread(int value, int threadId)
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = ServerRequestProcessor.Process<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
+                var response = ServerRequestProcessor.ProcessRequest<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
@@ -55,8 +57,16 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send an echo request with value ""(.*)"" through the server request processor on main thread")]
         public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnMainThread(int value)
         {
-            MainThreadResponses.Add(ServerRequestProcessor.Process<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
+            MainThreadResponses.Add(ServerRequestProcessor.ProcessRequest<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
         }
+
+        [When(@"I send file '(.*)' through the server request processor")]
+        public void WhenISendFileThroughTheServerRequestProcessor(string filePath)
+        {
+            ServerRequestProcessor.UploadFile(filePath);
+        }
+
+        // Then
 
         [Then(@"I get an echo response with the result ""(.*)"" on thread (.*)")]
         public void ThenIGetAnEchoResponseWithTheResultOnThread(int result, int threadId)

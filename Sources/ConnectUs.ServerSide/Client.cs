@@ -14,7 +14,7 @@ namespace ConnectUs.ServerSide
 
         public GetClientInformationResponse GetClientInformation()
         {
-            return _serverRequestProcessor.Process<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
+            return _serverRequestProcessor.ProcessRequest<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
         }
         public void CloseConnection()
         {
@@ -23,7 +23,7 @@ namespace ConnectUs.ServerSide
         public void Ping()
         {
             try {
-                var response = _serverRequestProcessor.Process<PingRequest, PingResponse>(new PingRequest());
+                var response = _serverRequestProcessor.ProcessRequest<PingRequest, PingResponse>(new PingRequest());
                 if (response.Value != "OK") {
                     throw new ClientException("An error occured during a ping. The value is invalid.");
                 }
@@ -34,11 +34,11 @@ namespace ConnectUs.ServerSide
         }
         public TResponse ExecuteCommand<TRequest, TResponse>(TRequest request)
         {
-            return _serverRequestProcessor.Process<TRequest, TResponse>(request);
+            return _serverRequestProcessor.ProcessRequest<TRequest, TResponse>(request);
         }
         public void Upload(string filePath)
         {
-            _serverRequestProcessor.Upload(filePath);
+            _serverRequestProcessor.UploadFile(filePath);
         }
     }
 }

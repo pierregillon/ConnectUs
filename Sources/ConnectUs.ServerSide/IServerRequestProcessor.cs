@@ -3,8 +3,8 @@ namespace ConnectUs.ServerSide
 {
     public interface IServerRequestProcessor
     {
-        TResponse Process<TRequest, TResponse>(TRequest request);
-        void Upload(string filePath);
+        TResponse ProcessRequest<TRequest, TResponse>(TRequest request);
+        void UploadFile(string filePath);
         void Close();
     }
 }

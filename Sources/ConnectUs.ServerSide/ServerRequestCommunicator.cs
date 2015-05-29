@@ -14,7 +14,7 @@ namespace ConnectUs.ServerSide
             _requestParser = requestParser;
         }
 
-        public void SendToClient<TRequest>(TRequest request)
+        public void SendRequest<TRequest>(TRequest request)
         {
             try {
                 var data = _requestParser.ConvertToBytes(request);
@@ -24,7 +24,7 @@ namespace ConnectUs.ServerSide
                 throw new RequestException("Unable to send the request.", ex);
             }
         }
-        public TResponse ReceiveFromClient<TResponse>()
+        public TResponse ReceiveResponse<TResponse>()
         {
             try {
                 var data = _connection.Read();
@@ -37,6 +37,11 @@ namespace ConnectUs.ServerSide
             catch (ConnectionException ex) {
                 throw new RequestException("Unable to receive the request.", ex);
             }
+        }
+        public void SendFile(string filePath)
+        {
+            var uploader = new Uploader(_connection);
+            uploader.Upload(filePath);
         }
         public void Close()
         {

@@ -18,7 +18,7 @@ namespace ConnectUs.Business.Tests.Steps
         public IContinuousRequestProcessor ContinuousRequestProcessor
         {
             get { return ScenarioContext.Current.Get<IContinuousRequestProcessor>("ContinuousRequestProcessor"); }
-            set { ScenarioContext.Current.Add("ContinuousRequestProcessor", value); }
+            set { ScenarioContext.Current.Set(value, "ContinuousRequestProcessor"); }
         }
         public IClientRequestProcessor ClientRequestProcessor
         {
@@ -33,7 +33,7 @@ namespace ConnectUs.Business.Tests.Steps
         public IClientRequestHandler ClientRequestHandler
         {
             get { return ScenarioContext.Current.Get<IClientRequestHandler>("ClientRequestHandler"); }
-            set { ScenarioContext.Current.Add("ClientRequestHandler", value); }
+            set { ScenarioContext.Current.Set(value, "ClientRequestHandler"); }
         }
         public string Result
         {

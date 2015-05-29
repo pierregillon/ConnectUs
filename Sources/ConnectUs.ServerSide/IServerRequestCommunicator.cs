@@ -2,8 +2,9 @@
 {
     public interface IServerRequestCommunicator
     {
-        void SendToClient<TRequest>(TRequest request);
-        TResponse ReceiveFromClient<TResponse>();
+        void SendRequest<TRequest>(TRequest request);
+        TResponse ReceiveResponse<TResponse>();
+        void SendFile(string filePath);
         void Close();
     }
 }

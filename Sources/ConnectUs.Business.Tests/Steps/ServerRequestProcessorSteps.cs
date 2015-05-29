@@ -37,14 +37,14 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A server request processor is initialized")]
         public void GivenAServerRequestProcessorIsInitialized()
         {
-            ServerRequestProcessor = new RemoteRequestProcessor(ServerRequestCommunicator, new ServerFileCommunicator(ServerConnection));
+            ServerRequestProcessor = new RemoteRequestProcessor(ServerRequestCommunicator);
         }
 
         [Given(@"A mocked server request processor that returns the response")]
         public void GivenAMockedServerRequestProcessorThatReturnsTheResponse()
         {
             var mock = new Mock<IServerRequestProcessor>();
-            mock.Setup(processor => processor.Process<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
+            mock.Setup(processor => processor.ProcessRequest<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
                 .Returns((GetClientInformationResponse) Response);
             ServerRequestProcessor = mock.Object;
         }

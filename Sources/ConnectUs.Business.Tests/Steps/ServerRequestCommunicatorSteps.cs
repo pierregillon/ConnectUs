@@ -50,14 +50,14 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send the request by the server request communicator")]
         public void WhenISendTheRequestByTheServerRequestCommunicator()
         {
-            ServerRequestCommunicator.SendToClient(Request);
+            ServerRequestCommunicator.SendRequest(Request);
         }
 
         [When(@"I read the response from the server request communicator")]
         public void WhenIReadTheResponseFromTheServerRequestCommunicator()
         {
             try {
-                Response = ServerRequestCommunicator.ReceiveFromClient<GetClientInformationResponse>();
+                Response = ServerRequestCommunicator.ReceiveResponse<GetClientInformationResponse>();
             }
             catch (Exception ex) {
                 Error = ex;

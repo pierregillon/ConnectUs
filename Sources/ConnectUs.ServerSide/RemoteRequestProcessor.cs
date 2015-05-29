@@ -6,30 +6,28 @@ namespace ConnectUs.ServerSide
     public class RemoteRequestProcessor : IServerRequestProcessor
     {
         private readonly IServerRequestCommunicator _serverRequestCommunicator;
-        private readonly IServerFileCommunicator _serverFileCommunicator;
         private readonly object _locker = new object();
 
         // ----- Constructors
-        public RemoteRequestProcessor(IServerRequestCommunicator serverRequestCommunicator, IServerFileCommunicator serverFileCommunicator)
+        public RemoteRequestProcessor(IServerRequestCommunicator serverRequestCommunicator)
         {
             _serverRequestCommunicator = serverRequestCommunicator;
-            _serverFileCommunicator = serverFileCommunicator;
         }
 
         // ----- Public methods
-        public TResponse Process<TRequest, TResponse>(TRequest request)
+        public TResponse ProcessRequest<TRequest, TResponse>(TRequest request)
         {
             lock (_locker) {
-                _serverRequestCommunicator.SendToClient(request);
-                return _serverRequestCommunicator.ReceiveFromClient<TResponse>();
+                _serverRequestCommunicator.SendRequest(request);
+                return _serverRequestCommunicator.ReceiveResponse<TResponse>();
             }
         }
-        public void Upload(string filePath)
+        public void UploadFile(string filePath)
         {
             lock (_locker) {
-                _serverRequestCommunicator.SendToClient(new UploadRequest{FileName=Path.GetFileName(filePath)});
-                _serverFileCommunicator.Upload(filePath);
-                _serverRequestCommunicator.ReceiveFromClient<UploadResponse>();
+                _serverRequestCommunicator.SendRequest(new UploadRequest{FileName=Path.GetFileName(filePath)});
+                _serverRequestCommunicator.SendFile(filePath);
+                _serverRequestCommunicator.ReceiveResponse<UploadResponse>();
             }
         }
         public void Close()

@@ -14,17 +14,17 @@ namespace ConnectUs.Business.Tests.Steps
         public IConnection ServerConnection
         {
             get { return ScenarioContext.Current.Get<IConnection>("ServerConnection"); }
-            set { ScenarioContext.Current.Add("ServerConnection", value); }
+            set { ScenarioContext.Current.Set(value, "ServerConnection"); }
         }
         public IConnection ClientConnection
         {
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
-            set { ScenarioContext.Current.Add("ClientConnection", value); }
+            set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
         public ConnectionException ConnectionException
         {
             get { return ScenarioContext.Current.Get<ConnectionException>("ConnectionException"); }
-            set { ScenarioContext.Current.Add("ConnectionException", value); }
+            set { ScenarioContext.Current.Set(value, "ConnectionException"); }
         }
         
         [Given(@"A connection is established between server and client on port (.*)")]
