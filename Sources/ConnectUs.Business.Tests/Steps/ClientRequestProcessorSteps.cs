@@ -12,17 +12,17 @@ namespace ConnectUs.Business.Tests.Steps
         public IClientRequestProcessor ClientRequestProcessor
         {
             get { return ScenarioContext.Current.Get<IClientRequestProcessor>("ClientRequestProcessor"); }
-            set { ScenarioContext.Current.Add("ClientRequestProcessor", value); }
+            set { ScenarioContext.Current.Set(value, "ClientRequestProcessor"); }
         }
         public ICommandLocator CommandLocator
         {
             get { return ScenarioContext.Current.Get<ICommandLocator>("CommandLocator"); }
-            set { ScenarioContext.Current.Add("CommandLocator", value); }
+            set { ScenarioContext.Current.Set(value, "CommandLocator"); }
         }
         public string Result
         {
             get { return ScenarioContext.Current.Get<string>("Result"); }
-            set { ScenarioContext.Current.Add("Result", value); }
+            set { ScenarioContext.Current.Set(value, "Result"); }
         }
 
         [Given(@"A mocked client request processor")]

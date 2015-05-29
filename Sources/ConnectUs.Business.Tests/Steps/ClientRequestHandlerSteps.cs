@@ -10,18 +10,18 @@ namespace ConnectUs.Business.Tests.Steps
         public IClientRequestHandler ClientRequestHandler
         {
             get { return ScenarioContext.Current.Get<IClientRequestHandler>("ClientRequestHandler"); }
-            set { ScenarioContext.Current.Add("ClientRequestHandler", value); }
+            set { ScenarioContext.Current.Set(value, "ClientRequestHandler"); }
         }
         public IConnection ClientConnection
         {
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
-            set { ScenarioContext.Current.Add("ClientConnection", value); }
+            set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
 
         public IClientRequestProcessor ClientRequestProcessor
         {
             get { return ScenarioContext.Current.Get<IClientRequestProcessor>("ClientRequestProcessor"); }
-            set { ScenarioContext.Current.Add("ClientRequestProcessor", value); }
+            set { ScenarioContext.Current.Set(value, "ClientRequestProcessor"); }
         }
 
         [Given(@"A client request handler")]

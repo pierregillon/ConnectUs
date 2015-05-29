@@ -103,10 +103,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManageModule.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ProcessRemoteRequest.feature.cs">
+    <Compile Include="Features\CommunicateRequestFromServerToClient.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProcessRemoteRequest.feature</DependentUpon>
+      <DependentUpon>CommunicateRequestFromServerToClient.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\ProcessRequestsOnClientSide.feature.cs">
       <AutoGen>True</AutoGen>
@@ -178,9 +178,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ManageModule.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ProcessRemoteRequest.feature">
+    <None Include="Features\CommunicateRequestFromServerToClient.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProcessRemoteRequest.feature.cs</LastGenOutput>
+      <LastGenOutput>CommunicateRequestFromServerToClient.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ProcessRequestsOnClientSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

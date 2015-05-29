@@ -13,32 +13,32 @@ namespace ConnectUs.Business.Tests.Steps
         public IConnection ServerConnection
         {
             get { return ScenarioContext.Current.Get<IConnection>("ServerConnection"); }
-            set { ScenarioContext.Current.Add("ServerConnection", value); }
+            set { ScenarioContext.Current.Set(value, "ServerConnection"); }
         }
         public IConnection ClientConnection
         {
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
-            set { ScenarioContext.Current.Add("ClientConnection", value); }
+            set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
-        public ServerRequestCommunicator ServerRequestCommunicator
+        public IServerRequestCommunicator ServerRequestCommunicator
         {
-            get { return ScenarioContext.Current.Get<ServerRequestCommunicator>("ServerRequestCommunicator"); }
-            set { ScenarioContext.Current.Add("ServerRequestCommunicator", value); }
+            get { return ScenarioContext.Current.Get<IServerRequestCommunicator>("ServerRequestCommunicator"); }
+            set { ScenarioContext.Current.Set(value, "ServerRequestCommunicator"); }
         }
         public object Request
         {
             get { return ScenarioContext.Current.Get<object>("Request"); }
-            set { ScenarioContext.Current.Add("Request", value); }
+            set { ScenarioContext.Current.Set(value, "Request"); }
         }
         public object Response
         {
             get { return ScenarioContext.Current.Get<object>("Response"); }
-            set { ScenarioContext.Current.Add("Response", value); }
+            set { ScenarioContext.Current.Set(value, "Response"); }
         }
         public Exception Error
         {
             get { return ScenarioContext.Current.Get<Exception>("Error"); }
-            set { ScenarioContext.Current.Add("Error", value); }
+            set { ScenarioContext.Current.Set(value, "Error"); }
         }
 
         [Given(@"A server request communicator")]

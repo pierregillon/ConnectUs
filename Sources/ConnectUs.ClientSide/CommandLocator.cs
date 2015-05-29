@@ -12,28 +12,30 @@ namespace ConnectUs.ClientSide
     public class CommandLocator : ICommandLocator
     {
         private readonly IModuleManager _moduleManager;
-        private readonly IClientInformation _clientInformation;
         
         private readonly Dictionary<ModuleName, Dictionary<string, object>> _moduleCommands = new Dictionary<ModuleName, Dictionary<string, object>>();
-        private readonly Dictionary<string, object> _defaultCommands = new Dictionary<string, object>
-        {
-            {typeof (GetClientInformationRequest).Name, new GetInformationCommand()},
-            {typeof (PingRequest).Name, new PingCommand()},
-        };
+        private readonly Dictionary<string, object> _defaultCommands = new Dictionary<string, object>();
 
         // ----- Constructors
         public CommandLocator(IModuleManager moduleManager, IClientInformation clientInformation)
         {
             _moduleManager = moduleManager;
-            _clientInformation = clientInformation;
-            foreach (var module in _moduleManager.GetModules()) {
-                LoadCommandsFromModule(module);
-            }
             _moduleManager.ModuleLoaded += ModuleManagerOnModuleLoaded;
             _moduleManager.ModuleUnloaded += ModuleManagerOnModuleUnloaded;
 
+            foreach (var module in _moduleManager.GetModules()) {
+                LoadCommandsFromModule(module);
+            }
+
+            _defaultCommands.Add(typeof(GetClientInformationRequest).Name, new GetInformationCommand());
+            _defaultCommands.Add(typeof(PingRequest).Name, new PingCommand());
             _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
-            _defaultCommands.Add(typeof(UploadRequest).Name, new UploadCommand(_clientInformation));
+            _defaultCommands.Add(typeof(UploadRequest).Name, new UploadCommand(clientInformation));
+        }
+        ~CommandLocator()
+        {
+            _moduleManager.ModuleLoaded -= ModuleManagerOnModuleLoaded;
+            _moduleManager.ModuleUnloaded -= ModuleManagerOnModuleUnloaded;
         }
 
         // ----- Public methods
