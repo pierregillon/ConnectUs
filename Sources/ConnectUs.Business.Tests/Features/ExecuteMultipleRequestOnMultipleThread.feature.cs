@@ -70,6 +70,24 @@ namespace ConnectUs.Business.Tests.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 7
+#line 8
+ testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 9
+  testRunner.And("A mocked client request processor that returns echo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
+  testRunner.And("A client request handler", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+  testRunner.And("A continuous client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+  testRunner.And("A server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
+  testRunner.And("A server request processor is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+        }
+        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Send multiple requests on multiple thread get correct response")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ExecuteMultipleRequestOnMultipleThread")]
@@ -77,45 +95,41 @@ namespace ConnectUs.Business.Tests.Features
         public virtual void SendMultipleRequestsOnMultipleThreadGetCorrectResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send multiple requests on multiple thread get correct response", ((string[])(null)));
-#line 7
+#line 15
 this.ScenarioSetup(scenarioInfo);
-#line 8
- testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
-  testRunner.And("A client request processor is initialized to echo requests", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
-  testRunner.And("A server request processor is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.When("I start the echo process on client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
+#line 7
+this.FeatureBackground();
+#line 16
+ testRunner.When("I start the continous client request process to process incoming request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
   testRunner.And("I send an echo request with value \"1\" through the server request processor on the" +
                     " thread 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 13
+#line 18
   testRunner.And("I send an echo request with value \"2\" through the server request processor on the" +
                     " thread 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
+#line 19
   testRunner.And("I send an echo request with value \"3\" through the server request processor on mai" +
                     "n thread", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 20
   testRunner.And("I send an echo request with value \"4\" through the server request processor on the" +
                     " thread 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 21
   testRunner.And("I send an echo request with value \"5\" through the server request processor on the" +
                     " thread 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 22
   testRunner.And("I send an echo request with value \"6\" through the server request processor on mai" +
                     "n thread", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.Then("I get an echo response with the result \"1\" on thread 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 19
-  testRunner.And("I get an echo response with the result \"2\" on thread 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
-  testRunner.And("I get an echo response with the result \"3\" on main thread index 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-  testRunner.And("I get an echo response with the result \"4\" on thread 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
-  testRunner.And("I get an echo response with the result \"5\" on thread 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
+ testRunner.Then("I get an echo response with the result \"1\" on thread 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 24
+  testRunner.And("I get an echo response with the result \"2\" on thread 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+  testRunner.And("I get an echo response with the result \"3\" on main thread index 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+  testRunner.And("I get an echo response with the result \"4\" on thread 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+  testRunner.And("I get an echo response with the result \"5\" on thread 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
   testRunner.And("I get an echo response with the result \"6\" on main thread index 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -128,25 +142,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendMultipleRequestsOnMainThreadGetCorrectResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send multiple requests on main thread get correct response", ((string[])(null)));
-#line 25
-this.ScenarioSetup(scenarioInfo);
-#line 26
- testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
-  testRunner.And("A client request processor is initialized to echo requests", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-  testRunner.And("A server request processor is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.When("I start the echo process on client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 31
+ testRunner.When("I start the continous client request process to process incoming request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
   testRunner.And("I send an echo request with value \"1\" through the server request processor on mai" +
                     "n thread", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 33
   testRunner.And("I send an echo request with value \"2\" through the server request processor on mai" +
                     "n thread", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 34
  testRunner.Then("I get an echo response with the result \"1\" on main thread index 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
+#line 35
   testRunner.And("I get an echo response with the result \"2\" on main thread index 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

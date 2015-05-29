@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ConnectUs.Business.Connections;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ClientSide;
 using NFluent;
@@ -9,6 +10,16 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ClientRequestProcessorSteps
     {
+        public IConnection ClientConnection
+        {
+            get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
+            set { ScenarioContext.Current.Add("ClientConnection", value); }
+        }
+        public IContinuousRequestProcessor ContinuousRequestProcessor
+        {
+            get { return ScenarioContext.Current.Get<IContinuousRequestProcessor>("ContinuousRequestProcessor"); }
+            set { ScenarioContext.Current.Add("ContinuousRequestProcessor", value); }
+        }
         public IClientRequestProcessor ClientRequestProcessor
         {
             get { return ScenarioContext.Current.Get<IClientRequestProcessor>("ClientRequestProcessor"); }
@@ -19,16 +30,29 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ICommandLocator>("CommandLocator"); }
             set { ScenarioContext.Current.Set(value, "CommandLocator"); }
         }
+        public IClientRequestHandler ClientRequestHandler
+        {
+            get { return ScenarioContext.Current.Get<IClientRequestHandler>("ClientRequestHandler"); }
+            set { ScenarioContext.Current.Add("ClientRequestHandler", value); }
+        }
         public string Result
         {
             get { return ScenarioContext.Current.Get<string>("Result"); }
             set { ScenarioContext.Current.Set(value, "Result"); }
         }
 
+        // Given
+
         [Given(@"A mocked client request processor")]
         public void GivenAMockedClientRequestProcessor()
         {
             ClientRequestProcessor = new MockedClientRequestProcess();
+        }
+
+        [Given(@"A mocked client request processor that returns echo")]
+        public void GivenAMockedClientRequestProcessorThatReturnsEcho()
+        {
+            ClientRequestProcessor = new MockedEchoClientRequestProcessor();
         }
 
         [Given(@"A mocked client request processor that returns error ""(.*)""")]
@@ -43,6 +67,14 @@ namespace ConnectUs.Business.Tests.Steps
             ClientRequestProcessor = new ClientRequestProcessor(CommandLocator, new JsonRequestParser());
         }
 
+        [Given(@"A continuous client request processor")]
+        public void GivenAContinuousClientRequestProcessor()
+        {
+            ContinuousRequestProcessor = new ContinuousRequestProcessor(ClientRequestHandler);
+        }
+
+        // When
+
         [When(@"I process the request ""(.*)"" with the data ""(.*)""")]
         public void WhenIProcessTheRequestWithTheData(string requestName, string json)
         {
@@ -51,6 +83,14 @@ namespace ConnectUs.Business.Tests.Steps
             var bytes = ClientRequestProcessor.Process(requestName, data);
             Result = encoding.GetString(bytes);
         }
+
+        [When(@"I start the continous client request process to process incoming request")]
+        public void WhenIStartTheContinousClientRequestProcessToProcessIncomingRequest()
+        {
+            ContinuousRequestProcessor.StartProcessingRequestFromConnection(ClientConnection);
+        }
+
+        // Then
 
         [Then(@"I get the request name ""(.*)"" and the data ""(.*)"" on the mocked client request processor")]
         public void ThenIGetTheRequestNameAndTheDataOnTheMockedClientRequestProcessor(string requestName, string data)
@@ -68,6 +108,14 @@ namespace ConnectUs.Business.Tests.Steps
         public void ThenIGetAProcessException(string text)
         {
             Check.That(Result).IsEqualTo(text);
+        }
+
+        // Clear
+
+        [AfterScenario("ConcurrentRequestExecution")]
+        public void AfterScenario()
+        {
+            ContinuousRequestProcessor.StopProcessingRequestFromConnection();
         }
     }
 }

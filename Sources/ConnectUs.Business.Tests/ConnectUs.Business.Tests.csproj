@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExecuteClientCommandOnServerSide.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ExecuteDefaultCommandOnClientSide.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExecuteDefaultCommandOnClientSide.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ExecuteMultipleRequestOnMultipleThread.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -134,7 +139,7 @@
     <Compile Include="Mocks\MockCommandLocator.cs" />
     <Compile Include="Steps\CommandLocatorSteps.cs" />
     <Compile Include="Steps\ModuleManagerSteps.cs" />
-    <Compile Include="Steps\RequestProcessorSteps.cs" />
+    <Compile Include="Steps\ServerRequestProcessorSteps.cs" />
     <Compile Include="Steps\RequestSteps.cs" />
     <Compile Include="Steps\ResponseSteps.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
@@ -153,6 +158,10 @@
     <None Include="Features\ExecuteClientCommandOnServerSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExecuteClientCommandOnServerSide.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ExecuteDefaultCommandOnClientSide.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExecuteDefaultCommandOnClientSide.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ExecuteMultipleRequestOnMultipleThread.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
