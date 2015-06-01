@@ -36,9 +36,9 @@ namespace ConnectUs.ServerSide
         {
             return _serverRequestProcessor.ProcessRequest<TRequest, TResponse>(request);
         }
-        public void Upload(string filePath)
+        public string Upload(string sourceFilePath, string targetDirectory)
         {
-            _serverRequestProcessor.UploadFile(filePath);
+            return _serverRequestProcessor.UploadFile(sourceFilePath, targetDirectory);
         }
     }
 }

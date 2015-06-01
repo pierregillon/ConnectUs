@@ -46,5 +46,12 @@ Scenario: Send multiple requests on main thread get correct response
 
 Scenario: Upload file through the server request processor
 	When I start the continous client request process to process incoming request
-		And I send file 'Resources/file.txt' through the server request processor
-	Then The "Resources/downloadedFile.txt" file and the "Resources/file.txt" file are equals
+		And I upload file 'Resources/file.txt' to 'Resources/Uploaded/' through the server request processor
+	Then I get the file path result 'Resources/Uploaded/file.txt'
+		And The "Resources/file.txt" file and the "Resources/Uploaded/file.txt" file are equals
+
+Scenario: Upload file through the server request processor with no directory name set new file in the current directory
+	When I start the continous client request process to process incoming request
+		And I upload file 'Resources/file.txt' to '' through the server request processor
+	Then I get the file path result 'file.txt'
+		And The "Resources/file.txt" file and the "file.txt" file are equals

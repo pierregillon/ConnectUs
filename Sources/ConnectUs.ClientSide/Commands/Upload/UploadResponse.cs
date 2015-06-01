@@ -2,5 +2,6 @@
 {
     public class UploadResponse
     {
+        public string FilePath { get; set; }
     }
 }

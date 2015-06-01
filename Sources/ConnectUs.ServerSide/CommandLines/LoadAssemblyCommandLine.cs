@@ -11,7 +11,7 @@ namespace ConnectUs.ServerSide.CommandLines
         public string ExecuteCommand(Client client, IEnumerable<string> parameters)
         {
             var modulePath = Path.Combine(Directory.GetCurrentDirectory(), parameters.First());
-            client.Upload(modulePath);
+            client.Upload(modulePath, "");
             var response = client.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(new LoadModuleRequest
             {
                 ModuleName = parameters.First()

@@ -16,6 +16,14 @@ namespace ConnectUs.Business.Connections
             if (File.Exists(filePath)) {
                 File.Delete(filePath);
             }
+            
+
+            DownloadInternal(filePath);
+        }
+
+        private void DownloadInternal(string filePath)
+        {
+            _connection.Send(new byte[1]);
             using (var stream = File.OpenWrite(filePath)) {
                 _connection.Read(stream);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ConnectUs.Business.Tests.Mocks;
@@ -33,6 +34,11 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ConcurrentDictionary<int, EchoResponse>>("ResponseByThread"); }
             set { ScenarioContext.Current.Add("ResponseByThread", value); }
         }
+        public string FilePath
+        {
+            get { return ScenarioContext.Current.Get<string>("FilePath"); }
+            set { ScenarioContext.Current.Set(value, "FilePath"); }
+        }
 
         [BeforeScenario("ConcurrentRequestExecution")]
         public void BeforeScenario()
@@ -60,10 +66,10 @@ namespace ConnectUs.Business.Tests.Steps
             MainThreadResponses.Add(ServerRequestProcessor.ProcessRequest<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
         }
 
-        [When(@"I send file '(.*)' through the server request processor")]
-        public void WhenISendFileThroughTheServerRequestProcessor(string filePath)
+        [When(@"I upload file '(.*)' to '(.*)' through the server request processor")]
+        public void WhenIUploadFileToThroughTheServerRequestProcessor(string sourceFilePath, string targetDirectory)
         {
-            ServerRequestProcessor.UploadFile(filePath);
+            FilePath = ServerRequestProcessor.UploadFile(sourceFilePath, targetDirectory);
         }
 
         // Then
@@ -87,6 +93,13 @@ namespace ConnectUs.Business.Tests.Steps
         public void ThenIGetAnEchoResponseWithTheResultOnMainThreadIndex(int result, int index)
         {
             Check.That(MainThreadResponses.ElementAt(index).Result).IsEqualTo(result.ToString());
+        }
+
+        [Then(@"I get the file path result '(.*)'")]
+        public void ThenIGetTheFilePathResult(string filePath)
+        {
+            var expectedFilePath = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+            Check.That(FilePath).IsEqualTo(expectedFilePath);
         }
     }
 }

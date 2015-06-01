@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using ConnectUs.ClientSide.Commands.Upload;
 
 namespace ConnectUs.ServerSide
@@ -22,12 +23,17 @@ namespace ConnectUs.ServerSide
                 return _serverRequestCommunicator.ReceiveResponse<TResponse>();
             }
         }
-        public void UploadFile(string filePath)
+        public string UploadFile(string sourceFilePath, string targetDirectory)
         {
+            var fileName = Path.GetFileName(sourceFilePath);
+            if (fileName == null) {
+                throw new Exception(string.Format("The file '{0}' is not a valid file.", sourceFilePath));
+            }
             lock (_locker) {
-                _serverRequestCommunicator.SendRequest(new UploadRequest{FileName=Path.GetFileName(filePath)});
-                _serverRequestCommunicator.SendFile(filePath);
-                _serverRequestCommunicator.ReceiveResponse<UploadResponse>();
+                _serverRequestCommunicator.SendRequest(new UploadRequest { FilePath = Path.Combine(targetDirectory, fileName) });
+                _serverRequestCommunicator.SendFile(sourceFilePath);
+                var response =_serverRequestCommunicator.ReceiveResponse<UploadResponse>();
+                return response.FilePath;
             }
         }
         public void Close()
