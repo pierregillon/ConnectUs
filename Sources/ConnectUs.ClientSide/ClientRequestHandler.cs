@@ -19,10 +19,10 @@ namespace ConnectUs.ClientSide
         public void ProcessNextRequestFrom(IConnection connection)
         {
             try {
-                var dataRead = connection.Read();
-                var requestName = _requestParser.GetRequestName(dataRead);
-                var resultData = _clientRequestProcessor.Process(requestName, dataRead);
-                connection.Send(resultData);
+                var request = connection.Read();
+                var requestName = _requestParser.GetRequestName(request);
+                var response = _clientRequestProcessor.Process(requestName, request);
+                connection.Send(response);
             }
             catch (NoDataToReadFromConnectionException ex) {
                 throw new NoRequestToProcessException("No request is available to process.", ex);

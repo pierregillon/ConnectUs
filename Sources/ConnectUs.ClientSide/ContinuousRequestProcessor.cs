@@ -27,7 +27,7 @@ namespace ConnectUs.ClientSide
         public void StartProcessingRequestFromConnection(IConnection connection)
         {
             _continueProcessing = true;
-            var thread = new Thread(() => ExecuteMultipleRequestOnConnection(connection));
+            var thread = new Thread(() => ProcessRequestFrom(connection));
             thread.Start();
         }
         public void StopProcessingRequestFromConnection()
@@ -36,7 +36,7 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Internal logics
-        private void ExecuteMultipleRequestOnConnection(IConnection connection)
+        private void ProcessRequestFrom(IConnection connection)
         {
             try {
                 while (_continueProcessing) {
