@@ -14,6 +14,7 @@ namespace ConnectUs.ServerSide.Command
             container.RegisterSingleton<CommandLineProcessor>();
             container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
             container.Register<ShowClientList>();
+            container.RegisterSingleton<Context>();
 
             var commandLineProcessor = container.GetInstance<CommandLineProcessor>();
             while (true) {

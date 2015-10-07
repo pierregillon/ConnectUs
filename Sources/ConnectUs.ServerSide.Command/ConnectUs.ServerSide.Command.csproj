@@ -50,6 +50,7 @@
     <Compile Include="CommandLines\ConnectClient.cs" />
     <Compile Include="CommandLines\Context.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
+    <Compile Include="CommandLines\PingCurrentClient.cs" />
     <Compile Include="ICommandLineHandler.cs" />
     <Compile Include="CommandLineHandlerLocator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
