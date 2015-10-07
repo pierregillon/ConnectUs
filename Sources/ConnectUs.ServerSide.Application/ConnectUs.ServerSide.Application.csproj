@@ -74,6 +74,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandLines\ExploreDirectoryCommandLine.cs" />
+    <Compile Include="CommandLines\ICommandLine.cs" />
+    <Compile Include="CommandLines\LoadAssemblyCommandLine.cs" />
+    <Compile Include="CommandLines\PingCommandLine.cs" />
+    <Compile Include="CommandLines\UploadCommandLine.cs" />
     <Compile Include="Controls\CommandLine.cs" />
     <Compile Include="Controls\CommandLineTextBox.cs" />
     <Compile Include="DesignTimeViewModelLocator.cs" />
@@ -156,6 +161,10 @@
     <ProjectReference Include="..\ConnectUs.ClientSide\ConnectUs.ClientSide.csproj">
       <Project>{666554C4-D914-43E3-8B79-004B5DC63454}</Project>
       <Name>ConnectUs.ClientSide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.FileExplorer\ConnectUs.FileExplorer.csproj">
+      <Project>{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}</Project>
+      <Name>ConnectUs.FileExplorer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
       <Project>{A5ACF831-6303-45A6-BF03-2B85359CAFBA}</Project>

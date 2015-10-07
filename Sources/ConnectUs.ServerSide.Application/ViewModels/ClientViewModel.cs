@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
-using ConnectUs.ServerSide.CommandLines;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
 {

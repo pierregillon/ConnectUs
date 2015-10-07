@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using ConnectUs.ClientSide.Commands.LoadModule;
 
-namespace ConnectUs.ServerSide.CommandLines
+namespace ConnectUs.ServerSide.Application.CommandLines
 {
     public class LoadAssemblyCommandLine : ICommandLine
     {

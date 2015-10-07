@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ConnectUs.FileExplorer;
 
-namespace ConnectUs.ServerSide.CommandLines
+namespace ConnectUs.ServerSide.Application.CommandLines
 {
     public class ExploreDirectoryCommandLine : ICommandLine
     {

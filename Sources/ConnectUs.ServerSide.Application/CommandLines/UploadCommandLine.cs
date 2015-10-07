@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace ConnectUs.ServerSide.CommandLines
+namespace ConnectUs.ServerSide.Application.CommandLines
 {
     public class UploadCommandLine : ICommandLine
     {

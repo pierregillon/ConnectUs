@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ConnectUs.ServerSide.CommandLines
+namespace ConnectUs.ServerSide.Application.CommandLines
 {
     public interface ICommandLine
     {

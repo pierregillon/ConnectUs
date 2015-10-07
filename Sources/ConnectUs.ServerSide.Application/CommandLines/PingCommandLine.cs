@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using ConnectUs.ClientSide.Commands.Ping;
 
-namespace ConnectUs.ServerSide.CommandLines
+namespace ConnectUs.ServerSide.Application.CommandLines
 {
     public class PingCommandLine : ICommandLine
     {

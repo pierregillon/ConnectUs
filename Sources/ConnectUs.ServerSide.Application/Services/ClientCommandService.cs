@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels;
-using ConnectUs.ServerSide.CommandLines;
 
 namespace ConnectUs.ServerSide.Application.Services
 {
