@@ -50,6 +50,17 @@ namespace ConnectUs.ServerSide.Command.Tests
         }
 
         [Fact]
+        public void parse_command_string_with_multiple_space_argument_to_command_line()
+        {
+            const string command = "dir    --force";
+
+            var commandLine = CommandLine.Parse(command);
+
+            Check.That(commandLine.CommandName).IsEqualTo("dir");
+            Check.That(commandLine.Arguments).ContainsExactly(new CommandArgument("force", null));
+        }
+
+        [Fact]
         public void parse_command_string_with_multiple_arguments_to_command_line()
         {
             const string command = "dir c:/ --force --user=toto --version=1.0.0 --now";

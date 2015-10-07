@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -17,7 +18,7 @@ namespace ConnectUs.ServerSide.Command
 
         public static CommandLine Parse(string commandLine)
         {
-            var values = commandLine.Split(' ');
+            var values = commandLine.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
             var commandName = values[0];
             var arguments = new List<CommandArgument>();
             foreach (var argument in values.Skip(1)) {
