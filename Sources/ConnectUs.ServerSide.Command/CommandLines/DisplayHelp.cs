@@ -18,9 +18,11 @@ namespace ConnectUs.ServerSide.Command.CommandLines
                 .OrderBy(x=>x.CommandName)
                 .ToArray();
 
+            var maxCommandNameLength = attributes.Max(x => x.CommandName.Length);
+
             var elements = new List<string>();
             foreach (var attribute in attributes) {
-                elements.Add(string.Format(" - {0} : {1}", attribute.CommandName.PadRight(10), attribute.Description));
+                elements.Add(string.Format(" - {0} : {1}", attribute.CommandName.PadRight(maxCommandNameLength), attribute.Description));
             }
             return "Available commands : " + Environment.NewLine + string.Join(Environment.NewLine, elements.ToArray());
         }
