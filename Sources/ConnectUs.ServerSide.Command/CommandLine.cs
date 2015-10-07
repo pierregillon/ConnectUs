@@ -23,8 +23,15 @@ namespace ConnectUs.ServerSide.Command
             }
             var values = commandLine.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
             var commandName = values[0];
+            var arguments = ExtractArguments(values.Skip(1));
+            return new CommandLine(commandName, arguments);
+        }
+
+        // ----- Internal logics
+        private static IEnumerable<CommandArgument> ExtractArguments(IEnumerable<string> values)
+        {
             var arguments = new List<CommandArgument>();
-            foreach (var argument in values.Skip(1)) {
+            foreach (var argument in values) {
                 CommandArgument commandArgument;
                 if (TryParseParameterizedArgument(argument, out commandArgument)) {
                     arguments.Add(commandArgument);
@@ -36,10 +43,8 @@ namespace ConnectUs.ServerSide.Command
                     arguments.Add(new CommandArgument("unknown", argument));
                 }
             }
-            return new CommandLine(commandName, arguments);
+            return arguments;
         }
-
-        // ----- Internal logics
         private static bool TryParseNoValueArgument(string argument, out CommandArgument commandArgument)
         {
             var match = Regex.Match(argument, @"--(?<argumentName>[^\ ]*)=(?<argumentValue>[^\ ]*)");
@@ -51,7 +56,6 @@ namespace ConnectUs.ServerSide.Command
             }
             return commandArgument != null;
         }
-
         private static bool TryParseParameterizedArgument(string argument, out CommandArgument commandArgument)
         {
             var match = Regex.Match(argument, @"--(?<argumentName>[^\ \=]*)[\ \n]?$");
