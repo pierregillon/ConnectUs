@@ -49,7 +49,9 @@
     <Compile Include="CommandLine.cs" />
     <Compile Include="CommandLines\ConnectClient.cs" />
     <Compile Include="CommandLines\Context.cs" />
+    <Compile Include="CommandLines\CurrentClientCommand.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
+    <Compile Include="CommandLines\InstallModule.cs" />
     <Compile Include="CommandLines\PingCurrentClient.cs" />
     <Compile Include="ICommandLineHandler.cs" />
     <Compile Include="CommandLineHandlerLocator.cs" />
