@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -17,11 +18,11 @@ namespace ConnectUs.ServerSide.Command.CommandLines
                 .OrderBy(x=>x.CommandName)
                 .ToArray();
 
-            var results = "Available commands : " + Environment.NewLine;
+            var elements = new List<string>();
             foreach (var attribute in attributes) {
-                results += string.Format(" - {0} : {1}", attribute.CommandName.PadRight(10), attribute.Description) + Environment.NewLine;
+                elements.Add(string.Format(" - {0} : {1}", attribute.CommandName.PadRight(10), attribute.Description));
             }
-            return results;
+            return "Available commands : " + Environment.NewLine + string.Join(Environment.NewLine, elements.ToArray());
         }
     }
 }

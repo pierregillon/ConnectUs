@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ConnectUs.ServerSide.Command.CommandLines
@@ -15,13 +16,13 @@ namespace ConnectUs.ServerSide.Command.CommandLines
 
         public string Handle(CommandLine commandLine)
         {
-            var results = string.Empty;
-            results += "Connected clients : " + Environment.NewLine;
-            foreach (var client in _server.GetConnectedClients().ToList()) {
-                var information= client.GetClientInformation();
-                results += string.Format("{0} {1}", information.MachineName, information.Ip) + Environment.NewLine;
+            var elements = new List<string> { "Connected clients : " };
+            for (var index = 0; index < _server.GetConnectedClients().ToList().Count; index++) {
+                var client = _server.GetConnectedClients().ToList()[index];
+                var information = client.GetClientInformation();
+                elements.Add(string.Format("{0} {1} {2}", index+1, information.MachineName, information.Ip));
             }
-            return results;
+            return string.Join(Environment.NewLine, elements.ToArray());
         }
     }
 }
