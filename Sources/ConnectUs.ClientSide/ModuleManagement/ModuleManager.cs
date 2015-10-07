@@ -49,6 +49,9 @@ namespace ConnectUs.ClientSide.ModuleManagement
         public void LoadModule(ModuleName name)
         {
             var module = FindModule(name);
+            if (module.IsLoaded) {
+                throw new ModuleException(string.Format("The module '{0}' is already loaded.", module.Name));
+            }
             module.Load();
             OnModuleLoaded(new ModuleLoadedEventArgs(module));
         }
