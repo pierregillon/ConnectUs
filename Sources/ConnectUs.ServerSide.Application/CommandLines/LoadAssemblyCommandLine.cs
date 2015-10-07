@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
         {
             var modulePath = Path.Combine(Directory.GetCurrentDirectory(), parameters.First());
             client.Upload(modulePath, "");
-            var response = client.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(new LoadModuleRequest
+            var response = client.ExecuteCommand<AddModuleRequest, AddModuleResponse>(new AddModuleRequest
             {
                 ModuleName = parameters.First()
             });

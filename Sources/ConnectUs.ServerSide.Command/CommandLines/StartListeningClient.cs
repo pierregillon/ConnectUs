@@ -6,6 +6,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
     internal class StartListeningClient : ICommandLineHandler
     {
         private readonly IClientListener _clientListener;
+        private readonly int DefaultPort = 9000;
 
         public StartListeningClient(IClientListener clientListener)
         {
@@ -14,12 +15,13 @@ namespace ConnectUs.ServerSide.Command.CommandLines
 
         public string Handle(CommandLine commandLine)
         {
+            var port = DefaultPort;
             var portArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "port");
-            if (portArgument == null) {
-                return "Port is missing.";
+            if (portArgument != null) {
+                port = int.Parse(portArgument.Value);
             }
-            _clientListener.Start(int.Parse(portArgument.Value));
-            return string.Format("Server started on port {0}.", portArgument.Value);
+            _clientListener.Start(port);
+            return string.Format("Server started on port {0}.", port);
         }
     }
 }

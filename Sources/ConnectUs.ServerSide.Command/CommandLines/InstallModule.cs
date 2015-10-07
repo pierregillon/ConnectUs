@@ -18,9 +18,10 @@ namespace ConnectUs.ServerSide.Command.CommandLines
                 return "You should define the module name.";
             }
 
-            var modulePath = Path.Combine(Directory.GetCurrentDirectory(), moduleName.Value);
-            client.Upload(modulePath, "");
-            client.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(new LoadModuleRequest
+            var localModuleFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Modules", moduleName.Value + ".dll");
+            var remoteModuleDirectoryPath = "Modules";
+            client.Upload(localModuleFilePath, remoteModuleDirectoryPath);
+            client.ExecuteCommand<AddModuleRequest, AddModuleResponse>(new AddModuleRequest
             {
                 ModuleName = moduleName.Value
             });

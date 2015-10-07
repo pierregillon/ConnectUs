@@ -1,6 +1,6 @@
 ﻿namespace ConnectUs.ClientSide.Commands.LoadModule
 {
-    public class LoadModuleRequest
+    public class AddModuleRequest
     {
         public string ModuleName { get; set; }
     }

@@ -25,7 +25,7 @@ namespace ConnectUs.ServerSide.Command
                 return string.Format("The command '{0}' is unknown. Did you forget to load some modules ? Type help for more information.", commandLine.CommandName);
             }
             catch (Exception ex) {
-                return ex.ToString();
+                return ex.Message;
             }
         }
     }

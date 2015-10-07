@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using ConnectUs.Business;
 
 namespace ConnectUs.ClientSide
@@ -24,6 +25,9 @@ namespace ConnectUs.ClientSide
                     throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));
                 }
                 result = ExecuteCommand(command, data);
+            }
+            catch (TargetInvocationException ex) {
+                result = new ErrorResponse {Error = ex.InnerException.Message};
             }
             catch (Exception ex) {
                 result = new ErrorResponse {Error = ex.Message};

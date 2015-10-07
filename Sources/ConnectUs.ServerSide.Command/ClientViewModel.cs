@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace ConnectUs.ServerSide.Command
 {
@@ -31,7 +32,7 @@ namespace ConnectUs.ServerSide.Command
                 watch.Stop();
                 Latency = (int) watch.ElapsedMilliseconds;
             }
-            catch (ClientException) {
+            catch (Exception) {
                 Client.CloseConnection();
             }
         }

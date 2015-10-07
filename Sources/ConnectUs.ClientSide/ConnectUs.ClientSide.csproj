@@ -54,9 +54,9 @@
     <Compile Include="Commands\GetClientInformation\GetClientInformationRequest.cs" />
     <Compile Include="Commands\GetClientInformation\GetClientInformationResponse.cs" />
     <Compile Include="Commands\GetClientInformation\GetInformationCommand.cs" />
-    <Compile Include="Commands\LoadModule\LoadModuleCommand.cs" />
-    <Compile Include="Commands\LoadModule\LoadModuleRequest.cs" />
-    <Compile Include="Commands\LoadModule\LoadModuleResponse.cs" />
+    <Compile Include="Commands\LoadModule\AddModuleCommand.cs" />
+    <Compile Include="Commands\LoadModule\AddModuleRequest.cs" />
+    <Compile Include="Commands\LoadModule\AddModuleResponse.cs" />
     <Compile Include="Commands\Ping\PingCommand.cs" />
     <Compile Include="Commands\Ping\PingRequest.cs" />
     <Compile Include="Commands\Ping\PingResponse.cs" />

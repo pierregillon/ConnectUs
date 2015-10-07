@@ -28,6 +28,10 @@ namespace ConnectUs.ClientSide.ModuleManagement
         {
             return _modules;
         }
+        public Module GetModule(ModuleName moduleName)
+        {
+            return _modules.FirstOrDefault(x => Equals(x.Name, moduleName));
+        }
         public ModuleName AddModule(string modulePath)
         {
             var module = new Module(modulePath);

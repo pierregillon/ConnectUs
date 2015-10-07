@@ -9,6 +9,7 @@ namespace ConnectUs.ClientSide.ModuleManagement
         event EventHandler<ModuleUnloadedEventArgs> ModuleUnloaded;
 
         IEnumerable<Module> GetModules();
+        Module GetModule(ModuleName moduleName);
         ModuleName AddModule(string modulePath);
         void RemoveModule(ModuleName modulePath);
         void LoadModule(ModuleName name);
