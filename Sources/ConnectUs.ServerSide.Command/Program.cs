@@ -8,15 +8,9 @@ namespace ConnectUs.ServerSide.Command
     {
         private static void Main(string[] args)
         {
-            var container = new Container();
-            container.RegisterSingleton(() => new ServerConfiguration {Port = 9000});
-            container.RegisterSingleton<Server>();
-            container.RegisterSingleton<CommandLineProcessor>();
-            container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
-            container.Register<ShowClientList>();
-            container.RegisterSingleton<Context>();
-
+            var container = ConfigureIoc();
             var commandLineProcessor = container.GetInstance<CommandLineProcessor>();
+
             while (true) {
                 Console.Write("cus> ");
                 var command = Console.ReadLine();
@@ -29,6 +23,18 @@ namespace ConnectUs.ServerSide.Command
             }
             Console.Write("< Press any key to exit >");
             Console.ReadKey();
+        }
+
+        private static Container ConfigureIoc()
+        {
+            var container = new Container();
+            container.RegisterSingleton(() => new ServerConfiguration { Port = 9000 });
+            container.RegisterSingleton<Server>();
+            container.RegisterSingleton<CommandLineProcessor>();
+            container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
+            container.Register<ShowClientList>();
+            container.RegisterSingleton<Context>();
+            return container;
         }
     }
 }
