@@ -12,9 +12,14 @@ namespace ConnectUs.ServerSide.Command
             var container = ConfigureIoc();
             var commandLineProcessor = container.GetInstance<CommandLineProcessor>();
             container.GetInstance<ClientList>();
+            var context = container.GetInstance<Context>();
 
             while (true) {
-                Console.Write("cus> ");
+                Console.Write("cus");
+                if (context.CurrentClient != null) {
+                    Console.Write(" | {0}", context.CurrentClient.MachineName);
+                }
+                Console.Write("> ");
                 var command = Console.ReadLine();
                 if (command == "exit") {
                     break;
@@ -37,7 +42,6 @@ namespace ConnectUs.ServerSide.Command
             container.RegisterSingleton<IConnectionListener, TcpClientConnectionListener>();
             container.RegisterSingleton<CommandLineProcessor>();
             container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
-            container.Register<ShowClientList>();
             container.RegisterSingleton<Context>();
             container.RegisterSingleton<ClientList>();
             return container;

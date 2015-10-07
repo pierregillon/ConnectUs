@@ -22,7 +22,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             }
 
             var index = int.Parse(argument.Value);
-            _context.CurrentClient = _clientList.GetClients().ElementAt(index-1).Client;
+            _context.CurrentClient = _clientList.GetClients().ElementAt(index-1);
             return "Ok";
         }
     }

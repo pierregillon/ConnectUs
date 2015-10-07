@@ -2,6 +2,6 @@
 {
     public class Context
     {
-        public Client CurrentClient { get; set; }
+        public ClientViewModel CurrentClient { get; set; }
     }
 }
