@@ -51,6 +51,7 @@
     <Compile Include="CommandLines\Context.cs" />
     <Compile Include="CommandLines\CurrentClientCommand.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
+    <Compile Include="CommandLines\ExploreDirectory.cs" />
     <Compile Include="CommandLines\InstallModule.cs" />
     <Compile Include="CommandLines\PingCurrentClient.cs" />
     <Compile Include="ICommandLineHandler.cs" />
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\ConnectUs.ClientSide\ConnectUs.ClientSide.csproj">
       <Project>{666554C4-D914-43E3-8B79-004B5DC63454}</Project>
       <Name>ConnectUs.ClientSide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.FileExplorer\ConnectUs.FileExplorer.csproj">
+      <Project>{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}</Project>
+      <Name>ConnectUs.FileExplorer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
       <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
