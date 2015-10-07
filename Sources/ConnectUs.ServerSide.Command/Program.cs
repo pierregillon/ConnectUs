@@ -12,10 +12,19 @@ namespace ConnectUs.ServerSide.Command
             while (true) {
                 Console.Write("cus> ");
                 var command = Console.ReadLine();
+                if (command == "exit") {
+                    break;
+                }
                 var commandResult = commandLineProcessor.Execute(command);
                 Console.WriteLine(commandResult);
                 Console.WriteLine();
             }
+            server.Stop();
+            foreach (var connectedClient in server.GetConnectedClients()) {
+                connectedClient.CloseConnection();
+            }
+            Console.Write("< Press any key to exit >");
+            Console.ReadKey();
         }
     }
 }
