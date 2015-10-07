@@ -11,6 +11,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
 
         protected override string HandleInternal(CommandLine commandLine, Client client)
         {
+            var loadModuleArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "load");
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (moduleName == null) {
                 return "You should define the module name.";
@@ -21,8 +22,14 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             client.Upload(localModuleFilePath, remoteModuleDirectoryPath);
             client.ExecuteCommand<AddModuleRequest, AddModuleResponse>(new AddModuleRequest
             {
-                ModuleName = moduleName.Value
+                ModuleName = moduleName.Value,
             });
+            if (loadModuleArgument != null) {
+                client.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(new LoadModuleRequest
+                {
+                    ModuleName = moduleName.Value,
+                });
+            }
             return "Ok";
         }
     }
