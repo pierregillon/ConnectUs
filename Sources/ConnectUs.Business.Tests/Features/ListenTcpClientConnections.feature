@@ -19,3 +19,10 @@ Scenario: Connection of tcp client provide a connection to communicate with it
 		And The tcp client connect to the host 'localhost' and the port 9000
 		And I send the 'ping' through the connection of the connection established event
 	Then the tcp client received the request
+
+Scenario: A connection listener can restart several time on the same port
+	Given A socket connection listener
+	When The connection listener starts listening on the port 9000
+		And The connection listener stop listening
+	When The connection listener starts listening on the port 9000
+		And The connection listener stop listening

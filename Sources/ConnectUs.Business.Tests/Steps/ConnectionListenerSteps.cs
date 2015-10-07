@@ -71,6 +71,12 @@ namespace ConnectUs.Business.Tests.Steps
             ConnectionListener.Start(port);
         }
 
+        [When(@"The connection listener stop listening")]
+        public void WhenTheConnectionListenerStopListening()
+        {
+            ConnectionListener.Stop();
+        }
+
         [When(@"I send the '(.*)' through the connection of the connection established event")]
         public void WhenISendTheThroughTheConnectionOfTheConnectionEstablishedEvent(string data)
         {

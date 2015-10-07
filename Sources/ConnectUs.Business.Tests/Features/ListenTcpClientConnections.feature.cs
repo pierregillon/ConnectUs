@@ -121,6 +121,29 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("A connection listener can restart several time on the same port")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ListenTcpClientConnections")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ConnectionListener")]
+        public virtual void AConnectionListenerCanRestartSeveralTimeOnTheSamePort()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A connection listener can restart several time on the same port", ((string[])(null)));
+#line 23
+this.ScenarioSetup(scenarioInfo);
+#line 24
+ testRunner.Given("A socket connection listener", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+ testRunner.When("The connection listener starts listening on the port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+  testRunner.And("The connection listener stop listening", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+ testRunner.When("The connection listener starts listening on the port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+  testRunner.And("The connection listener stop listening", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

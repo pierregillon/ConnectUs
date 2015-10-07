@@ -34,21 +34,22 @@ namespace ConnectUs.Business.Connections
         }
         public void Stop()
         {
-            if (_listener == null) {
-                throw new ConnectionListenerAlreadyStoppedException();
+            if (_listener != null) {
+                _listener.Stop();
+                _listener = null;
             }
-            _listener.Stop();
         }
 
         // ----- Internal logics
         private void Callback(IAsyncResult result)
         {
             try {
-                var client = _listener.EndAcceptTcpClient(result);
+                var listener = (TcpListener)result.AsyncState;
+                var client = listener.EndAcceptTcpClient(result);
                 var connection = new TcpClientConnection(client);
                 connection.Disconnected += ConnectionOnDisconnected;
                 OnConnectionEstablished(new ConnectionEstablishedEventArgs(connection));
-                _listener.BeginAcceptTcpClient(Callback, _listener);
+                listener.BeginAcceptTcpClient(Callback, listener);
             }
             catch (ObjectDisposedException) {}
         }
