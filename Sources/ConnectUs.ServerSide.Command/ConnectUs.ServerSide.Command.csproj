@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandArgument.cs" />
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="CommandLineHandler.cs" />
+    <Compile Include="CommandLineHandlerLocator.cs" />
+    <Compile Include="CommandLineProcessor.cs" />
+    <Compile Include="ICommandLineHandlerLocator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
