@@ -57,6 +57,10 @@
     <Compile Include="Commands\LoadModule\AddModuleCommand.cs" />
     <Compile Include="Commands\LoadModule\AddModuleRequest.cs" />
     <Compile Include="Commands\LoadModule\AddModuleResponse.cs" />
+    <Compile Include="Commands\LoadModule\ListModuleCommand.cs" />
+    <Compile Include="Commands\LoadModule\ListModuleRequest.cs" />
+    <Compile Include="Commands\LoadModule\ListModuleResponse.cs" />
+    <Compile Include="Commands\LoadModule\ModuleState.cs" />
     <Compile Include="Commands\Ping\PingCommand.cs" />
     <Compile Include="Commands\Ping\PingRequest.cs" />
     <Compile Include="Commands\Ping\PingResponse.cs" />

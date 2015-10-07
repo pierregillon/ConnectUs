@@ -55,6 +55,7 @@
     <Compile Include="CommandLines\DisconnectClient.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
     <Compile Include="CommandLines\ExploreDirectory.cs" />
+    <Compile Include="CommandLines\GetModuleList.cs" />
     <Compile Include="CommandLines\InstallModule.cs" />
     <Compile Include="CommandLines\PingCurrentClient.cs" />
     <Compile Include="CommandLines\UploadFile.cs" />
