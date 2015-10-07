@@ -19,7 +19,7 @@ namespace ConnectUs.Business.Tests.Mocks
             if (handler != null) handler(this, e);
         }
 
-        public void Start()
+        public void Start(int port)
         {
             throw new NotImplementedException();
         }

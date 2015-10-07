@@ -1,4 +1,5 @@
 ﻿using System;
+using ConnectUs.Business.Connections;
 using ConnectUs.ServerSide.Command.CommandLines;
 using SimpleInjector;
 
@@ -10,6 +11,7 @@ namespace ConnectUs.ServerSide.Command
         {
             var container = ConfigureIoc();
             var commandLineProcessor = container.GetInstance<CommandLineProcessor>();
+            container.GetInstance<ClientList>();
 
             while (true) {
                 Console.Write("cus> ");
@@ -28,12 +30,14 @@ namespace ConnectUs.ServerSide.Command
         private static Container ConfigureIoc()
         {
             var container = new Container();
-            container.RegisterSingleton(() => new ServerConfiguration { Port = 9000 });
-            container.RegisterSingleton<Server>();
+            container.RegisterSingleton(() => new ServerConfiguration {Port = 9000});
+            container.RegisterSingleton<IClientListener, ClientListener>();
+            container.RegisterSingleton<IConnectionListener, TcpClientConnectionListener>();
             container.RegisterSingleton<CommandLineProcessor>();
             container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
             container.Register<ShowClientList>();
             container.RegisterSingleton<Context>();
+            container.RegisterSingleton<ClientList>();
             return container;
         }
     }

@@ -5,12 +5,12 @@ namespace ConnectUs.ServerSide.Command.CommandLines
     [CommandDescription(CommandName = "connect", Description = "Connect to a client.")]
     internal class ConnectClient : ICommandLineHandler
     {
-        private readonly Server _server;
+        private readonly ClientList _clientList;
         private readonly Context _context;
 
-        public ConnectClient(Server server, Context context)
+        public ConnectClient(ClientList clientList, Context context)
         {
-            _server = server;
+            _clientList = clientList;
             _context = context;
         }
 
@@ -22,7 +22,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             }
 
             var index = int.Parse(argument.Value);
-            _context.CurrentClient = _server.GetConnectedClients().ElementAt(index-1);
+            _context.CurrentClient = _clientList.GetClients().ElementAt(index-1).Client;
             return "Ok";
         }
     }

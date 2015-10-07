@@ -37,7 +37,7 @@ namespace ConnectUs.Business.Tests.Steps
         [Given(@"A client listener linked with the connection listener and the server parameters")]
         public void GivenAClientListenerLinkedWithTheConnectionListenerAndTheServerParameters()
         {
-            ClientListener = new ClientListener(ConnectionListener, ServerConfiguration);
+            ClientListener = new ClientListener(ConnectionListener);
             ClientListener.ClientConnected += (sender, args) => ClientConnectedEventArgs = args;
             ClientListener.ClientDisconnected += (sender, args) => ClientDisconnectedEventArgs = args;
         }
@@ -45,7 +45,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I start the client listener")]
         public void WhenIStartTheClientListener()
         {
-            ClientListener.Start();
+            ClientListener.Start(ServerConfiguration.Port);
         }
 
         [Then(@"A new ClientConnected event is raised")]

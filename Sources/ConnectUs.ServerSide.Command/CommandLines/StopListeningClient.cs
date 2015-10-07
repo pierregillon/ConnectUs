@@ -3,16 +3,16 @@
     [CommandDescription(CommandName = "stop", Description = "Stop the listen of new clients.")]
     internal class StopListeningClient : ICommandLineHandler
     {
-        private readonly Server _server;
+        private readonly IClientListener _clientListener;
 
-        public StopListeningClient(Server server)
+        public StopListeningClient(IClientListener clientListener)
         {
-            _server = server;
+            _clientListener = clientListener;
         }
 
         public string Handle(CommandLine commandLine)
         {
-            _server.Stop();
+            _clientListener.Stop();
             return "Server stopped.";
         }
     }

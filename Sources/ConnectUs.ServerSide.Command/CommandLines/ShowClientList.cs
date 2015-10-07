@@ -7,20 +7,21 @@ namespace ConnectUs.ServerSide.Command.CommandLines
     [CommandDescription(CommandName = "clients", Description = "Display the client list that are currently connected.")]
     internal class ShowClientList : ICommandLineHandler
     {
-        private readonly Server _server;
+        private readonly ClientList _clientList;
 
-        public ShowClientList(Server server)
+        public ShowClientList(ClientList clientList)
         {
-            _server = server;
+            _clientList = clientList;
         }
 
         public string Handle(CommandLine commandLine)
         {
             var elements = new List<string> { "Connected clients : " };
-            for (var index = 0; index < _server.GetConnectedClients().ToList().Count; index++) {
-                var client = _server.GetConnectedClients().ToList()[index];
-                var information = client.GetClientInformation();
-                elements.Add(string.Format("{0} {1} {2}", index+1, information.MachineName, information.Ip));
+            var clients = _clientList.GetClients().ToList();
+            for (var index = 0; index < clients.Count; index++)
+            {
+                var client = clients[index];
+                elements.Add(string.Format("{0}\t{1}\t{2}\t{3}ms", index + 1, client.MachineName, client.Ip, client.Latency));
             }
             return string.Join(Environment.NewLine, elements.ToArray());
         }

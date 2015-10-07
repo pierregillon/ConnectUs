@@ -8,7 +8,6 @@ namespace ConnectUs.ServerSide
     public class ClientListener : IClientListener
     {
         private readonly IConnectionListener _connectionListener;
-        private readonly ServerConfiguration _serverConfiguration;
         private readonly Dictionary<IConnection, Client> _connectedClients = new Dictionary<IConnection, Client>();
 
         public event EventHandler<ClientConnectedEventArgs> ClientConnected;
@@ -25,17 +24,16 @@ namespace ConnectUs.ServerSide
             if (handler != null) handler(this, e);
         }
 
-        public ClientListener(IConnectionListener connectionListener, ServerConfiguration serverConfiguration)
+        public ClientListener(IConnectionListener connectionListener)
         {
-            _serverConfiguration = serverConfiguration;
             _connectionListener = connectionListener;
             _connectionListener.ConnectionEstablished += ConnectionListenerOnConnectionEstablished;
             _connectionListener.ConnectionLost += ConnectionListenerOnConnectionLost;
         }
 
-        public void Start()
+        public void Start(int port)
         {
-            _connectionListener.Start(_serverConfiguration.Port);
+            _connectionListener.Start(port);
         }
         public void Stop()
         {

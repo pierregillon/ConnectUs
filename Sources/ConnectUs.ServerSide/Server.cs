@@ -6,6 +6,7 @@ namespace ConnectUs.ServerSide
 {
     public class Server : IServer
     {
+        private readonly ServerConfiguration _serverConfiguration;
         private readonly IClientListener _clientListener;
         private readonly List<Client> _clients = new List<Client>();
 
@@ -23,7 +24,10 @@ namespace ConnectUs.ServerSide
             if (handler != null) handler(this, e);
         }
 
-        public Server(ServerConfiguration serverConfiguration) : this(new ClientListener(new TcpClientConnectionListener(), serverConfiguration)) {}
+        public Server(ServerConfiguration serverConfiguration) : this(new ClientListener(new TcpClientConnectionListener()))
+        {
+            _serverConfiguration = serverConfiguration;
+        }
         private Server(IClientListener clientListener)
         {
             _clientListener = clientListener;
@@ -44,7 +48,7 @@ namespace ConnectUs.ServerSide
 
         public void Start()
         {
-            _clientListener.Start();
+            _clientListener.Start(_serverConfiguration.Port);
         }
         public void Stop()
         {

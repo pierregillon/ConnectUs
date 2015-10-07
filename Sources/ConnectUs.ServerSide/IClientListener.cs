@@ -7,7 +7,7 @@ namespace ConnectUs.ServerSide
         event EventHandler<ClientConnectedEventArgs> ClientConnected;
         event EventHandler<ClientDisconnectedEventArgs> ClientDisconnected;
 
-        void Start();
+        void Start(int port);
         void Stop();
     }
 }

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientList.cs" />
+    <Compile Include="ClientViewModel.cs" />
     <Compile Include="CommandArgument.cs" />
     <Compile Include="CommandDescriptionAttribute.cs" />
     <Compile Include="CommandLine.cs" />
