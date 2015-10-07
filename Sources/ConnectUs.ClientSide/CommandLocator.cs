@@ -32,6 +32,7 @@ namespace ConnectUs.ClientSide
             _defaultCommands.Add(typeof(AddModuleRequest).Name, new AddModuleCommand(_moduleManager));
             _defaultCommands.Add(typeof(ListModuleRequest).Name, new ListModuleCommand(_moduleManager));
             _defaultCommands.Add(typeof(LoadModuleRequest).Name, new LoadModuleCommand(_moduleManager));
+            _defaultCommands.Add(typeof(UnloadModuleRequest).Name, new UnloadModuleCommand(_moduleManager));
             _defaultCommands.Add(typeof(UploadRequest).Name, new UploadCommand(clientInformation));
         }
         ~CommandLocator()
