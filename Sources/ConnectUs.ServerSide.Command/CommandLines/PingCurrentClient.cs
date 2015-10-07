@@ -4,7 +4,7 @@ using ConnectUs.ClientSide.Commands.Ping;
 namespace ConnectUs.ServerSide.Command.CommandLines
 {
     [CommandDescription(CommandName = "ping", Description = "Connect to a client.")]
-    internal class PingCurrentClient : CurrentClientCommand, ICommandLineHandler
+    internal class PingCurrentClient : CurrentClientCommand
     {
         public PingCurrentClient(Context context) : base(context)
         {

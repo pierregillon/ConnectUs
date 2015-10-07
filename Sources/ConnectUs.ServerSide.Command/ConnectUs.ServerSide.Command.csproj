@@ -54,6 +54,7 @@
     <Compile Include="CommandLines\ExploreDirectory.cs" />
     <Compile Include="CommandLines\InstallModule.cs" />
     <Compile Include="CommandLines\PingCurrentClient.cs" />
+    <Compile Include="CommandLines\UploadFile.cs" />
     <Compile Include="ICommandLineHandler.cs" />
     <Compile Include="CommandLineHandlerLocator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
