@@ -1,10 +1,36 @@
-﻿namespace ConnectUs.ServerSide.Command
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using SimpleInjector;
+
+namespace ConnectUs.ServerSide.Command
 {
     public class CommandLineHandlerLocator : ICommandLineHandlerLocator
     {
-        public CommandLineHandler Get(string commandName)
+        private readonly Container _container;
+
+        public CommandLineHandlerLocator(Container container)
         {
-            return null;
+            _container = container;
         }
+
+        public ICommandLineHandler Get(string commandName)
+        {
+            var type = GetType().Assembly.GetTypes().FirstOrDefault(x =>
+            {
+                var a = x.GetCustomAttribute<CommandLineAttribute>();
+                return a != null && a.CommandName == commandName;
+            });
+
+            if (type == null) {
+                return null;
+            }
+            return (ICommandLineHandler)_container.GetInstance(type);
+        }
+    }
+
+    public class CommandLineAttribute : Attribute
+    {
+        public string CommandName { get; set; }
     }
 }

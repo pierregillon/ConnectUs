@@ -2,6 +2,6 @@
 {
     public interface ICommandLineHandlerLocator
     {
-        CommandLineHandler Get(string commandName);
+        ICommandLineHandler Get(string commandName);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using ConnectUs.ServerSide.Command.CommandLines;
+using SimpleInjector;
 
 namespace ConnectUs.ServerSide.Command
 {
@@ -6,9 +8,14 @@ namespace ConnectUs.ServerSide.Command
     {
         private static void Main(string[] args)
         {
-            var server = new Server(new ServerConfiguration {Port = 9000});
-            var commandLineProcessor = new CommandLineProcessor(new CommandLineHandlerLocator());
-            server.Start();
+            var container = new Container();
+            container.RegisterSingleton(() => new ServerConfiguration {Port = 9000});
+            container.RegisterSingleton<Server>();
+            container.RegisterSingleton<CommandLineProcessor>();
+            container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
+            container.Register<ShowClientList>();
+
+            var commandLineProcessor = container.GetInstance<CommandLineProcessor>();
             while (true) {
                 Console.Write("cus> ");
                 var command = Console.ReadLine();
@@ -18,10 +25,6 @@ namespace ConnectUs.ServerSide.Command
                 var commandResult = commandLineProcessor.Execute(command);
                 Console.WriteLine(commandResult);
                 Console.WriteLine();
-            }
-            server.Stop();
-            foreach (var connectedClient in server.GetConnectedClients()) {
-                connectedClient.CloseConnection();
             }
             Console.Write("< Press any key to exit >");
             Console.ReadKey();
