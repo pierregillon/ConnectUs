@@ -52,6 +52,7 @@
     <Compile Include="CommandLines\ConnectClient.cs" />
     <Compile Include="CommandLines\Context.cs" />
     <Compile Include="CommandLines\CurrentClientCommand.cs" />
+    <Compile Include="CommandLines\DisconnectClient.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
     <Compile Include="CommandLines\ExploreDirectory.cs" />
     <Compile Include="CommandLines\InstallModule.cs" />
