@@ -20,8 +20,10 @@ namespace ConnectUs.ServerSide.Command
                     break;
                 }
                 var commandResult = commandLineProcessor.Execute(command);
-                Console.WriteLine(commandResult);
-                Console.WriteLine();
+                if (string.IsNullOrEmpty(commandResult) == false) {
+                    Console.WriteLine(commandResult);
+                    Console.WriteLine();
+                }
             }
             Console.Write("< Press any key to exit >");
             Console.ReadKey();

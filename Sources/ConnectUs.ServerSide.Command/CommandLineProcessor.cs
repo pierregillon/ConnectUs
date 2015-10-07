@@ -15,6 +15,9 @@ namespace ConnectUs.ServerSide.Command
         {
             try {
                 var commandLine = CommandLine.Parse(command);
+                if (commandLine == null) {
+                    return string.Empty;
+                }
                 var commandLineHandler =_commandLineHandlerLocator.Get(commandLine.CommandName);
                 if (commandLineHandler != null) {
                     return commandLineHandler.Handle(commandLine);
