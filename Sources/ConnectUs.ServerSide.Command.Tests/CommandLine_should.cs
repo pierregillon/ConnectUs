@@ -6,6 +6,14 @@ namespace ConnectUs.ServerSide.Command.Tests
     public class CommandLine_should
     {
         [Fact]
+        public void return_null_when_parsing_empty_command()
+        {
+            var commandLine = CommandLine.Parse(null);
+
+            Check.That(commandLine).IsNull();
+        }
+
+        [Fact]
         public void parse_command_string_with_no_argument_to_command_line()
         {
             const string command = "dir";

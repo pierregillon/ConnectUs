@@ -18,6 +18,9 @@ namespace ConnectUs.ServerSide.Command
 
         public static CommandLine Parse(string commandLine)
         {
+            if (string.IsNullOrEmpty(commandLine)) {
+                return null;
+            }
             var values = commandLine.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
             var commandName = values[0];
             var arguments = new List<CommandArgument>();
