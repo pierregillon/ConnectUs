@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using SimpleInjector;
 
@@ -18,19 +17,14 @@ namespace ConnectUs.ServerSide.Command
         {
             var type = GetType().Assembly.GetTypes().FirstOrDefault(x =>
             {
-                var a = x.GetCustomAttribute<CommandLineAttribute>();
+                var a = x.GetCustomAttribute<CommandDescriptionAttribute>();
                 return a != null && a.CommandName == commandName;
             });
 
             if (type == null) {
                 return null;
             }
-            return (ICommandLineHandler)_container.GetInstance(type);
+            return (ICommandLineHandler) _container.GetInstance(type);
         }
-    }
-
-    public class CommandLineAttribute : Attribute
-    {
-        public string CommandName { get; set; }
     }
 }

@@ -16,7 +16,7 @@
             if (commandLineHandler != null) {
                 return commandLineHandler.Handle(commandLine);
             }
-            return "Unknown command";
+            return string.Format("The command '{0}' is unknown. Did you forget to load some modules ? Type help for more information.", commandLine.CommandName);
         }
     }
 }

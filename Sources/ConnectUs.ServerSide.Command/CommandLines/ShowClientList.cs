@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ConnectUs.ServerSide.Command.CommandLines
 {
-    [CommandLine(CommandName = "clients")]
+    [CommandDescription(CommandName = "clients", Description = "Display the client list that are currently connected.")]
     internal class ShowClientList : ICommandLineHandler
     {
         private readonly Server _server;

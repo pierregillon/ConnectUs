@@ -1,6 +1,6 @@
 ﻿namespace ConnectUs.ServerSide.Command.CommandLines
 {
-    [CommandLine(CommandName = "stop")]
+    [CommandDescription(CommandName = "stop", Description = "Stop the listen of new clients.")]
     internal class StopListeningClient : ICommandLineHandler
     {
         private readonly Server _server;

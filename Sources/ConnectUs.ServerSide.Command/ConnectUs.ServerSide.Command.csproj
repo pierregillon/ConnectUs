@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandArgument.cs" />
+    <Compile Include="CommandDescriptionAttribute.cs" />
     <Compile Include="CommandLine.cs" />
+    <Compile Include="CommandLines\DisplayHelp.cs" />
     <Compile Include="ICommandLineHandler.cs" />
     <Compile Include="CommandLineHandlerLocator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
