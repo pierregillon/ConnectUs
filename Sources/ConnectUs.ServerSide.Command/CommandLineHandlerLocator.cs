@@ -15,11 +15,14 @@ namespace ConnectUs.ServerSide.Command
 
         public ICommandLineHandler Get(string commandName)
         {
-            var type = GetType().Assembly.GetTypes().FirstOrDefault(x =>
-            {
-                var a = x.GetCustomAttribute<CommandDescriptionAttribute>();
-                return a != null && a.CommandName == commandName;
-            });
+            var type = GetType()
+                .Assembly.GetTypes()
+                .Where(x => x.GetInterface(typeof (ICommandLineHandler).Name) != null)
+                .FirstOrDefault(x =>
+                {
+                    var a = x.GetCustomAttribute<CommandDescriptionAttribute>();
+                    return a != null && a.CommandName == commandName;
+                });
 
             if (type == null) {
                 return null;

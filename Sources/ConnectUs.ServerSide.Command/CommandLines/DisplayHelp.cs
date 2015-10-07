@@ -13,6 +13,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             var attributes = GetType()
                 .Assembly
                 .GetTypes()
+                .Where(x=>x.GetInterface(typeof(ICommandLineHandler).Name) != null)
                 .Select(x => x.GetCustomAttribute<CommandDescriptionAttribute>())
                 .Where(x=>x!=null)
                 .OrderBy(x=>x.CommandName)
