@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide
     public class RemoteClientListener : IRemoteClientListener
     {
         private readonly IConnectionListener _connectionListener;
-        private readonly Dictionary<IConnection, RemoteClient> _connectedClients = new Dictionary<IConnection, RemoteClient>();
+        private readonly Dictionary<IConnection, IRemoteClient> _connectedClients = new Dictionary<IConnection, IRemoteClient>();
 
         public event EventHandler<RemoteClientConnectedEventArgs> ClientConnected;
         protected virtual void OnClientConnected(RemoteClientConnectedEventArgs e)
@@ -48,9 +48,11 @@ namespace ConnectUs.ServerSide
         }
         private void ConnectionListenerOnConnectionLost(object sender, ConnectionLostEventArgs args)
         {
-            var client = _connectedClients[args.Connection];
-            _connectedClients.Remove(args.Connection);
-            OnClientDisconnected(new RemoteClientDisconnectedEventArgs(client));
+            IRemoteClient remoteClient;
+            if (_connectedClients.TryGetValue(args.Connection, out remoteClient)) {
+                _connectedClients.Remove(args.Connection);
+                OnClientDisconnected(new RemoteClientDisconnectedEventArgs(remoteClient));
+            }
         }
     }
 }
