@@ -2,7 +2,7 @@
 using System.Linq;
 using ConnectUs.FileExplorer;
 
-namespace ConnectUs.ServerSide.Command.CommandLines
+namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
 {
     [CommandDescription(CommandName = "dir", Description = "Display the list of files and directories of a remote folder.")]
     internal class ExploreDirectory : CurrentClientCommand
@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
         {
             var directoryPath = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (directoryPath == null) {

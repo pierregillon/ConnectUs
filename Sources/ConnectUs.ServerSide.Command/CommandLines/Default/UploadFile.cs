@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace ConnectUs.ServerSide.Command.CommandLines
+namespace ConnectUs.ServerSide.Command.CommandLines.Default
 {
     [CommandDescription(CommandName = "upload", Description = "Upload a file to the remote client.")]
     internal class UploadFile : CurrentClientCommand
@@ -11,7 +11,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
         {
             var localFilePath = commandLine.Arguments.First(x => x.Name == "unknown");
             var remoteFolder = commandLine.Arguments.Last(x => x.Name == "unknown");

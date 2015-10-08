@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using ConnectUs.ServerSide.Decorators;
 
-namespace ConnectUs.ServerSide.Command.CommandLines.Modules
+namespace ConnectUs.ServerSide.Command.CommandLines.Module
 {
     [CommandDescription(CommandName = "install-module", Description = "Install a module on remote client.")]
     public class InstallModule : CurrentClientCommand
     {
         public InstallModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
         {
             var loadModuleArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "load");
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");

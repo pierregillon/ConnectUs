@@ -50,17 +50,17 @@
     <Compile Include="CommandDescriptionAttribute.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="CommandLines\ConnectClient.cs" />
-    <Compile Include="CommandLines\Context.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="CommandLines\CurrentClientCommand.cs" />
     <Compile Include="CommandLines\DisconnectClient.cs" />
     <Compile Include="CommandLines\DisplayHelp.cs" />
-    <Compile Include="CommandLines\ExploreDirectory.cs" />
-    <Compile Include="CommandLines\Modules\GetModuleList.cs" />
-    <Compile Include="CommandLines\Modules\InstallModule.cs" />
-    <Compile Include="CommandLines\Modules\LoadModule.cs" />
-    <Compile Include="CommandLines\PingCurrentClient.cs" />
-    <Compile Include="CommandLines\Modules\UnloadModule.cs" />
-    <Compile Include="CommandLines\UploadFile.cs" />
+    <Compile Include="CommandLines\FileExplorer\ExploreDirectory.cs" />
+    <Compile Include="CommandLines\Module\GetModuleList.cs" />
+    <Compile Include="CommandLines\Module\InstallModule.cs" />
+    <Compile Include="CommandLines\Module\LoadModule.cs" />
+    <Compile Include="CommandLines\Default\PingCurrentClient.cs" />
+    <Compile Include="CommandLines\Module\UnloadModule.cs" />
+    <Compile Include="CommandLines\Default\UploadFile.cs" />
     <Compile Include="ICommandLineHandler.cs" />
     <Compile Include="CommandLineHandlerLocator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
@@ -68,8 +68,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandLines\ShowClientList.cs" />
-    <Compile Include="CommandLines\StartListeningClient.cs" />
-    <Compile Include="CommandLines\StopListeningClient.cs" />
+    <Compile Include="CommandLines\Server\StartListeningClient.cs" />
+    <Compile Include="CommandLines\Server\StopListeningClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ConnectUs.ServerSide.Command.CommandLines
+namespace ConnectUs.ServerSide.Command.CommandLines.Server
 {
     [CommandDescription(CommandName = "start", Description = "Start the listen of new clients.")]
     internal class StartListeningClient : ICommandLineHandler

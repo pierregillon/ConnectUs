@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using ConnectUs.ClientSide.Commands.Ping;
 
-namespace ConnectUs.ServerSide.Command.CommandLines
+namespace ConnectUs.ServerSide.Command.CommandLines.Default
 {
     [CommandDescription(CommandName = "ping", Description = "Connect to a client.")]
     internal class PingCurrentClient : CurrentClientCommand
@@ -10,7 +10,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
         {
             var watch = new Stopwatch();
             watch.Start();
