@@ -54,6 +54,7 @@
     <Compile Include="IServer.cs" />
     <Compile Include="IServerRequestCommunicator.cs" />
     <Compile Include="IServerRequestProcessor.cs" />
+    <Compile Include="Decorators\ModuleDecorator.cs" />
     <Compile Include="PackageClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteRequestProcessor.cs" />

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using ConnectUs.ClientSide.Commands.LoadModule;
+using ConnectUs.ServerSide.Decorators;
 
-namespace ConnectUs.ServerSide.Command.CommandLines
+namespace ConnectUs.ServerSide.Command.CommandLines.Modules
 {
     [CommandDescription(CommandName = "unload-module", Description = "Unload a module on remote client.")]
     public class UnloadModule : CurrentClientCommand
@@ -14,11 +14,9 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             if (moduleName == null) {
                 return "You should define the module name.";
             }
-            client.ExecuteCommand<UnloadModuleRequest, UnloadModuleResponse>(new UnloadModuleRequest
-            {
-                ModuleName = moduleName.Value
-            });
-            return "Ok";
+            var moduleDecorator = new ModuleDecorator(client);
+            moduleDecorator.UnloadModule(moduleName.Value);
+            return string.Empty;
         }
     }
 }
