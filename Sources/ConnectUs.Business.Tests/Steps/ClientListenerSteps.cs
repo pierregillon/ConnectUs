@@ -18,10 +18,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IClientListener>("ClientListener"); }
             set { ScenarioContext.Current.Add("ClientListener", value); }
         }
-        public ServerConfiguration ServerConfiguration
+        public int Port
         {
-            get { return ScenarioContext.Current.Get<ServerConfiguration>("ServerConfiguration"); }
-            set { ScenarioContext.Current.Add("ServerConfiguration", value); }
+            get { return ScenarioContext.Current.Get<int>("Port"); }
+            set { ScenarioContext.Current.Add("Port", value); }
         }
         public ClientConnectedEventArgs ClientConnectedEventArgs
         {
@@ -45,7 +45,7 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I start the client listener")]
         public void WhenIStartTheClientListener()
         {
-            ClientListener.Start(ServerConfiguration.Port);
+            ClientListener.Start(Port);
         }
 
         [Then(@"A new ClientConnected event is raised")]

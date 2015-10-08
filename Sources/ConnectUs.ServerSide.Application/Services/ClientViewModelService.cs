@@ -7,16 +7,16 @@ namespace ConnectUs.ServerSide.Application.Services
 {
     public class ClientViewModelService : IClientViewModelService
     {
-        private readonly IServer _server;
+        private readonly IClientListener _clientListener;
         private readonly ObservableCollection<ClientViewModel> _clients = new ObservableCollection<ClientViewModel>();
         private readonly Dictionary<Client, ClientViewModel> _relations = new Dictionary<Client, ClientViewModel>();
         private readonly SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
-        public ClientViewModelService(IServer server)
+        public ClientViewModelService(IClientListener clientListener)
         {
-            _server = server;
-            _server.ClientConnected += ServerOnClientConnected;
-            _server.ClientDisconnected += ServerOnClientDisconnected;
+            _clientListener = clientListener;
+            _clientListener.ClientConnected += ClientListenerOnClientConnected;
+            _clientListener.ClientDisconnected += ClientListenerOnClientDisconnected;
         }
 
         public ObservableCollection<ClientViewModel> GetClients()
@@ -25,14 +25,14 @@ namespace ConnectUs.ServerSide.Application.Services
         }
 
         // ----- Event callbacks
-        private void ServerOnClientConnected(object sender, ClientConnectedEventArgs args)
+        private void ClientListenerOnClientConnected(object sender, ClientConnectedEventArgs args)
         {
             var clientViewModel = new ClientViewModel(args.Client);
             clientViewModel.StartPing();
             _relations.Add(args.Client, clientViewModel);
             _synchronizationContext.Post(state => _clients.Add(clientViewModel), null);
         }
-        private void ServerOnClientDisconnected(object sender, ClientDisconnectedEventArgs args)
+        private void ClientListenerOnClientDisconnected(object sender, ClientDisconnectedEventArgs args)
         {
             var clientViewModel = _relations[args.Client];
             _relations.Remove(args.Client);

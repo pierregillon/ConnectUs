@@ -139,7 +139,6 @@
     <Compile Include="Steps\ResponseSteps.cs" />
     <Compile Include="Steps\ServerConfigurationSteps.cs" />
     <Compile Include="Steps\ServerRequestCommunicatorSteps.cs" />
-    <Compile Include="Steps\ServerSteps.cs" />
     <Compile Include="Steps\TaskSynchroniserSteps.cs" />
     <Compile Include="Steps\TcpClientSteps.cs" />
     <Compile Include="Steps\UploaderSteps.cs" />

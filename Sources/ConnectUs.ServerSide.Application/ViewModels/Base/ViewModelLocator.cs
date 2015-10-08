@@ -1,4 +1,5 @@
-﻿using ConnectUs.ServerSide.Application.Services;
+﻿using ConnectUs.Business.Connections;
+using ConnectUs.ServerSide.Application.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace ConnectUs.ServerSide.Application.ViewModels.Base
@@ -8,9 +9,9 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic == false) {
-                SimpleIoc.Default.Register(() => new ServerConfiguration {Port = 9000});
+                SimpleIoc.Default.Register<IClientListener, ClientListener>();
+                SimpleIoc.Default.Register<IConnectionListener, TcpClientConnectionListener>();
                 SimpleIoc.Default.Register<IViewModelBuilder, ViewModelBuilder>();
-                SimpleIoc.Default.Register<IServer, Server>();
                 SimpleIoc.Default.Register<IClientCommandService, ClientCommandService>();
                 SimpleIoc.Default.Register<IClientViewModelService, ClientViewModelService>();
                 SimpleIoc.Default.Register<ClientListViewModel>();

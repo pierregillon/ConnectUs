@@ -37,7 +37,6 @@ namespace ConnectUs.ServerSide.Command
         private static Container ConfigureIoc()
         {
             var container = new Container();
-            container.RegisterSingleton(() => new ServerConfiguration {Port = 9000});
             container.RegisterSingleton<IClientListener, ClientListener>();
             container.RegisterSingleton<IConnectionListener, TcpClientConnectionListener>();
             container.RegisterSingleton<CommandLineProcessor>();
