@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public InstallModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
         {
             var loadModuleArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "load");
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
@@ -16,7 +16,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
                 return "You should define the module name.";
             }
 
-            var moduleDecorator = new ModuleDecorator(client);
+            var moduleDecorator = new ModuleDecorator(remoteClient);
             moduleDecorator.UploadModule(moduleName.Value);
             moduleDecorator.AddModule(moduleName.Value);
             if (loadModuleArgument != null) {

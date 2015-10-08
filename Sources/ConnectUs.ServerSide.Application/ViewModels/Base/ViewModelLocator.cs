@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic == false) {
-                SimpleIoc.Default.Register<IClientListener, ClientListener>();
+                SimpleIoc.Default.Register<IRemoteClientListener, RemoteClientListener>();
                 SimpleIoc.Default.Register<IConnectionListener, TcpClientConnectionListener>();
                 SimpleIoc.Default.Register<IViewModelBuilder, ViewModelBuilder>();
                 SimpleIoc.Default.Register<IClientCommandService, ClientCommandService>();

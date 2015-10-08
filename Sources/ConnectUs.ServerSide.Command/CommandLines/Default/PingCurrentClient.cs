@@ -10,11 +10,11 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
         {
             var watch = new Stopwatch();
             watch.Start();
-            client.ExecuteCommand<PingRequest, PingResponse>(new PingRequest());
+            remoteClient.ExecuteCommand<PingRequest, PingResponse>(new PingRequest());
             watch.Stop();
             var duration = watch.ElapsedMilliseconds;
             return string.Format("Ping to client : {0} ms", duration);

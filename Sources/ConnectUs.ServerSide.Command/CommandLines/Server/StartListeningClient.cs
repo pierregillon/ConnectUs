@@ -5,12 +5,12 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Server
     [CommandDescription(CommandName = "start", Description = "Start the listen of new clients.", Category = "Server")]
     internal class StartListeningClient : ICommandLineHandler
     {
-        private readonly IClientListener _clientListener;
+        private readonly IRemoteClientListener _remoteClientListener;
         private readonly int DefaultPort = 9000;
 
-        public StartListeningClient(IClientListener clientListener)
+        public StartListeningClient(IRemoteClientListener remoteClientListener)
         {
-            _clientListener = clientListener;
+            _remoteClientListener = remoteClientListener;
         }
 
         public string Handle(CommandLine commandLine)
@@ -20,7 +20,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Server
             if (portArgument != null) {
                 port = int.Parse(portArgument.Value);
             }
-            _clientListener.Start(port);
+            _remoteClientListener.Start(port);
             return string.Format("Server started on port {0}.", port);
         }
     }

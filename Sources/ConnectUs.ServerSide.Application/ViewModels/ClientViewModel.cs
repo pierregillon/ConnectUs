@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
 {
     public class ClientViewModel : ViewModelBase
     {
-        private readonly Client _client;
+        private readonly RemoteClient _remoteClient;
         private readonly ClientInformationDecorator _clientInformationDecorator;
         private bool _continuePinging;
 
@@ -30,10 +30,10 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         }
 
         public ClientViewModel() {}
-        public ClientViewModel(Client client)
+        public ClientViewModel(RemoteClient remoteClient)
         {
-            _client = client;
-            _clientInformationDecorator = new ClientInformationDecorator(client);
+            _remoteClient = remoteClient;
+            _clientInformationDecorator = new ClientInformationDecorator(remoteClient);
         }
 
         public void StartPing()
@@ -59,18 +59,18 @@ namespace ConnectUs.ServerSide.Application.ViewModels
                 }
             }
             catch (ClientException) {
-                _client.CloseConnection();
+                _remoteClient.CloseConnection();
             }
         }
         public void Close()
         {
             _continuePinging = false;
-            _client.CloseConnection();
+            _remoteClient.CloseConnection();
         }
 
         public string ExecuteCommand(ICommandLine commandLine, IEnumerable<string> parameters)
         {
-            return commandLine.ExecuteCommand(_client, parameters);
+            return commandLine.ExecuteCommand(_remoteClient, parameters);
         }
     }
 }

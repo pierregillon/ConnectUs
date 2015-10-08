@@ -7,8 +7,7 @@ Scenario: The client information query converts the response in client informati
 	Given A response with the name "GetClientInformation"
 		And The GetClientInformation response has the ip "192.168.1.1"
 		And The GetClientInformation response has the machine name "mycomputer"
-		And A mocked server request processor that returns the response
-		And A client on the request processor
+		And A mocked remote client that returns the response
 	When I ask the client information
 	Then I get a client information
 		And the client information has the ip to "192.168.1.1"

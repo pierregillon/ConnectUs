@@ -11,21 +11,21 @@ namespace ConnectUs.ServerSide.Command
         public string Ip { get; private set; }
         public string MachineName { get; private set; }
         public int Latency { get; private set; }
-        public Client Client { get; private set; }
+        public RemoteClient RemoteClient { get; private set; }
 
-        public ClientViewModel(Client client)
+        public ClientViewModel(RemoteClient remoteClient)
         {
-            Client = client;
+            RemoteClient = remoteClient;
             
-            _clientInformationDecorator = new ClientInformationDecorator(Client);
+            _clientInformationDecorator = new ClientInformationDecorator(RemoteClient);
             var information = _clientInformationDecorator.GetClientInformation();
             Ip = information.Ip;
             MachineName = information.MachineName;
         }
 
-        public bool Match(Client client)
+        public bool Match(RemoteClient remoteClient)
         {
-            return Client == client;
+            return RemoteClient == remoteClient;
         }
         public void Ping()
         {
@@ -37,7 +37,7 @@ namespace ConnectUs.ServerSide.Command
                 Latency = (int) watch.ElapsedMilliseconds;
             }
             catch (Exception) {
-                Client.CloseConnection();
+                RemoteClient.CloseConnection();
             }
         }
     }

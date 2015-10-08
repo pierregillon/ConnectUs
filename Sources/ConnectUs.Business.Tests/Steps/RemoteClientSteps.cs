@@ -1,22 +1,23 @@
 ﻿using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ServerSide;
+using Moq;
 using NFluent;
 using TechTalk.SpecFlow;
 
 namespace ConnectUs.Business.Tests.Steps
 {
     [Binding]
-    public class ClientSteps
+    public class RemoteClientSteps
     {
-        public Client Client
+        public IRemoteClient RemoteClient
         {
-            get { return ScenarioContext.Current.Get<Client>("Client"); }
-            set { ScenarioContext.Current.Add("Client", value); }
+            get { return ScenarioContext.Current.Get<IRemoteClient>("RemoteClient"); }
+            set { ScenarioContext.Current.Add("RemoteClient", value); }
         }
-        public IServerRequestProcessor ServerRequestProcessor
+        public IServerRequestCommunicator ServerRequestCommunicator
         {
-            get { return ScenarioContext.Current.Get<IServerRequestProcessor>("ServerRequestProcessor"); }
-            set { ScenarioContext.Current.Add("ServerRequestProcessor", value); }
+            get { return ScenarioContext.Current.Get<IServerRequestCommunicator>("ServerRequestCommunicator"); }
+            set { ScenarioContext.Current.Add("ServerRequestCommunicator", value); }
         }
         public GetClientInformationResponse GetClientInformationResponse
         {
@@ -28,18 +29,32 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<ClientException>("Exception"); }
             set { ScenarioContext.Current.Add("Exception", value); }
         }
+        public object Response
+        {
+            get { return ScenarioContext.Current.Get<object>("Response"); }
+            set { ScenarioContext.Current.Add("Response", value); }
+        }
 
-        [Given(@"A client on the request processor")]
+        [Given(@"A remote client on the request processor")]
         public void GivenAClientOnTheRequestProcessor()
         {
-            Client = new Client(ServerRequestProcessor);
+            RemoteClient = new RemoteClient(ServerRequestCommunicator);
+        }
+
+        [Given(@"A mocked remote client that returns the response")]
+        public void GivenAMockedClientThatReturnsTheResponse()
+        {
+            var mock = new Mock<IRemoteClient>();
+            mock.Setup(processor => processor.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
+                .Returns((GetClientInformationResponse)Response);
+            RemoteClient = mock.Object;
         }
 
         [When(@"I ask the client information")]
         public void WhenIAskTheClientInformation()
         {
             try {
-                GetClientInformationResponse = Client.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
+                GetClientInformationResponse = RemoteClient.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
             }
             catch (ClientException ex) {
                 Exception = ex;

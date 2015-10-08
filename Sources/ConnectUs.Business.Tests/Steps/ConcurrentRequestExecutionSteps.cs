@@ -14,10 +14,10 @@ namespace ConnectUs.Business.Tests.Steps
     [Binding]
     public class ConcurrentRequestExecutionSteps
     {
-        public IServerRequestProcessor ServerRequestProcessor
+        public IRemoteClient RemoteClient
         {
-            get { return ScenarioContext.Current.Get<IServerRequestProcessor>("ServerRequestProcessor"); }
-            set { ScenarioContext.Current.Add("ServerRequestProcessor", value); }
+            get { return ScenarioContext.Current.Get<IRemoteClient>("RemoteClient"); }
+            set { ScenarioContext.Current.Add("RemoteClient", value); }
         }
         private List<Task> Tasks
         {
@@ -50,26 +50,26 @@ namespace ConnectUs.Business.Tests.Steps
 
         // When
 
-        [When(@"I send an echo request with value ""(.*)"" through the server request processor on the thread (.*)")]
-        public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnTheThread(int value, int threadId)
+        [When(@"I send an echo request with value ""(.*)"" through the remote client on the thread on the thread (.*)")]
+        public void WhenISendAnEchoRequestWithValueThroughTheRemoteClientOnTheThread(int value, int threadId)
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = ServerRequestProcessor.ProcessRequest<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
+                var response = RemoteClient.ExecuteCommand<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
 
-        [When(@"I send an echo request with value ""(.*)"" through the server request processor on main thread")]
-        public void WhenISendAnEchoRequestWithValueThroughTheServerRequestProcessorOnMainThread(int value)
+        [When(@"I send an echo request with value ""(.*)"" through the remote client on main thread")]
+        public void WhenISendAnEchoRequestWithValueThroughTheRemoteClientOnMainThread(int value)
         {
-            MainThreadResponses.Add(ServerRequestProcessor.ProcessRequest<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
+            MainThreadResponses.Add(RemoteClient.ExecuteCommand<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
         }
 
-        [When(@"I upload file '(.*)' to '(.*)' through the server request processor")]
-        public void WhenIUploadFileToThroughTheServerRequestProcessor(string sourceFilePath, string targetDirectory)
+        [When(@"I upload file '(.*)' to '(.*)' through the remote client")]
+        public void WhenIUploadFileToThroughTheRemoteClient(string sourceFilePath, string targetDirectory)
         {
-            FilePath = ServerRequestProcessor.UploadFile(sourceFilePath, targetDirectory);
+            FilePath = RemoteClient.Upload(sourceFilePath, targetDirectory);
         }
 
         // Then

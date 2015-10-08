@@ -44,19 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientConnectedEventArgs.cs" />
-    <Compile Include="ClientDisconnectedEventArgs.cs" />
+    <Compile Include="RemoteClientConnectedEventArgs.cs" />
+    <Compile Include="RemoteClientDisconnectedEventArgs.cs" />
     <Compile Include="ClientException.cs" />
-    <Compile Include="ClientListener.cs" />
-    <Compile Include="IClientListener.cs" />
+    <Compile Include="RemoteClientListener.cs" />
+    <Compile Include="IRemoteClientListener.cs" />
     <Compile Include="IRequestHandler.cs" />
-    <Compile Include="IServer.cs" />
     <Compile Include="IServerRequestCommunicator.cs" />
-    <Compile Include="IServerRequestProcessor.cs" />
+    <Compile Include="IRemoteClient.cs" />
     <Compile Include="PackageClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoteRequestProcessor.cs" />
+    <Compile Include="RemoteClient.cs" />
     <Compile Include="RequestException.cs" />
     <Compile Include="ServerRequestCommunicator.cs" />
   </ItemGroup>

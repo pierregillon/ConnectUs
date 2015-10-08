@@ -5,11 +5,11 @@ namespace ConnectUs.ServerSide
 {
     public class PackageClient
     {
-        private readonly Client _client;
+        private readonly RemoteClient _remoteClient;
 
-        public PackageClient(Client client)
+        public PackageClient(RemoteClient remoteClient)
         {
-            _client = client;
+            _remoteClient = remoteClient;
         }
 
         public void InstallPackage(string packageName, Version version)

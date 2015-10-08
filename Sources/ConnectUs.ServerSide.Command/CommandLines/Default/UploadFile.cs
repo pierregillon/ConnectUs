@@ -11,7 +11,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
         {
             var localFilePath = commandLine.Arguments.First(x => x.Name == "unknown");
             var remoteFolder = commandLine.Arguments.Last(x => x.Name == "unknown");
@@ -21,7 +21,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
             if (remoteFolder == null) {
                 return "You should specify a remote folder.";
             }
-            var filePath = client.Upload(localFilePath.Value, remoteFolder.Value);
+            var filePath = remoteClient.Upload(localFilePath.Value, remoteFolder.Value);
             return string.Format("Le fichier '{0}' a bien été uploadé à l'emplacement '{1}'.", Path.GetFileName(localFilePath.Value), filePath);
         }
     }

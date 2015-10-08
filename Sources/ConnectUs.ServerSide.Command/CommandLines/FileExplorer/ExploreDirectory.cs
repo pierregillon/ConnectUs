@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
         {
             var directoryPath = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (directoryPath == null) {
@@ -25,7 +25,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
                 GetDirectories = true,
                 GetFiles = true
             };
-            var response = client.ExecuteCommand<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
+            var response = remoteClient.ExecuteCommand<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
             return string.Join(Environment.NewLine, response.Files.Select(x => x.Name));
         }
     }

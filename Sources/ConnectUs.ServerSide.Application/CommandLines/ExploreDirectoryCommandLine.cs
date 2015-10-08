@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
     public class ExploreDirectoryCommandLine : ICommandLine
     {
         public string Name { get { return "dir"; } }
-        public string ExecuteCommand(Client client, IEnumerable<string> parameters)
+        public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
         {
             var request = new ExploreDirectoryRequest
             {
@@ -16,7 +16,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
                 GetDirectories = true,
                 GetFiles = true
             };
-            var response = client.ExecuteCommand<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
+            var response = remoteClient.ExecuteCommand<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
             return string.Join(Environment.NewLine, response.Files.Select(x => x.Name));
         }
     }

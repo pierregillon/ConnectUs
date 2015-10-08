@@ -19,8 +19,8 @@ namespace ConnectUs.ServerSide.Application
                     new ClientViewModel {Ip = "110.8.102.8", MachineName = "Marine", Ping = 20},
                 });
 
-                var mockServer = new Mock<IServer>();
-                mockServer.Setup(server => server.Start()).Callback(()=>{});
+                var mockServer = new Mock<IRemoteClientListener>();
+                mockServer.Setup(server => server.Start(9000)).Callback(()=>{});
 
                 var vm = new ClientListViewModel(mockServer.Object, mock.Object);
                 vm.Boot();

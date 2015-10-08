@@ -6,21 +6,21 @@ namespace ConnectUs.ServerSide.Command
 {
     public class ClientList
     {
-        private readonly IClientListener _clientListener;
+        private readonly IRemoteClientListener _remoteClientListener;
         private readonly List<ClientViewModel> _clientViewModels = new List<ClientViewModel>();
         private readonly Timer _timer;
 
-        public ClientList(IClientListener clientListener)
+        public ClientList(IRemoteClientListener remoteClientListener)
         {
-            _clientListener = clientListener;
-            _clientListener.ClientConnected += ClientListenerOnClientConnected;
-            _clientListener.ClientDisconnected += ClientListenerOnClientDisconnected;
+            _remoteClientListener = remoteClientListener;
+            _remoteClientListener.ClientConnected += RemoteClientListenerOnRemoteClientConnected;
+            _remoteClientListener.ClientDisconnected += RemoteClientListenerOnRemoteClientDisconnected;
             _timer = new Timer(Callback, null, 0, 10000);
         }
         ~ClientList()
         {
-            _clientListener.ClientConnected -= ClientListenerOnClientConnected;
-            _clientListener.ClientDisconnected -= ClientListenerOnClientDisconnected;
+            _remoteClientListener.ClientConnected -= RemoteClientListenerOnRemoteClientConnected;
+            _remoteClientListener.ClientDisconnected -= RemoteClientListenerOnRemoteClientDisconnected;
             _timer.Dispose();
         }
         private void Callback(object state)
@@ -35,13 +35,13 @@ namespace ConnectUs.ServerSide.Command
             return _clientViewModels.ToArray();
         }
 
-        private void ClientListenerOnClientConnected(object sender, ClientConnectedEventArgs args)
+        private void RemoteClientListenerOnRemoteClientConnected(object sender, RemoteClientConnectedEventArgs args)
         {
-            _clientViewModels.Add(new ClientViewModel(args.Client));
+            _clientViewModels.Add(new ClientViewModel(args.RemoteClient));
         }
-        private void ClientListenerOnClientDisconnected(object sender, ClientDisconnectedEventArgs args)
+        private void RemoteClientListenerOnRemoteClientDisconnected(object sender, RemoteClientDisconnectedEventArgs args)
         {
-            var viewModel = _clientViewModels.FirstOrDefault(x => x.Match(args.Client));
+            var viewModel = _clientViewModels.FirstOrDefault(x => x.Match(args.RemoteClient));
             if (viewModel != null) {
                 _clientViewModels.Remove(viewModel);
             }

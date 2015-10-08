@@ -10,14 +10,14 @@ namespace ConnectUs.ServerSide.Application.CommandLines
         {
             get { return "upload"; }
         }
-        public string ExecuteCommand(Client client, IEnumerable<string> parameters)
+        public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
         {
             if (!parameters.Any()) {
                 return "Missing parameters";
             }
             var sourceFilePath = parameters.First();
             var targetDirectory = parameters.Count() == 2 ? parameters.Last() : string.Empty;
-            var filePath = client.Upload(sourceFilePath, targetDirectory);
+            var filePath = remoteClient.Upload(sourceFilePath, targetDirectory);
             return string.Format("Le fichier '{0}' a bien été uploadé à l'emplacement '{1}'.", Path.GetFileName(sourceFilePath), filePath);
         }
     }

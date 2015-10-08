@@ -37,7 +37,7 @@ namespace ConnectUs.ServerSide.Command
         private static Container ConfigureIoc()
         {
             var container = new Container();
-            container.RegisterSingleton<IClientListener, ClientListener>();
+            container.RegisterSingleton<IRemoteClientListener, RemoteClientListener>();
             container.RegisterSingleton<IConnectionListener, TcpClientConnectionListener>();
             container.RegisterSingleton<CommandLineProcessor>();
             container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));

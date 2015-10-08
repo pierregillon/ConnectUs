@@ -7,38 +7,38 @@ namespace ConnectUs.ServerSide.Decorators
     public class ModuleDecorator
     {
         private const string RemoteModuleDirectoryPath = "Modules";
-        private readonly Client _client;
+        private readonly RemoteClient _remoteClient;
 
-        public ModuleDecorator(Client client)
+        public ModuleDecorator(RemoteClient remoteClient)
         {
-            _client = client;
+            _remoteClient = remoteClient;
         }
 
         public void UploadModule(string moduleName)
         {
             var localModuleFilePath = Path.Combine(Directory.GetCurrentDirectory(), RemoteModuleDirectoryPath, moduleName + ".dll");
-            _client.Upload(localModuleFilePath, RemoteModuleDirectoryPath);
+            _remoteClient.Upload(localModuleFilePath, RemoteModuleDirectoryPath);
         }
         public void AddModule(string moduleName)
         {
             var request = new AddModuleRequest(moduleName);
-            _client.ExecuteCommand<AddModuleRequest, AddModuleResponse>(request);
+            _remoteClient.ExecuteCommand<AddModuleRequest, AddModuleResponse>(request);
         }
         public void LoadModule(string moduleName)
         {
             var request = new LoadModuleRequest(moduleName);
-            _client.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(request);
+            _remoteClient.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(request);
         }
         public IEnumerable<ModuleState> GetIntalledModules()
         {
             var request = new ListModuleRequest();
-            var response = _client.ExecuteCommand<ListModuleRequest, ListModuleResponse>(request);
+            var response = _remoteClient.ExecuteCommand<ListModuleRequest, ListModuleResponse>(request);
             return response.Modules;
         }
         public void UnloadModule(string moduleName)
         {
             var request = new UnloadModuleRequest(moduleName);
-            _client.ExecuteCommand<UnloadModuleRequest, UnloadModuleResponse>(request);
+            _remoteClient.ExecuteCommand<UnloadModuleRequest, UnloadModuleResponse>(request);
         }
     }
 }

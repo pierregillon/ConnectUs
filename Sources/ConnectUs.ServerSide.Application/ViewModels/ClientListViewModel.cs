@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
 {
     public class ClientListViewModel : ViewModelBase, IBootable
     {
-        private readonly IServer _server;
+        private readonly IRemoteClientListener _remoteClientListener;
         private readonly IClientViewModelService _clientViewModelService;
 
         public ObservableCollection<ClientViewModel> Clients { get; private set; }
@@ -21,9 +21,9 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         public RelayCommand OpenNewClientCommandViewModelCommand { get; private set; }
 
         // ----- Constructors
-        public ClientListViewModel(IServer server, IClientViewModelService clientViewModelService)
+        public ClientListViewModel(IRemoteClientListener remoteClientListener, IClientViewModelService clientViewModelService)
         {
-            _server = server;
+            _remoteClientListener = remoteClientListener;
             _clientViewModelService = clientViewModelService;
             Clients = new ObservableCollection<ClientViewModel>();
             OpenNewClientCommandViewModelCommand = new RelayCommand(OpenNewClientCommandViewModel, CanOpenNewClientCommandViewModel);
@@ -42,7 +42,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         // ----- Public methods
         public void Boot()
         {
-            _server.Start();
+            _remoteClientListener.Start(9000);
             Clients = _clientViewModelService.GetClients();
         }
         public void Dispose()

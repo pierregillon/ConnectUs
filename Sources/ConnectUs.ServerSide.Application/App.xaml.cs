@@ -13,7 +13,7 @@ namespace ConnectUs.ServerSide.Application
         {
             base.OnExit(e);
 
-            SimpleIoc.Default.GetInstance<IServer>().Stop();
+            SimpleIoc.Default.GetInstance<IRemoteClientListener>().Stop();
             SimpleIoc.Default.GetInstance<ClientListViewModel>().Dispose();
         }
     }

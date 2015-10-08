@@ -4,26 +4,26 @@ using ConnectUs.ClientSide.Commands.Upload;
 
 namespace ConnectUs.ServerSide
 {
-    public class RemoteRequestProcessor : IServerRequestProcessor
+    public class RemoteClient : IRemoteClient
     {
         private readonly IServerRequestCommunicator _serverRequestCommunicator;
         private readonly object _locker = new object();
 
         // ----- Constructors
-        public RemoteRequestProcessor(IServerRequestCommunicator serverRequestCommunicator)
+        public RemoteClient(IServerRequestCommunicator serverRequestCommunicator)
         {
             _serverRequestCommunicator = serverRequestCommunicator;
         }
 
         // ----- Public methods
-        public TResponse ProcessRequest<TRequest, TResponse>(TRequest request)
+        public TResponse ExecuteCommand<TRequest, TResponse>(TRequest request)
         {
             lock (_locker) {
                 _serverRequestCommunicator.SendRequest(request);
                 return _serverRequestCommunicator.ReceiveResponse<TResponse>();
             }
         }
-        public string UploadFile(string sourceFilePath, string targetDirectory)
+        public string Upload(string sourceFilePath, string targetDirectory)
         {
             var fileName = Path.GetFileName(sourceFilePath);
             if (fileName == null) {
@@ -36,9 +36,11 @@ namespace ConnectUs.ServerSide
                 return response.FilePath;
             }
         }
-        public void Close()
+        public void CloseConnection()
         {
-            _serverRequestCommunicator.Close();
+            lock (_locker) {
+                _serverRequestCommunicator.Close();
+            }
         }
     }
 }

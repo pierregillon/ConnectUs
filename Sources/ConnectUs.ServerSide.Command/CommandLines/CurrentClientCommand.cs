@@ -15,9 +15,9 @@
                 return "You should define the current client first using 'connect %index'.";
             }
 
-            return HandleInternal(commandLine, _context.CurrentClient.Client);
+            return HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
         }
 
-        protected abstract string HandleInternal(CommandLine commandLine, Client client);
+        protected abstract string HandleInternal(CommandLine commandLine, RemoteClient remoteClient);
     }
 }

@@ -8,13 +8,13 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public UnloadModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, Client client)
+        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
         {
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (moduleName == null) {
                 return "You should define the module name.";
             }
-            var moduleDecorator = new ModuleDecorator(client);
+            var moduleDecorator = new ModuleDecorator(remoteClient);
             moduleDecorator.UnloadModule(moduleName.Value);
             return string.Empty;
         }
