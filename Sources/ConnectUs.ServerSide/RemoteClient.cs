@@ -16,14 +16,14 @@ namespace ConnectUs.ServerSide
         }
 
         // ----- Public methods
-        public TResponse ExecuteCommand<TRequest, TResponse>(TRequest request)
+        public TResponse Send<TRequest, TResponse>(TRequest request)
         {
             lock (_locker) {
                 _requestDispatcher.SendRequest(request);
                 return _requestDispatcher.ReceiveResponse<TResponse>();
             }
         }
-        public string Upload(string sourceFilePath, string targetDirectory)
+        public string UploadFile(string sourceFilePath, string targetDirectory)
         {
             var fileName = Path.GetFileName(sourceFilePath);
             if (fileName == null) {
@@ -36,7 +36,7 @@ namespace ConnectUs.ServerSide
                 return response.FilePath;
             }
         }
-        public void CloseConnection()
+        public void Close()
         {
             lock (_locker) {
                 _requestDispatcher.Close();

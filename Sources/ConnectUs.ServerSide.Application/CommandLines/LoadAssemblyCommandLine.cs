@@ -11,8 +11,8 @@ namespace ConnectUs.ServerSide.Application.CommandLines
         public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
         {
             var modulePath = Path.Combine(Directory.GetCurrentDirectory(), parameters.First());
-            remoteClient.Upload(modulePath, "");
-            var response = remoteClient.ExecuteCommand<AddModuleRequest, AddModuleResponse>(new AddModuleRequest
+            remoteClient.UploadFile(modulePath, "");
+            var response = remoteClient.Send<AddModuleRequest, AddModuleResponse>(new AddModuleRequest
             {
                 ModuleName = parameters.First()
             });

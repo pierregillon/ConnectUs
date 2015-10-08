@@ -59,13 +59,13 @@ namespace ConnectUs.ServerSide.Application.ViewModels
                 }
             }
             catch (ClientException) {
-                _remoteClient.CloseConnection();
+                _remoteClient.Close();
             }
         }
         public void Close()
         {
             _continuePinging = false;
-            _remoteClient.CloseConnection();
+            _remoteClient.Close();
         }
 
         public string ExecuteCommand(ICommandLine commandLine, IEnumerable<string> parameters)

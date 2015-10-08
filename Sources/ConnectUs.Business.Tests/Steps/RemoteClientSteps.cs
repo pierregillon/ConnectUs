@@ -45,7 +45,7 @@ namespace ConnectUs.Business.Tests.Steps
         public void GivenAMockedClientThatReturnsTheResponse()
         {
             var mock = new Mock<IRemoteClient>();
-            mock.Setup(processor => processor.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
+            mock.Setup(processor => processor.Send<GetClientInformationRequest, GetClientInformationResponse>(It.IsAny<GetClientInformationRequest>()))
                 .Returns((GetClientInformationResponse)Response);
             RemoteClient = mock.Object;
         }
@@ -54,7 +54,7 @@ namespace ConnectUs.Business.Tests.Steps
         public void WhenIAskTheClientInformation()
         {
             try {
-                GetClientInformationResponse = RemoteClient.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
+                GetClientInformationResponse = RemoteClient.Send<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
             }
             catch (ClientException ex) {
                 Exception = ex;

@@ -21,7 +21,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
             if (remoteFolder == null) {
                 return "You should specify a remote folder.";
             }
-            var filePath = remoteClient.Upload(localFilePath.Value, remoteFolder.Value);
+            var filePath = remoteClient.UploadFile(localFilePath.Value, remoteFolder.Value);
             return string.Format("Le fichier '{0}' a bien été uploadé à l'emplacement '{1}'.", Path.GetFileName(localFilePath.Value), filePath);
         }
     }

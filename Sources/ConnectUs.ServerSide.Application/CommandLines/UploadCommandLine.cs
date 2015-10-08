@@ -17,7 +17,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
             }
             var sourceFilePath = parameters.First();
             var targetDirectory = parameters.Count() == 2 ? parameters.Last() : string.Empty;
-            var filePath = remoteClient.Upload(sourceFilePath, targetDirectory);
+            var filePath = remoteClient.UploadFile(sourceFilePath, targetDirectory);
             return string.Format("Le fichier '{0}' a bien été uploadé à l'emplacement '{1}'.", Path.GetFileName(sourceFilePath), filePath);
         }
     }

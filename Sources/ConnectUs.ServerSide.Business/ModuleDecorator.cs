@@ -17,28 +17,28 @@ namespace ConnectUs.ServerSide.Decorators
         public void UploadModule(string moduleName)
         {
             var localModuleFilePath = Path.Combine(Directory.GetCurrentDirectory(), RemoteModuleDirectoryPath, moduleName + ".dll");
-            _remoteClient.Upload(localModuleFilePath, RemoteModuleDirectoryPath);
+            _remoteClient.UploadFile(localModuleFilePath, RemoteModuleDirectoryPath);
         }
         public void AddModule(string moduleName)
         {
             var request = new AddModuleRequest(moduleName);
-            _remoteClient.ExecuteCommand<AddModuleRequest, AddModuleResponse>(request);
+            _remoteClient.Send<AddModuleRequest, AddModuleResponse>(request);
         }
         public void LoadModule(string moduleName)
         {
             var request = new LoadModuleRequest(moduleName);
-            _remoteClient.ExecuteCommand<LoadModuleRequest, LoadModuleResponse>(request);
+            _remoteClient.Send<LoadModuleRequest, LoadModuleResponse>(request);
         }
         public IEnumerable<ModuleState> GetIntalledModules()
         {
             var request = new ListModuleRequest();
-            var response = _remoteClient.ExecuteCommand<ListModuleRequest, ListModuleResponse>(request);
+            var response = _remoteClient.Send<ListModuleRequest, ListModuleResponse>(request);
             return response.Modules;
         }
         public void UnloadModule(string moduleName)
         {
             var request = new UnloadModuleRequest(moduleName);
-            _remoteClient.ExecuteCommand<UnloadModuleRequest, UnloadModuleResponse>(request);
+            _remoteClient.Send<UnloadModuleRequest, UnloadModuleResponse>(request);
         }
     }
 }

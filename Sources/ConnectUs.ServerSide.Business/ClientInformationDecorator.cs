@@ -14,13 +14,13 @@ namespace ConnectUs.ServerSide.Business
 
         public GetClientInformationResponse GetClientInformation()
         {
-            return _remoteClient.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
+            return _remoteClient.Send<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
         }
 
         public void Ping()
         {
             try {
-                var response = _remoteClient.ExecuteCommand<PingRequest, PingResponse>(new PingRequest());
+                var response = _remoteClient.Send<PingRequest, PingResponse>(new PingRequest());
                 if (response.Value != "OK") {
                     throw new ClientException("An error occured during a ping. The value is invalid.");
                 }

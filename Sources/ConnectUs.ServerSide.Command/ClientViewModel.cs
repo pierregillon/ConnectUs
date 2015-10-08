@@ -37,7 +37,7 @@ namespace ConnectUs.ServerSide.Command
                 Latency = (int) watch.ElapsedMilliseconds;
             }
             catch (Exception) {
-                RemoteClient.CloseConnection();
+                RemoteClient.Close();
             }
         }
     }

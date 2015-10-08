@@ -55,7 +55,7 @@ namespace ConnectUs.Business.Tests.Steps
         {
             Tasks.Add(Task.Factory.StartNew(() =>
             {
-                var response = RemoteClient.ExecuteCommand<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
+                var response = RemoteClient.Send<EchoRequest, EchoResponse>(new EchoRequest(value.ToString()));
                 ResponseByThread.GetOrAdd(threadId, i => response);
             }));
         }
@@ -63,13 +63,13 @@ namespace ConnectUs.Business.Tests.Steps
         [When(@"I send an echo request with value ""(.*)"" through the remote client on main thread")]
         public void WhenISendAnEchoRequestWithValueThroughTheRemoteClientOnMainThread(int value)
         {
-            MainThreadResponses.Add(RemoteClient.ExecuteCommand<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
+            MainThreadResponses.Add(RemoteClient.Send<EchoRequest, EchoResponse>(new EchoRequest(value.ToString())));
         }
 
         [When(@"I upload file '(.*)' to '(.*)' through the remote client")]
         public void WhenIUploadFileToThroughTheRemoteClient(string sourceFilePath, string targetDirectory)
         {
-            FilePath = RemoteClient.Upload(sourceFilePath, targetDirectory);
+            FilePath = RemoteClient.UploadFile(sourceFilePath, targetDirectory);
         }
 
         // Then

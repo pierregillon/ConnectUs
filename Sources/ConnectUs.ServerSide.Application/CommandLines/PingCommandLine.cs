@@ -15,7 +15,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
         {
             var watch = new Stopwatch();
             watch.Start();
-            remoteClient.ExecuteCommand<PingRequest, PingResponse>(new PingRequest());
+            remoteClient.Send<PingRequest, PingResponse>(new PingRequest());
             watch.Stop();
             var duration = watch.ElapsedMilliseconds;
             return string.Format("Ping to client : {0} ms", duration);

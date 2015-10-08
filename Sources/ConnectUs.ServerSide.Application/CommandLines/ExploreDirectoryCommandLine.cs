@@ -16,7 +16,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
                 GetDirectories = true,
                 GetFiles = true
             };
-            var response = remoteClient.ExecuteCommand<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
+            var response = remoteClient.Send<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
             return string.Join(Environment.NewLine, response.Files.Select(x => x.Name));
         }
     }
