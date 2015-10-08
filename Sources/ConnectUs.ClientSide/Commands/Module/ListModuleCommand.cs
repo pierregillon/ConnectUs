@@ -1,7 +1,7 @@
 using System.Linq;
 using ConnectUs.ClientSide.ModuleManagement;
 
-namespace ConnectUs.ClientSide.Commands.LoadModule
+namespace ConnectUs.ClientSide.Commands.Module
 {
     public class ListModuleCommand
     {

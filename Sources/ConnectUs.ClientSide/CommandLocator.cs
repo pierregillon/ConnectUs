@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ConnectUs.ClientSide.Commands.GetClientInformation;
-using ConnectUs.ClientSide.Commands.LoadModule;
+using ConnectUs.ClientSide.Commands.Module;
 using ConnectUs.ClientSide.Commands.Ping;
 using ConnectUs.ClientSide.Commands.Upload;
 using ConnectUs.ClientSide.ModuleManagement;
