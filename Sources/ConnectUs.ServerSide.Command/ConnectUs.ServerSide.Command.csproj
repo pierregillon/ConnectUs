@@ -88,6 +88,10 @@
       <Project>{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}</Project>
       <Name>ConnectUs.FileExplorer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.ServerSide.Business\ConnectUs.ServerSide.Business.csproj">
+      <Project>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</Project>
+      <Name>ConnectUs.ServerSide.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
       <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
       <Name>ConnectUs.ServerSide</Name>

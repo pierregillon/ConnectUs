@@ -3,12 +3,14 @@ using System.Diagnostics;
 using System.Threading;
 using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
+using ConnectUs.ServerSide.Business;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
 {
     public class ClientViewModel : ViewModelBase
     {
         private readonly Client _client;
+        private readonly ClientInformationDecorator _clientInformationDecorator;
         private bool _continuePinging;
 
         public string Ip
@@ -31,11 +33,12 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         public ClientViewModel(Client client)
         {
             _client = client;
+            _clientInformationDecorator = new ClientInformationDecorator(client);
         }
 
         public void StartPing()
         {
-            var information = _client.GetClientInformation();
+            var information = _clientInformationDecorator.GetClientInformation();
             Ip = information.Ip;
             MachineName = information.MachineName;
             _continuePinging = true;
@@ -48,7 +51,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
                 var watch = new Stopwatch();
                 while (_continuePinging) {
                     watch.Start();
-                    _client.Ping();
+                    _clientInformationDecorator.Ping();
                     watch.Stop();
                     Ping = (int) watch.ElapsedMilliseconds;
                     watch.Reset();

@@ -26,7 +26,7 @@ namespace ConnectUs.Business.Tests.Steps
             GetClientInformationResponse = Server
                 .GetConnectedClients()
                 .ElementAt(index - 1)
-                .GetClientInformation();
+                .ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
         }
 
         [Then(@"The received information contains an ip to ""(.*)""")]

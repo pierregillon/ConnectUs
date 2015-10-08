@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using ConnectUs.ServerSide.Business;
 
 namespace ConnectUs.ServerSide.Command
 {
     public class ClientViewModel
     {
+        private readonly ClientInformationDecorator _clientInformationDecorator;
+
         public string Ip { get; private set; }
         public string MachineName { get; private set; }
         public int Latency { get; private set; }
@@ -13,8 +16,9 @@ namespace ConnectUs.ServerSide.Command
         public ClientViewModel(Client client)
         {
             Client = client;
-
-            var information = Client.GetClientInformation();
+            
+            _clientInformationDecorator = new ClientInformationDecorator(Client);
+            var information = _clientInformationDecorator.GetClientInformation();
             Ip = information.Ip;
             MachineName = information.MachineName;
         }
@@ -28,7 +32,7 @@ namespace ConnectUs.ServerSide.Command
             try {
                 var watch = new Stopwatch();
                 watch.Start();
-                Client.Ping();
+                _clientInformationDecorator.Ping();
                 watch.Stop();
                 Latency = (int) watch.ElapsedMilliseconds;
             }

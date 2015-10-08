@@ -39,7 +39,7 @@ namespace ConnectUs.Business.Tests.Steps
         public void WhenIAskTheClientInformation()
         {
             try {
-                GetClientInformationResponse = Client.GetClientInformation();
+                GetClientInformationResponse = Client.ExecuteCommand<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
             }
             catch (ClientException ex) {
                 Exception = ex;
