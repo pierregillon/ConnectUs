@@ -38,7 +38,8 @@ namespace ConnectUs.ClientSide
             foreach (var filePath in Directory.GetFiles("Modules")) {
                 try {
                     Console.Write("\t-> {0} ... ", Path.GetFileName(filePath));
-                    moduleManager.AddModule(filePath);
+                    var moduleName = moduleManager.AddModule(filePath);
+                    moduleManager.LoadModule(moduleName);
                     Console.WriteLine("OK");
                 }
                 catch (Exception) {
