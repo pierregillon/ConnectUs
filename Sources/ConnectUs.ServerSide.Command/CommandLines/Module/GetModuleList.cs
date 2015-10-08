@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
+        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var moduleDecorator = new ModuleDecorator(remoteClient);
             var modules = moduleDecorator.GetIntalledModules();

@@ -5,6 +5,6 @@ namespace ConnectUs.ServerSide.Application.CommandLines
     public interface ICommandLine
     {
         string Name { get; }
-        string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters);
+        string ExecuteCommand(IRemoteClient remoteClient, IEnumerable<string> parameters);
     }
 }

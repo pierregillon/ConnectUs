@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Application.Services
     {
         private readonly IRemoteClientListener _remoteClientListener;
         private readonly ObservableCollection<ClientViewModel> _clients = new ObservableCollection<ClientViewModel>();
-        private readonly Dictionary<RemoteClient, ClientViewModel> _relations = new Dictionary<RemoteClient, ClientViewModel>();
+        private readonly Dictionary<IRemoteClient, ClientViewModel> _relations = new Dictionary<IRemoteClient, ClientViewModel>();
         private readonly SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
         public ClientViewModelService(IRemoteClientListener remoteClientListener)

@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
     public class LoadAssemblyCommandLine : ICommandLine
     {
         public string Name { get { return "install-module"; } }
-        public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
+        public string ExecuteCommand(IRemoteClient remoteClient, IEnumerable<string> parameters)
         {
             var modulePath = Path.Combine(Directory.GetCurrentDirectory(), parameters.First());
             remoteClient.UploadFile(modulePath, "");

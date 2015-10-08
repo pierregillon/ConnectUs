@@ -11,7 +11,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
             get { return "ping"; }
         }
 
-        public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
+        public string ExecuteCommand(IRemoteClient remoteClient, IEnumerable<string> parameters)
         {
             var watch = new Stopwatch();
             watch.Start();

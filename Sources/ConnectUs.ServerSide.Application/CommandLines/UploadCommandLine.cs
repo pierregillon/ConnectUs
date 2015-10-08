@@ -10,7 +10,7 @@ namespace ConnectUs.ServerSide.Application.CommandLines
         {
             get { return "upload"; }
         }
-        public string ExecuteCommand(RemoteClient remoteClient, IEnumerable<string> parameters)
+        public string ExecuteCommand(IRemoteClient remoteClient, IEnumerable<string> parameters)
         {
             if (!parameters.Any()) {
                 return "Missing parameters";

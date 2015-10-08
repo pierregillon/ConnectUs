@@ -9,7 +9,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
 {
     public class ClientViewModel : ViewModelBase
     {
-        private readonly RemoteClient _remoteClient;
+        private readonly IRemoteClient _remoteClient;
         private readonly ClientInformationDecorator _clientInformationDecorator;
         private bool _continuePinging;
 
@@ -30,7 +30,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
         }
 
         public ClientViewModel() {}
-        public ClientViewModel(RemoteClient remoteClient)
+        public ClientViewModel(IRemoteClient remoteClient)
         {
             _remoteClient = remoteClient;
             _clientInformationDecorator = new ClientInformationDecorator(remoteClient);

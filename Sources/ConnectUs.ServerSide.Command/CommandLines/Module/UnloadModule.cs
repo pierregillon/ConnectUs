@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public UnloadModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
+        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (moduleName == null) {

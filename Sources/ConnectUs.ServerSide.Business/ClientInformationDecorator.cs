@@ -5,9 +5,9 @@ namespace ConnectUs.ServerSide.Business
 {
     public class ClientInformationDecorator
     {
-        private readonly RemoteClient _remoteClient;
+        private readonly IRemoteClient _remoteClient;
 
-        public ClientInformationDecorator(RemoteClient remoteClient)
+        public ClientInformationDecorator(IRemoteClient remoteClient)
         {
             _remoteClient = remoteClient;
         }

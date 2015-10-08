@@ -8,7 +8,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public InstallModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
+        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var loadModuleArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "load");
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");

@@ -11,9 +11,9 @@ namespace ConnectUs.ServerSide.Command
         public string Ip { get; private set; }
         public string MachineName { get; private set; }
         public int Latency { get; private set; }
-        public RemoteClient RemoteClient { get; private set; }
+        public IRemoteClient RemoteClient { get; private set; }
 
-        public ClientViewModel(RemoteClient remoteClient)
+        public ClientViewModel(IRemoteClient remoteClient)
         {
             RemoteClient = remoteClient;
             
@@ -23,7 +23,7 @@ namespace ConnectUs.ServerSide.Command
             MachineName = information.MachineName;
         }
 
-        public bool Match(RemoteClient remoteClient)
+        public bool Match(IRemoteClient remoteClient)
         {
             return RemoteClient == remoteClient;
         }

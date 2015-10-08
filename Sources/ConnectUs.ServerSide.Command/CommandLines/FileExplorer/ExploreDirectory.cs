@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
+        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var directoryPath = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (directoryPath == null) {

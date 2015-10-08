@@ -7,9 +7,9 @@ namespace ConnectUs.ServerSide.Decorators
     public class ModuleDecorator
     {
         private const string RemoteModuleDirectoryPath = "Modules";
-        private readonly RemoteClient _remoteClient;
+        private readonly IRemoteClient _remoteClient;
 
-        public ModuleDecorator(RemoteClient remoteClient)
+        public ModuleDecorator(IRemoteClient remoteClient)
         {
             _remoteClient = remoteClient;
         }

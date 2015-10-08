@@ -4,8 +4,8 @@ namespace ConnectUs.ServerSide
 {
     public class RemoteClientConnectedEventArgs : EventArgs
     {
-        public RemoteClient RemoteClient { get; private set; }
-        public RemoteClientConnectedEventArgs(RemoteClient remoteClient)
+        public IRemoteClient RemoteClient { get; private set; }
+        public RemoteClientConnectedEventArgs(IRemoteClient remoteClient)
         {
             RemoteClient = remoteClient;
         }

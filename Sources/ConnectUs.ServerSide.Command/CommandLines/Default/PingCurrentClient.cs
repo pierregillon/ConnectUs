@@ -10,7 +10,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, RemoteClient remoteClient)
+        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var watch = new Stopwatch();
             watch.Start();

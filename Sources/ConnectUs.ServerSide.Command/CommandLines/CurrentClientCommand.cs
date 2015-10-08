@@ -18,6 +18,6 @@
             return HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
         }
 
-        protected abstract string HandleInternal(CommandLine commandLine, RemoteClient remoteClient);
+        protected abstract string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient);
     }
 }
