@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using ConnectUs.ServerSide.Business;
 
 namespace ConnectUs.ServerSide.Command
@@ -16,7 +15,7 @@ namespace ConnectUs.ServerSide.Command
         public ClientViewModel(IRemoteClient remoteClient)
         {
             RemoteClient = remoteClient;
-            
+
             _clientInformationDecorator = new ClientInformationDecorator(RemoteClient);
             var information = _clientInformationDecorator.GetClientInformation();
             Ip = information.Ip;
@@ -30,11 +29,7 @@ namespace ConnectUs.ServerSide.Command
         public void Ping()
         {
             try {
-                var watch = new Stopwatch();
-                watch.Start();
-                _clientInformationDecorator.Ping();
-                watch.Stop();
-                Latency = (int) watch.ElapsedMilliseconds;
+                Latency = _clientInformationDecorator.Ping();
             }
             catch (Exception) {
                 RemoteClient.Close();

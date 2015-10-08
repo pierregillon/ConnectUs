@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
@@ -44,33 +43,27 @@ namespace ConnectUs.ServerSide.Application.ViewModels
             _continuePinging = true;
             new Thread(PingProcess).Start();
         }
+        public void Close()
+        {
+            _continuePinging = false;
+            _remoteClient.Close();
+        }
+        public string ExecuteCommand(ICommandLine commandLine, IEnumerable<string> parameters)
+        {
+            return commandLine.ExecuteCommand(_remoteClient, parameters);
+        }
 
         private void PingProcess()
         {
             try {
-                var watch = new Stopwatch();
                 while (_continuePinging) {
-                    watch.Start();
-                    _clientInformationDecorator.Ping();
-                    watch.Stop();
-                    Ping = (int) watch.ElapsedMilliseconds;
-                    watch.Reset();
+                    Ping = _clientInformationDecorator.Ping();
                     Thread.Sleep(5000);
                 }
             }
             catch (ClientException) {
                 _remoteClient.Close();
             }
-        }
-        public void Close()
-        {
-            _continuePinging = false;
-            _remoteClient.Close();
-        }
-
-        public string ExecuteCommand(ICommandLine commandLine, IEnumerable<string> parameters)
-        {
-            return commandLine.ExecuteCommand(_remoteClient, parameters);
         }
     }
 }
