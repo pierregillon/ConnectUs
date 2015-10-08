@@ -11,7 +11,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
+        protected override string HandleInternal(CommandLine commandLine, Client client)
         {
             var localFilePath = commandLine.Arguments.First(x => x.Name == "unknown");
             var remoteFolder = commandLine.Arguments.Last(x => x.Name == "unknown");

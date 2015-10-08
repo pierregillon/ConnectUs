@@ -10,7 +10,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
+        protected override string HandleInternal(CommandLine commandLine, Client client)
         {
             var watch = new Stopwatch();
             watch.Start();

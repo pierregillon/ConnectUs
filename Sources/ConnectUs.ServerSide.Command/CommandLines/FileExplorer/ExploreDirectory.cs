@@ -4,7 +4,7 @@ using ConnectUs.FileExplorer;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
 {
-    [CommandDescription(CommandName = "dir", Description = "Display the list of files and directories of a remote folder.")]
+    [CommandDescription(CommandName = "dir", Description = "Display files and directories of a remote folder.", Category = "FileExplorer")]
     internal class ExploreDirectory : CurrentClientCommand
     {
         public ExploreDirectory(Context context)
@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
+        protected override string HandleInternal(CommandLine commandLine, Client client)
         {
             var directoryPath = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (directoryPath == null) {

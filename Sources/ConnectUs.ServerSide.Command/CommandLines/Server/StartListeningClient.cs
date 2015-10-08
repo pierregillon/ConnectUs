@@ -2,7 +2,7 @@
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Server
 {
-    [CommandDescription(CommandName = "start", Description = "Start the listen of new clients.")]
+    [CommandDescription(CommandName = "start", Description = "Start the listen of new clients.", Category = "Server")]
     internal class StartListeningClient : ICommandLineHandler
     {
         private readonly IClientListener _clientListener;

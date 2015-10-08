@@ -4,7 +4,7 @@ using ConnectUs.ServerSide.Decorators;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Module
 {
-    [CommandDescription(CommandName = "list-module", Description = "List all the installed module on remote client.")]
+    [CommandDescription(CommandName = "list-module", Description = "List the installed modules on remote client.", Category = "Module")]
     public class GetModuleList : CurrentClientCommand
     {
         public GetModuleList(Context context)
@@ -12,7 +12,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, ServerSide.Client client)
+        protected override string HandleInternal(CommandLine commandLine, Client client)
         {
             var moduleDecorator = new ModuleDecorator(client);
             var modules = moduleDecorator.GetIntalledModules();
