@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace ConnectUs.Business.Tests.Steps
 {
     [Binding]
-    public class ServerRequestCommunicatorSteps
+    public class ServerRequestDispatcherSteps
     {
         public IConnection ServerConnection
         {
@@ -20,10 +20,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
             set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
-        public IServerRequestCommunicator ServerRequestCommunicator
+        public IRequestDispatcher RequestDispatcher
         {
-            get { return ScenarioContext.Current.Get<IServerRequestCommunicator>("ServerRequestCommunicator"); }
-            set { ScenarioContext.Current.Set(value, "ServerRequestCommunicator"); }
+            get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
+            set { ScenarioContext.Current.Set(value, "RequestDispatcher"); }
         }
         public object Request
         {
@@ -41,23 +41,23 @@ namespace ConnectUs.Business.Tests.Steps
             set { ScenarioContext.Current.Set(value, "Error"); }
         }
 
-        [Given(@"A server request communicator")]
-        public void GivenAServerRequestCommunicator()
+        [Given(@"A server request dispatcher")]
+        public void GivenAServerRequestDispatcher()
         {
-            ServerRequestCommunicator = new ServerRequestCommunicator(ServerConnection, new JsonRequestParser());
+            RequestDispatcher = new RequestDispatcher(ServerConnection, new JsonRequestParser());
         }
 
-        [When(@"I send the request by the server request communicator")]
-        public void WhenISendTheRequestByTheServerRequestCommunicator()
+        [When(@"I send the request by the server request dispatcher")]
+        public void WhenISendTheRequestByTheServerRequestDispatcher()
         {
-            ServerRequestCommunicator.SendRequest(Request);
+            RequestDispatcher.SendRequest(Request);
         }
 
-        [When(@"I read the response from the server request communicator")]
-        public void WhenIReadTheResponseFromTheServerRequestCommunicator()
+        [When(@"I read the response from the server request dispatcher")]
+        public void WhenIReadTheResponseFromTheServerRequestDispatcher()
         {
             try {
-                Response = ServerRequestCommunicator.ReceiveResponse<GetClientInformationResponse>();
+                Response = RequestDispatcher.ReceiveResponse<GetClientInformationResponse>();
             }
             catch (Exception ex) {
                 Error = ex;

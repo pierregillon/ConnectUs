@@ -1,6 +1,6 @@
 ﻿namespace ConnectUs.ServerSide
 {
-    public interface IServerRequestCommunicator
+    public interface IRequestDispatcher
     {
         void SendRequest<TRequest>(TRequest request);
         TResponse ReceiveResponse<TResponse>();

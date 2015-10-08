@@ -75,7 +75,7 @@ namespace ConnectUs.Business.Tests.Features
 #line 7
  testRunner.Given("A connection is established between server and client on port 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
-  testRunner.And("A server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("A server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
   testRunner.And("A mocked client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
@@ -96,7 +96,7 @@ this.FeatureBackground();
 #line 13
  testRunner.Given("A \"GetClientInformation\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
- testRunner.When("I send the request by the server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send the request by the server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
   testRunner.And("I process the request from the client request handler", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
@@ -119,11 +119,11 @@ this.FeatureBackground();
 #line 19
  testRunner.Given("A \"GetClientInformation\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
- testRunner.When("I send the request by the server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send the request by the server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 21
   testRunner.And("I process the request from the client request handler", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-  testRunner.And("I read the response from the server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I read the response from the server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
  testRunner.Then("The response is a \"GetClientInformation\" response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
@@ -154,11 +154,11 @@ this.FeatureBackground();
 #line 30
   testRunner.And("A \"GetClientInformation\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
- testRunner.When("I send the request by the server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I send the request by the server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 32
   testRunner.And("I process the request from the client request handler", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
-  testRunner.And("I read the response from the server request communicator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I read the response from the server request dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
  testRunner.Then("An exception is thrown with the message \"Error occured on client side\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

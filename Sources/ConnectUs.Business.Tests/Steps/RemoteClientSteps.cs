@@ -14,10 +14,10 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IRemoteClient>("RemoteClient"); }
             set { ScenarioContext.Current.Add("RemoteClient", value); }
         }
-        public IServerRequestCommunicator ServerRequestCommunicator
+        public IRequestDispatcher RequestDispatcher
         {
-            get { return ScenarioContext.Current.Get<IServerRequestCommunicator>("ServerRequestCommunicator"); }
-            set { ScenarioContext.Current.Add("ServerRequestCommunicator", value); }
+            get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
+            set { ScenarioContext.Current.Add("RequestDispatcher", value); }
         }
         public GetClientInformationResponse GetClientInformationResponse
         {
@@ -35,10 +35,10 @@ namespace ConnectUs.Business.Tests.Steps
             set { ScenarioContext.Current.Add("Response", value); }
         }
 
-        [Given(@"A remote client on the request processor")]
-        public void GivenAClientOnTheRequestProcessor()
+        [Given(@"A remote client on the server request dispatcher")]
+        public void GivenAClientOnTheServerRequestDispatcher()
         {
-            RemoteClient = new RemoteClient(ServerRequestCommunicator);
+            RemoteClient = new RemoteClient(RequestDispatcher);
         }
 
         [Given(@"A mocked remote client that returns the response")]

@@ -6,21 +6,21 @@ namespace ConnectUs.ServerSide
 {
     public class RemoteClient : IRemoteClient
     {
-        private readonly IServerRequestCommunicator _serverRequestCommunicator;
+        private readonly IRequestDispatcher _requestDispatcher;
         private readonly object _locker = new object();
 
         // ----- Constructors
-        public RemoteClient(IServerRequestCommunicator serverRequestCommunicator)
+        public RemoteClient(IRequestDispatcher requestDispatcher)
         {
-            _serverRequestCommunicator = serverRequestCommunicator;
+            _requestDispatcher = requestDispatcher;
         }
 
         // ----- Public methods
         public TResponse ExecuteCommand<TRequest, TResponse>(TRequest request)
         {
             lock (_locker) {
-                _serverRequestCommunicator.SendRequest(request);
-                return _serverRequestCommunicator.ReceiveResponse<TResponse>();
+                _requestDispatcher.SendRequest(request);
+                return _requestDispatcher.ReceiveResponse<TResponse>();
             }
         }
         public string Upload(string sourceFilePath, string targetDirectory)
@@ -30,16 +30,16 @@ namespace ConnectUs.ServerSide
                 throw new Exception(string.Format("The file '{0}' is not a valid file.", sourceFilePath));
             }
             lock (_locker) {
-                _serverRequestCommunicator.SendRequest(new UploadRequest { FilePath = Path.Combine(targetDirectory, fileName) });
-                _serverRequestCommunicator.SendFile(sourceFilePath);
-                var response =_serverRequestCommunicator.ReceiveResponse<UploadResponse>();
+                _requestDispatcher.SendRequest(new UploadRequest { FilePath = Path.Combine(targetDirectory, fileName) });
+                _requestDispatcher.SendFile(sourceFilePath);
+                var response =_requestDispatcher.ReceiveResponse<UploadResponse>();
                 return response.FilePath;
             }
         }
         public void CloseConnection()
         {
             lock (_locker) {
-                _serverRequestCommunicator.Close();
+                _requestDispatcher.Close();
             }
         }
     }

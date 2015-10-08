@@ -3,12 +3,12 @@ using ConnectUs.Business.Connections;
 
 namespace ConnectUs.ServerSide
 {
-    public class ServerRequestCommunicator : IServerRequestCommunicator
+    public class RequestDispatcher : IRequestDispatcher
     {
         private readonly IConnection _connection;
         private readonly IRequestParser _requestParser;
 
-        public ServerRequestCommunicator(IConnection connection, IRequestParser requestParser)
+        public RequestDispatcher(IConnection connection, IRequestParser requestParser)
         {
             _connection = connection;
             _requestParser = requestParser;

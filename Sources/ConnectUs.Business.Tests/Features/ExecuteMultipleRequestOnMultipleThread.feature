@@ -13,8 +13,8 @@ Background:
 		And A client request handler
 		And A continuous client request processor
 		# server side
-		And A server request communicator
-		And A remote client on the request processor
+		And A server request dispatcher
+		And A remote client on the server request dispatcher
 
 Scenario: Send multiple requests on multiple thread get correct response
 	Given A mocked client request processor that returns echo
