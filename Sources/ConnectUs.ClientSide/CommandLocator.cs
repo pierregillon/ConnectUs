@@ -23,10 +23,6 @@ namespace ConnectUs.ClientSide
             _moduleManager.ModuleLoaded += ModuleManagerOnModuleLoaded;
             _moduleManager.ModuleUnloaded += ModuleManagerOnModuleUnloaded;
 
-            foreach (var module in _moduleManager.GetModules()) {
-                LoadCommandsFromModule(module);
-            }
-
             _defaultCommands.Add(typeof(GetClientInformationRequest).Name, new GetInformationCommand());
             _defaultCommands.Add(typeof(PingRequest).Name, new PingCommand());
             _defaultCommands.Add(typeof(AddModuleRequest).Name, new AddModuleCommand(_moduleManager));

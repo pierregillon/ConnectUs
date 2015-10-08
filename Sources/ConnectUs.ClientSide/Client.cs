@@ -1,7 +1,5 @@
 ﻿using System;
-using ConnectUs.Business;
 using ConnectUs.Business.Connections;
-using ConnectUs.ClientSide.ModuleManagement;
 
 namespace ConnectUs.ClientSide
 {
@@ -25,14 +23,7 @@ namespace ConnectUs.ClientSide
         }
 
         // ----- Constructors
-        static Client()
-        {
-            InitIoc();
-        }
-        public Client() : this(Ioc.Instance.GetInstance<IContinuousRequestProcessor>(), Ioc.Instance.GetInstance<IClientInformation>())
-        {
-        }
-        private Client(IContinuousRequestProcessor continuousRequestProcessor, IClientInformation clientInformation)
+        public Client(IContinuousRequestProcessor continuousRequestProcessor, IClientInformation clientInformation)
         {
             _clientInformation = clientInformation;
             _continuousRequestProcessor = continuousRequestProcessor;
@@ -59,18 +50,6 @@ namespace ConnectUs.ClientSide
             _continuousRequestProcessor.StopProcessingRequestFromConnection();
             OnClientDisconnected();
             _clientInformation.CurrentConnection = null;
-        }
-
-        // ----- Utils
-        private static void InitIoc()
-        {
-            Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
-            Ioc.Instance.Register<IClientRequestProcessor, ClientRequestProcessor>();
-            Ioc.Instance.Register<IClientRequestHandler, ClientRequestHandler>();
-            Ioc.Instance.Register<ICommandLocator, CommandLocator>();
-            Ioc.Instance.Register<IModuleManager, ModuleManager>();
-            Ioc.Instance.Register<IRequestParser, JsonRequestParser>();
-            Ioc.Instance.RegisterSingle<IClientInformation, ClientInformation>();
         }
     }
 }
