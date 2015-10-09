@@ -10,6 +10,7 @@ namespace ConnectUs.ServerSide.Command
         private readonly IRemoteClientListener _remoteClientListener;
         private readonly List<ClientViewModel> _clientViewModels = new List<ClientViewModel>();
         private readonly Timer _timer;
+        private bool _pinging = false;
 
         public ClientList(IRemoteClientListener remoteClientListener)
         {
@@ -26,8 +27,16 @@ namespace ConnectUs.ServerSide.Command
         }
         private void Callback(object state)
         {
-            foreach (var clientViewModel in _clientViewModels.ToArray()) {
-                clientViewModel.Ping();
+            if (_pinging == false) {
+                try {
+                    _pinging = true;
+                    foreach (var clientViewModel in _clientViewModels.ToArray()) {
+                        clientViewModel.Ping();
+                    }
+                }
+                finally {
+                    _pinging = false;
+                }
             }
         }
 

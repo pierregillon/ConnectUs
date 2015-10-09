@@ -37,13 +37,35 @@ namespace ConnectUs.ServerSide.Clients
             }
             lock (_locker) {
                 try {
-                    _requestDispatcher.SendRequest(new UploadRequest { FilePath = Path.Combine(targetDirectory, fileName) });
+                    _requestDispatcher.SendRequest(new UploadRequest {FilePath = Path.Combine(targetDirectory, fileName)});
                     _requestDispatcher.SendFile(sourceFilePath);
-                    var response =_requestDispatcher.ReceiveResponse<UploadResponse>();
+                    var response = _requestDispatcher.ReceiveResponse<UploadResponse>();
                     return response.FilePath;
                 }
                 catch (RequestException ex) {
                     throw new RemoteClientException(string.Format("An error occured during the upload of {0}.", Path.GetFileName(sourceFilePath)), ex);
+                }
+            }
+        }
+        public string DownloadFile(string remoteFilePath, string localFolder)
+        {
+            var remoteFileName = Path.GetFileName(remoteFilePath);
+            if (string.IsNullOrEmpty(remoteFileName)) {
+                throw new Exception("The remote file path is not a file.");
+            }
+            if (Directory.Exists(localFolder) == false) {
+                Directory.CreateDirectory(localFolder);
+            }
+            var localFilePath = Path.Combine(localFolder, remoteFileName);
+            lock (_locker) {
+                try {
+                    _requestDispatcher.SendRequest(new DownloadRequest { FilePath = remoteFilePath });
+                    _requestDispatcher.ReceiveFile(localFilePath);
+                    var response = _requestDispatcher.ReceiveResponse<DownloadResponse>();
+                    return response.RemoteFilePath;
+                }
+                catch (RequestException ex) {
+                    throw new RemoteClientException(string.Format("An error occured during the download of {0}.", Path.GetFileName(remoteFilePath)), ex);
                 }
             }
         }

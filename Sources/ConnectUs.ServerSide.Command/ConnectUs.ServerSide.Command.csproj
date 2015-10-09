@@ -50,6 +50,7 @@
     <Compile Include="CommandDescriptionAttribute.cs" />
     <Compile Include="CommandLine.cs" />
     <Compile Include="CommandLines\ConnectClient.cs" />
+    <Compile Include="CommandLines\Default\DownloadFile.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="CommandLines\CurrentClientCommand.cs" />
     <Compile Include="CommandLines\DisconnectClient.cs" />

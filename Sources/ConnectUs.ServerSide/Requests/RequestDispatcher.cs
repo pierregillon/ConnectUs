@@ -43,6 +43,11 @@ namespace ConnectUs.ServerSide.Requests
             var uploader = new Uploader(_connection);
             uploader.Upload(filePath);
         }
+        public void ReceiveFile(string filePath)
+        {
+            var downloader = new Downloader(_connection);
+            downloader.Download(filePath);
+        }
         public void Close()
         {
             _connection.Close();

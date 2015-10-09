@@ -13,19 +13,18 @@ namespace ConnectUs.Business.Connections
 
         public void Download(string filePath)
         {
-            if (File.Exists(filePath)) {
-                File.Delete(filePath);
-            }
-            
+            RemoveFileIfExists(filePath);
 
-            DownloadInternal(filePath);
-        }
-
-        private void DownloadInternal(string filePath)
-        {
             _connection.Send(new byte[1]);
             using (var stream = File.OpenWrite(filePath)) {
                 _connection.Read(stream);
+            }
+        }
+
+        private static void RemoveFileIfExists(string filePath)
+        {
+            if (File.Exists(filePath)) {
+                File.Delete(filePath);
             }
         }
     }

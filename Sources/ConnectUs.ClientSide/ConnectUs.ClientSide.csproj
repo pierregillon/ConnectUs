@@ -70,6 +70,9 @@
     <Compile Include="Commands\Ping\PingCommand.cs" />
     <Compile Include="Commands\Ping\PingRequest.cs" />
     <Compile Include="Commands\Ping\PingResponse.cs" />
+    <Compile Include="Commands\Upload\DownloadCommand.cs" />
+    <Compile Include="Commands\Upload\DownloadRequest.cs" />
+    <Compile Include="Commands\Upload\DownloadResponse.cs" />
     <Compile Include="Commands\Upload\UploadCommand.cs" />
     <Compile Include="Commands\Upload\UploadResponse.cs" />
     <Compile Include="Commands\Upload\UploadRequest.cs" />
