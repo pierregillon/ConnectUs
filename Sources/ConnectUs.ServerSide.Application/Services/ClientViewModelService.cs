@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading;
 using ConnectUs.ServerSide.Application.ViewModels;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.Services
 {

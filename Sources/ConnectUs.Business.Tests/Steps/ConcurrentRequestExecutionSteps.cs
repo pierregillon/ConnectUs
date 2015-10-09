@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ConnectUs.Business.Tests.Mocks;
 using ConnectUs.ServerSide;
+using ConnectUs.ServerSide.Clients;
 using NFluent;
 using TechTalk.SpecFlow;
 

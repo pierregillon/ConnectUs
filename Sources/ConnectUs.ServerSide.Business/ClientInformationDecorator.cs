@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Threading;
 using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ClientSide.Commands.Ping;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Business
 {
@@ -26,13 +26,10 @@ namespace ConnectUs.ServerSide.Business
                 _watch.Start();
                 var response = _remoteClient.Send<PingRequest, PingResponse>(new PingRequest());
                 if (response.Value != "OK") {
-                    throw new ClientException("An error occured during a ping. The value is invalid.");
+                    throw new Clients.RemoteClientException("An error occured during a ping. The value is invalid.");
                 }
                 _watch.Stop();
                 return (int) _watch.ElapsedMilliseconds;
-            }
-            catch (RequestException ex) {
-                throw new ClientException("An error occured during the ping request", ex);
             }
             finally {
                 _watch.Reset();

@@ -1,9 +1,9 @@
 ﻿using ConnectUs.Business;
 using ConnectUs.Business.Connections;
 
-namespace ConnectUs.ServerSide
+namespace ConnectUs.ServerSide.Requests
 {
-    public class RequestDispatcher : IRequestDispatcher
+    internal class RequestDispatcher : IRequestDispatcher
     {
         private readonly IConnection _connection;
         private readonly IRequestParser _requestParser;

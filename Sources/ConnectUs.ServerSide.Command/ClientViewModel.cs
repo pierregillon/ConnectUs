@@ -1,5 +1,6 @@
 ﻿using System;
 using ConnectUs.ServerSide.Business;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command
 {

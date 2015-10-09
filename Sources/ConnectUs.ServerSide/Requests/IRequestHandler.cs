@@ -1,6 +1,6 @@
-﻿namespace ConnectUs.ServerSide
+﻿namespace ConnectUs.ServerSide.Requests
 {
-    public interface IRequestHandler
+    internal interface IRequestHandler
     {
         TResponse Execute<TRequest, TResponse>(TRequest request);
     }

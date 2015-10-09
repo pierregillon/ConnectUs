@@ -1,5 +1,6 @@
 ﻿using System;
 using ConnectUs.ServerSide;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.Business.Tests.Mocks
 {
@@ -28,11 +29,11 @@ namespace ConnectUs.Business.Tests.Mocks
             throw new NotImplementedException();
         }
 
-        public void AddClient(RemoteClient remoteClient)
+        public void AddClient(IRemoteClient remoteClient)
         {
             OnClientConnected(new RemoteClientConnectedEventArgs(remoteClient));
         }
-        public void RemoveClient(RemoteClient remoteClient)
+        public void RemoveClient(IRemoteClient remoteClient)
         {
             OnClientDisconnected(new RemoteClientDisconnectedEventArgs(remoteClient));
         }

@@ -3,6 +3,7 @@ using System.Threading;
 using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
 using ConnectUs.ServerSide.Business;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
 {
@@ -61,7 +62,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels
                     Thread.Sleep(5000);
                 }
             }
-            catch (ClientException) {
+            catch (RemoteClientException) {
                 _remoteClient.Close();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ConnectUs.FileExplorer;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
 {

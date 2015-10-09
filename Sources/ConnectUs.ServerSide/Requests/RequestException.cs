@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ConnectUs.ServerSide
+namespace ConnectUs.ServerSide.Requests
 {
-    public class RequestException : Exception
+    internal class RequestException : Exception
     {
         public RequestException(string message, Exception exception) : base(message, exception)
         {

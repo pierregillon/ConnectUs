@@ -1,5 +1,6 @@
 ﻿using ConnectUs.ClientSide.Commands.GetClientInformation;
-using ConnectUs.ServerSide;
+using ConnectUs.ServerSide.Clients;
+using ConnectUs.ServerSide.Requests;
 using Moq;
 using NFluent;
 using TechTalk.SpecFlow;
@@ -14,7 +15,7 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IRemoteClient>("RemoteClient"); }
             set { ScenarioContext.Current.Add("RemoteClient", value); }
         }
-        public IRequestDispatcher RequestDispatcher
+        internal IRequestDispatcher RequestDispatcher
         {
             get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
             set { ScenarioContext.Current.Add("RequestDispatcher", value); }
@@ -24,9 +25,9 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<GetClientInformationResponse>("GetClientInformationResponse"); }
             set { ScenarioContext.Current.Add("GetClientInformationResponse", value); }
         }
-        public ClientException Exception
+        public RemoteClientException Exception
         {
-            get { return ScenarioContext.Current.Get<ClientException>("Exception"); }
+            get { return ScenarioContext.Current.Get<RemoteClientException>("Exception"); }
             set { ScenarioContext.Current.Add("Exception", value); }
         }
         public object Response
@@ -56,7 +57,7 @@ namespace ConnectUs.Business.Tests.Steps
             try {
                 GetClientInformationResponse = RemoteClient.Send<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
             }
-            catch (ClientException ex) {
+            catch (RemoteClientException ex) {
                 Exception = ex;
             }
         }

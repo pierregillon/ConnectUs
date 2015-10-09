@@ -1,5 +1,5 @@
 ﻿
-namespace ConnectUs.ServerSide
+namespace ConnectUs.ServerSide.Clients
 {
     public interface IRemoteClient
     {

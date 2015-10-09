@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

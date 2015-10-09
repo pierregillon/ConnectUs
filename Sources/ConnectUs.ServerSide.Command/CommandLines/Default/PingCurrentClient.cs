@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using ConnectUs.ClientSide.Commands.Ping;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Default
 {

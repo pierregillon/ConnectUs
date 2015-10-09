@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ConnectUs.ServerSide.Clients;
 using ConnectUs.ServerSide.Decorators;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Module

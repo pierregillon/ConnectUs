@@ -1,7 +1,7 @@
 ﻿using System;
 using ConnectUs.Business.Connections;
 using ConnectUs.ClientSide.Commands.GetClientInformation;
-using ConnectUs.ServerSide;
+using ConnectUs.ServerSide.Requests;
 using NFluent;
 using TechTalk.SpecFlow;
 
@@ -20,7 +20,7 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
             set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
-        public IRequestDispatcher RequestDispatcher
+        internal IRequestDispatcher RequestDispatcher
         {
             get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
             set { ScenarioContext.Current.Set(value, "RequestDispatcher"); }

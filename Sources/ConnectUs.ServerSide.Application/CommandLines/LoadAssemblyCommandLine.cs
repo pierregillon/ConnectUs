@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using ConnectUs.ClientSide.Commands.Module;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

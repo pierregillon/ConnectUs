@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Server
 {

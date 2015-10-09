@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ConnectUs.ServerSide.Clients;
 using ConnectUs.ServerSide.Decorators;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Module

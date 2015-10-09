@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using ConnectUs.Business;
 using ConnectUs.Business.Connections;
+using ConnectUs.ServerSide.Requests;
 
-namespace ConnectUs.ServerSide
+namespace ConnectUs.ServerSide.Clients
 {
-    public class RemoteClientListener : IRemoteClientListener
+    internal class RemoteClientListener : IRemoteClientListener
     {
         private readonly IConnectionListener _connectionListener;
         private readonly Dictionary<IConnection, IRemoteClient> _connectedClients = new Dictionary<IConnection, IRemoteClient>();

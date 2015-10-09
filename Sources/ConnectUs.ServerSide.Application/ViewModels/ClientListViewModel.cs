@@ -2,6 +2,7 @@
 using ConnectUs.ServerSide.Application.Services;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
 using ConnectUs.ServerSide.Application.ViewModels.Messages;
+using ConnectUs.ServerSide.Clients;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 

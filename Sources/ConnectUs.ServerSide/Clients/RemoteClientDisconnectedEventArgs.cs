@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConnectUs.ServerSide
+namespace ConnectUs.ServerSide.Clients
 {
     public class RemoteClientDisconnectedEventArgs : EventArgs
     {

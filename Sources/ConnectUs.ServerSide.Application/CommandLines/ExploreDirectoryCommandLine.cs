@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ConnectUs.FileExplorer;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

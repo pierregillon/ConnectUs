@@ -1,4 +1,6 @@
-﻿namespace ConnectUs.ServerSide.Command.CommandLines
+﻿using ConnectUs.ServerSide.Clients;
+
+namespace ConnectUs.ServerSide.Command.CommandLines
 {
     public abstract class CurrentClientCommand : ICommandLineHandler
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using ConnectUs.Business.Connections;
+using ConnectUs.ServerSide.Clients;
 using ConnectUs.ServerSide.Command.CommandLines;
 using SimpleInjector;
 
@@ -37,8 +38,7 @@ namespace ConnectUs.ServerSide.Command
         private static Container ConfigureIoc()
         {
             var container = new Container();
-            container.RegisterSingleton<IRemoteClientListener, RemoteClientListener>();
-            container.RegisterSingleton<IConnectionListener, TcpClientConnectionListener>();
+            container.RegisterSingleton(() => new RemoteClientListenerFactory().Build());
             container.RegisterSingleton<CommandLineProcessor>();
             container.RegisterSingleton<ICommandLineHandlerLocator>(() => new CommandLineHandlerLocator(container));
             container.RegisterSingleton<Context>();

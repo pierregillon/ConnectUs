@@ -1,5 +1,5 @@
-﻿using ConnectUs.Business.Connections;
-using ConnectUs.ServerSide.Application.Services;
+﻿using ConnectUs.ServerSide.Application.Services;
+using ConnectUs.ServerSide.Clients;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace ConnectUs.ServerSide.Application.ViewModels.Base
@@ -9,8 +9,7 @@ namespace ConnectUs.ServerSide.Application.ViewModels.Base
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic == false) {
-                SimpleIoc.Default.Register<IRemoteClientListener, RemoteClientListener>();
-                SimpleIoc.Default.Register<IConnectionListener, TcpClientConnectionListener>();
+                SimpleIoc.Default.Register(() => new RemoteClientListenerFactory().Build());
                 SimpleIoc.Default.Register<IViewModelBuilder, ViewModelBuilder>();
                 SimpleIoc.Default.Register<IClientCommandService, ClientCommandService>();
                 SimpleIoc.Default.Register<IClientViewModelService, ClientViewModelService>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using ConnectUs.ClientSide.Commands.Module;
+using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Decorators
 {
