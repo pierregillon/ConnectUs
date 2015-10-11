@@ -21,7 +21,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             for (var index = 0; index < clients.Count; index++)
             {
                 var client = clients[index];
-                elements.Add(string.Format("{0}\t{1}\t{2}\t{3}ms", index + 1, client.MachineName, client.Ip, client.Latency));
+                elements.Add(string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}ms", index + 1, client.MachineName, client.UserName, client.OperatingSystem, client.Ip, client.Latency));
             }
             return string.Join(Environment.NewLine, elements.ToArray());
         }

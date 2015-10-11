@@ -11,6 +11,9 @@ namespace ConnectUs.ServerSide.Command
         public string Ip { get; private set; }
         public string MachineName { get; private set; }
         public int Latency { get; private set; }
+        public string OperatingSystem { get; set; }
+        public string UserName { get; set; }
+
         public IRemoteClient RemoteClient { get; private set; }
 
         public ClientViewModel(IRemoteClient remoteClient)
@@ -41,6 +44,8 @@ namespace ConnectUs.ServerSide.Command
                 var information = _clientInformationDecorator.GetClientInformation();
                 Ip = information.Ip;
                 MachineName = information.MachineName;
+                UserName = information.UserName;
+                OperatingSystem = information.OperatingSystem;
             }
             catch (Exception) {
                 RemoteClient.Close();

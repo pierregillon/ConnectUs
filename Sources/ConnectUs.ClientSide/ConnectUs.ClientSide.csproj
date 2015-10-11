@@ -53,8 +53,12 @@
     <Compile Include="ClientRequestProcessor.cs" />
     <Compile Include="Commands\GetClientInformation\GetClientInformationRequest.cs" />
     <Compile Include="Commands\GetClientInformation\GetClientInformationResponse.cs" />
+    <Compile Include="Commands\GetClientInformation\GetFullClientInformationRequest.cs" />
+    <Compile Include="Commands\GetClientInformation\GetFullClientInformationResponse.cs" />
+    <Compile Include="Commands\GetClientInformation\GetFullInformationCommand.cs" />
     <Compile Include="Commands\GetClientInformation\GetInformationCommand.cs" />
     <Compile Include="Commands\GetClientInformation\NetHelper.cs" />
+    <Compile Include="Commands\GetClientInformation\NetworkInformation.cs" />
     <Compile Include="Commands\Module\AddModuleCommand.cs" />
     <Compile Include="Commands\Module\AddModuleRequest.cs" />
     <Compile Include="Commands\Module\AddModuleResponse.cs" />

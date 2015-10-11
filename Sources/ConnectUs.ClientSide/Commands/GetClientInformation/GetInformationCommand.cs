@@ -17,7 +17,9 @@ namespace ConnectUs.ClientSide.Commands.GetClientInformation
             return new GetClientInformationResponse
             {
                 Ip = PublicIp,
-                MachineName = Environment.MachineName
+                MachineName = Environment.MachineName,
+                OperatingSystem = Environment.OSVersion.Platform.ToString(),
+                UserName = Environment.UserName,
             };
         }
     }

@@ -20,13 +20,17 @@ namespace ConnectUs.ServerSide.Business
             return _remoteClient.Send<GetClientInformationRequest, GetClientInformationResponse>(new GetClientInformationRequest());
         }
 
+        public GetFullClientInformationResponse GetFullClientInformation()
+        {
+            return _remoteClient.Send<GetFullClientInformationRequest, GetFullClientInformationResponse>(new GetFullClientInformationRequest());
+        }
         public int Ping()
         {
             try {
                 _watch.Start();
                 var response = _remoteClient.Send<PingRequest, PingResponse>(new PingRequest());
                 if (response.Value != "OK") {
-                    throw new Clients.RemoteClientException("An error occured during a ping. The value is invalid.");
+                    throw new RemoteClientException("An error occured during a ping. The value is invalid.");
                 }
                 _watch.Stop();
                 return (int) _watch.ElapsedMilliseconds;

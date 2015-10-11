@@ -30,6 +30,7 @@ namespace ConnectUs.ClientSide
             }
 
             _defaultCommands.Add(typeof(GetClientInformationRequest).Name, new GetInformationCommand());
+            _defaultCommands.Add(typeof(GetFullClientInformationRequest).Name, new GetFullInformationCommand());
             _defaultCommands.Add(typeof(PingRequest).Name, new PingCommand());
             _defaultCommands.Add(typeof(AddModuleRequest).Name, new AddModuleCommand(_moduleManager));
             _defaultCommands.Add(typeof(ListModuleRequest).Name, new ListModuleCommand(_moduleManager));
