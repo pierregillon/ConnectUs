@@ -54,6 +54,7 @@
     <Compile Include="Commands\GetClientInformation\GetClientInformationRequest.cs" />
     <Compile Include="Commands\GetClientInformation\GetClientInformationResponse.cs" />
     <Compile Include="Commands\GetClientInformation\GetInformationCommand.cs" />
+    <Compile Include="Commands\GetClientInformation\NetHelper.cs" />
     <Compile Include="Commands\Module\AddModuleCommand.cs" />
     <Compile Include="Commands\Module\AddModuleRequest.cs" />
     <Compile Include="Commands\Module\AddModuleResponse.cs" />

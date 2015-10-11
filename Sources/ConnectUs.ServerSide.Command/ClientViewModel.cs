@@ -18,9 +18,8 @@ namespace ConnectUs.ServerSide.Command
             RemoteClient = remoteClient;
 
             _clientInformationDecorator = new ClientInformationDecorator(RemoteClient);
-            var information = _clientInformationDecorator.GetClientInformation();
-            Ip = information.Ip;
-            MachineName = information.MachineName;
+
+            UpdateInformation();
         }
 
         public bool Match(IRemoteClient remoteClient)
@@ -31,6 +30,17 @@ namespace ConnectUs.ServerSide.Command
         {
             try {
                 Latency = _clientInformationDecorator.Ping();
+            }
+            catch (Exception) {
+                RemoteClient.Close();
+            }
+        }
+        public void UpdateInformation()
+        {
+            try {
+                var information = _clientInformationDecorator.GetClientInformation();
+                Ip = information.Ip;
+                MachineName = information.MachineName;
             }
             catch (Exception) {
                 RemoteClient.Close();

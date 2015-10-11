@@ -1,7 +1,5 @@
 ﻿using System;
-using ConnectUs.Business.Connections;
 using ConnectUs.ServerSide.Clients;
-using ConnectUs.ServerSide.Command.CommandLines;
 using SimpleInjector;
 
 namespace ConnectUs.ServerSide.Command
