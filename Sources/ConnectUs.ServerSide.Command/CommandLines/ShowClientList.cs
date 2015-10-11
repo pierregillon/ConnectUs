@@ -16,12 +16,17 @@ namespace ConnectUs.ServerSide.Command.CommandLines
 
         public string Handle(CommandLine commandLine)
         {
-            var elements = new List<string> { "Connected clients : " };
+            var elements = new List<string> {"Connected clients : "};
             var clients = _clientList.GetClients().ToList();
-            for (var index = 0; index < clients.Count; index++)
-            {
+            for (var index = 0; index < clients.Count; index++) {
                 var client = clients[index];
-                elements.Add(string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}ms", index + 1, client.MachineName, client.UserName, client.OperatingSystem, client.Ip, client.Latency));
+                elements.Add(string.Format("{0} {1} {2} {3} {4} {5}",
+                    (index + 1).ToString().PadRight(3),
+                    client.MachineName.PadRight(15),
+                    client.UserName.PadRight(15),
+                    client.OperatingSystem.PadRight(15),
+                    (client.Ip ?? string.Empty).PadRight(15),
+                    (client.Latency + "ms").PadLeft(5)));
             }
             return string.Join(Environment.NewLine, elements.ToArray());
         }
