@@ -65,6 +65,9 @@ namespace ConnectUs.ServerSide.Clients
                     return response.RemoteFilePath;
                 }
                 catch (RequestException ex) {
+                    if (File.Exists(localFilePath)) {
+                        File.Delete(localFilePath);
+                    }
                     throw new RemoteClientException(string.Format("An error occured during the download of {0}.", Path.GetFileName(remoteFilePath)), ex);
                 }
             }
