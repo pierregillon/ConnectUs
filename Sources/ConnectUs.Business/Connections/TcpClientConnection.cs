@@ -10,17 +10,13 @@ namespace ConnectUs.Business.Connections
     {
         private const int StreamBufferSize = 2048;
         private const int ReadBufferSize = 1024;
+        private const int DefaultTimeout = 1000;
 
         private readonly TcpClient _client;
 
         public int TimeOut
         {
             get { return _client.ReceiveTimeout; }
-            set
-            {
-                _client.ReceiveTimeout = value;
-                _client.SendTimeout = value;
-            }
         }
 
         public event EventHandler Disconnected;
@@ -31,9 +27,11 @@ namespace ConnectUs.Business.Connections
         }
 
         // ----- Constructors
-        public TcpClientConnection(TcpClient client)
+        public TcpClientConnection(TcpClient client, int timeout = DefaultTimeout)
         {
             _client = client;
+            _client.ReceiveTimeout = timeout;
+            _client.SendTimeout = timeout;
         }
 
         // ----- Public methods

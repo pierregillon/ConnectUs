@@ -4,7 +4,7 @@ namespace ConnectUs.Business.Connections
 {
     public interface IConnection
     {
-        int TimeOut { get; set; }
+        int TimeOut { get; }
         void Send(byte[] data);
         void Send(Stream stream);
         byte[] Read();

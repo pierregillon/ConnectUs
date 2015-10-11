@@ -1,5 +1,4 @@
 ﻿using System.Net.Sockets;
-using ConnectUs.Business.Encodings;
 
 namespace ConnectUs.Business.Connections
 {
@@ -10,8 +9,7 @@ namespace ConnectUs.Business.Connections
             try {
                 var client = new TcpClient();
                 client.Connect(hostName, port);
-                var connection = new TcpClientConnection(client);
-                connection.TimeOut = timeout;
+                var connection = new TcpClientConnection(client, timeout);
                 return connection;
             }
             catch (SocketException ex) {
