@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using ConnectUs.Business.Connections;
+using ConnectUs.Modules.Integrated.FileTransfert;
 
 namespace ConnectUs.ClientSide.Commands.Upload
 {
-    public class UploadCommand
+    internal class UploadCommand
     {
         private readonly IClientInformation _clientInformation;
 

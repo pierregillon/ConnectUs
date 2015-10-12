@@ -1,8 +1,9 @@
 ﻿using ConnectUs.ClientSide.ModuleManagement;
+using ConnectUs.Modules.Integrated.ModuleManagement;
 
 namespace ConnectUs.ClientSide.Commands.Module
 {
-    public class UnloadModuleCommand
+    internal class UnloadModuleCommand
     {
         private readonly IModuleManager _moduleManager;
 

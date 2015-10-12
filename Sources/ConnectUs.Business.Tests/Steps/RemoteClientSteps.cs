@@ -1,4 +1,4 @@
-﻿using ConnectUs.ClientSide.Commands.GetClientInformation;
+﻿using ConnectUs.Modules.Integrated.GetClientInformation;
 using ConnectUs.ServerSide.Clients;
 using ConnectUs.ServerSide.Requests;
 using Moq;
@@ -15,7 +15,7 @@ namespace ConnectUs.Business.Tests.Steps
             get { return ScenarioContext.Current.Get<IRemoteClient>("RemoteClient"); }
             set { ScenarioContext.Current.Add("RemoteClient", value); }
         }
-        internal IRequestDispatcher RequestDispatcher
+        public IRequestDispatcher RequestDispatcher
         {
             get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
             set { ScenarioContext.Current.Add("RequestDispatcher", value); }

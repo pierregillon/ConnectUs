@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.ClientSide.Commands.Module
+﻿namespace ConnectUs.Modules.Integrated.ModuleManagement
 {
     public class ModuleState
     {

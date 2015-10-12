@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</ProjectGuid>
+    <ProjectGuid>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConnectUs.ServerSide.Business</RootNamespace>
-    <AssemblyName>ConnectUs.ServerSide.Business</AssemblyName>
+    <RootNamespace>ConnectUs.Modules.Integrated</RootNamespace>
+    <AssemblyName>ConnectUs.Modules.Integrated</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,27 +29,41 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientInformationDecorator.cs" />
-    <Compile Include="ModuleDecorator.cs" />
+    <Compile Include="FileTransfert\DownloadRequest.cs" />
+    <Compile Include="FileTransfert\DownloadResponse.cs" />
+    <Compile Include="FileTransfert\UploadRequest.cs" />
+    <Compile Include="FileTransfert\UploadResponse.cs" />
+    <Compile Include="GetClientInformation\GetClientInformationRequest.cs" />
+    <Compile Include="GetClientInformation\GetClientInformationResponse.cs" />
+    <Compile Include="GetFullClientInformation\GetFullClientInformationRequest.cs" />
+    <Compile Include="GetFullClientInformation\GetFullClientInformationResponse.cs" />
+    <Compile Include="GetFullClientInformation\GetFullInformationCommand.cs" />
+    <Compile Include="GetClientInformation\GetInformationCommand.cs" />
+    <Compile Include="ModuleManagement\AddModuleRequest.cs" />
+    <Compile Include="ModuleManagement\AddModuleResponse.cs" />
+    <Compile Include="ModuleManagement\ListModuleRequest.cs" />
+    <Compile Include="ModuleManagement\ListModuleResponse.cs" />
+    <Compile Include="ModuleManagement\LoadModuleRequest.cs" />
+    <Compile Include="ModuleManagement\LoadModuleResponse.cs" />
+    <Compile Include="ModuleManagement\ModuleState.cs" />
+    <Compile Include="ModuleManagement\UnloadModuleRequest.cs" />
+    <Compile Include="ModuleManagement\UnloadModuleResponse.cs" />
+    <Compile Include="NetHelper.cs" />
+    <Compile Include="NetworkInformation.cs" />
+    <Compile Include="Ping\PingCommand.cs" />
+    <Compile Include="Ping\PingRequest.cs" />
+    <Compile Include="Ping\PingResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
-      <Project>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</Project>
-      <Name>ConnectUs.Modules.Integrated</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
-      <Project>{A5ACF831-6303-45A6-BF03-2B85359CAFBA}</Project>
-      <Name>ConnectUs.ServerSide</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

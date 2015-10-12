@@ -1,6 +1,6 @@
 ﻿namespace ConnectUs.ServerSide.Requests
 {
-    internal interface IRequestDispatcher
+    public interface IRequestDispatcher
     {
         void SendRequest<TRequest>(TRequest request);
         TResponse ReceiveResponse<TResponse>();

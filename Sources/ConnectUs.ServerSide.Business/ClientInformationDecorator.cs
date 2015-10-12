@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
-using ConnectUs.ClientSide.Commands.GetClientInformation;
-using ConnectUs.ClientSide.Commands.Ping;
+using ConnectUs.Modules.Integrated.GetClientInformation;
+using ConnectUs.Modules.Integrated.GetFullClientInformation;
+using ConnectUs.Modules.Integrated.Ping;
 using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Business
 {
-    public class ClientInformationDecorator
+    internal class ClientInformationDecorator
     {
         private readonly IRemoteClient _remoteClient;
         private readonly Stopwatch _watch = new Stopwatch();

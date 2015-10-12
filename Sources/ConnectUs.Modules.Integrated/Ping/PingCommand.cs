@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.ClientSide.Commands.Ping
+﻿namespace ConnectUs.Modules.Integrated.Ping
 {
     public class PingCommand
     {

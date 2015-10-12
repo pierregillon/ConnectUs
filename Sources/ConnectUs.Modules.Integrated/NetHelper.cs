@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 
-namespace ConnectUs.ClientSide.Commands.GetClientInformation
+namespace ConnectUs.Modules.Integrated
 {
     public class NetHelper
     {

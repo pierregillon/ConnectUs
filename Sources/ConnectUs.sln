@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.Business", "ConnectUs.Business\ConnectUs.Business.csproj", "{E8D6208B-FA4F-46CA-8226-E20343BF3D34}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.ServerSide.Command.Tests", "ConnectUs.ServerSide.Command.Tests\ConnectUs.ServerSide.Command.Tests.csproj", "{8ABE9201-0A67-4934-A010-C20871EFE79E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.ServerSide.Business", "ConnectUs.ServerSide.Business\ConnectUs.ServerSide.Business.csproj", "{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectUs.Modules.Integrated", "ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj", "{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,6 @@ Global
 		{9920928A-578D-4F3E-A18B-388F175F3B84} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
 		{671D76D7-BEE3-4BCD-923E-C09A4484F3FF} = {9920928A-578D-4F3E-A18B-388F175F3B84}
 		{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF} = {A7E7AFC4-BEB9-4F25-AFD5-517D41ADD35E}
+		{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB} = {9920928A-578D-4F3E-A18B-388F175F3B84}
 	EndGlobalSection
 EndGlobal

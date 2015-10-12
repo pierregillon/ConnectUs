@@ -1,6 +1,6 @@
 ﻿using System;
 using ConnectUs.Business.Connections;
-using ConnectUs.ClientSide.Commands.GetClientInformation;
+using ConnectUs.Modules.Integrated.GetClientInformation;
 using ConnectUs.ServerSide.Requests;
 using NFluent;
 using TechTalk.SpecFlow;

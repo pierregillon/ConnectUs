@@ -1,4 +1,4 @@
-using ConnectUs.ClientSide.Commands.GetClientInformation;
+using ConnectUs.Modules.Integrated.GetClientInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 

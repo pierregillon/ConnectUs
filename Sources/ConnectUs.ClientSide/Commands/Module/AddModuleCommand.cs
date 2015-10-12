@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using ConnectUs.ClientSide.ModuleManagement;
+using ConnectUs.Modules.Integrated.ModuleManagement;
 
 namespace ConnectUs.ClientSide.Commands.Module
 {
-    public class AddModuleCommand
+    internal class AddModuleCommand
     {
         private readonly IModuleManager _moduleManager;
         private const string ModuleDirectoryPath = "modules";

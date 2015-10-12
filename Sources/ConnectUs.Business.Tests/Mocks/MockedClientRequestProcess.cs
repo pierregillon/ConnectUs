@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using ConnectUs.ClientSide;
-using ConnectUs.ClientSide.Commands.GetClientInformation;
+using ConnectUs.Modules.Integrated.GetClientInformation;
 using Newtonsoft.Json;
 
 namespace ConnectUs.Business.Tests.Mocks

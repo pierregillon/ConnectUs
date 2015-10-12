@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConnectUs.ClientSide.Commands.GetClientInformation
+namespace ConnectUs.Modules.Integrated.GetFullClientInformation
 {
-    public class GetFullClientInformationResponse {
+    public class GetFullClientInformationResponse
+    {
         public string PublicIp { get; set; }
         public string MachineName { get; set; }
         public string OperatingSystem { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using ConnectUs.ClientSide.Commands.Upload;
+using ConnectUs.Modules.Integrated.FileTransfert;
 using ConnectUs.ServerSide.Requests;
 
 namespace ConnectUs.ServerSide.Clients

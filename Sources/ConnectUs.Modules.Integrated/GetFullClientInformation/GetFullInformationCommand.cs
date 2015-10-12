@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net.NetworkInformation;
+using ConnectUs.Modules.Integrated.GetClientInformation;
 
-namespace ConnectUs.ClientSide.Commands.GetClientInformation
+namespace ConnectUs.Modules.Integrated.GetFullClientInformation
 {
     public class GetFullInformationCommand
     {

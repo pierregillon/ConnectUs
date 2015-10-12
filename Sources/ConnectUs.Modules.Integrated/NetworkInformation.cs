@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConnectUs.ClientSide.Commands.GetClientInformation
+namespace ConnectUs.Modules.Integrated
 {
     public class NetworkInformation
     {

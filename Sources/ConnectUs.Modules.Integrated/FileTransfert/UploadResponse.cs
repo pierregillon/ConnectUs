@@ -1,4 +1,4 @@
-﻿namespace ConnectUs.ClientSide.Commands.Upload
+﻿namespace ConnectUs.Modules.Integrated.FileTransfert
 {
     public class UploadResponse
     {

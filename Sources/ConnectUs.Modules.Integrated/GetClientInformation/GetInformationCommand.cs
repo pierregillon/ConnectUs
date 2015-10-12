@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ConnectUs.ClientSide.Commands.GetClientInformation
+namespace ConnectUs.Modules.Integrated.GetClientInformation
 {
     public class GetInformationCommand
     {

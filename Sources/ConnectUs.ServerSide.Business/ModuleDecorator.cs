@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using ConnectUs.ClientSide.Commands.Module;
+using ConnectUs.Modules.Integrated.ModuleManagement;
 using ConnectUs.ServerSide.Clients;
 
-namespace ConnectUs.ServerSide.Decorators
+namespace ConnectUs.ServerSide.Business
 {
     public class ModuleDecorator
     {
@@ -30,7 +30,7 @@ namespace ConnectUs.ServerSide.Decorators
             var request = new LoadModuleRequest(moduleName);
             _remoteClient.Send<LoadModuleRequest, LoadModuleResponse>(request);
         }
-        public IEnumerable<ModuleState> GetIntalledModules()
+        internal IEnumerable<ModuleState> GetIntalledModules()
         {
             var request = new ListModuleRequest();
             var response = _remoteClient.Send<ListModuleRequest, ListModuleResponse>(request);

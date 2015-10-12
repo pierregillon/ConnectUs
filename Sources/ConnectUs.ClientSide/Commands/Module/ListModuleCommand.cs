@@ -1,9 +1,10 @@
 using System.Linq;
 using ConnectUs.ClientSide.ModuleManagement;
+using ConnectUs.Modules.Integrated.ModuleManagement;
 
 namespace ConnectUs.ClientSide.Commands.Module
 {
-    public class ListModuleCommand
+    internal class ListModuleCommand
     {
         private readonly IModuleManager _moduleManager;
         private const string ModuleDirectoryPath = "modules";

@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using ConnectUs.ClientSide.Commands.GetClientInformation;
 using ConnectUs.ClientSide.Commands.Module;
-using ConnectUs.ClientSide.Commands.Ping;
 using ConnectUs.ClientSide.Commands.Upload;
 using ConnectUs.ClientSide.ModuleManagement;
+using ConnectUs.Modules.Integrated.FileTransfert;
+using ConnectUs.Modules.Integrated.GetClientInformation;
+using ConnectUs.Modules.Integrated.GetFullClientInformation;
+using ConnectUs.Modules.Integrated.ModuleManagement;
+using ConnectUs.Modules.Integrated.Ping;
 using IModuleManager = ConnectUs.ClientSide.ModuleManagement.IModuleManager;
 
 namespace ConnectUs.ClientSide

@@ -46,41 +46,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\DownloadRequest.cs">
+      <Link>Commands\Upload\DownloadRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\DownloadResponse.cs">
+      <Link>Commands\Upload\DownloadResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\UploadRequest.cs">
+      <Link>Commands\Upload\UploadRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\UploadResponse.cs">
+      <Link>Commands\Upload\UploadResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetClientInformation\GetClientInformationRequest.cs">
+      <Link>Commands\GetClientInformationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetClientInformation\GetClientInformationResponse.cs">
+      <Link>Commands\GetClientInformationResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetClientInformation\GetInformationCommand.cs">
+      <Link>Commands\GetInformationCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetFullClientInformation\GetFullClientInformationRequest.cs">
+      <Link>Commands\GetFullClientInformationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetFullClientInformation\GetFullClientInformationResponse.cs">
+      <Link>Commands\GetFullClientInformationResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\GetFullClientInformation\GetFullInformationCommand.cs">
+      <Link>Commands\GetFullInformationCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\AddModuleRequest.cs">
+      <Link>Commands\Module\AddModuleRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\AddModuleResponse.cs">
+      <Link>Commands\Module\AddModuleResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ListModuleRequest.cs">
+      <Link>Commands\Module\ListModuleRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ListModuleResponse.cs">
+      <Link>Commands\Module\ListModuleResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\LoadModuleRequest.cs">
+      <Link>Commands\Module\LoadModuleRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\LoadModuleResponse.cs">
+      <Link>Commands\Module\LoadModuleResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ModuleState.cs">
+      <Link>Commands\Module\ModuleState.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\UnloadModuleRequest.cs">
+      <Link>Commands\Module\UnloadModuleRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\UnloadModuleResponse.cs">
+      <Link>Commands\Module\UnloadModuleResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\NetHelper.cs">
+      <Link>Commands\NetHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\NetworkInformation.cs">
+      <Link>Commands\NetworkInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\Ping\PingCommand.cs">
+      <Link>Commands\PingCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\Ping\PingRequest.cs">
+      <Link>Commands\PingRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Modules.Integrated\Ping\PingResponse.cs">
+      <Link>Commands\PingResponse.cs</Link>
+    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="ClientException.cs" />
     <Compile Include="ClientInformation.cs" />
     <Compile Include="ClientRequestHandler.cs" />
     <Compile Include="ClientRequestProcessor.cs" />
-    <Compile Include="Commands\GetClientInformation\GetClientInformationRequest.cs" />
-    <Compile Include="Commands\GetClientInformation\GetClientInformationResponse.cs" />
-    <Compile Include="Commands\GetClientInformation\GetFullClientInformationRequest.cs" />
-    <Compile Include="Commands\GetClientInformation\GetFullClientInformationResponse.cs" />
-    <Compile Include="Commands\GetClientInformation\GetFullInformationCommand.cs" />
-    <Compile Include="Commands\GetClientInformation\GetInformationCommand.cs" />
-    <Compile Include="Commands\GetClientInformation\NetHelper.cs" />
-    <Compile Include="Commands\GetClientInformation\NetworkInformation.cs" />
     <Compile Include="Commands\Module\AddModuleCommand.cs" />
-    <Compile Include="Commands\Module\AddModuleRequest.cs" />
-    <Compile Include="Commands\Module\AddModuleResponse.cs" />
     <Compile Include="Commands\Module\ListModuleCommand.cs" />
-    <Compile Include="Commands\Module\ListModuleRequest.cs" />
-    <Compile Include="Commands\Module\ListModuleResponse.cs" />
     <Compile Include="Commands\Module\LoadModuleCommand.cs" />
-    <Compile Include="Commands\Module\LoadModuleRequest.cs" />
-    <Compile Include="Commands\Module\LoadModuleResponse.cs" />
-    <Compile Include="Commands\Module\ModuleState.cs" />
     <Compile Include="Commands\Module\UnloadModuleCommand.cs" />
-    <Compile Include="Commands\Module\UnloadModuleRequest.cs" />
-    <Compile Include="Commands\Module\UnloadModuleResponse.cs" />
-    <Compile Include="Commands\Ping\PingCommand.cs" />
-    <Compile Include="Commands\Ping\PingRequest.cs" />
-    <Compile Include="Commands\Ping\PingResponse.cs" />
     <Compile Include="Commands\Upload\DownloadCommand.cs" />
-    <Compile Include="Commands\Upload\DownloadRequest.cs" />
-    <Compile Include="Commands\Upload\DownloadResponse.cs" />
     <Compile Include="Commands\Upload\UploadCommand.cs" />
-    <Compile Include="Commands\Upload\UploadResponse.cs" />
-    <Compile Include="Commands\Upload\UploadRequest.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />
     <Compile Include="IClientInformation.cs" />
     <Compile Include="IClientRequestHandler.cs" />
@@ -113,6 +161,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
