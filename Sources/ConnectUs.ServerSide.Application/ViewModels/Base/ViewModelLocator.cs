@@ -1,5 +1,5 @@
-﻿using ConnectUs.ServerSide.Application.Services;
-using ConnectUs.ServerSide.Clients;
+﻿using ConnectUs.Core.ServerSide.Clients;
+using ConnectUs.ServerSide.Application.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace ConnectUs.ServerSide.Application.ViewModels.Base

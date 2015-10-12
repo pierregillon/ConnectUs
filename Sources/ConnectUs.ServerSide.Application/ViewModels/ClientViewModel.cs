@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Application.CommandLines;
 using ConnectUs.ServerSide.Application.ViewModels.Base;
 using ConnectUs.ServerSide.Business;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.ViewModels
 {

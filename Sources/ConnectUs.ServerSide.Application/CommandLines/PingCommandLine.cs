@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Business;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

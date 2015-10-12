@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Application.ViewModels;
-using ConnectUs.ServerSide.Clients;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace ConnectUs.ServerSide.Application

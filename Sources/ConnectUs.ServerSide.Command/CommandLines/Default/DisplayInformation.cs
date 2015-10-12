@@ -1,6 +1,6 @@
 ﻿using System;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Business;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Default
 {

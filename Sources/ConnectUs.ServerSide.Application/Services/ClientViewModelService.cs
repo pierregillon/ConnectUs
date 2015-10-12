@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Application.ViewModels;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.Services
 {

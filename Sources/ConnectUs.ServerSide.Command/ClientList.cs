@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using ConnectUs.ServerSide.Clients;
+using ConnectUs.Core.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command
 {

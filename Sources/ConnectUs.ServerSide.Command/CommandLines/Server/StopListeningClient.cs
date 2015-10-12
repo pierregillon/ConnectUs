@@ -1,4 +1,4 @@
-﻿using ConnectUs.ServerSide.Clients;
+﻿using ConnectUs.Core.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Server
 {

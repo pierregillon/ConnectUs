@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Modules.Integrated.GetClientInformation;
 using ConnectUs.Modules.Integrated.GetFullClientInformation;
 using ConnectUs.Modules.Integrated.Ping;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Business
 {

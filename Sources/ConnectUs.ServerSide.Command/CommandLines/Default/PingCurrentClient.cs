@@ -1,5 +1,5 @@
-﻿using ConnectUs.ServerSide.Business;
-using ConnectUs.ServerSide.Clients;
+﻿using ConnectUs.Core.ServerSide.Clients;
+using ConnectUs.ServerSide.Business;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Default
 {

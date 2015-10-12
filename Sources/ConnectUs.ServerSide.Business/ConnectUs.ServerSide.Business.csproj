@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
+    <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
-      <Name>ConnectUs.Business</Name>
+      <Name>ConnectUs.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
       <Project>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</Project>

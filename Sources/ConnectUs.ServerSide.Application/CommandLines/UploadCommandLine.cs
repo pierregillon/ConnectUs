@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ConnectUs.ServerSide.Clients;
+using ConnectUs.Core.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

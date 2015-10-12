@@ -46,161 +46,161 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Client.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\Client.cs">
       <Link>Client.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ClientException.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ClientException.cs">
       <Link>ClientException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ClientInformation.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ClientInformation.cs">
       <Link>ClientInformation.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ClientRequestHandler.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ClientRequestHandler.cs">
       <Link>ClientRequestHandler.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ClientRequestProcessor.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ClientRequestProcessor.cs">
       <Link>ClientRequestProcessor.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\CommandLocator.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\CommandLocator.cs">
       <Link>CommandLocator.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ContinuousRequestProcessor.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\AddModuleCommand.cs">
+      <Link>Commands\AddModuleCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\DownloadCommand.cs">
+      <Link>Commands\DownloadCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\ListModuleCommand.cs">
+      <Link>Commands\ListModuleCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\LoadModuleCommand.cs">
+      <Link>Commands\LoadModuleCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\UnloadModuleCommand.cs">
+      <Link>Commands\UnloadModuleCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\Commands\UploadCommand.cs">
+      <Link>Commands\UploadCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ClientSide\ContinuousRequestProcessor.cs">
       <Link>ContinuousRequestProcessor.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\IClientInformation.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\IClientInformation.cs">
       <Link>IClientInformation.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\IClientRequestHandler.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\IClientRequestHandler.cs">
       <Link>IClientRequestHandler.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\IClientRequestProcessor.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\IClientRequestProcessor.cs">
       <Link>IClientRequestProcessor.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ICommandLocator.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ICommandLocator.cs">
       <Link>ICommandLocator.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\IContinuousRequestProcessor.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\IContinuousRequestProcessor.cs">
       <Link>IContinuousRequestProcessor.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\IModuleManager.cs">
-      <Link>ModuleManagement\IModuleManager.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\Module.cs">
-      <Link>ModuleManagement\Module.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\ModuleException.cs">
-      <Link>ModuleManagement\ModuleException.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\ModuleLoadedEventArgs.cs">
-      <Link>ModuleManagement\ModuleLoadedEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\ModuleManager.cs">
-      <Link>ModuleManagement\ModuleManager.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\ModuleName.cs">
-      <Link>ModuleManagement\ModuleName.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\ModuleUnloadedEventArgs.cs">
-      <Link>ModuleManagement\ModuleUnloadedEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ModuleManagement\Proxy.cs">
-      <Link>ModuleManagement\Proxy.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\AddModuleCommand.cs">
-      <Link>Commands\Module\AddModuleCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\DownloadCommand.cs">
-      <Link>Commands\Upload\DownloadCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\ListModuleCommand.cs">
-      <Link>Commands\Module\ListModuleCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\LoadModuleCommand.cs">
-      <Link>Commands\Module\LoadModuleCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\UnloadModuleCommand.cs">
-      <Link>Commands\Module\UnloadModuleCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\Module\UploadCommand.cs">
-      <Link>Commands\Upload\UploadCommand.cs</Link>
-    </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\NoRequestToProcessException.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\NoRequestToProcessException.cs">
       <Link>NoRequestToProcessException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ClientSide\ProcessException.cs">
+    <Compile Include="..\ConnectUs.Core\ClientSide\ProcessException.cs">
       <Link>ProcessException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\ConnectionEstablishedEventArgs.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\ConnectionEstablishedEventArgs.cs">
       <Link>Connections\ConnectionEstablishedEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\ConnectionException.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\ConnectionException.cs">
       <Link>Connections\ConnectionException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\ConnectionListenerAlreadyStartedException.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\ConnectionListenerAlreadyStartedException.cs">
       <Link>Connections\ConnectionListenerAlreadyStartedException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\ConnectionLostEventArgs.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\ConnectionLostEventArgs.cs">
       <Link>Connections\ConnectionLostEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\Downloader.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\Downloader.cs">
       <Link>Connections\Downloader.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\IConnection.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\IConnection.cs">
       <Link>Connections\IConnection.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\IConnectionListener.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\IConnectionListener.cs">
       <Link>Connections\IConnectionListener.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\IConnector.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\IConnector.cs">
       <Link>Connections\IConnector.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\NoDataToReadFromConnectionException.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\NoDataToReadFromConnectionException.cs">
       <Link>Connections\NoDataToReadFromConnectionException.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\StreamExtensions.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\StreamExtensions.cs">
       <Link>Connections\StreamExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\TcpClientConnection.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\TcpClientConnection.cs">
       <Link>Connections\TcpClientConnection.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\TcpClientConnectionFactory.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\TcpClientConnectionFactory.cs">
       <Link>Connections\TcpClientConnectionFactory.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\TcpClientConnectionListener.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\TcpClientConnectionListener.cs">
       <Link>Connections\TcpClientConnectionListener.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Connections\Uploader.cs">
+    <Compile Include="..\ConnectUs.Core\Connections\Uploader.cs">
       <Link>Connections\Uploader.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Encodings\CustomEncoder.cs">
+    <Compile Include="..\ConnectUs.Core\Encodings\CustomEncoder.cs">
       <Link>Connections\CustomEncoder.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\Encodings\IEncoder.cs">
+    <Compile Include="..\ConnectUs.Core\Encodings\IEncoder.cs">
       <Link>Connections\IEncoder.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\ErrorResponse.cs">
+    <Compile Include="..\ConnectUs.Core\ErrorResponse.cs">
       <Link>Connections\ErrorResponse.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\IRequestParser.cs">
+    <Compile Include="..\ConnectUs.Core\IRequestParser.cs">
       <Link>Connections\IRequestParser.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\JsonRequestParser.cs">
+    <Compile Include="..\ConnectUs.Core\JsonRequestParser.cs">
       <Link>Connections\JsonRequestParser.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Business\RequestBase.cs">
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\IModuleManager.cs">
+      <Link>ModuleManagement\IModuleManager.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\Module.cs">
+      <Link>ModuleManagement\Module.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\ModuleException.cs">
+      <Link>ModuleManagement\ModuleException.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\ModuleLoadedEventArgs.cs">
+      <Link>ModuleManagement\ModuleLoadedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\ModuleManager.cs">
+      <Link>ModuleManagement\ModuleManager.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\ModuleName.cs">
+      <Link>ModuleManagement\ModuleName.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\ModuleUnloadedEventArgs.cs">
+      <Link>ModuleManagement\ModuleUnloadedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\ModuleManagement\Proxy.cs">
+      <Link>ModuleManagement\Proxy.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core\RequestBase.cs">
       <Link>Connections\RequestBase.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\DownloadRequest.cs">
-      <Link>Commands\Upload\DownloadRequest.cs</Link>
+      <Link>Commands\DownloadRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\DownloadResponse.cs">
-      <Link>Commands\Upload\DownloadResponse.cs</Link>
+      <Link>Commands\DownloadResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\UploadRequest.cs">
-      <Link>Commands\Upload\UploadRequest.cs</Link>
+      <Link>Commands\UploadRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\FileTransfert\UploadResponse.cs">
-      <Link>Commands\Upload\UploadResponse.cs</Link>
+      <Link>Commands\UploadResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\GetClientInformation\GetClientInformationRequest.cs">
       <Link>Commands\GetClientInformationRequest.cs</Link>
@@ -221,31 +221,31 @@
       <Link>Commands\GetFullInformationCommand.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\AddModuleRequest.cs">
-      <Link>Commands\Module\AddModuleRequest.cs</Link>
+      <Link>Commands\AddModuleRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\AddModuleResponse.cs">
-      <Link>Commands\Module\AddModuleResponse.cs</Link>
+      <Link>Commands\AddModuleResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ListModuleRequest.cs">
-      <Link>Commands\Module\ListModuleRequest.cs</Link>
+      <Link>Commands\ListModuleRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ListModuleResponse.cs">
-      <Link>Commands\Module\ListModuleResponse.cs</Link>
+      <Link>Commands\ListModuleResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\LoadModuleRequest.cs">
-      <Link>Commands\Module\LoadModuleRequest.cs</Link>
+      <Link>Commands\LoadModuleRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\LoadModuleResponse.cs">
-      <Link>Commands\Module\LoadModuleResponse.cs</Link>
+      <Link>Commands\LoadModuleResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\ModuleState.cs">
-      <Link>Commands\Module\ModuleState.cs</Link>
+      <Link>Commands\ModuleState.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\UnloadModuleRequest.cs">
-      <Link>Commands\Module\UnloadModuleRequest.cs</Link>
+      <Link>Commands\UnloadModuleRequest.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\ModuleManagement\UnloadModuleResponse.cs">
-      <Link>Commands\Module\UnloadModuleResponse.cs</Link>
+      <Link>Commands\UnloadModuleResponse.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Modules.Integrated\NetHelper.cs">
       <Link>Commands\NetHelper.cs</Link>

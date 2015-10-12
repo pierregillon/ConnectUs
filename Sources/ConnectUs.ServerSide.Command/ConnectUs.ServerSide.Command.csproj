@@ -78,9 +78,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
+    <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
       <Project>{e8d6208b-fa4f-46ca-8226-e20343bf3d34}</Project>
-      <Name>ConnectUs.Business</Name>
+      <Name>ConnectUs.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.FileExplorer\ConnectUs.FileExplorer.csproj">
       <Project>{671D76D7-BEE3-4BCD-923E-C09A4484F3FF}</Project>

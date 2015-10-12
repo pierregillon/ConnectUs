@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.FileExplorer;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Application.CommandLines
 {

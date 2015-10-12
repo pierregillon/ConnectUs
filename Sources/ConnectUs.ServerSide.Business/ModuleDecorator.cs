@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Modules.Integrated.ModuleManagement;
-using ConnectUs.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Business
 {

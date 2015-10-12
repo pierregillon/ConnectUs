@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{179D85D7-2DAA-4352-9C6C-F0AAF954C815}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConnectUs.Core.Tests</RootNamespace>
+    <AssemblyName>ConnectUs.Core.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NFluent">
+      <HintPath>..\packages\NFluent.1.3.1.0\lib\net40\NFluent.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Features\DownloadUploadFile.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DownloadUploadFile.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ExecuteClientCommandOnServerSide.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExecuteClientCommandOnServerSide.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ExecuteMultipleRequestOnMultipleThread.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExecuteMultipleRequestOnMultipleThread.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CommunicationWithTcpClientConnections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommunicationWithTcpClientConnections.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\EncodeData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EncodeData.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ListenClientConnections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListenClientConnections.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ListenTcpClientConnections.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListenTcpClientConnections.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ManageModule.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageModule.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CommunicateRequestFromServerToClient.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommunicateRequestFromServerToClient.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ProcessRequestsOnClientSide.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessRequestsOnClientSide.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Mocks\EchoRequest.cs" />
+    <Compile Include="Mocks\EchoResponse.cs" />
+    <Compile Include="Mocks\FakeRemoteClientListener.cs" />
+    <Compile Include="Mocks\MockedEchoClientRequestProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\RemoteClientListenerSteps.cs" />
+    <Compile Include="Steps\ClientRequestHandlerSteps.cs" />
+    <Compile Include="Steps\ClientRequestProcessorSteps.cs" />
+    <Compile Include="Steps\RemoteClientSteps.cs" />
+    <Compile Include="Steps\ConcurrentRequestExecutionSteps.cs" />
+    <Compile Include="Steps\ConnectionListenerSteps.cs" />
+    <Compile Include="Mocks\FakeConnection.cs" />
+    <Compile Include="Steps\ConnectionSteps.cs" />
+    <Compile Include="Mocks\EchoCommand.cs" />
+    <Compile Include="Steps\DownloaderSteps.cs" />
+    <Compile Include="Steps\EncoderSteps.cs" />
+    <Compile Include="Mocks\MockedClientRequestProcess.cs" />
+    <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
+    <Compile Include="Mocks\MockCommandLocator.cs" />
+    <Compile Include="Steps\CommandLocatorSteps.cs" />
+    <Compile Include="Steps\ModuleManagerSteps.cs" />
+    <Compile Include="Steps\RequestSteps.cs" />
+    <Compile Include="Steps\ResponseSteps.cs" />
+    <Compile Include="Steps\ServerConfigurationSteps.cs" />
+    <Compile Include="Steps\ServerRequestCommunicatorSteps.cs" />
+    <Compile Include="Steps\TaskSynchroniserSteps.cs" />
+    <Compile Include="Steps\TcpClientSteps.cs" />
+    <Compile Include="Steps\UploaderSteps.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Features\DownloadUploadFile.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DownloadUploadFile.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ExecuteClientCommandOnServerSide.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExecuteClientCommandOnServerSide.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ExecuteMultipleRequestOnMultipleThread.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExecuteMultipleRequestOnMultipleThread.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CommunicationWithTcpClientConnections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CommunicationWithTcpClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\EncodeData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EncodeData.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ListenClientConnections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ListenClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ListenTcpClientConnections.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ListenTcpClientConnections.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ManageModule.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ManageModule.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CommunicateRequestFromServerToClient.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CommunicateRequestFromServerToClient.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ProcessRequestsOnClientSide.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProcessRequestsOnClientSide.feature.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
+      <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
+      <Name>ConnectUs.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
+      <Project>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</Project>
+      <Name>ConnectUs.Modules.Integrated</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Modules\ConnectUs.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Modules\FileExplorer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\file.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\file_1024_bytes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

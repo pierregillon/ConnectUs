@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using ConnectUs.Business;
-using ConnectUs.ClientSide.ModuleManagement;
+using ConnectUs.Core;
+using ConnectUs.Core.ClientSide;
+using ConnectUs.Core.ModuleManagement;
 
 namespace ConnectUs.ClientSide
 {

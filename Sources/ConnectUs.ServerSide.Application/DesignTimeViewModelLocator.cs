@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.ServerSide.Application.Services;
 using ConnectUs.ServerSide.Application.ViewModels;
-using ConnectUs.ServerSide.Clients;
 using Moq;
 
 namespace ConnectUs.ServerSide.Application
