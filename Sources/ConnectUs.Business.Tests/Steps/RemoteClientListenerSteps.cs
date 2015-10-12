@@ -1,5 +1,4 @@
 ﻿using ConnectUs.Business.Connections;
-using ConnectUs.ServerSide;
 using ConnectUs.ServerSide.Clients;
 using NFluent;
 using TechTalk.SpecFlow;

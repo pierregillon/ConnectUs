@@ -44,13 +44,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectUs.Business\ConnectUs.Business.csproj">
+      <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
+      <Name>ConnectUs.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
       <Project>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</Project>
       <Name>ConnectUs.Modules.Integrated</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
-      <Project>{A5ACF831-6303-45A6-BF03-2B85359CAFBA}</Project>
-      <Name>ConnectUs.ServerSide</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

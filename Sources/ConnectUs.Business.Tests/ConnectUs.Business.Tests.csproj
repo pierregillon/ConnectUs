@@ -191,13 +191,9 @@
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ClientSide\ConnectUs.ClientSide.csproj">
-      <Project>{666554c4-d914-43e3-8b79-004b5dc63454}</Project>
-      <Name>ConnectUs.ClientSide</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
-      <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
-      <Name>ConnectUs.ServerSide</Name>
+    <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
+      <Project>{36A3A9FC-41BB-417D-BBEA-A8CCB17B89AB}</Project>
+      <Name>ConnectUs.Modules.Integrated</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

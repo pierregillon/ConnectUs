@@ -94,10 +94,6 @@
       <Project>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</Project>
       <Name>ConnectUs.ServerSide.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ServerSide\ConnectUs.ServerSide.csproj">
-      <Project>{a5acf831-6303-45a6-bf03-2b85359cafba}</Project>
-      <Name>ConnectUs.ServerSide</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

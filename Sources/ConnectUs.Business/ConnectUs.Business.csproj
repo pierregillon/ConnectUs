@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ConnectUs.Business</RootNamespace>
     <AssemblyName>ConnectUs.Business</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -40,6 +42,34 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientSide\Client.cs" />
+    <Compile Include="ClientSide\ClientException.cs" />
+    <Compile Include="ClientSide\ClientInformation.cs" />
+    <Compile Include="ClientSide\ClientRequestHandler.cs" />
+    <Compile Include="ClientSide\ClientRequestProcessor.cs" />
+    <Compile Include="ClientSide\CommandLocator.cs" />
+    <Compile Include="ClientSide\ContinuousRequestProcessor.cs" />
+    <Compile Include="ClientSide\IClientInformation.cs" />
+    <Compile Include="ClientSide\IClientRequestHandler.cs" />
+    <Compile Include="ClientSide\IClientRequestProcessor.cs" />
+    <Compile Include="ClientSide\ICommandLocator.cs" />
+    <Compile Include="ClientSide\IContinuousRequestProcessor.cs" />
+    <Compile Include="ClientSide\ModuleManagement\IModuleManager.cs" />
+    <Compile Include="ClientSide\ModuleManagement\Module.cs" />
+    <Compile Include="ClientSide\ModuleManagement\ModuleException.cs" />
+    <Compile Include="ClientSide\ModuleManagement\ModuleLoadedEventArgs.cs" />
+    <Compile Include="ClientSide\ModuleManagement\ModuleManager.cs" />
+    <Compile Include="ClientSide\ModuleManagement\ModuleName.cs" />
+    <Compile Include="ClientSide\ModuleManagement\ModuleUnloadedEventArgs.cs" />
+    <Compile Include="ClientSide\ModuleManagement\Proxy.cs" />
+    <Compile Include="ClientSide\Module\AddModuleCommand.cs" />
+    <Compile Include="ClientSide\Module\DownloadCommand.cs" />
+    <Compile Include="ClientSide\Module\ListModuleCommand.cs" />
+    <Compile Include="ClientSide\Module\LoadModuleCommand.cs" />
+    <Compile Include="ClientSide\Module\UnloadModuleCommand.cs" />
+    <Compile Include="ClientSide\Module\UploadCommand.cs" />
+    <Compile Include="ClientSide\NoRequestToProcessException.cs" />
+    <Compile Include="ClientSide\ProcessException.cs" />
     <Compile Include="Connections\ConnectionEstablishedEventArgs.cs" />
     <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
@@ -61,9 +91,27 @@
     <Compile Include="RequestBase.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Connections\TcpClientConnection.cs" />
+    <Compile Include="ServerSide\Clients\IRemoteClient.cs" />
+    <Compile Include="ServerSide\Clients\IRemoteClientListener.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClient.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClientConnectedEventArgs.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClientDisconnectedEventArgs.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClientException.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClientListener.cs" />
+    <Compile Include="ServerSide\Clients\RemoteClientListenerFactory.cs" />
+    <Compile Include="ServerSide\Requests\IRequestDispatcher.cs" />
+    <Compile Include="ServerSide\Requests\IRequestHandler.cs" />
+    <Compile Include="ServerSide\Requests\RequestDispatcher.cs" />
+    <Compile Include="ServerSide\Requests\RequestException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
+      <Project>{36a3a9fc-41bb-417d-bbea-a8ccb17b89ab}</Project>
+      <Name>ConnectUs.Modules.Integrated</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
