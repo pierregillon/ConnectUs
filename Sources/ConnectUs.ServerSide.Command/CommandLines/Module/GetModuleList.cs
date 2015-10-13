@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Core.ServerSide.Decorators;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Module
 {
-    [CommandDescription(CommandName = "list-module", Description = "List the installed modules on remote client.", Category = "Module")]
+    [CommandDescription(CommandName = "list-modules", Description = "List the installed modules on remote client.", Category = "Module")]
     public class GetModuleList : CurrentClientCommand
     {
         public GetModuleList(Context context)
@@ -17,11 +16,13 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
         {
             var moduleDecorator = new ModuleDecorator(remoteClient);
             var modules = moduleDecorator.GetIntalledModules();
-            var results = new List<string>();
             foreach (var moduleState in modules) {
-                results.Add(string.Format("{0}\t{1}\t{2}", moduleState.Name, moduleState.Version, moduleState.IsLoaded));
+                Console.WriteLine("{0} {1} {2}", 
+                    moduleState.Name.PadLeft(15),
+                    moduleState.Version.PadLeft(15),
+                    moduleState.IsLoaded.ToString().PadLeft(15));
             }
-            return string.Join(Environment.NewLine, results);
+            return string.Empty;
         }
     }
 }
