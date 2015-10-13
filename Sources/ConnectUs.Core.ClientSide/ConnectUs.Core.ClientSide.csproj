@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</ProjectGuid>
+    <ProjectGuid>{0796AD5A-49BF-4839-9A70-547D0DB0EB67}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConnectUs.ServerSide.Business</RootNamespace>
-    <AssemblyName>ConnectUs.ServerSide.Business</AssemblyName>
+    <RootNamespace>ConnectUs.Core.ClientSide</RootNamespace>
+    <AssemblyName>ConnectUs.Core.ClientSide</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,23 +29,41 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientException.cs" />
+    <Compile Include="ClientInformation.cs" />
+    <Compile Include="ClientRequestHandler.cs" />
+    <Compile Include="ClientRequestProcessor.cs" />
+    <Compile Include="CommandLocator.cs" />
+    <Compile Include="Commands\AddModuleCommand.cs" />
+    <Compile Include="Commands\DownloadCommand.cs" />
+    <Compile Include="Commands\ListModuleCommand.cs" />
+    <Compile Include="Commands\LoadModuleCommand.cs" />
+    <Compile Include="Commands\UnloadModuleCommand.cs" />
+    <Compile Include="Commands\UploadCommand.cs" />
+    <Compile Include="ContinuousRequestProcessor.cs" />
+    <Compile Include="IClientInformation.cs" />
+    <Compile Include="IClientRequestHandler.cs" />
+    <Compile Include="IClientRequestProcessor.cs" />
+    <Compile Include="ICommandLocator.cs" />
+    <Compile Include="IContinuousRequestProcessor.cs" />
+    <Compile Include="NoRequestToProcessException.cs" />
+    <Compile Include="ProcessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConnectUs.Core.ServerSide\ConnectUs.Core.ServerSide.csproj">
-      <Project>{7E4ABE60-1175-430A-8CC7-CB60149246D5}</Project>
-      <Name>ConnectUs.Core.ServerSide</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
-      <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
+      <Project>{e8d6208b-fa4f-46ca-8226-e20343bf3d34}</Project>
       <Name>ConnectUs.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</ProjectGuid>
+    <ProjectGuid>{7E4ABE60-1175-430A-8CC7-CB60149246D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConnectUs.ServerSide.Business</RootNamespace>
-    <AssemblyName>ConnectUs.ServerSide.Business</AssemblyName>
+    <RootNamespace>ConnectUs.Core.ServerSide</RootNamespace>
+    <AssemblyName>ConnectUs.Core.ServerSide</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,21 +29,33 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\IRemoteClient.cs" />
+    <Compile Include="Clients\IRemoteClientListener.cs" />
+    <Compile Include="Clients\RemoteClient.cs" />
+    <Compile Include="Clients\RemoteClientConnectedEventArgs.cs" />
+    <Compile Include="Clients\RemoteClientDisconnectedEventArgs.cs" />
+    <Compile Include="Clients\RemoteClientException.cs" />
+    <Compile Include="Clients\RemoteClientListener.cs" />
+    <Compile Include="Clients\RemoteClientListenerFactory.cs" />
+    <Compile Include="Decorators\ClientInformationDecorator.cs" />
+    <Compile Include="Decorators\ModuleDecorator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\IRequestDispatcher.cs" />
+    <Compile Include="Requests\IRequestHandler.cs" />
+    <Compile Include="Requests\RequestDispatcher.cs" />
+    <Compile Include="Requests\RequestException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConnectUs.Core.ServerSide\ConnectUs.Core.ServerSide.csproj">
-      <Project>{7E4ABE60-1175-430A-8CC7-CB60149246D5}</Project>
-      <Name>ConnectUs.Core.ServerSide</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Core</Name>

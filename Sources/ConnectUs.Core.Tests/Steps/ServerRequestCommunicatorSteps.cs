@@ -20,7 +20,7 @@ namespace ConnectUs.Core.Tests.Steps
             get { return ScenarioContext.Current.Get<IConnection>("ClientConnection"); }
             set { ScenarioContext.Current.Set(value, "ClientConnection"); }
         }
-        internal IRequestDispatcher RequestDispatcher
+        public IRequestDispatcher RequestDispatcher
         {
             get { return ScenarioContext.Current.Get<IRequestDispatcher>("RequestDispatcher"); }
             set { ScenarioContext.Current.Set(value, "RequestDispatcher"); }

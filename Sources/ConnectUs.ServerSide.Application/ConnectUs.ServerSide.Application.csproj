@@ -154,6 +154,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectUs.Core.ServerSide\ConnectUs.Core.ServerSide.csproj">
+      <Project>{7E4ABE60-1175-430A-8CC7-CB60149246D5}</Project>
+      <Name>ConnectUs.Core.ServerSide</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Core</Name>
@@ -165,10 +169,6 @@
     <ProjectReference Include="..\ConnectUs.Modules.Integrated\ConnectUs.Modules.Integrated.csproj">
       <Project>{36a3a9fc-41bb-417d-bbea-a8ccb17b89ab}</Project>
       <Name>ConnectUs.Modules.Integrated</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConnectUs.ServerSide.Business\ConnectUs.ServerSide.Business.csproj">
-      <Project>{2D436FFC-CFA2-4F3F-B4A3-CD203C8E1DFF}</Project>
-      <Name>ConnectUs.ServerSide.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

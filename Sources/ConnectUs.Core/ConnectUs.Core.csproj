@@ -42,18 +42,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientSide\Client.cs" />
-    <Compile Include="ClientSide\ClientException.cs" />
-    <Compile Include="ClientSide\ClientInformation.cs" />
-    <Compile Include="ClientSide\ClientRequestHandler.cs" />
-    <Compile Include="ClientSide\ClientRequestProcessor.cs" />
-    <Compile Include="ClientSide\CommandLocator.cs" />
-    <Compile Include="ClientSide\ContinuousRequestProcessor.cs" />
-    <Compile Include="ClientSide\IClientInformation.cs" />
-    <Compile Include="ClientSide\IClientRequestHandler.cs" />
-    <Compile Include="ClientSide\IClientRequestProcessor.cs" />
-    <Compile Include="ClientSide\ICommandLocator.cs" />
-    <Compile Include="ClientSide\IContinuousRequestProcessor.cs" />
     <Compile Include="ParseException.cs" />
     <Compile Include="ModuleManagement\IModuleManager.cs" />
     <Compile Include="ModuleManagement\Module.cs" />
@@ -63,14 +51,6 @@
     <Compile Include="ModuleManagement\ModuleName.cs" />
     <Compile Include="ModuleManagement\ModuleUnloadedEventArgs.cs" />
     <Compile Include="ModuleManagement\Proxy.cs" />
-    <Compile Include="ClientSide\Commands\AddModuleCommand.cs" />
-    <Compile Include="ClientSide\Commands\DownloadCommand.cs" />
-    <Compile Include="ClientSide\Commands\ListModuleCommand.cs" />
-    <Compile Include="ClientSide\Commands\LoadModuleCommand.cs" />
-    <Compile Include="ClientSide\Commands\UnloadModuleCommand.cs" />
-    <Compile Include="ClientSide\Commands\UploadCommand.cs" />
-    <Compile Include="ClientSide\NoRequestToProcessException.cs" />
-    <Compile Include="ClientSide\ProcessException.cs" />
     <Compile Include="Connections\ConnectionEstablishedEventArgs.cs" />
     <Compile Include="Connections\ConnectionException.cs" />
     <Compile Include="Connections\ConnectionListenerAlreadyStartedException.cs" />
@@ -92,18 +72,6 @@
     <Compile Include="RequestBase.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Connections\TcpClientConnection.cs" />
-    <Compile Include="ServerSide\Clients\IRemoteClient.cs" />
-    <Compile Include="ServerSide\Clients\IRemoteClientListener.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClient.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClientConnectedEventArgs.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClientDisconnectedEventArgs.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClientException.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClientListener.cs" />
-    <Compile Include="ServerSide\Clients\RemoteClientListenerFactory.cs" />
-    <Compile Include="ServerSide\Requests\IRequestDispatcher.cs" />
-    <Compile Include="ServerSide\Requests\IRequestHandler.cs" />
-    <Compile Include="ServerSide\Requests\RequestDispatcher.cs" />
-    <Compile Include="ServerSide\Requests\RequestException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

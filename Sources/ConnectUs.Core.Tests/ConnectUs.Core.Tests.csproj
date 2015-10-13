@@ -187,6 +187,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectUs.Core.ClientSide\ConnectUs.Core.ClientSide.csproj">
+      <Project>{0796AD5A-49BF-4839-9A70-547D0DB0EB67}</Project>
+      <Name>ConnectUs.Core.ClientSide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectUs.Core.ServerSide\ConnectUs.Core.ServerSide.csproj">
+      <Project>{7E4ABE60-1175-430A-8CC7-CB60149246D5}</Project>
+      <Name>ConnectUs.Core.ServerSide</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">
       <Project>{E8D6208B-FA4F-46CA-8226-E20343BF3D34}</Project>
       <Name>ConnectUs.Core</Name>

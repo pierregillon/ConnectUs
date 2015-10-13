@@ -4,9 +4,9 @@ using ConnectUs.Modules.Integrated.GetClientInformation;
 using ConnectUs.Modules.Integrated.GetFullClientInformation;
 using ConnectUs.Modules.Integrated.Ping;
 
-namespace ConnectUs.ServerSide.Business
+namespace ConnectUs.Core.ServerSide.Decorators
 {
-    internal class ClientInformationDecorator
+    public class ClientInformationDecorator
     {
         private readonly IRemoteClient _remoteClient;
         private readonly Stopwatch _watch = new Stopwatch();

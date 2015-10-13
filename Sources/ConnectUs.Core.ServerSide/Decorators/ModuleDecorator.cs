@@ -3,7 +3,7 @@ using System.IO;
 using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Modules.Integrated.ModuleManagement;
 
-namespace ConnectUs.ServerSide.Business
+namespace ConnectUs.Core.ServerSide.Decorators
 {
     public class ModuleDecorator
     {
@@ -30,7 +30,7 @@ namespace ConnectUs.ServerSide.Business
             var request = new LoadModuleRequest(moduleName);
             _remoteClient.Send<LoadModuleRequest, LoadModuleResponse>(request);
         }
-        internal IEnumerable<ModuleState> GetIntalledModules()
+        public IEnumerable<ModuleState> GetIntalledModules()
         {
             var request = new ListModuleRequest();
             var response = _remoteClient.Send<ListModuleRequest, ListModuleResponse>(request);
