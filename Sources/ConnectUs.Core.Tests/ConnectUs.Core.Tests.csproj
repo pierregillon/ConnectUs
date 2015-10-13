@@ -153,6 +153,9 @@
     <Compile Include="BDD\Steps\TaskSynchroniserSteps.cs" />
     <Compile Include="BDD\Steps\TcpClientSteps.cs" />
     <Compile Include="BDD\Steps\UploaderSteps.cs" />
+    <Compile Include="TDD\EmptyJsonException.cs" />
+    <Compile Include="TDD\JsonProperty.cs" />
+    <Compile Include="TDD\JsonSerializer.cs" />
     <Compile Include="TDD\JsonSerializerShould.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using NFluent;
 using Xunit;
 
@@ -149,77 +144,6 @@ namespace ConnectUs.Core.Tests.TDD
         private class MyObject<T>
         {
             public T MyValue { get; set; }
-        }
-    }
-
-    public class EmptyJsonException : Exception
-    {
-    }
-
-    public class JsonSerializer
-    {
-        public static object Deserialize(Type type, string json)
-        {
-            if (string.IsNullOrEmpty(json) || json.Trim() == string.Empty) {
-                throw new EmptyJsonException();
-            }
-            var instance = Activator.CreateInstance(type);
-            var properties = GetProperties(json);
-            foreach (var property in properties) {
-                property.AffectTo(instance);
-            }
-            return instance;
-        }
-
-        private static IEnumerable<JsonProperty> GetProperties(string json)
-        {
-            var regex = new Regex(@"'(?<name>[^:]*)'\ *:\ *'?(?<value>[^,^}^']*)'?".Replace("'", "\""));
-            var matches = regex.Matches(json);
-            foreach (Match match in matches) {
-                yield return new JsonProperty(match.Groups["name"].Value, match.Groups["value"].Value);
-            }
-        }
-    }
-
-    internal class JsonProperty
-    {
-        public string Name { get; private set; }
-        public string Value { get; private set; }
-
-        public JsonProperty(string name, string value)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        public void AffectTo(object instance)
-        {
-            var type = instance.GetType();
-            var propertyInfo = type.GetProperty(Name);
-            if (propertyInfo.PropertyType == typeof (string)) {
-                propertyInfo.SetValue(instance, Value);
-            }
-            else {
-                var parseMethods = propertyInfo
-                    .PropertyType
-                    .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                    .Where(x=>x.Name == "Parse")
-                    .ToArray();
-
-                var parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 2 && x.GetParameters().Last().ParameterType == typeof (IFormatProvider));
-                if (parseMethod != null) {
-                    var parsedValue = parseMethod.Invoke(null, new object[] {Value, CultureInfo.InvariantCulture});
-                    propertyInfo.SetValue(instance, parsedValue);
-                }
-                else {
-                    parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 1);
-                    if (parseMethod == null) {
-                        throw new Exception("Unable to parse the value.");
-                    }
-                    var parsedValue = parseMethod.Invoke(null, new object[] { Value });
-                    propertyInfo.SetValue(instance, parsedValue);
-                }
-            }
         }
     }
 }
