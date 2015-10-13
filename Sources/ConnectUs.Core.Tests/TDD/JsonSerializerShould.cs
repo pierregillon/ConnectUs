@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -67,11 +68,44 @@ namespace ConnectUs.Core.Tests.TDD
         }
 
         [Theory]
+        [InlineData("{\"MyValue\":120.25}", 120.25d)]
+        [InlineData("{\"MyValue\":-20.25}", -20.25d)]
+        public void parse_json_with_double(string json, double expectedValue)
+        {
+            var result = (MyObject<double>)JsonSerializer.Deserialize(typeof(MyObject<double>), json);
+
+            Check.That(result).Not.IsNull();
+            Check.That(result.MyValue).IsEqualTo(expectedValue);
+        }
+
+        [Theory]
+        [InlineData("{\"MyValue\":120.25}", 120.25)]
+        [InlineData("{\"MyValue\":-20.25}", -20.25)]
+        public void parse_json_with_decimal(string json, decimal expectedValue)
+        {
+            var result = (MyObject<decimal>)JsonSerializer.Deserialize(typeof(MyObject<decimal>), json);
+
+            Check.That(result).Not.IsNull();
+            Check.That(result.MyValue).IsEqualTo(expectedValue);
+        }
+
+        [Theory]
+        [InlineData("{\"MyValue\":120.25}", 120.25f)]
+        [InlineData("{\"MyValue\":-20.25}", -20.25f)]
+        public void parse_json_with_float(string json, float expectedValue)
+        {
+            var result = (MyObject<float>)JsonSerializer.Deserialize(typeof(MyObject<float>), json);
+
+            Check.That(result).Not.IsNull();
+            Check.That(result.MyValue).IsEqualTo(expectedValue);
+        }
+
+        [Theory]
         [InlineData("{\"MyValue\":\"hello world\"}", "hello world")]
         [InlineData("{\"MyValue\":\"\"}", "")]
         public void parse_json_with_string(string json, string expectedValue)
         {
-            var result = (MyObject<string>)JsonSerializer.Deserialize(typeof(MyObject<string>), json);
+            var result = (MyObject<string>) JsonSerializer.Deserialize(typeof (MyObject<string>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -81,7 +115,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"Name\":\"myname\",\"Value\":\"myvalue\",\"Ticks\":1000}")]
         public void parse_json_with_simple_dataset(string json)
         {
-            var result = (MySimpleObject)JsonSerializer.Deserialize(typeof(MySimpleObject), json);
+            var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.Name).IsEqualTo("myname");
@@ -94,13 +128,16 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{  \"Name\"  :\"myname\",  \"Value\"     :   \"myvalue\" ,  \"Ticks\" : 1000     }")]
         public void parse_json_with_spaces(string json)
         {
-            var result = (MySimpleObject)JsonSerializer.Deserialize(typeof(MySimpleObject), json);
+            var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.Name).IsEqualTo("myname");
             Check.That(result.Value).IsEqualTo("myvalue");
             Check.That(result.Ticks).IsEqualTo(1000);
         }
+
+
+        // ----- Internal classes
 
         private class MySimpleObject
         {
@@ -163,12 +200,25 @@ namespace ConnectUs.Core.Tests.TDD
                 propertyInfo.SetValue(instance, Value);
             }
             else {
-                var parseMethod = propertyInfo.PropertyType.GetMethods(BindingFlags.Static | BindingFlags.Public).SingleOrDefault(x => x.Name == "Parse" && x.GetParameters().Count() == 1);
-                if (parseMethod == null) {
-                    throw new Exception("Unable to parse the value.");
+                var parseMethods = propertyInfo
+                    .PropertyType
+                    .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                    .Where(x=>x.Name == "Parse")
+                    .ToArray();
+
+                var parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 2 && x.GetParameters().Last().ParameterType == typeof (IFormatProvider));
+                if (parseMethod != null) {
+                    var parsedValue = parseMethod.Invoke(null, new object[] {Value, CultureInfo.InvariantCulture});
+                    propertyInfo.SetValue(instance, parsedValue);
                 }
-                var parsedValue = parseMethod.Invoke(null, new object[] {Value});
-                propertyInfo.SetValue(instance, parsedValue);
+                else {
+                    parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 1);
+                    if (parseMethod == null) {
+                        throw new Exception("Unable to parse the value.");
+                    }
+                    var parsedValue = parseMethod.Invoke(null, new object[] { Value });
+                    propertyInfo.SetValue(instance, parsedValue);
+                }
             }
         }
     }
