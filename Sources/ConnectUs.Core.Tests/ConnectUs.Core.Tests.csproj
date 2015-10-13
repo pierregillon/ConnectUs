@@ -63,124 +63,124 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Features\DownloadUploadFile.feature.cs">
+    <Compile Include="BDD\Features\DownloadUploadFile.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DownloadUploadFile.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ExecuteClientCommandOnServerSide.feature.cs">
+    <Compile Include="BDD\Features\ExecuteClientCommandOnServerSide.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExecuteClientCommandOnServerSide.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ExecuteMultipleRequestOnMultipleThread.feature.cs">
+    <Compile Include="BDD\Features\ExecuteMultipleRequestOnMultipleThread.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExecuteMultipleRequestOnMultipleThread.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\CommunicationWithTcpClientConnections.feature.cs">
+    <Compile Include="BDD\Features\CommunicationWithTcpClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunicationWithTcpClientConnections.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\EncodeData.feature.cs">
+    <Compile Include="BDD\Features\EncodeData.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EncodeData.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ListenClientConnections.feature.cs">
+    <Compile Include="BDD\Features\ListenClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListenClientConnections.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ListenTcpClientConnections.feature.cs">
+    <Compile Include="BDD\Features\ListenTcpClientConnections.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListenTcpClientConnections.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ManageModule.feature.cs">
+    <Compile Include="BDD\Features\ManageModule.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ManageModule.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\CommunicateRequestFromServerToClient.feature.cs">
+    <Compile Include="BDD\Features\CommunicateRequestFromServerToClient.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommunicateRequestFromServerToClient.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ProcessRequestsOnClientSide.feature.cs">
+    <Compile Include="BDD\Features\ProcessRequestsOnClientSide.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcessRequestsOnClientSide.feature</DependentUpon>
     </Compile>
-    <Compile Include="Mocks\EchoRequest.cs" />
-    <Compile Include="Mocks\EchoResponse.cs" />
-    <Compile Include="Mocks\FakeRemoteClientListener.cs" />
-    <Compile Include="Mocks\MockedEchoClientRequestProcessor.cs" />
+    <Compile Include="BDD\Mocks\EchoRequest.cs" />
+    <Compile Include="BDD\Mocks\EchoResponse.cs" />
+    <Compile Include="BDD\Mocks\FakeRemoteClientListener.cs" />
+    <Compile Include="BDD\Mocks\MockedEchoClientRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Steps\RemoteClientListenerSteps.cs" />
-    <Compile Include="Steps\ClientRequestHandlerSteps.cs" />
-    <Compile Include="Steps\ClientRequestProcessorSteps.cs" />
-    <Compile Include="Steps\RemoteClientSteps.cs" />
-    <Compile Include="Steps\ConcurrentRequestExecutionSteps.cs" />
-    <Compile Include="Steps\ConnectionListenerSteps.cs" />
-    <Compile Include="Mocks\FakeConnection.cs" />
-    <Compile Include="Steps\ConnectionSteps.cs" />
-    <Compile Include="Mocks\EchoCommand.cs" />
-    <Compile Include="Steps\DownloaderSteps.cs" />
-    <Compile Include="Steps\EncoderSteps.cs" />
-    <Compile Include="Mocks\MockedClientRequestProcess.cs" />
-    <Compile Include="Mocks\MockedErrorClientRequestProcess.cs" />
-    <Compile Include="Mocks\MockCommandLocator.cs" />
-    <Compile Include="Steps\CommandLocatorSteps.cs" />
-    <Compile Include="Steps\ModuleManagerSteps.cs" />
-    <Compile Include="Steps\RequestSteps.cs" />
-    <Compile Include="Steps\ResponseSteps.cs" />
-    <Compile Include="Steps\ServerConfigurationSteps.cs" />
-    <Compile Include="Steps\ServerRequestCommunicatorSteps.cs" />
-    <Compile Include="Steps\TaskSynchroniserSteps.cs" />
-    <Compile Include="Steps\TcpClientSteps.cs" />
-    <Compile Include="Steps\UploaderSteps.cs" />
+    <Compile Include="BDD\Steps\RemoteClientListenerSteps.cs" />
+    <Compile Include="BDD\Steps\ClientRequestHandlerSteps.cs" />
+    <Compile Include="BDD\Steps\ClientRequestProcessorSteps.cs" />
+    <Compile Include="BDD\Steps\RemoteClientSteps.cs" />
+    <Compile Include="BDD\Steps\ConcurrentRequestExecutionSteps.cs" />
+    <Compile Include="BDD\Steps\ConnectionListenerSteps.cs" />
+    <Compile Include="BDD\Mocks\FakeConnection.cs" />
+    <Compile Include="BDD\Steps\ConnectionSteps.cs" />
+    <Compile Include="BDD\Mocks\EchoCommand.cs" />
+    <Compile Include="BDD\Steps\DownloaderSteps.cs" />
+    <Compile Include="BDD\Steps\EncoderSteps.cs" />
+    <Compile Include="BDD\Mocks\MockedClientRequestProcess.cs" />
+    <Compile Include="BDD\Mocks\MockedErrorClientRequestProcess.cs" />
+    <Compile Include="BDD\Mocks\MockCommandLocator.cs" />
+    <Compile Include="BDD\Steps\CommandLocatorSteps.cs" />
+    <Compile Include="BDD\Steps\ModuleManagerSteps.cs" />
+    <Compile Include="BDD\Steps\RequestSteps.cs" />
+    <Compile Include="BDD\Steps\ResponseSteps.cs" />
+    <Compile Include="BDD\Steps\ServerConfigurationSteps.cs" />
+    <Compile Include="BDD\Steps\ServerRequestCommunicatorSteps.cs" />
+    <Compile Include="BDD\Steps\TaskSynchroniserSteps.cs" />
+    <Compile Include="BDD\Steps\TcpClientSteps.cs" />
+    <Compile Include="BDD\Steps\UploaderSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\DownloadUploadFile.feature">
+    <None Include="BDD\Features\DownloadUploadFile.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DownloadUploadFile.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ExecuteClientCommandOnServerSide.feature">
+    <None Include="BDD\Features\ExecuteClientCommandOnServerSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExecuteClientCommandOnServerSide.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ExecuteMultipleRequestOnMultipleThread.feature">
+    <None Include="BDD\Features\ExecuteMultipleRequestOnMultipleThread.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExecuteMultipleRequestOnMultipleThread.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\CommunicationWithTcpClientConnections.feature">
+    <None Include="BDD\Features\CommunicationWithTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CommunicationWithTcpClientConnections.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\EncodeData.feature">
+    <None Include="BDD\Features\EncodeData.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>EncodeData.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ListenClientConnections.feature">
+    <None Include="BDD\Features\ListenClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListenClientConnections.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ListenTcpClientConnections.feature">
+    <None Include="BDD\Features\ListenTcpClientConnections.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListenTcpClientConnections.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ManageModule.feature">
+    <None Include="BDD\Features\ManageModule.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ManageModule.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\CommunicateRequestFromServerToClient.feature">
+    <None Include="BDD\Features\CommunicateRequestFromServerToClient.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CommunicateRequestFromServerToClient.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ProcessRequestsOnClientSide.feature">
+    <None Include="BDD\Features\ProcessRequestsOnClientSide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProcessRequestsOnClientSide.feature.cs</LastGenOutput>
     </None>
@@ -204,7 +204,9 @@
       <Name>ConnectUs.Modules.Integrated</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="TDD\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Modules\ConnectUs.Common.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
