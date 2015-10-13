@@ -13,11 +13,12 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var directoryPath = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (directoryPath == null) {
-                return "You should define the directory path.";
+                WriteWarning("You should define the directory path.");
+                return;
             }
 
             var request = new ExploreDirectoryRequest
@@ -27,7 +28,7 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
                 GetFiles = true
             };
             var response = remoteClient.Send<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
-            return string.Join(Environment.NewLine, response.Files.Select(x => x.Name));
+            WriteInfo(string.Join(Environment.NewLine, response.Files.Select(x => x.Name)));
         }
     }
 }

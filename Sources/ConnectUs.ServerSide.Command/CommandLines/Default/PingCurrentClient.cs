@@ -1,4 +1,5 @@
-﻿using ConnectUs.Core.ServerSide.Clients;
+﻿using System.Threading;
+using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Core.ServerSide.Decorators;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.Default
@@ -10,11 +11,14 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var decorator = new ClientInformationDecorator(remoteClient);
-            var duration = decorator.Ping();
-            return string.Format("Ping to client : {0} ms", duration);
+            for (var i = 0; i < 5; i++) {
+                var duration = decorator.Ping();
+                WriteInfo(string.Format("Ping to client : {0} ms", duration));
+                Thread.Sleep(500);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace ConnectUs.ServerSide.Command.CommandLines
 {
     [CommandDescription(CommandName = "connect", Description = "Connect to a client.")]
-    internal class ConnectClient : ICommandLineHandler
+    internal class ConnectClient : CommandHandler, ICommandLineHandler
     {
         private readonly ClientList _clientList;
         private readonly Context _context;
@@ -14,16 +14,16 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             _context = context;
         }
 
-        public string Handle(CommandLine commandLine)
+        public void Handle(CommandLine commandLine)
         {
             var argument = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (argument == null) {
-                return "You should define the client index.";
+                WriteWarning("You should define the client index.");
             }
-
-            var index = int.Parse(argument.Value);
-            _context.CurrentClient = _clientList.GetClients().ElementAt(index-1);
-            return string.Empty;
+            else {
+                var index = int.Parse(argument.Value);
+                _context.CurrentClient = _clientList.GetClients().ElementAt(index - 1);
+            }
         }
     }
 }

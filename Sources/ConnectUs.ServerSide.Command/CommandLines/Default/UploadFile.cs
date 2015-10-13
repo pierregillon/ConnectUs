@@ -12,18 +12,20 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Default
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var localFilePath = commandLine.Arguments.First(x => x.Name == "unknown");
             var remoteFolder = commandLine.Arguments.Last(x => x.Name == "unknown");
             if (localFilePath == null) {
-                return "You should specify a local file path.";
+                WriteWarning("You should specify a local file path.");
+                return;
             }
             if (remoteFolder == null) {
-                return "You should specify a remote folder.";
+                WriteWarning("You should specify a remote folder.");
+                return;
             }
             var filePath = remoteClient.UploadFile(localFilePath.Value, remoteFolder.Value);
-            return string.Format("The file '{0}' has been uploaded to the the remote location '{1}'.", Path.GetFileName(localFilePath.Value), filePath);
+            WriteInfo("The file '{0}' has been uploaded to the the remote location '{1}'.", Path.GetFileName(localFilePath.Value), filePath);
         }
     }
 }

@@ -9,15 +9,16 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public UnloadModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (moduleName == null) {
-                return "You should define the module name.";
+                WriteWarning("You should define the module name.");
             }
-            var moduleDecorator = new ModuleDecorator(remoteClient);
-            moduleDecorator.UnloadModule(moduleName.Value);
-            return string.Empty;
+            else {
+                var moduleDecorator = new ModuleDecorator(remoteClient);
+                moduleDecorator.UnloadModule(moduleName.Value);
+            }
         }
     }
 }

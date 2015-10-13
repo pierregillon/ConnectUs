@@ -9,21 +9,20 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
     {
         public InstallModule(Context context) : base(context) {}
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var loadModuleArgument = commandLine.Arguments.FirstOrDefault(x => x.Name == "load");
             var moduleName = commandLine.Arguments.FirstOrDefault(x => x.Name == "unknown");
             if (moduleName == null) {
-                return "You should define the module name.";
+                WriteWarning("You should define the module name.");
+                return;
             }
-
             var moduleDecorator = new ModuleDecorator(remoteClient);
             moduleDecorator.UploadModule(moduleName.Value);
             moduleDecorator.AddModule(moduleName.Value);
             if (loadModuleArgument != null) {
                 moduleDecorator.LoadModule(moduleName.Value);
             }
-            return string.Empty;
         }
     }
 }

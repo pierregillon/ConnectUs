@@ -2,6 +2,6 @@
 {
     public interface ICommandLineHandler
     {
-        string Handle(CommandLine commandLine);
+        void Handle(CommandLine commandLine);
     }
 }

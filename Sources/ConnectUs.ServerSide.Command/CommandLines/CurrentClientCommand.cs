@@ -2,7 +2,7 @@
 
 namespace ConnectUs.ServerSide.Command.CommandLines
 {
-    public abstract class CurrentClientCommand : ICommandLineHandler
+    public abstract class CurrentClientCommand : CommandHandler, ICommandLineHandler
     {
         private readonly Context _context;
 
@@ -11,15 +11,14 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             _context = context;
         }
 
-        public string Handle(CommandLine commandLine)
+        public void Handle(CommandLine commandLine)
         {
             if (_context.CurrentClient == null) {
-                return "You should define the current client first using 'connect %index'.";
+                WriteError("You should define the current client first using 'connect %index'.");
             }
-
-            return HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
+            HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
         }
 
-        protected abstract string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient);
+        protected abstract void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient);
     }
 }

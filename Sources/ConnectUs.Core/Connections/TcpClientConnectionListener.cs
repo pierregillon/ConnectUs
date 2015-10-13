@@ -26,7 +26,7 @@ namespace ConnectUs.Core.Connections
         public void Start(int port)
         {
             if (_listener != null) {
-                throw new ConnectionListenerAlreadyStartedException();
+                throw new ConnectionListenerAlreadyStartedException("The tcp listener is already listening.");
             }
             _listener = new TcpListener(IPAddress.Any, port);
             _listener.Start();

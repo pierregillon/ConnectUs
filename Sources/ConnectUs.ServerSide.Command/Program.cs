@@ -23,11 +23,8 @@ namespace ConnectUs.ServerSide.Command
                 if (command == "exit") {
                     break;
                 }
-                var commandResult = commandLineProcessor.Execute(command);
-                if (string.IsNullOrEmpty(commandResult) == false) {
-                    Console.WriteLine(commandResult);
-                    Console.WriteLine();
-                }
+                commandLineProcessor.Execute(command);
+                Console.WriteLine();
             }
             Console.Write("< Press any key to exit >");
             Console.ReadKey();

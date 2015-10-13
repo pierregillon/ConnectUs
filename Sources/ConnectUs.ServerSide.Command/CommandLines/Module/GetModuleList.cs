@@ -1,4 +1,3 @@
-using System;
 using ConnectUs.Core.ServerSide.Clients;
 using ConnectUs.Core.ServerSide.Decorators;
 
@@ -12,17 +11,16 @@ namespace ConnectUs.ServerSide.Command.CommandLines.Module
         {
         }
 
-        protected override string HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
+        protected override void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient)
         {
             var moduleDecorator = new ModuleDecorator(remoteClient);
             var modules = moduleDecorator.GetIntalledModules();
             foreach (var moduleState in modules) {
-                Console.WriteLine("{0} {1} {2}", 
+                WriteInfo("{0} {1} {2}", 
                     moduleState.Name.PadLeft(15),
                     moduleState.Version.PadLeft(15),
                     moduleState.IsLoaded.ToString().PadLeft(15));
             }
-            return string.Empty;
         }
     }
 }
