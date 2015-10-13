@@ -15,7 +15,11 @@ namespace ConnectUs.Core
         {
             var json = Encoding.GetString(data);
             var jsonObject = JToken.ReadFrom(new JsonTextReader(new StringReader(json)));
-            return jsonObject[RequestTypePropertyName].ToString();
+            var requestNameJsonObject = jsonObject[RequestTypePropertyName];
+            if (requestNameJsonObject == null) {
+                throw new ParseException("Unable to read request name : invalid json object.");
+            }
+            return requestNameJsonObject.ToString();
         }
         public string GetError(byte[] data)
         {

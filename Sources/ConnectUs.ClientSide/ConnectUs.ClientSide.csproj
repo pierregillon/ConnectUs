@@ -187,6 +187,9 @@
     <Compile Include="..\ConnectUs.Core\ModuleManagement\Proxy.cs">
       <Link>ModuleManagement\Proxy.cs</Link>
     </Compile>
+    <Compile Include="..\ConnectUs.Core\ParseException.cs">
+      <Link>Connections\ParseException.cs</Link>
+    </Compile>
     <Compile Include="..\ConnectUs.Core\RequestBase.cs">
       <Link>Connections\RequestBase.cs</Link>
     </Compile>
@@ -271,7 +274,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

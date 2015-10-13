@@ -15,10 +15,11 @@ namespace ConnectUs.Core.ClientSide
             _requestParser = requestParser;
         }
 
-        public byte[] Process(string requestName, byte[] data)
+        public byte[] Process(byte[] data)
         {
             object result;
             try {
+                var requestName = _requestParser.GetRequestName(data);
                 var command = _commandLocator.GetCommand(requestName);
                 if (command == null) {
                     throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));

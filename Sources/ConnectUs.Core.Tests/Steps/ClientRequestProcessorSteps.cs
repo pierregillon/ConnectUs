@@ -75,12 +75,12 @@ namespace ConnectUs.Core.Tests.Steps
 
         // When
 
-        [When(@"I process the request ""(.*)"" with the data ""(.*)""")]
-        public void WhenIProcessTheRequestWithTheData(string requestName, string json)
+        [When(@"I process the request ""(.*)""")]
+        public void WhenIProcessTheRequestWithTheData(string json)
         {
             var encoding = new UTF8Encoding();
             var data = encoding.GetBytes(json);
-            var bytes = ClientRequestProcessor.Process(requestName, data);
+            var bytes = ClientRequestProcessor.Process(data);
             Result = encoding.GetString(bytes);
         }
 
@@ -95,7 +95,7 @@ namespace ConnectUs.Core.Tests.Steps
         [Then(@"I get the request name ""(.*)"" and the data ""(.*)"" on the mocked client request processor")]
         public void ThenIGetTheRequestNameAndTheDataOnTheMockedClientRequestProcessor(string requestName, string data)
         {
-            Check.That(((MockedClientRequestProcess) ClientRequestProcessor).GetData(requestName)).IsEqualTo(data);
+            Check.That(((MockedClientRequestProcess) ClientRequestProcessor).GetData()).IsEqualTo(data);
         }
 
         [Then(@"I get the response ""(.*)""")]

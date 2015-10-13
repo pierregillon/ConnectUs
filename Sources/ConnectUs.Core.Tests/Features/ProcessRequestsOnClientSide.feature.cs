@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
   testRunner.And("A client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.When("I process the request \"EchoRequest\" with the data \"{\"Value\":\"test\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I process the request \"{\"Name\":\"EchoRequest\", \"Value\":\"test\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("I get the response \"{\"Result\":\"test\",\"Name\":\"EchoResponse\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -102,7 +102,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
   testRunner.And("A client request processor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
- testRunner.When("I process the request \"unknownRequest\" with the data \"{}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I process the request \"{\"Name\":\"unknownRequest\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
  testRunner.Then("I get a process exception \"{\"Error\":\"The request \'unknownRequest\' is unknown.\",\"N" +
                     "ame\":\"ErrorResponse\"}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -5,13 +5,11 @@ namespace ConnectUs.Core.ClientSide
     public class ClientRequestHandler : IClientRequestHandler
     {
         private readonly IClientRequestProcessor _clientRequestProcessor;
-        private readonly IRequestParser _requestParser;
 
         // ----- Constructors
-        public ClientRequestHandler(IClientRequestProcessor clientRequestProcessor, IRequestParser requestParser)
+        public ClientRequestHandler(IClientRequestProcessor clientRequestProcessor)
         {
             _clientRequestProcessor = clientRequestProcessor;
-            _requestParser = requestParser;
         }
 
         // ----- Public methods
@@ -19,8 +17,7 @@ namespace ConnectUs.Core.ClientSide
         {
             try {
                 var request = connection.Read();
-                var requestName = _requestParser.GetRequestName(request);
-                var response = _clientRequestProcessor.Process(requestName, request);
+                var response = _clientRequestProcessor.Process(request);
                 connection.Send(response);
             }
             catch (NoDataToReadFromConnectionException ex) {

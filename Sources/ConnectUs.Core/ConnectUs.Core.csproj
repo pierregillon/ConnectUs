@@ -54,6 +54,7 @@
     <Compile Include="ClientSide\IClientRequestProcessor.cs" />
     <Compile Include="ClientSide\ICommandLocator.cs" />
     <Compile Include="ClientSide\IContinuousRequestProcessor.cs" />
+    <Compile Include="ParseException.cs" />
     <Compile Include="ModuleManagement\IModuleManager.cs" />
     <Compile Include="ModuleManagement\Module.cs" />
     <Compile Include="ModuleManagement\ModuleException.cs" />

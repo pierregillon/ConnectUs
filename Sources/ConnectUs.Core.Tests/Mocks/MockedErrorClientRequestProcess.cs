@@ -10,7 +10,7 @@ namespace ConnectUs.Core.Tests.Mocks
         {
             ErrorMessage = message;
         }
-        public override byte[] Process(string requestName, byte[] originalData)
+        public override byte[] Process(byte[] originalData)
         {
             var encoding = new UTF8Encoding();
             var json = JsonConvert.SerializeObject(new ErrorResponse

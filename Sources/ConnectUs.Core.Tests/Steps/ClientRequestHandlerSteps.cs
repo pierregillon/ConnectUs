@@ -27,7 +27,7 @@ namespace ConnectUs.Core.Tests.Steps
         [Given(@"A client request handler")]
         public void GivenAClientRequestHandler()
         {
-            ClientRequestHandler = new ClientRequestHandler(ClientRequestProcessor, new JsonRequestParser());
+            ClientRequestHandler = new ClientRequestHandler(ClientRequestProcessor);
         }
 
         [When(@"I process the request from the client request handler")]
