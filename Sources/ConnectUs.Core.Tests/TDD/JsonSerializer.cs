@@ -6,7 +6,6 @@ namespace ConnectUs.Core.Tests.TDD
 {
     public class JsonSerializer
     {
-        
         public static object Deserialize(Type type, string json)
         {
             if (string.IsNullOrEmpty(json) || json.Trim() == string.Empty) {
@@ -15,6 +14,12 @@ namespace ConnectUs.Core.Tests.TDD
 
             var jsonObject = JsonObject.Parse(json);
             return Materialize(type, jsonObject);
+        }
+        public static string Serialize(object obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            return null;
         }
 
         private static object Materialize(Type type, JsonObject jsonObject)

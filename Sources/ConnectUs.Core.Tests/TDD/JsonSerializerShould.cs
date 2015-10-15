@@ -144,6 +144,13 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(car.Motor.Couple).IsEqualTo(1250);
         }
 
+        [Fact]
+        public void throw_error_when_trying_to_serialize_null_object()
+        {
+            Action code = () => JsonSerializer.Serialize(null);
+
+            Check.That(code).Throws<ArgumentNullException>();
+        }
 
         // ----- Internal classes
 
