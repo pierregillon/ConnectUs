@@ -156,7 +156,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(0)]
         [InlineData(120)]
         [InlineData(-33)]
-        public void serialize_json_with_long(long value)
+        public void serialize_object_with_long_property(long value)
         {
             var json = JsonSerializer.Serialize(new MyObject<long>(value));
 
@@ -168,7 +168,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(0)]
         [InlineData(120)]
         [InlineData(-33)]
-        public void serialize_json_with_long(int value)
+        public void serialize_object_with_int_property(int value)
         {
             var json = JsonSerializer.Serialize(new MyObject<int>(value));
 
@@ -180,7 +180,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(0)]
         [InlineData(0.3652f)]
         [InlineData(-66.256f)]
-        public void serialize_json_with_float(float value)
+        public void serialize_object_with_float_property(float value)
         {
             var json = JsonSerializer.Serialize(new MyObject<float>(value));
 
