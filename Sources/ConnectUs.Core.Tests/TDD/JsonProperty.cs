@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ConnectUs.Core.Tests.TDD
 {
-    internal class JsonProperty
+    public class JsonProperty
     {
         public string Name { get; private set; }
         public string Value { get; private set; }

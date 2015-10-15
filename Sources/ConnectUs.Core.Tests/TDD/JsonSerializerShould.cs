@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using Xunit;
 
@@ -131,6 +132,17 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(result.Ticks).IsEqualTo(1000);
         }
 
+        [Theory(Skip = "temp")]
+        [InlineData("{\"Motor\":{\"Brand\":\"Yamaha\",\"Couple\":1250}}")]
+        public void parse_json_with_sub_object(string json)
+        {
+            var car = (Car)JsonSerializer.Deserialize(typeof(Car), json);
+
+            Check.That(car).Not.IsNull();
+            Check.That(car.Motor).Not.IsNull();
+            Check.That(car.Motor.Brand).IsEqualTo("Yamaha");
+            Check.That(car.Motor.Couple).IsEqualTo(1250);
+        }
 
         // ----- Internal classes
 
@@ -144,6 +156,17 @@ namespace ConnectUs.Core.Tests.TDD
         private class MyObject<T>
         {
             public T MyValue { get; set; }
+        }
+
+        private class Car
+        {
+            public Motor Motor { get; set; }
+        }
+
+        private class Motor
+        {
+            public string Brand { get; set; }
+            public long Couple { get; set; }
         }
     }
 }
