@@ -3,6 +3,7 @@ using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using Xunit;
+using Assert = Xunit.Assert;
 
 namespace ConnectUs.Core.Tests.TDD
 {
@@ -203,6 +204,24 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(json).IsEqualTo("{'Name':'James BOND','Value':'test23','Ticks':1236}".Replace("'", "\""));
         }
 
+        [Fact]
+        public void serialize_simple_object_with_sub_object()
+        {
+            var obj = new Car
+            {
+                Motor = new Motor
+                {
+                    Brand = "Yamaha",
+                    Couple = 1235
+                },
+                Name = "Test"
+            };
+            var json = JsonSerializer.Serialize(obj);
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{'Motor':{'Brand':'Yamaha','Couple':1235},'Name':'Test'}".Replace("'", "\""));
+        }
+
         // ----- Internal classes
 
         private class MySimpleObject
@@ -226,6 +245,7 @@ namespace ConnectUs.Core.Tests.TDD
         private class Car
         {
             public Motor Motor { get; set; }
+            public string Name { get; set; }
         }
 
         private class Motor

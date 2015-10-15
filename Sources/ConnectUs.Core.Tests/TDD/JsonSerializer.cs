@@ -36,7 +36,7 @@ namespace ConnectUs.Core.Tests.TDD
         }
     }
 
-    public class JsonObject : Dictionary<string, string>
+    public class JsonObject : Dictionary<string, object>
     {
         private const string JsonPropertyName = @"'(?<name>[^:]*)'";
         private const string JsonPropertyValue = @"'?(?<value>[^,^}^']*)'?";
@@ -81,7 +81,7 @@ namespace ConnectUs.Core.Tests.TDD
             }
             return jsonObject;
         }
-        private static string GetValue(PropertyInfo property, object o)
+        private static object GetValue(PropertyInfo property, object o)
         {
             if (property.PropertyType.IsPrimitive) {
                 if (property.PropertyType.IsNumeric()) {
@@ -92,7 +92,7 @@ namespace ConnectUs.Core.Tests.TDD
                 return property.GetValue(o).ToString().Surround("\"");
             }
 
-            throw new NotImplementedException();
+            return From(property.GetValue(o));
         }
     }
 
