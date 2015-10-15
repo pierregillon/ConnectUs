@@ -12,7 +12,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("     ")]
         [InlineData("")]
         [InlineData(null)]
-        public void throw_error_when_trying_to_parse_empty_json(string json)
+        public void throw_error_when_trying_to_deserialize_empty_json(string json)
         {
             Action code = () => JsonSerializer.Deserialize(typeof (object), json);
 
@@ -22,7 +22,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData(typeof (object), "{}")]
         [InlineData(typeof (Exception), "{}")]
-        public void parse_json_with_no_data_should_return_empty_object(Type type, string json)
+        public void deserialize_json_with_no_data_should_return_empty_object(Type type, string json)
         {
             var result = JsonSerializer.Deserialize(type, json);
 
@@ -33,7 +33,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":100}", 100)]
         [InlineData("{\"MyValue\":-100}", -100)]
-        public void parse_json_with_long(string json, long expectedValue)
+        public void deserialize_json_with_long(string json, long expectedValue)
         {
             var result = (MyObject<long>) JsonSerializer.Deserialize(typeof (MyObject<long>), json);
 
@@ -44,7 +44,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":120}", 120)]
         [InlineData("{\"MyValue\":-33}", -33)]
-        public void parse_json_with_short(string json, short expectedValue)
+        public void deserialize_json_with_short(string json, short expectedValue)
         {
             var result = (MyObject<short>) JsonSerializer.Deserialize(typeof (MyObject<short>), json);
 
@@ -55,7 +55,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":15}", 15)]
         [InlineData("{\"MyValue\":-15}", -15)]
-        public void parse_json_with_integer(string json, int expectedValue)
+        public void deserialize_json_with_integer(string json, int expectedValue)
         {
             var result = (MyObject<int>) JsonSerializer.Deserialize(typeof (MyObject<int>), json);
 
@@ -66,7 +66,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":120.25}", 120.25d)]
         [InlineData("{\"MyValue\":-20.25}", -20.25d)]
-        public void parse_json_with_double(string json, double expectedValue)
+        public void deserialize_json_with_double(string json, double expectedValue)
         {
             var result = (MyObject<double>)JsonSerializer.Deserialize(typeof(MyObject<double>), json);
 
@@ -77,7 +77,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":120.25}", 120.25)]
         [InlineData("{\"MyValue\":-20.25}", -20.25)]
-        public void parse_json_with_decimal(string json, decimal expectedValue)
+        public void deserialize_json_with_decimal(string json, decimal expectedValue)
         {
             var result = (MyObject<decimal>)JsonSerializer.Deserialize(typeof(MyObject<decimal>), json);
 
@@ -88,7 +88,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":120.25}", 120.25f)]
         [InlineData("{\"MyValue\":-20.25}", -20.25f)]
-        public void parse_json_with_float(string json, float expectedValue)
+        public void deserialize_json_with_float(string json, float expectedValue)
         {
             var result = (MyObject<float>)JsonSerializer.Deserialize(typeof(MyObject<float>), json);
 
@@ -99,7 +99,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"MyValue\":\"hello world\"}", "hello world")]
         [InlineData("{\"MyValue\":\"\"}", "")]
-        public void parse_json_with_string(string json, string expectedValue)
+        public void deserialize_json_with_string(string json, string expectedValue)
         {
             var result = (MyObject<string>) JsonSerializer.Deserialize(typeof (MyObject<string>), json);
 
@@ -109,7 +109,7 @@ namespace ConnectUs.Core.Tests.TDD
 
         [Theory]
         [InlineData("{\"Name\":\"myname\",\"Value\":\"myvalue\",\"Ticks\":1000}")]
-        public void parse_json_with_simple_dataset(string json)
+        public void deserialize_json_with_simple_dataset(string json)
         {
             var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
@@ -122,7 +122,7 @@ namespace ConnectUs.Core.Tests.TDD
         [Theory]
         [InlineData("{\"Name\"  :  \"myname\"  ,  \"Value\" :   \"myvalue\" ,  \"Ticks\" : 1000}")]
         [InlineData("{  \"Name\"  :\"myname\",  \"Value\"     :   \"myvalue\" ,  \"Ticks\" : 1000     }")]
-        public void parse_json_with_spaces(string json)
+        public void deserialize_json_with_spaces(string json)
         {
             var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
@@ -134,7 +134,7 @@ namespace ConnectUs.Core.Tests.TDD
 
         [Theory(Skip = "temp")]
         [InlineData("{\"Motor\":{\"Brand\":\"Yamaha\",\"Couple\":1250}}")]
-        public void parse_json_with_sub_object(string json)
+        public void deserialize_json_with_sub_object(string json)
         {
             var car = (Car)JsonSerializer.Deserialize(typeof(Car), json);
 
@@ -143,6 +143,7 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(car.Motor.Brand).IsEqualTo("Yamaha");
             Check.That(car.Motor.Couple).IsEqualTo(1250);
         }
+
 
         // ----- Internal classes
 
