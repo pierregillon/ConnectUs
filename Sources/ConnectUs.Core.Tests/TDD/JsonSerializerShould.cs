@@ -164,6 +164,30 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
         }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(120)]
+        [InlineData(-33)]
+        public void serialize_json_with_long(int value)
+        {
+            var json = JsonSerializer.Serialize(new MyObject<int>(value));
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(0.3652f)]
+        [InlineData(-66.256f)]
+        public void serialize_json_with_float(float value)
+        {
+            var json = JsonSerializer.Serialize(new MyObject<float>(value));
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
+        }
+
         // ----- Internal classes
 
         private class MySimpleObject
