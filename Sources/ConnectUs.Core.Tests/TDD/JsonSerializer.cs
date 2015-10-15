@@ -87,9 +87,9 @@ namespace ConnectUs.Core.Tests.TDD
                 if (property.PropertyType.IsNumeric()) {
                     return property.GetValue(o).ToString();
                 }
-                if (property.PropertyType == typeof (string)) {
-                    return property.GetValue(o).ToString().Surround("\"");
-                }
+            }
+            if (property.PropertyType == typeof (string)) {
+                return property.GetValue(o).ToString().Surround("\"");
             }
 
             throw new NotImplementedException();

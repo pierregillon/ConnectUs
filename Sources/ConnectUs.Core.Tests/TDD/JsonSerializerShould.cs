@@ -188,6 +188,21 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
         }
 
+        [Fact]
+        public void serialize_simple_object()
+        {
+            var obj = new MySimpleObject
+            {
+                Name = "James BOND",
+                Value = "test23",
+                Ticks = 1236
+            };
+            var json = JsonSerializer.Serialize(obj);
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{'Name':'James BOND','Value':'test23','Ticks':1236}".Replace("'", "\""));
+        }
+
         // ----- Internal classes
 
         private class MySimpleObject
