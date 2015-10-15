@@ -15,7 +15,7 @@ namespace ConnectUs.Core.Tests.TDD
             }
 
             var jsonObject = JsonObject.Parse(json);
-            return Materialize(type, jsonObject);
+            return jsonObject.Materialize(type);
         }
         public static string Serialize(object obj)
         {
@@ -23,16 +23,6 @@ namespace ConnectUs.Core.Tests.TDD
 
             var jsonObject = JsonObject.From(obj);
             return jsonObject.ToString();
-        }
-
-        private static object Materialize(Type type, JsonObject jsonObject)
-        {
-            var instance = Activator.CreateInstance(type);
-            var properties = jsonObject.GetProperties();
-            foreach (var property in properties) {
-                property.SetTo(instance);
-            }
-            return instance;
         }
     }
 
@@ -43,43 +33,57 @@ namespace ConnectUs.Core.Tests.TDD
         private const string JsonRegex = JsonPropertyName + @"\ *:\ *" + JsonPropertyValue;
         private static readonly Regex Regex = new Regex(JsonRegex.Replace("'", "\""));
 
-        private readonly string _json;
-
-        public JsonObject()
+        private JsonObject()
         {
         }
-        private JsonObject(string json)
-        {
-            _json = json;
-        }
 
-        public IEnumerable<JsonProperty> GetProperties()
+        // ----- Public methods
+        public object Materialize(Type type)
         {
-            var matches = Regex.Matches(_json);
-            foreach (Match match in matches) {
-                var name = match.Groups["name"].Value;
-                var value = match.Groups["value"].Value;
-                yield return new JsonProperty(name, value);
+            var instance = Activator.CreateInstance(type);
+            foreach (var keyValue in this) {
+                var property = new JsonProperty(keyValue.Key, keyValue.Value.ToString());
+                property.SetTo(instance);
             }
+            return instance;
         }
 
+        // ----- Overrides
         public override string ToString()
         {
             var elements = this.Select(x => x.Key + ":" + x.Value).ToArray();
             return string.Join(",", elements).Surround("{", "}");
         }
 
+        // ----- Statics
         public static JsonObject Parse(string json)
         {
-            return new JsonObject(json);
-        }
-        public static JsonObject From(object o)
-        {
             var jsonObject = new JsonObject();
-            foreach (var property in o.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty)) {
-                jsonObject[property.Name.Surround("\"")] = GetValue(property, o);
+            var matches = Regex.Matches(json);
+            foreach (Match match in matches) {
+                var name = match.Groups["name"].Value;
+                var value = match.Groups["value"].Value;
+                jsonObject.Add(name, value);
             }
             return jsonObject;
+        }
+        public static JsonObject From(object origin)
+        {
+            return GetJsonObject(origin);
+        }
+        private static JsonObject GetJsonObject(object origin)
+        {
+            var jsonObject = new JsonObject();
+            foreach (var property in GetPropertiesToSerialize(origin)) {
+                jsonObject[property.Name.Surround("\"")] = GetValue(property, origin);
+            }
+            return jsonObject;
+        }
+        private static IEnumerable<PropertyInfo> GetPropertiesToSerialize(object origin)
+        {
+            return origin
+                .GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty);
         }
         private static object GetValue(PropertyInfo property, object o)
         {
@@ -92,7 +96,7 @@ namespace ConnectUs.Core.Tests.TDD
                 return property.GetValue(o).ToString().Surround("\"");
             }
 
-            return From(property.GetValue(o));
+            return GetJsonObject(property.GetValue(o));
         }
     }
 
