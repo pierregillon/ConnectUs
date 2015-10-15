@@ -152,6 +152,18 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(code).Throws<ArgumentNullException>();
         }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(120)]
+        [InlineData(-33)]
+        public void serialize_json_with_long(long value)
+        {
+            var json = JsonSerializer.Serialize(new MyObject<long>(value));
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
+        }
+
         // ----- Internal classes
 
         private class MySimpleObject
@@ -164,6 +176,12 @@ namespace ConnectUs.Core.Tests.TDD
         private class MyObject<T>
         {
             public T MyValue { get; set; }
+
+            public MyObject(){}
+            public MyObject(T value)
+            {
+                MyValue = value;
+            }
         }
 
         private class Car
