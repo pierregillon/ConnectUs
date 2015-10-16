@@ -11,6 +11,10 @@ namespace ConnectUs.Core.Tests.TDD
     {
         private readonly JsonSerializer _jsonSerializer;
 
+        private readonly CarBuilder _aCar = new CarBuilder();
+        private readonly MotorBuilder _aMotor = new MotorBuilder();
+        private readonly ParkingBuilder _aParking = new ParkingBuilder();
+
         public JsonSerializerShould()
         {
             _jsonSerializer = new JsonSerializer();
@@ -243,28 +247,27 @@ namespace ConnectUs.Core.Tests.TDD
         [Fact]
         public void serialize_collection_of_object()
         {
-            var cars = new List<Car>
-            {
-                new Car
-                {
-                    Motor = new Motor
-                    {
-                        Brand = "Yamaha",
-                        Couple = 1235
-                    },
-                    Name = "Test"
-                },
-                new Car
-                {
-                    Motor = new Motor
-                    {
-                        Brand = "Audi",
-                        Couple = 900
-                    },
-                    Name = "Test2"
-                }
-            };
-            var json = _jsonSerializer.Serialize(cars);
+            var johnCar = _aCar
+                .WithName("Test")
+                .WithMotor(
+                    _aMotor
+                        .WithBrand("Yamaha")
+                        .WithCouple(1235)
+                        .Build()
+                )
+                .Build();
+
+            var robCar = _aCar
+                .WithName("Test2")
+                .WithMotor(
+                    _aMotor
+                        .WithBrand("Audi")
+                        .WithCouple(900)
+                        .Build()
+                )
+                .Build();
+
+            var json = _jsonSerializer.Serialize(new[] {johnCar, robCar});
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("[" +
@@ -276,30 +279,27 @@ namespace ConnectUs.Core.Tests.TDD
         [Fact]
         public void serialize_object_with_array()
         {
-            var parking = new Parking
-            {
-                Cars = new List<Car>
-                {
-                    new Car
-                    {
-                        Motor = new Motor
-                        {
-                            Brand = "Yamaha",
-                            Couple = 1235
-                        },
-                        Name = "Test"
-                    },
-                    new Car
-                    {
-                        Motor = new Motor
-                        {
-                            Brand = "Audi",
-                            Couple = 900
-                        },
-                        Name = "Test2"
-                    }
-                }
-            };
+            var parking = _aParking
+                .With(_aCar
+                    .WithName("Test")
+                    .WithMotor(
+                        _aMotor
+                            .WithBrand("Yamaha")
+                            .WithCouple(1235)
+                            .Build()
+                    ).Build())
+                
+                .With(
+                    _aCar
+                        .WithName("Test2")
+                        .WithMotor(
+                            _aMotor
+                                .WithBrand("Audi")
+                                .WithCouple(900)
+                                .Build()
+                        )
+                        .Build())
+                .Build();
 
             var json = _jsonSerializer.Serialize(parking);
 
@@ -340,15 +340,83 @@ namespace ConnectUs.Core.Tests.TDD
             public string Name { get; set; }
         }
 
+        private class CarBuilder
+        {
+            private string _name;
+            private Motor _motor;
+
+            public CarBuilder WithName(string name)
+            {
+                _name = name;
+                return this;
+            }
+            public CarBuilder WithMotor(Motor motor)
+            {
+                _motor = motor;
+                return this;
+            }
+            public Car Build()
+            {
+                return new Car
+                {
+                    Name = _name,
+                    Motor = _motor
+                };
+            }
+        }
+
         private class Motor
         {
             public string Brand { get; set; }
             public long Couple { get; set; }
         }
 
+        private class MotorBuilder
+        {
+            private string _brand;
+            private int _couple;
+            public MotorBuilder WithBrand(string brand)
+            {
+                _brand = brand;
+                return this;
+            }
+            public MotorBuilder WithCouple(int couple)
+            {
+                _couple = couple;
+                return this;
+            }
+            public Motor Build()
+            {
+                return new Motor
+                {
+                    Brand = _brand,
+                    Couple = _couple
+                };
+            }
+        }
+
         private class Parking
         {
-            public List<Car> Cars { get; set; }
+            public IEnumerable<Car> Cars { get; set; }
+        }
+
+        private class ParkingBuilder
+        {
+            private readonly List<Car> _cars = new List<Car>();
+
+            public ParkingBuilder With(Car car)
+            {
+                _cars.Add(car);
+                return this;
+            }
+            public Parking Build()
+            {
+                return new Parking
+                {
+                    Cars = _cars
+                };
+            }
         }
     }
+
 }
