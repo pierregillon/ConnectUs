@@ -157,6 +157,30 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(car.Motor.Couple).IsEqualTo(1250);
         }
 
+        [Theory]
+        [InlineData("[]", new int[0])]
+        [InlineData("[1,2,3]", new[] { 1, 2, 3 })]
+        [InlineData("[1,  2,    -3]", new[] { 1, 2, -3 })]
+        public void deserialize_int_json_array(string json, int[] values)
+        {
+            var integers = _jsonSerializer.Deserialize<List<int>>(json);
+
+            Check.That(integers).Not.IsNull();
+            Check.That(integers).ContainsExactly(values);
+        }
+
+        [Theory]
+        [InlineData("[]", new string[0])]
+        [InlineData("[\"test\",\"hello\",\"world\"]", new[] { "test", "hello", "world" })]
+        [InlineData("[\"test\"  ,  \"hel  lo\"   ,   \"world\"]", new[] { "test", "hel  lo", "world" })]
+        public void deserialize_string_json_array(string json, string[] values)
+        {
+            var elements = _jsonSerializer.Deserialize<List<string>>(json);
+
+            Check.That(elements).Not.IsNull();
+            Check.That(elements).ContainsExactly(elements);
+        }
+
         [Fact]
         public void throw_error_when_trying_to_serialize_null_object()
         {

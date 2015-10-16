@@ -13,6 +13,9 @@ namespace ConnectUs.Core.Serialization
                 var builder = new JsonClassBuilder();
                 return builder.Build(value);
             }
+            if (value.IsSurroundBy('[', ']')) {
+                return new JsonArray(value);
+            }
             if (value.IsSurroundBy('\"')) {
                 return new StringJsonProperty(value);
             }
@@ -38,6 +41,18 @@ namespace ConnectUs.Core.Serialization
     {
         private readonly IList<IJsonObject> _jsonObjects = new List<IJsonObject>();
 
+        public JsonArray(string json)
+        {
+            var elements = json.
+                Substring(1, json.Length - 2)
+                .Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => x.Trim())
+                .ToArray();
+
+            foreach (var element in elements) {
+                _jsonObjects.Add(JsonObjectFactory.BuildJsonObject(element));
+            }
+        }
         public JsonArray(IEnumerable collection)
         {
             foreach (var element in collection) {
