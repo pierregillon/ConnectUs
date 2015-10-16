@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ConnectUs.Core.Tests.TDD
 {
-    internal class NumericJsonProperty : IMaterializable
+    internal class NumericJsonProperty : IJsonObject
     {
         private readonly string _value;
 

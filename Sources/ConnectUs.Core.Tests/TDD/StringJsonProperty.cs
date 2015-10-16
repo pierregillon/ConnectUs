@@ -2,7 +2,7 @@ using System;
 
 namespace ConnectUs.Core.Tests.TDD
 {
-    internal class StringJsonProperty : IMaterializable
+    internal class StringJsonProperty : IJsonObject
     {
         private readonly string _value;
 
