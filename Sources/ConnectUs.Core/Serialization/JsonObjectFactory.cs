@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConnectUs.Core.Serialization
 {
@@ -24,7 +27,40 @@ namespace ConnectUs.Core.Serialization
             if (type == typeof (string)) {
                 return new StringJsonProperty(instance.ToString().Surround("\""));
             }
+            if (type.GetInterface("IEnumerable") != null) {
+                return new JsonArray((IEnumerable)instance);
+            }
             return new JsonClass(instance);
+        }
+    }
+
+    internal class JsonArray : IJsonObject
+    {
+        private readonly IList<IJsonObject> _jsonObjects = new List<IJsonObject>();
+
+        public JsonArray(IEnumerable collection)
+        {
+            foreach (var element in collection) {
+                _jsonObjects.Add(JsonObjectFactory.BuildJsonObject(element.GetType(), element));
+            }
+        }
+
+        public object Materialize(Type type)
+        {
+            if (type.Implements(typeof(IList<>)) == false) {
+                throw new NotImplementedException("Collection that does not implement IList<T> are not implemented yet.");
+            }
+            var argumentType = type.GetGenericArguments()[0];
+            var collection = (IList) Activator.CreateInstance(type);
+            foreach (var jsonObject in _jsonObjects) {
+                collection.Add(jsonObject.Materialize(argumentType));
+            }
+            return collection;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",", _jsonObjects.Select(x => x.ToString())).Surround("[", "]");
         }
     }
 }

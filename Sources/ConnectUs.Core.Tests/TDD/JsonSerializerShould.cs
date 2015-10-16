@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using ConnectUs.Core.Serialization;
 using NFluent;
@@ -42,7 +43,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-100}", -100)]
         public void deserialize_json_with_long(string json, long expectedValue)
         {
-            var result = _jsonSerializer.Deserialize < MyObject<long>>(json);
+            var result = _jsonSerializer.Deserialize<MyObject<long>>(json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -53,7 +54,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-33}", -33)]
         public void deserialize_json_with_short(string json, short expectedValue)
         {
-            var result = _jsonSerializer.Deserialize < MyObject<short>>(json);
+            var result = _jsonSerializer.Deserialize<MyObject<short>>(json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -75,7 +76,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-20.25}", -20.25d)]
         public void deserialize_json_with_double(string json, double expectedValue)
         {
-            var result = _jsonSerializer.Deserialize < MyObject<double>>(json);
+            var result = _jsonSerializer.Deserialize<MyObject<double>>(json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -151,7 +152,7 @@ namespace ConnectUs.Core.Tests.TDD
             Check.That(car.Motor.Brand).IsEqualTo("Yamaha");
             Check.That(car.Motor.Couple).IsEqualTo(1250);
         }
-        
+
         [Fact]
         public void throw_error_when_trying_to_serialize_null_object()
         {
@@ -227,6 +228,39 @@ namespace ConnectUs.Core.Tests.TDD
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("{'Motor':{'Brand':'Yamaha','Couple':1235},'Name':'Test'}".Replace("'", "\""));
+        }
+
+        [Fact]
+        public void serialize_collection()
+        {
+            var cars = new List<Car>
+            {
+                new Car
+                {
+                    Motor = new Motor
+                    {
+                        Brand = "Yamaha",
+                        Couple = 1235
+                    },
+                    Name = "Test"
+                },
+                new Car
+                {
+                    Motor = new Motor
+                    {
+                        Brand = "Audi",
+                        Couple = 900
+                    },
+                    Name = "Test2"
+                }
+            };
+            var json = _jsonSerializer.Serialize(cars);
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("[" +
+                                       "{'Motor':{'Brand':'Yamaha','Couple':1235},'Name':'Test'},".Replace("'", "\"") +
+                                       "{'Motor':{'Brand':'Audi','Couple':900},'Name':'Test2'}".Replace("'", "\"") +
+                                       "]");
         }
 
         // ----- Internal classes

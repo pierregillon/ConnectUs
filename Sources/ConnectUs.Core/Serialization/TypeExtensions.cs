@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace ConnectUs.Core.Serialization
 {
@@ -26,6 +27,17 @@ namespace ConnectUs.Core.Serialization
                     return false;
                 default:
                     return false;
+            }
+        }
+
+        public static bool Implements(this Type classType, Type interfaceType)
+        {
+            var genericArguments = classType.GetGenericArguments();
+            if (genericArguments.Any()) {
+                return classType.GetInterface(interfaceType.MakeGenericType(genericArguments).Name) != null;
+            }
+            else {
+                return classType.GetInterface(interfaceType.Name) != null;
             }
         }
     }
