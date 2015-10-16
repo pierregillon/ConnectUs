@@ -242,6 +242,7 @@ namespace ConnectUs.Core.Tests.TDD
         {
             public T MyValue { get; set; }
 
+            // ReSharper disable once UnusedMember.Local
             public MyObject() {}
             public MyObject(T value)
             {
