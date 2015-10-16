@@ -154,9 +154,12 @@
     <Compile Include="BDD\Steps\TcpClientSteps.cs" />
     <Compile Include="BDD\Steps\UploaderSteps.cs" />
     <Compile Include="TDD\EmptyJsonException.cs" />
+    <Compile Include="TDD\IMaterializable.cs" />
     <Compile Include="TDD\JsonObject.cs" />
     <Compile Include="TDD\JsonSerializer.cs" />
     <Compile Include="TDD\JsonSerializerShould.cs" />
+    <Compile Include="TDD\NumericJsonProperty.cs" />
+    <Compile Include="TDD\StringJsonProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace ConnectUs.Core.Tests.TDD
 {
-    public class JsonObject : Dictionary<string, object>
+    public class JsonObject : Dictionary<string, IMaterializable>, IMaterializable
     {
         private const string JsonPropertyName = @"'(?<name>[^:]*)'";
-        private const string JsonPropertyValue = @"'?(?<value>[^,^}^']*)'?";
+        private const string JsonPropertyValue = @"(?<value>[^,^}]*)";
         private const string JsonRegex = JsonPropertyName + @"\ *:\ *" + JsonPropertyValue;
         private static readonly Regex PropertyRegex = new Regex(JsonRegex.Replace("'", "\""));
         private static readonly Regex ClassRegex = new Regex(@"(?<name>'[^,]*?'):(?<value>[{\[].*?[}\]])".Replace("'", "\""));
@@ -18,72 +17,31 @@ namespace ConnectUs.Core.Tests.TDD
         private JsonObject()
         {
         }
+        private JsonObject(object obj)
+        {
+            foreach (var property in GetPropertiesToSerialize(obj)) {
+                this[property.Name.Surround("\"")] = GetValue(property, obj);
+            }
+        }
 
         // ----- Public methods
         public object Materialize(Type type)
         {
             var instance = Activator.CreateInstance(type);
             foreach (var keyValue in this) {
-                var key = keyValue.Key;
-                if (key.IsSurroundBy('\"')) {
-                    key = key.Substring(1, key.Length - 2);
+                var propertyInfo = Key(type, keyValue.Key);
+                if (propertyInfo != null) {
+                    propertyInfo.SetValue(instance, keyValue.Value.Materialize(propertyInfo.PropertyType));
                 }
-                SetTo(instance, key, keyValue.Value);
             }
             return instance;
         }
-
-        public void SetTo(object instance, string name, object value)
+        private static PropertyInfo Key(Type type, string propertyName)
         {
-            var type = instance.GetType();
-            var propertyInfo = type.GetProperty(name);
-            if (propertyInfo.PropertyType == typeof(string)) {
-                var val = (string) value;
-                if (val.IsSurroundBy('\"')) {
-                    val = val.Substring(1, val.Length - 2);
-                }
-                propertyInfo.SetValue(instance, val);
+            if (propertyName.IsSurroundBy('\"')) {
+                propertyName = propertyName.Substring(1, propertyName.Length - 2);
             }
-            else if (propertyInfo.PropertyType.IsNumeric())
-            {
-                var val = (string) value;
-                if (val.IsSurroundBy('\"')) {
-                    val = val.Substring(1, val.Length - 2);
-                }
-
-                var parseMethods = propertyInfo
-                    .PropertyType
-                    .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                    .Where(x => x.Name == "Parse")
-                    .ToArray();
-
-                var parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 2 && x.GetParameters().Last().ParameterType == typeof(IFormatProvider));
-                if (parseMethod != null)
-                {
-                    var parsedValue = parseMethod.Invoke(null, new object[] { val, CultureInfo.InvariantCulture });
-                    propertyInfo.SetValue(instance, parsedValue);
-                }
-                else
-                {
-                    parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 1);
-                    if (parseMethod == null)
-                    {
-                        throw new Exception("Unable to parse the value.");
-                    }
-                    var parsedValue = parseMethod.Invoke(null, new object[] { val });
-                    propertyInfo.SetValue(instance, parsedValue);
-                }
-            }
-
-            else if (propertyInfo.PropertyType.IsClass) {
-                var jsonObject = (JsonObject) value;
-                var objectProperty = jsonObject.Materialize(propertyInfo.PropertyType);
-                propertyInfo.SetValue(instance, objectProperty);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            return type.GetProperty(propertyName);
         }
 
         // ----- Overrides
@@ -98,34 +56,42 @@ namespace ConnectUs.Core.Tests.TDD
         {
             var jsonObject = new JsonObject();
 
+            json = ParseSubObjects(jsonObject, json);
+            ParseProperties(jsonObject, json);
+
+            return jsonObject;
+        }
+        public static JsonObject From(object origin)
+        {
+            return new JsonObject(origin);
+        }
+
+        // ----- Utils
+        private static void ParseProperties(JsonObject jsonObject, string json)
+        {
+            var matches = PropertyRegex.Matches(json);
+            foreach (Match match in matches) {
+                var name = match.Groups["name"].Value;
+                var value = match.Groups["value"].Value.Trim();
+
+                if (value.IsSurroundBy('\"')) {
+                    jsonObject.Add(name, new StringJsonProperty(value));
+                }
+                else {
+                    jsonObject.Add(name, new NumericJsonProperty(value));
+                }
+            }
+        }
+        private static string ParseSubObjects(JsonObject jsonObject, string json)
+        {
             var classMatches = ClassRegex.Matches(json);
-            foreach (Match classMatch in classMatches)
-            {
+            foreach (Match classMatch in classMatches) {
                 var name = classMatch.Groups["name"].Value;
                 var value = classMatch.Groups["value"].Value;
                 jsonObject[name] = Parse(value);
                 json = json.Replace(classMatch.Value, "");
             }
-
-            var matches = PropertyRegex.Matches(json);
-            foreach (Match match in matches) {
-                var name = match.Groups["name"].Value;
-                var value = match.Groups["value"].Value;
-                jsonObject.Add(name, value);
-            }
-            return jsonObject;
-        }
-        public static JsonObject From(object origin)
-        {
-            return GetJsonObject(origin);
-        }
-        private static JsonObject GetJsonObject(object origin)
-        {
-            var jsonObject = new JsonObject();
-            foreach (var property in GetPropertiesToSerialize(origin)) {
-                jsonObject[property.Name.Surround("\"")] = GetValue(property, origin);
-            }
-            return jsonObject;
+            return json;
         }
         private static IEnumerable<PropertyInfo> GetPropertiesToSerialize(object origin)
         {
@@ -133,18 +99,15 @@ namespace ConnectUs.Core.Tests.TDD
                 .GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty);
         }
-        private static object GetValue(PropertyInfo property, object o)
+        private static IMaterializable GetValue(PropertyInfo property, object instance)
         {
-            if (property.PropertyType.IsPrimitive) {
-                if (property.PropertyType.IsNumeric()) {
-                    return property.GetValue(o).ToString();
-                }
+            if (property.PropertyType.IsNumeric()) {
+                return new NumericJsonProperty(property.GetValue(instance).ToString());
             }
             if (property.PropertyType == typeof (string)) {
-                return property.GetValue(o).ToString().Surround("\"");
+                return new StringJsonProperty(property.GetValue(instance).ToString().Surround("\""));
             }
-
-            return GetJsonObject(property.GetValue(o));
+            return new JsonObject(property.GetValue(instance));
         }
     }
 }
