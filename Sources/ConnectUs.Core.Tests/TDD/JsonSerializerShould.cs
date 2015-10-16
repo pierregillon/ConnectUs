@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using ConnectUs.Core.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using Xunit;

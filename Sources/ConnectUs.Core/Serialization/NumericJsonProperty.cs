@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace ConnectUs.Core.Tests.TDD
+namespace ConnectUs.Core.Serialization
 {
     internal class NumericJsonProperty : IJsonObject
     {

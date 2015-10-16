@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ConnectUs.Core.Tests.TDD
+namespace ConnectUs.Core.Serialization
 {
     public class JsonClass : Dictionary<string, IJsonObject>, IJsonObject
     {

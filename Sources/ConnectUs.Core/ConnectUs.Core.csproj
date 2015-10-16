@@ -72,6 +72,16 @@
     <Compile Include="RequestBase.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Connections\TcpClientConnection.cs" />
+    <Compile Include="Serialization\EmptyJsonException.cs" />
+    <Compile Include="Serialization\IJsonObject.cs" />
+    <Compile Include="Serialization\JsonClass.cs" />
+    <Compile Include="Serialization\JsonClassBuilder.cs" />
+    <Compile Include="Serialization\JsonObjectFactory.cs" />
+    <Compile Include="Serialization\JsonSerializer.cs" />
+    <Compile Include="Serialization\NumericJsonProperty.cs" />
+    <Compile Include="Serialization\StringExtensions.cs" />
+    <Compile Include="Serialization\StringJsonProperty.cs" />
+    <Compile Include="Serialization\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

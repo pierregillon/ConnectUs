@@ -1,4 +1,4 @@
-namespace ConnectUs.Core.Tests.TDD
+namespace ConnectUs.Core.Serialization
 {
     public static class StringExtensions
     {

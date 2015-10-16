@@ -1,6 +1,6 @@
 using System;
 
-namespace ConnectUs.Core.Tests.TDD
+namespace ConnectUs.Core.Serialization
 {
     internal class StringJsonProperty : IJsonObject
     {

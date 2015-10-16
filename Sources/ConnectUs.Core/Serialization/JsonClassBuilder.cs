@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace ConnectUs.Core.Tests.TDD
+namespace ConnectUs.Core.Serialization
 {
     public class JsonClassBuilder
     {
