@@ -104,7 +104,7 @@ namespace ConnectUs.Core.Tests.TDD
                 var name = classMatch.Groups["name"].Value;
                 var value = classMatch.Groups["value"].Value;
                 jsonObject[name] = Parse(value);
-                json = json.Replace(string.Format("{0}:{1}", name, value), "");
+                json = json.Replace(classMatch.Value, "");
             }
 
             var matches = PropertyRegex.Matches(json);
