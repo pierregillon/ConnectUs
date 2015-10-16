@@ -4,16 +4,20 @@ namespace ConnectUs.Core.Serialization
 {
     internal class StringJsonProperty : IJsonObject
     {
-        private readonly string _value;
+        private readonly string _json;
 
-        public StringJsonProperty(string value)
+        public StringJsonProperty(object instance)
         {
-            _value = value;
+            _json = ((string) instance).Surround("\"");
+        }
+        public StringJsonProperty(string json)
+        {
+            _json = json;
         }
 
         public object Materialize(Type type)
         {
-            var val = _value;
+            var val = _json;
             if (val.IsSurroundBy('\"')) {
                 val = val.Substring(1, val.Length - 2);
             }
@@ -22,7 +26,7 @@ namespace ConnectUs.Core.Serialization
 
         public override string ToString()
         {
-            return _value;
+            return _json;
         }
     }
 }

@@ -1,81 +1,37 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ConnectUs.Core.Serialization
 {
     internal class JsonObjectFactory
     {
-        public static IJsonObject BuildJsonObject(string value)
+        public static IJsonObject BuildJsonObject(string json)
         {
-            if (value.IsSurroundBy('{', '}')) {
+            if (json.IsSurroundBy('{', '}')) {
                 var builder = new JsonClassBuilder();
-                return builder.Build(value);
+                return builder.Build(json);
             }
-            if (value.IsSurroundBy('[', ']')) {
-                return new JsonArray(value);
+            if (json.IsSurroundBy('[', ']')) {
+                return new JsonArray(json);
             }
-            if (value.IsSurroundBy('\"')) {
-                return new StringJsonProperty(value);
+            if (json.IsSurroundBy('\"')) {
+                return new StringJsonProperty(json);
             }
-            return new NumericJsonProperty(value);
+            return new NumericJsonProperty(json);
         }
 
         public static IJsonObject BuildJsonObject(Type type, object instance)
         {
             if (type.IsNumeric()) {
-                return new NumericJsonProperty(instance.ToString());
+                return new NumericJsonProperty(instance);
             }
             if (type == typeof (string)) {
-                return new StringJsonProperty(instance.ToString().Surround("\""));
+                return new StringJsonProperty(instance);
             }
             if (type.GetInterface("IEnumerable") != null) {
                 return new JsonArray((IEnumerable)instance);
             }
             return new JsonClass(instance);
-        }
-    }
-
-    internal class JsonArray : IJsonObject
-    {
-        private readonly IList<IJsonObject> _jsonObjects = new List<IJsonObject>();
-
-        public JsonArray(string json)
-        {
-            var elements = json.
-                Substring(1, json.Length - 2)
-                .Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim())
-                .ToArray();
-
-            foreach (var element in elements) {
-                _jsonObjects.Add(JsonObjectFactory.BuildJsonObject(element));
-            }
-        }
-        public JsonArray(IEnumerable collection)
-        {
-            foreach (var element in collection) {
-                _jsonObjects.Add(JsonObjectFactory.BuildJsonObject(element.GetType(), element));
-            }
-        }
-
-        public object Materialize(Type type)
-        {
-            if (type.Implements(typeof(IList<>)) == false) {
-                throw new NotImplementedException("Collection that does not implement IList<T> are not implemented yet.");
-            }
-            var argumentType = type.GetGenericArguments()[0];
-            var collection = (IList) Activator.CreateInstance(type);
-            foreach (var jsonObject in _jsonObjects) {
-                collection.Add(jsonObject.Materialize(argumentType));
-            }
-            return collection;
-        }
-
-        public override string ToString()
-        {
-            return string.Join(",", _jsonObjects.Select(x => x.ToString())).Surround("[", "]");
         }
     }
 }

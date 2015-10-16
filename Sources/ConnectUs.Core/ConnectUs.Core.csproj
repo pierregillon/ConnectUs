@@ -74,6 +74,7 @@
     <Compile Include="Connections\TcpClientConnection.cs" />
     <Compile Include="Serialization\EmptyJsonException.cs" />
     <Compile Include="Serialization\IJsonObject.cs" />
+    <Compile Include="Serialization\JsonArray.cs" />
     <Compile Include="Serialization\JsonClass.cs" />
     <Compile Include="Serialization\JsonClassBuilder.cs" />
     <Compile Include="Serialization\JsonObjectFactory.cs" />

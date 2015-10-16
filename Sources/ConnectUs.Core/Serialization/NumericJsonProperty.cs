@@ -7,20 +7,19 @@ namespace ConnectUs.Core.Serialization
 {
     internal class NumericJsonProperty : IJsonObject
     {
-        private readonly string _value;
+        private readonly string _json;
 
-        public NumericJsonProperty(string value)
+        public NumericJsonProperty(object instance)
         {
-            _value = value;
+            _json = instance.ToString().Trim();
+        }
+        public NumericJsonProperty(string json)
+        {
+            _json = json;
         }
 
         public object Materialize(Type type)
         {
-            var val = _value.Replace(" ", "");
-            if (val.IsSurroundBy('\"')) {
-                val = val.Substring(1, val.Length - 2);
-            }
-
             var parseMethods = type
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(x => x.Name == "Parse")
@@ -28,20 +27,20 @@ namespace ConnectUs.Core.Serialization
 
             var parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 2 && x.GetParameters().Last().ParameterType == typeof (IFormatProvider));
             if (parseMethod != null) {
-                return parseMethod.Invoke(null, new object[] {val, CultureInfo.InvariantCulture});
+                return parseMethod.Invoke(null, new object[] { _json, CultureInfo.InvariantCulture });
             }
             else {
                 parseMethod = parseMethods.SingleOrDefault(x => x.GetParameters().Count() == 1);
                 if (parseMethod == null) {
                     throw new Exception("Unable to parse the value.");
                 }
-                return parseMethod.Invoke(null, new object[] {val});
+                return parseMethod.Invoke(null, new object[] { _json });
             }
         }
 
         public override string ToString()
         {
-            return _value;
+            return _json;
         }
     }
 }
