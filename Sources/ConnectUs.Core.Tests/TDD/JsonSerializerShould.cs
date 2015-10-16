@@ -263,6 +263,46 @@ namespace ConnectUs.Core.Tests.TDD
                                        "]");
         }
 
+        [Fact]
+        public void serialize_object_with_array()
+        {
+            var parking = new Parking
+            {
+                Cars = new List<Car>
+                {
+                    new Car
+                    {
+                        Motor = new Motor
+                        {
+                            Brand = "Yamaha",
+                            Couple = 1235
+                        },
+                        Name = "Test"
+                    },
+                    new Car
+                    {
+                        Motor = new Motor
+                        {
+                            Brand = "Audi",
+                            Couple = 900
+                        },
+                        Name = "Test2"
+                    }
+                }
+            };
+
+            var json = _jsonSerializer.Serialize(parking);
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("{" +
+                                       "'Cars':".Replace("'", "\"") +
+                                       "[" +
+                                       "{'Motor':{'Brand':'Yamaha','Couple':1235},'Name':'Test'},".Replace("'", "\"") +
+                                       "{'Motor':{'Brand':'Audi','Couple':900},'Name':'Test2'}".Replace("'", "\"") +
+                                       "]".Replace("'", "\"") +
+                                       "}");
+        }
+
         // ----- Internal classes
 
         private class MySimpleObject
@@ -294,6 +334,11 @@ namespace ConnectUs.Core.Tests.TDD
         {
             public string Brand { get; set; }
             public long Couple { get; set; }
+        }
+
+        private class Parking
+        {
+            public List<Car> Cars { get; set; }
         }
     }
 }
