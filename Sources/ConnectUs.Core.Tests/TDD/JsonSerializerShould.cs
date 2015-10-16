@@ -1,22 +1,27 @@
 ﻿using System;
-using System.Collections;
+using System.Globalization;
 using ConnectUs.Core.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using Xunit;
-using Assert = Xunit.Assert;
 
 namespace ConnectUs.Core.Tests.TDD
 {
     public class JsonSerializerShould
     {
+        private readonly JsonSerializer _jsonSerializer;
+
+        public JsonSerializerShould()
+        {
+            _jsonSerializer = new JsonSerializer();
+        }
+
         [Theory]
         [InlineData("     ")]
         [InlineData("")]
         [InlineData(null)]
         public void throw_error_when_trying_to_deserialize_empty_json(string json)
         {
-            Action code = () => JsonSerializer.Deserialize(typeof (object), json);
+            Action code = () => _jsonSerializer.Deserialize(typeof (object), json);
 
             Check.ThatCode(code).Throws<EmptyJsonException>();
         }
@@ -26,7 +31,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(typeof (Exception), "{}")]
         public void deserialize_json_with_no_data_should_return_empty_object(Type type, string json)
         {
-            var result = JsonSerializer.Deserialize(type, json);
+            var result = _jsonSerializer.Deserialize(type, json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.GetType()).IsEqualTo(type);
@@ -37,7 +42,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-100}", -100)]
         public void deserialize_json_with_long(string json, long expectedValue)
         {
-            var result = (MyObject<long>) JsonSerializer.Deserialize(typeof (MyObject<long>), json);
+            var result = (MyObject<long>) _jsonSerializer.Deserialize(typeof (MyObject<long>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -48,7 +53,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-33}", -33)]
         public void deserialize_json_with_short(string json, short expectedValue)
         {
-            var result = (MyObject<short>) JsonSerializer.Deserialize(typeof (MyObject<short>), json);
+            var result = (MyObject<short>) _jsonSerializer.Deserialize(typeof (MyObject<short>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -59,7 +64,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-15}", -15)]
         public void deserialize_json_with_integer(string json, int expectedValue)
         {
-            var result = (MyObject<int>) JsonSerializer.Deserialize(typeof (MyObject<int>), json);
+            var result = (MyObject<int>) _jsonSerializer.Deserialize(typeof (MyObject<int>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -70,7 +75,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-20.25}", -20.25d)]
         public void deserialize_json_with_double(string json, double expectedValue)
         {
-            var result = (MyObject<double>)JsonSerializer.Deserialize(typeof(MyObject<double>), json);
+            var result = (MyObject<double>)_jsonSerializer.Deserialize(typeof(MyObject<double>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -81,7 +86,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-20.25}", -20.25)]
         public void deserialize_json_with_decimal(string json, decimal expectedValue)
         {
-            var result = (MyObject<decimal>)JsonSerializer.Deserialize(typeof(MyObject<decimal>), json);
+            var result = (MyObject<decimal>)_jsonSerializer.Deserialize(typeof(MyObject<decimal>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -92,7 +97,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":-20.25}", -20.25f)]
         public void deserialize_json_with_float(string json, float expectedValue)
         {
-            var result = (MyObject<float>)JsonSerializer.Deserialize(typeof(MyObject<float>), json);
+            var result = (MyObject<float>)_jsonSerializer.Deserialize(typeof(MyObject<float>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -103,7 +108,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"MyValue\":\"\"}", "")]
         public void deserialize_json_with_string(string json, string expectedValue)
         {
-            var result = (MyObject<string>) JsonSerializer.Deserialize(typeof (MyObject<string>), json);
+            var result = (MyObject<string>) _jsonSerializer.Deserialize(typeof (MyObject<string>), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.MyValue).IsEqualTo(expectedValue);
@@ -113,7 +118,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"Name\":\"myname\",\"Value\":\"myvalue\",\"Ticks\":1000}")]
         public void deserialize_json_with_simple_dataset(string json)
         {
-            var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
+            var result = (MySimpleObject) _jsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.Name).IsEqualTo("myname");
@@ -126,7 +131,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{  \"Name\"  :\"myname\",  \"Value\"     :   \"myvalue\" ,  \"Ticks\" : 1000     }")]
         public void deserialize_json_with_spaces(string json)
         {
-            var result = (MySimpleObject) JsonSerializer.Deserialize(typeof (MySimpleObject), json);
+            var result = (MySimpleObject) _jsonSerializer.Deserialize(typeof (MySimpleObject), json);
 
             Check.That(result).Not.IsNull();
             Check.That(result.Name).IsEqualTo("myname");
@@ -138,7 +143,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData("{\"Motor\":{\"Brand\":\"Yamaha\",\"Couple\":1250},\"Name\":\"Test\"}")]
         public void deserialize_json_with_sub_object(string json)
         {
-            var car = (Car)JsonSerializer.Deserialize(typeof(Car), json);
+            var car = (Car)_jsonSerializer.Deserialize(typeof(Car), json);
 
             Check.That(car).Not.IsNull();
             Check.That(car.Name).IsEqualTo("Test");
@@ -150,9 +155,9 @@ namespace ConnectUs.Core.Tests.TDD
         [Fact]
         public void throw_error_when_trying_to_serialize_null_object()
         {
-            Action code = () => JsonSerializer.Serialize(null);
+            Action code = () => _jsonSerializer.Serialize(null);
 
-            Check.That(code).Throws<ArgumentNullException>();
+            Check.ThatCode(code).Throws<ArgumentNullException>();
         }
 
         [Theory]
@@ -161,7 +166,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(-33)]
         public void serialize_object_with_long_property(long value)
         {
-            var json = JsonSerializer.Serialize(new MyObject<long>(value));
+            var json = _jsonSerializer.Serialize(new MyObject<long>(value));
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
@@ -173,7 +178,7 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(-33)]
         public void serialize_object_with_int_property(int value)
         {
-            var json = JsonSerializer.Serialize(new MyObject<int>(value));
+            var json = _jsonSerializer.Serialize(new MyObject<int>(value));
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
@@ -185,10 +190,10 @@ namespace ConnectUs.Core.Tests.TDD
         [InlineData(-66.256f)]
         public void serialize_object_with_float_property(float value)
         {
-            var json = JsonSerializer.Serialize(new MyObject<float>(value));
+            var json = _jsonSerializer.Serialize(new MyObject<float>(value));
 
             Check.That(json).Not.IsNull();
-            Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString()).Replace("'", "\""));
+            Check.That(json).IsEqualTo("{'MyValue':{0}}".Replace("{0}", value.ToString(CultureInfo.InvariantCulture)).Replace("'", "\""));
         }
 
         [Fact]
@@ -200,7 +205,7 @@ namespace ConnectUs.Core.Tests.TDD
                 Value = "test23",
                 Ticks = 1236
             };
-            var json = JsonSerializer.Serialize(obj);
+            var json = _jsonSerializer.Serialize(obj);
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("{'Name':'James BOND','Value':'test23','Ticks':1236}".Replace("'", "\""));
@@ -218,7 +223,7 @@ namespace ConnectUs.Core.Tests.TDD
                 },
                 Name = "Test"
             };
-            var json = JsonSerializer.Serialize(obj);
+            var json = _jsonSerializer.Serialize(obj);
 
             Check.That(json).Not.IsNull();
             Check.That(json).IsEqualTo("{'Motor':{'Brand':'Yamaha','Couple':1235},'Name':'Test'}".Replace("'", "\""));
