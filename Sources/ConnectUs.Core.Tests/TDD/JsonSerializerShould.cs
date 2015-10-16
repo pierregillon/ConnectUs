@@ -231,7 +231,17 @@ namespace ConnectUs.Core.Tests.TDD
         }
 
         [Fact]
-        public void serialize_collection()
+        public void serialize_collection_of_int()
+        {
+            var numbers = new[]{1, 2, 3, 5, 6, 9, -5};
+            var json = _jsonSerializer.Serialize(numbers);
+
+            Check.That(json).Not.IsNull();
+            Check.That(json).IsEqualTo("[1,2,3,5,6,9,-5]");
+        }
+
+        [Fact]
+        public void serialize_collection_of_object()
         {
             var cars = new List<Car>
             {
