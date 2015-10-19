@@ -10,6 +10,7 @@ namespace ConnectUs.ClientSide
         static Program()
         {
             Ioc.Instance.RegisterSingle<IApplication, Application>();
+            Ioc.Instance.Register<IInstaller, Installer>();
             Ioc.Instance.Register<IRemoteServerConnector, RemoteServerConnector>();
             Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
             Ioc.Instance.Register<IClientRequestProcessor, ClientRequestProcessor>();
@@ -28,8 +29,14 @@ namespace ConnectUs.ClientSide
                 application.ProcessRequests();
             }
             else {
-                application.Locate();
+                var filePath = application.Install();
+                LaunchProcess(filePath);
             }
+        }
+
+        private static void LaunchProcess(string filePath)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -103,6 +103,12 @@
     <Compile Include="..\ConnectUs.Core.ClientSide\IContinuousRequestProcessor.cs">
       <Link>IContinuousRequestProcessor.cs</Link>
     </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\IInstaller.cs">
+      <Link>IInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\Installer.cs">
+      <Link>Installer.cs</Link>
+    </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\IRemoteServerConnector.cs">
       <Link>IRemoteServerConnector.cs</Link>
     </Compile>

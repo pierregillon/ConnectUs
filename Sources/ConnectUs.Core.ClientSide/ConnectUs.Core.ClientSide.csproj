@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="IInstaller.cs" />
+    <Compile Include="Installer.cs" />
     <Compile Include="IRemoteServerConnector.cs" />
     <Compile Include="RemoteServerConnector.cs" />
     <Compile Include="ClientException.cs" />

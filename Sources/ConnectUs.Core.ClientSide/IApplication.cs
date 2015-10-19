@@ -5,6 +5,6 @@
         bool IsWellLocated();
         void LoadModules();
         void ProcessRequests();
-        void Locate();
+        string Install();
     }
 }

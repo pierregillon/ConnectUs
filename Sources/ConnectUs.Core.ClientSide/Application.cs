@@ -5,12 +5,17 @@ namespace ConnectUs.Core.ClientSide
 {
     public class Application : IApplication
     {
+        private readonly IInstaller _installer;
         private readonly IModuleManager _moduleManager;
         private readonly IRemoteServerConnector _remoteServerConnector;
 
         // ----- Constructor
-        public Application(IModuleManager moduleManager, IRemoteServerConnector remoteServerConnector)
+        public Application(
+            IInstaller installer, 
+            IModuleManager moduleManager,
+            IRemoteServerConnector remoteServerConnector)
         {
+            _installer = installer;
             _moduleManager = moduleManager;
             _remoteServerConnector = remoteServerConnector;
         }
@@ -18,7 +23,7 @@ namespace ConnectUs.Core.ClientSide
         // ----- Public methods
         public bool IsWellLocated()
         {
-            throw new NotImplementedException();
+            return _installer.IsInstalled;
         }
         public void LoadModules()
         {
@@ -33,9 +38,9 @@ namespace ConnectUs.Core.ClientSide
             Console.WriteLine("- Finding a remote server ...");
             _remoteServerConnector.StartFinding();
         }
-        public void Locate()
+        public string Install()
         {
-            throw new NotImplementedException();
+            return _installer.Install();
         }
     }
 }
