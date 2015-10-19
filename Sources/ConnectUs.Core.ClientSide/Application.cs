@@ -1,27 +1,18 @@
 using System;
-using System.IO;
-using System.Threading;
 using ConnectUs.Core.ModuleManagement;
 
 namespace ConnectUs.Core.ClientSide
 {
     public class Application : IApplication
     {
-        private const string HostName = "localhost";
-        private const int Port = 9000;
-        private static readonly AutoResetEvent ResetEvent = new AutoResetEvent(false);
-
         private readonly IModuleManager _moduleManager;
-        private readonly Client _client;
+        private readonly IRemoteServerConnector _remoteServerConnector;
 
         // ----- Constructor
-        public Application(IModuleManager moduleManager, Client client)
+        public Application(IModuleManager moduleManager, IRemoteServerConnector remoteServerConnector)
         {
             _moduleManager = moduleManager;
-
-            _client = client;
-            _client.ClientConnected += ClientOnClientConnected;
-            _client.ClientDisconnected += ClientOnClientDisconnected;
+            _remoteServerConnector = remoteServerConnector;
         }
 
         // ----- Public methods
@@ -39,30 +30,12 @@ namespace ConnectUs.Core.ClientSide
         }
         public void ProcessRequests()
         {
-            Console.WriteLine("- Starting client ...");
-            while (true) {
-                Console.WriteLine("Trying to connect to the host '{0}' on port '{1}'", HostName, Port);
-                try {
-                    _client.ConnectToServer(HostName, Port);
-                    ResetEvent.WaitOne();
-                }
-                catch (ClientException) {}
-            }
+            Console.WriteLine("- Finding a remote server ...");
+            _remoteServerConnector.StartFinding();
         }
         public void Locate()
         {
             throw new NotImplementedException();
-        }
-
-        // ----- Event handlers
-        private static void ClientOnClientConnected(object sender, EventArgs eventArgs)
-        {
-            Console.WriteLine("Client connected.");
-        }
-        private static void ClientOnClientDisconnected(object sender, EventArgs eventArgs)
-        {
-            Console.WriteLine("Client disconnected.");
-            ResetEvent.Set();
         }
     }
 }

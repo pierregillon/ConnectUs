@@ -9,7 +9,8 @@ namespace ConnectUs.ClientSide
     {
         static Program()
         {
-            Ioc.Instance.Register<Client>();
+            Ioc.Instance.RegisterSingle<IApplication, Application>();
+            Ioc.Instance.Register<IRemoteServerConnector, RemoteServerConnector>();
             Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
             Ioc.Instance.Register<IClientRequestProcessor, ClientRequestProcessor>();
             Ioc.Instance.Register<IClientRequestHandler, ClientRequestHandler>();
@@ -17,7 +18,6 @@ namespace ConnectUs.ClientSide
             Ioc.Instance.RegisterSingle<IModuleManager, ModuleManager>();
             Ioc.Instance.Register<IRequestParser, JsonRequestParser>();
             Ioc.Instance.RegisterSingle<IClientInformation, ClientInformation>();
-            Ioc.Instance.RegisterSingle<IApplication, Application>();
         }
 
         public static void Main(string[] args)

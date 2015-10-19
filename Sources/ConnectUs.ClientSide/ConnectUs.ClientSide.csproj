@@ -49,9 +49,6 @@
     <Compile Include="..\ConnectUs.Core.ClientSide\Application.cs">
       <Link>Application.cs</Link>
     </Compile>
-    <Compile Include="..\ConnectUs.Core.ClientSide\Client.cs">
-      <Link>Client.cs</Link>
-    </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\ClientException.cs">
       <Link>ClientException.cs</Link>
     </Compile>
@@ -106,11 +103,20 @@
     <Compile Include="..\ConnectUs.Core.ClientSide\IContinuousRequestProcessor.cs">
       <Link>IContinuousRequestProcessor.cs</Link>
     </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\IRemoteServerConnector.cs">
+      <Link>IRemoteServerConnector.cs</Link>
+    </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\NoRequestToProcessException.cs">
       <Link>NoRequestToProcessException.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\ProcessException.cs">
       <Link>ProcessException.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\RemoteServer.cs">
+      <Link>RemoteServer.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\RemoteServerConnector.cs">
+      <Link>RemoteServerConnector.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Core\Connections\ConnectionEstablishedEventArgs.cs">
       <Link>Connections\ConnectionEstablishedEventArgs.cs</Link>
