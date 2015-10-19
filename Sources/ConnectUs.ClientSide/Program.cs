@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
 using ConnectUs.Core;
 using ConnectUs.Core.ClientSide;
 using ConnectUs.Core.ModuleManagement;
@@ -27,19 +27,14 @@ namespace ConnectUs.ClientSide
         public static void Main(string[] args)
         {
             var application = Ioc.Instance.GetInstance<IApplication>();
-            if (args.FirstOrDefault() == "--debug" || application.IsWellLocated()) {
+            if (application.IsWellLocated()) {
                 application.LoadModules();
                 application.ProcessRequests();
             }
             else {
                 var filePath = application.Install();
-                LaunchProcess(filePath);
+                Process.Start(filePath);
             }
-        }
-
-        private static void LaunchProcess(string filePath)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
