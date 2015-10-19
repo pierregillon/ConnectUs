@@ -1,12 +1,19 @@
-using System;
+using System.Reflection;
 
 namespace ConnectUs.Core.ClientSide
 {
     public class ClientEnvironment : IEnvironment
     {
-        public string CurrentParentFolder
+        private readonly string _location;
+
+        public ClientEnvironment()
         {
-            get { return Environment.CurrentDirectory; }
+            _location = Assembly.GetExecutingAssembly().Location;
+        }
+
+        public string ApplicationPath
+        {
+            get { return _location; }
         }
     }
 }
