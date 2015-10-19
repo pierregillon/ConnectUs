@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
+﻿using System.Linq;
 using ConnectUs.Core;
 using ConnectUs.Core.ClientSide;
 using ConnectUs.Core.ModuleManagement;
@@ -9,18 +7,7 @@ namespace ConnectUs.ClientSide
 {
     public static class Program
     {
-        const string HostName = "localhost";
-        const int Port = 9000;
-        private static readonly AutoResetEvent ResetEvent = new AutoResetEvent(false);
-
-        public static void Main(string[] args)
-        {
-            InitIoc();
-            LoadExistingModules();
-            StartClient();
-        }
-
-        private static void InitIoc()
+        static Program()
         {
             Ioc.Instance.Register<Client>();
             Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
@@ -30,55 +17,19 @@ namespace ConnectUs.ClientSide
             Ioc.Instance.RegisterSingle<IModuleManager, ModuleManager>();
             Ioc.Instance.Register<IRequestParser, JsonRequestParser>();
             Ioc.Instance.RegisterSingle<IClientInformation, ClientInformation>();
+            Ioc.Instance.RegisterSingle<IApplication, Application>();
         }
 
-        private static void LoadExistingModules()
+        public static void Main(string[] args)
         {
-            Console.WriteLine("- Loading modules");
-            var moduleManager = Ioc.Instance.GetInstance<IModuleManager>();
-            foreach (var filePath in Directory.GetFiles("Modules")) {
-                try {
-                    Console.Write("\t-> {0} ... ", Path.GetFileName(filePath));
-                    var moduleName = moduleManager.AddModule(filePath);
-                    moduleManager.LoadModule(moduleName);
-                    Console.WriteLine("OK");
-                }
-                catch (Exception) {
-                    Console.WriteLine("ERROR");
-                }
+            var application = Ioc.Instance.GetInstance<IApplication>();
+            if (args.FirstOrDefault() == "--debug" || application.IsWellLocated()) {
+                application.LoadModules();
+                application.ProcessRequests();
             }
-        }
-
-        private static void StartClient()
-        {
-            Console.WriteLine("- Starting client ...");
-
-            var client = Ioc.Instance.GetInstance<Client>();
-            client.ClientConnected += ClientOnClientConnected;
-            client.ClientDisconnected += ClientOnClientDisconnected;
-
-            while (true)
-            {
-                Console.WriteLine("Trying to connect to the host '{0}' on port '{1}'", HostName, Port);
-                try
-                {
-                    client.ConnectToServer(HostName, Port);
-                    ResetEvent.WaitOne();
-                }
-                catch (ClientException)
-                {
-                }
+            else {
+                application.Locate();
             }
-        }
-        private static void ClientOnClientConnected(object sender, EventArgs eventArgs)
-        {
-            Console.WriteLine("Client connected.");
-        }
-
-        private static void ClientOnClientDisconnected(object sender, EventArgs eventArgs)
-        {
-            Console.WriteLine("Client disconnected.");
-            ResetEvent.Set();
         }
     }
 }

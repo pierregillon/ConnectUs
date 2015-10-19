@@ -182,6 +182,20 @@ namespace ConnectUs.Core.Tests.TDD
         }
 
         [Fact]
+        public void deserialize_object_json_array()
+        {
+            var json = "[" +
+                       "     {\"Motor\":{\"Brand\":\"Yamaha\",\"Couple\":1235},\"Name\":\"Test\"}," +
+                       "     {\"Motor\":{\"Brand\":\"Audi\",\"Couple\":900},\"Name\":\"Test2\"}" +
+                       "]";
+
+            var cars = _jsonSerializer.Deserialize<List<Car>>(json);
+
+            Check.That(cars).Not.IsNull();
+            Check.That(cars).HasSize(2);
+        }
+
+        [Fact]
         public void throw_error_when_trying_to_serialize_null_object()
         {
             Action code = () => _jsonSerializer.Serialize(null);

@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ConnectUs.Core.ClientSide\Application.cs">
+      <Link>Application.cs</Link>
+    </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\Client.cs">
       <Link>Client.cs</Link>
     </Compile>
@@ -84,6 +87,9 @@
     </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\ContinuousRequestProcessor.cs">
       <Link>ContinuousRequestProcessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\IApplication.cs">
+      <Link>IApplication.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\IClientInformation.cs">
       <Link>IClientInformation.cs</Link>

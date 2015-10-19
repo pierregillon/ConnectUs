@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientException.cs" />
     <Compile Include="ClientInformation.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Commands\UnloadModuleCommand.cs" />
     <Compile Include="Commands\UploadCommand.cs" />
     <Compile Include="ContinuousRequestProcessor.cs" />
+    <Compile Include="IApplication.cs" />
     <Compile Include="IClientInformation.cs" />
     <Compile Include="IClientRequestHandler.cs" />
     <Compile Include="IClientRequestProcessor.cs" />
