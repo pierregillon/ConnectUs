@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace ConnectUs.Core.ModuleManagement
@@ -59,6 +60,14 @@ namespace ConnectUs.Core.ModuleManagement
             var module = FindModule(name);
             module.Unload();
             OnModuleUnloaded(new ModuleUnloadedEventArgs(module));
+        }
+        public IEnumerable<ModuleName> LoadModules()
+        {
+            foreach (var filePath in Directory.GetFiles("Modules")) {
+                var moduleName = AddModule(filePath);
+                LoadModule(moduleName);
+                yield return moduleName;
+            }
         }
 
         // ----- Utils

@@ -14,5 +14,6 @@ namespace ConnectUs.Core.ModuleManagement
         void RemoveModule(ModuleName modulePath);
         void LoadModule(ModuleName name);
         void UnloadModule(ModuleName name);
+        IEnumerable<ModuleName> LoadModules();
     }
 }

@@ -31,17 +31,10 @@ namespace ConnectUs.Core.ClientSide
         }
         public void LoadModules()
         {
-            Console.WriteLine("- Loading modules");
-            foreach (var filePath in Directory.GetFiles("Modules")) {
-                try {
-                    Console.Write("\t-> {0} ... ", Path.GetFileName(filePath));
-                    var moduleName = _moduleManager.AddModule(filePath);
-                    _moduleManager.LoadModule(moduleName);
-                    Console.WriteLine("OK");
-                }
-                catch (Exception) {
-                    Console.WriteLine("ERROR");
-                }
+            Console.WriteLine("- Loading modules ... ");
+            var moduleNames = _moduleManager.LoadModules();
+            foreach (var moduleName in moduleNames) {
+                Console.WriteLine("\t-> {0}", moduleName);
             }
         }
         public void ProcessRequests()
