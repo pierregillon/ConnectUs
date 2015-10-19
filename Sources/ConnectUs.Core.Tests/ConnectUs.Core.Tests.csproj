@@ -154,6 +154,7 @@
     <Compile Include="BDD\Steps\TcpClientSteps.cs" />
     <Compile Include="BDD\Steps\UploaderSteps.cs" />
     <Compile Include="TDD\JsonSerializerShould.cs" />
+    <Compile Include="TDD\InstallerShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

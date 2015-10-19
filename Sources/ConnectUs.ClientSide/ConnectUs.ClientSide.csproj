@@ -49,6 +49,9 @@
     <Compile Include="..\ConnectUs.Core.ClientSide\Application.cs">
       <Link>Application.cs</Link>
     </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\ClientEnvironment.cs">
+      <Link>ClientEnvironment.cs</Link>
+    </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\ClientException.cs">
       <Link>ClientException.cs</Link>
     </Compile>
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\IContinuousRequestProcessor.cs">
       <Link>IContinuousRequestProcessor.cs</Link>
+    </Compile>
+    <Compile Include="..\ConnectUs.Core.ClientSide\IEnvironment.cs">
+      <Link>IEnvironment.cs</Link>
     </Compile>
     <Compile Include="..\ConnectUs.Core.ClientSide\IInstaller.cs">
       <Link>IInstaller.cs</Link>

@@ -11,6 +11,7 @@ namespace ConnectUs.ClientSide
         {
             Ioc.Instance.RegisterSingle<IApplication, Application>();
             Ioc.Instance.Register<IInstaller, Installer>();
+            Ioc.Instance.Register<IEnvironment, ClientEnvironment>();
             Ioc.Instance.Register<IRemoteServerConnector, RemoteServerConnector>();
             Ioc.Instance.Register<IContinuousRequestProcessor, ContinuousRequestProcessor>();
             Ioc.Instance.Register<IClientRequestProcessor, ClientRequestProcessor>();
