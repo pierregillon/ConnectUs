@@ -6,8 +6,8 @@ namespace ConnectUs.Core.ClientSide
     {
         public void Copy(string sourceFileName, string destinationFileName)
         {
-            if (File.Exists(sourceFileName)) {
-                File.Delete(sourceFileName);
+            if (File.Exists(destinationFileName)) {
+                File.Delete(destinationFileName);
             }
             File.Copy(sourceFileName, destinationFileName);
         }
