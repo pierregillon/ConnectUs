@@ -9,13 +9,16 @@ namespace ConnectUs.Core.ClientSide
         {
             Add("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "ApplicationName", value);
         }
+
         public void Add(string subkey, string name, string value)
         {
             using (var registryKey = Registry.CurrentUser.OpenSubKey(subkey, true)) {
                 if (registryKey == null) {
                     throw new Exception("error");
                 }
-                registryKey.SetValue(name, value);
+                if (registryKey.GetValue(name) != null) {
+                    registryKey.SetValue(name, value);
+                }
             }
         }
     }
