@@ -1,22 +1,27 @@
 using System;
+using System.IO;
 using Microsoft.Win32;
 
 namespace ConnectUs.Core.ClientSide
 {
     public class WindowsRegistry : IRegistry
     {
-        public void AddInStartupRegistry(string value)
+        public void AddFileToStartupRegistry(string filePath)
         {
-            Add("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "ApplicationName", value);
+            var fileName = Path.GetFileName(filePath);
+            if (fileName == null) {
+                throw new Exception("Invalid file path");
+            }
+            Add("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", fileName, filePath);
         }
 
         public void Add(string subkey, string name, string value)
         {
-            using (var registryKey = Registry.CurrentUser.OpenSubKey(subkey, true)) {
+            using (var registryKey = Registry.LocalMachine.OpenSubKey(subkey, true)) {
                 if (registryKey == null) {
                     throw new Exception("error");
                 }
-                if (registryKey.GetValue(name) != null) {
+                if (registryKey.GetValue(name) == null) {
                     registryKey.SetValue(name, value);
                 }
             }

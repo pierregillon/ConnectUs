@@ -60,7 +60,7 @@ namespace ConnectUs.Core.Tests.TDD
 
             _installer.Install();
 
-            _registry.Verify(x => x.AddInStartupRegistry(@"C:\Windows\System32\test.exe"), Times.Once);
+            _registry.Verify(x => x.AddFileToStartupRegistry(@"C:\Windows\System32\test.exe"), Times.Once);
         }
     }
 }
