@@ -32,5 +32,9 @@ namespace ConnectUs.Core.ClientSide
 
             return targetFilePath;
         }
+        public void Uninstall()
+        {
+            _registry.RemoveFileFromStartupRegistry(_environment.ApplicationPath);
+        }
     }
 }

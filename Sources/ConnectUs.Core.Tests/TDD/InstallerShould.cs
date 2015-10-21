@@ -62,5 +62,15 @@ namespace ConnectUs.Core.Tests.TDD
 
             _registry.Verify(x => x.AddFileToStartupRegistry(@"C:\Windows\System32\test.exe"), Times.Once);
         }
+
+        [Fact]
+        public void remote_target_file_path_of_startup_registry_when_uninstalling()
+        {
+            _environment.Setup(x => x.ApplicationPath).Returns(@"C:\Windows\System32\test.exe");
+
+            _installer.Uninstall();
+
+            _registry.Verify(x => x.RemoveFileFromStartupRegistry(@"C:\Windows\System32\test.exe"), Times.Once);
+        }
     }
 }

@@ -4,5 +4,6 @@ namespace ConnectUs.Core.ClientSide
     {
         bool IsInstalled { get; }
         string Install();
+        void Uninstall();
     }
 }
