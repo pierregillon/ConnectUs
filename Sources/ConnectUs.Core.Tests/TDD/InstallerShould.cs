@@ -42,15 +42,13 @@ namespace ConnectUs.Core.Tests.TDD
         }
 
         [Fact]
-        public void copy_executable_to_safe_place_when_installing()
+        public void copy_new_executable_to_safe_place_when_installing()
         {
-            const string originPath = @"C:\test.exe";
-            const string targetPath = @"C:\Windows\System32\test.exe";
-            _environment.Setup(x => x.ApplicationPath).Returns(originPath);
+            _environment.Setup(x => x.ApplicationPath).Returns(@"C:\test.exe");
 
             _installer.Install();
 
-            _fileService.Verify(x => x.Copy(originPath, targetPath), Times.Once);
+            _fileService.Verify(x => x.Copy(@"C:\test.exe", It.IsRegex(@"C:\\Windows\\System32\\.+\.exe")), Times.Once);
         }
 
         [Fact]
