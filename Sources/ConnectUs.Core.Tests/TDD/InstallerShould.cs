@@ -15,7 +15,10 @@ namespace ConnectUs.Core.Tests.TDD
         public InstallerShould()
         {
             _environment = new Mock<IEnvironment>();
+
             _fileService = new Mock<IFileService>();
+            _fileService.Setup(x => x.GenerateRandomFileName()).Returns("xxx");
+
             _registry = new Mock<IRegistry>();
             _installer = new Installer(_environment.Object, _fileService.Object, _registry.Object);
         }
@@ -52,13 +55,23 @@ namespace ConnectUs.Core.Tests.TDD
         }
 
         [Fact]
-        public void add_target_file_path_in_startup_registry_when_installing()
+        public void generate_a_new_name_for_executable_when_installing()
         {
-            _environment.Setup(x => x.ApplicationPath).Returns(@"C:\test.exe");
+            _fileService.Setup(x => x.GenerateRandomFileName()).Returns("myName");
 
             _installer.Install();
 
-            _registry.Verify(x => x.AddFileToStartupRegistry(@"C:\Windows\System32\test.exe"), Times.Once);
+            _fileService.Verify(x => x.Copy(It.IsAny<string>(), @"C:\Windows\System32\myName.exe"), Times.Once);
+        }
+
+        [Fact]
+        public void add_target_file_path_in_startup_registry_when_installing()
+        {
+            _fileService.Setup(x => x.GenerateRandomFileName()).Returns("myName");
+
+            _installer.Install();
+
+            _registry.Verify(x => x.AddFileToStartupRegistry(@"C:\Windows\System32\myName.exe"), Times.Once);
         }
 
         [Fact]
