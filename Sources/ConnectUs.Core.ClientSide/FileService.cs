@@ -16,6 +16,10 @@ namespace ConnectUs.Core.ClientSide
         {
             return GetFileNameFromMachine() ?? GetRandomFileName();
         }
+        public bool Exists(string filePath)
+        {
+            return File.Exists(filePath);
+        }
 
         private static string GetRandomFileName()
         {

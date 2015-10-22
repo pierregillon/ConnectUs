@@ -4,5 +4,6 @@ namespace ConnectUs.Core.ClientSide
     {
         void Copy(string sourceFileName, string destinationFileName);
         string GenerateRandomFileName();
+        bool Exists(string filePath);
     }
 }

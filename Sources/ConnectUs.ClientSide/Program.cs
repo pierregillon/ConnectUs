@@ -33,7 +33,9 @@ namespace ConnectUs.ClientSide
             }
             else {
                 var filePath = application.Install();
-                Process.Start(filePath);
+                if (string.IsNullOrEmpty(filePath) == false) {
+                    Process.Start(filePath);
+                }
             }
         }
     }

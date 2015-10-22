@@ -24,7 +24,28 @@ namespace ConnectUs.Core.ClientSide
             }
             Remove(StartUpRegistry, fileName);
         }
+        public bool IsRegisteredAtStartup(string filePath)
+        {
+            var fileName = Path.GetFileName(filePath);
+            if (fileName == null) {
+                throw new Exception("Invalid file path");
+            }
+            return Get(StartUpRegistry, fileName) == filePath;
+        }
 
+        public string Get(string subKey, string key)
+        {
+            using (var registryKey = Registry.LocalMachine.OpenSubKey(subKey, true)) {
+                if (registryKey == null) {
+                    throw new Exception("error");
+                }
+                var value = registryKey.GetValue(key);
+                if (value == null) {
+                    return null;
+                }
+                return value.ToString();
+            }
+        }
         public void Add(string subkey, string name, string value)
         {
             using (var registryKey = Registry.LocalMachine.OpenSubKey(subkey, true)) {
