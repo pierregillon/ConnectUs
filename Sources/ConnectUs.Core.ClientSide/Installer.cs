@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace ConnectUs.Core.ClientSide
@@ -39,7 +38,7 @@ namespace ConnectUs.Core.ClientSide
                 if (string.IsNullOrEmpty(filePath)) {
                     return false;
                 }
-                return File.Exists(filePath) == false ^ _registry.IsRegisteredAtStartup(filePath) == false;
+                return _fileService.Exists(filePath) == false ^ _registry.IsRegisteredAtStartup(filePath) == false;
             }
         }
         public string Install()
