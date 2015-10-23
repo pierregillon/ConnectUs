@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Principal;
 using ConnectUs.Core;
 using ConnectUs.Core.ClientSide;
 using ConnectUs.Core.ModuleManagement;
@@ -26,6 +27,10 @@ namespace ConnectUs.ClientSide
 
         public static void Main(string[] args)
         {
+            if (IsAdministrator() == false) {
+                RestartApplicationWithAdministratorPrivileges();
+                return;
+            }
             var application = Ioc.Instance.GetInstance<IApplication>();
             if (application.IsWellLocated()) {
                 application.LoadModules();
@@ -34,9 +39,31 @@ namespace ConnectUs.ClientSide
             else {
                 var filePath = application.Install();
                 if (string.IsNullOrEmpty(filePath) == false) {
-                    Process.Start(filePath);
+                    StartExecutableWithAdministratorPrivileges(filePath);
                 }
             }
+        }
+
+        // ----- Utils
+        private static bool IsAdministrator()
+        {
+            using (var identity = WindowsIdentity.GetCurrent()) {
+                var principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+        private static void RestartApplicationWithAdministratorPrivileges()
+        {
+            var exeName = Process.GetCurrentProcess().MainModule.FileName;
+            StartExecutableWithAdministratorPrivileges(exeName);
+        }
+        private static void StartExecutableWithAdministratorPrivileges(string filePath)
+        {
+            var startInfo = new ProcessStartInfo(filePath)
+            {
+                Verb = "runas"
+            };
+            Process.Start(startInfo);
         }
     }
 }
