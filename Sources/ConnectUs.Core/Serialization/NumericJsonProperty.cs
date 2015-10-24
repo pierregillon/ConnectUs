@@ -12,7 +12,13 @@ namespace ConnectUs.Core.Serialization
 
         public NumericJsonProperty(object instance)
         {
-            _json = instance.ToString().Trim();
+            var convertible = instance as IConvertible;
+            if (convertible != null) {
+                _json = convertible.ToString(CultureInfo.InvariantCulture);
+            }
+            else {
+                _json = instance.ToString().Trim();
+            }
         }
         public NumericJsonProperty(string json)
         {
