@@ -63,10 +63,13 @@ namespace ConnectUs.Core.ModuleManagement
         }
         public IEnumerable<ModuleName> LoadModules()
         {
-            foreach (var filePath in Directory.GetFiles("Modules")) {
-                var moduleName = AddModule(filePath);
-                LoadModule(moduleName);
-                yield return moduleName;
+            const string moduleFolderPath = "Modules";
+            if (Directory.Exists(moduleFolderPath)) {
+                foreach (var filePath in Directory.GetFiles(moduleFolderPath)) {
+                    var moduleName = AddModule(filePath);
+                    LoadModule(moduleName);
+                    yield return moduleName;
+                }
             }
         }
 
