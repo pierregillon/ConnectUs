@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Security.Principal;
 using ConnectUs.Core;
 using ConnectUs.Core.ClientSide;
@@ -32,7 +33,7 @@ namespace ConnectUs.ClientSide
                 return;
             }
             var application = Ioc.Instance.GetInstance<IApplication>();
-            if (application.IsWellLocated()) {
+            if (args.Any(x => x == "--debug" || application.IsWellLocated())) {
                 application.LoadModules();
                 application.ProcessRequests();
             }
