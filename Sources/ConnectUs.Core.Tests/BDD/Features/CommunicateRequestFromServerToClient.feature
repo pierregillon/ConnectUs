@@ -15,6 +15,18 @@ Scenario: Sending request from server get correct json in client side
 		And I process the request from the client request handler
 	Then I get the request name "GetClientInformationRequest" and the data "{"Name":"GetClientInformationRequest"}" on the mocked client request processor
 
+Scenario: Sending multiple requests from server get correct json in client side in good order
+	Given A "GetClientInformation" request
+	When I send the request by the server request dispatcher
+		And I send the request by the server request dispatcher
+		And I send the request by the server request dispatcher
+	When I process the request from the client request handler
+		Then I get the request name "GetClientInformationRequest" and the data "{"Name":"GetClientInformationRequest"}" on the mocked client request processor
+	When I process the request from the client request handler
+		Then I get the request name "GetClientInformationRequest" and the data "{"Name":"GetClientInformationRequest"}" on the mocked client request processor
+	When I process the request from the client request handler
+		Then I get the request name "GetClientInformationRequest" and the data "{"Name":"GetClientInformationRequest"}" on the mocked client request processor
+
 Scenario: Process request in client side get the correct response in server side.
 	Given A "GetClientInformation" request
 	When I send the request by the server request dispatcher

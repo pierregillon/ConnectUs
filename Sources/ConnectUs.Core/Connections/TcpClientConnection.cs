@@ -13,6 +13,8 @@ namespace ConnectUs.Core.Connections
         private const int DefaultTimeout = 1000;
 
         private readonly TcpClient _client;
+        private Queue<byte[]> _alreadyReadBuffers = new Queue<byte[]>();
+        private byte[] END = {0, 0, 0, 0, 0 };
 
         public int TimeOut
         {
@@ -39,6 +41,7 @@ namespace ConnectUs.Core.Connections
         {
             var networkStream = _client.GetStream();
             Send(networkStream, data);
+            Send(networkStream, END);
         }
         public void Send(Stream stream)
         {
@@ -46,9 +49,23 @@ namespace ConnectUs.Core.Connections
         }
         public byte[] Read()
         {
+            if (_alreadyReadBuffers.Any()) {
+                return _alreadyReadBuffers.Dequeue();
+            }
+
             var buffers = new List<byte[]>();
             WhileDataAvailable(ReadBufferSize, buffers.Add);
-            return buffers.SelectMany(bytes => bytes).ToArray();
+
+            var correctBuffers = buffers
+                .SelectMany(bytes => bytes)
+                .ToArray()
+                .Split(END)
+                .ToArray();
+
+            foreach (var correctBuffer in correctBuffers) {
+                _alreadyReadBuffers.Enqueue(correctBuffer);
+            }
+            return _alreadyReadBuffers.Dequeue();
         }
         public void Read(Stream stream)
         {
@@ -114,6 +131,30 @@ namespace ConnectUs.Core.Connections
                 var buffer = Read(networkStream, bufferSize);
                 callback(buffer);
             } while (networkStream.DataAvailable);
+        }
+    }
+
+    public static class ByteArrayExtensions
+    {
+        public static IEnumerable<byte[]> Split(this IReadOnlyList<byte> array, IReadOnlyList<byte> sequenceToFind)
+        {
+            var lastIndex = 0;
+            for (int i = 0; i < array.Count; i++) {
+                var j = 0;
+                for (; j < sequenceToFind.Count; j++) {
+                    if (array[j+i] != sequenceToFind[j]) {
+                        break;
+                    }
+                }
+                if (j == sequenceToFind.Count) {
+                    yield return array.Skip(lastIndex).Take(i - lastIndex).ToArray();
+                    lastIndex = i += j;
+                }
+            }
+
+            if (lastIndex == 0) {
+                yield return array.ToArray();
+            }
         }
     }
 }
