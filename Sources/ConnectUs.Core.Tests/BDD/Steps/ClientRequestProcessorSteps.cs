@@ -104,7 +104,7 @@ namespace ConnectUs.Core.Tests.BDD.Steps
             Check.That(Result).IsEqualTo(data);
         }
 
-        [Then(@"I get a process exception ""(.*)""")]
+        [Then(@"I get the message ""(.*)""")]
         public void ThenIGetAProcessException(string text)
         {
             Check.That(Result).IsEqualTo(text);

@@ -22,24 +22,32 @@ namespace ConnectUs.Core.ClientSide
                 var requestName = _requestParser.GetRequestName(data);
                 var command = _commandLocator.GetCommand(requestName);
                 if (command == null) {
-                    throw new ProcessException(string.Format("The request '{0}' is unknown.", requestName));
+                    result = UnknownRequest(requestName);
                 }
-                result = ExecuteCommand(command, data);
+                else {
+                    result = ExecuteCommand(command, data);
+                }
             }
             catch (TargetInvocationException ex) {
-                result = new ErrorResponse {Error = ex.InnerException.Message};
+                result = new ErrorResponse(ex.InnerException);
             }
             catch (Exception ex) {
-                result = new ErrorResponse {Error = ex.Message};
+                result = new ErrorResponse(ex);
             }
             return _requestParser.ConvertToBytes(result);
+        }
+
+        private static ErrorResponse UnknownRequest(string requestName)
+        {
+            var exception = new Exception($"The request '{requestName}' is unknown.");
+            return new ErrorResponse(exception, 404);
         }
 
         private object ExecuteCommand(object command, byte[] data)
         {
             var methodInfo = command.GetType().GetMethod("Execute");
             if (methodInfo == null) {
-                throw new ProcessException(string.Format("Unable to find the method 'Execute' on the command '{0}'.", command.GetType().Name));
+                throw new Exception($"Unable to find the method 'Execute' on the command '{command.GetType().Name}'.");
             }
             var requestType = methodInfo.GetParameters().Single().ParameterType;
             var request = _requestParser.FromBytes(requestType, data);

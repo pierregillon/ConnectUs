@@ -13,10 +13,7 @@ namespace ConnectUs.Core.Tests.BDD.Mocks
         public override byte[] Process(byte[] originalData)
         {
             var encoding = new UTF8Encoding();
-            var json = JsonConvert.SerializeObject(new ErrorResponse
-            {
-                Error = ErrorMessage
-            });
+            var json = "{\"Name\":\"ErrorResponse\", \"Message\":\"" + ErrorMessage + "\"}";
             return encoding.GetBytes(json);
         }
     }

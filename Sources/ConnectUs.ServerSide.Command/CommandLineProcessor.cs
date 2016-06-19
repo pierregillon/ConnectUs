@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ConnectUs.Core.ServerSide.Clients;
 
 namespace ConnectUs.ServerSide.Command
 {
@@ -27,9 +29,20 @@ namespace ConnectUs.ServerSide.Command
                     _console.WriteError("The command '{0}' is unknown. Did you forget to load some modules ? Type help for more information.", commandLine.CommandName);
                 }
             }
-            catch (Exception ex) {
-                _console.WriteError(ex.Message);
+            catch (RemoteClientException ex) {
+                var messages = GetMessages(ex);
+                _console.WriteError(messages);
             }
+        }
+
+        private string GetMessages(Exception exception)
+        {
+            var messages = new List<string>();
+            while (exception != null) {
+                messages.Add(exception.Message);
+                exception = exception.InnerException;
+            }
+            return string.Join(Environment.NewLine, messages);
         }
     }
 }

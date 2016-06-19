@@ -54,6 +54,7 @@
     <Compile Include="Requests\IRequestHandler.cs" />
     <Compile Include="Requests\RequestDispatcher.cs" />
     <Compile Include="Requests\RequestException.cs" />
+    <Compile Include="Requests\UnknownCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectUs.Core\ConnectUs.Core.csproj">

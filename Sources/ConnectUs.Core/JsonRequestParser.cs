@@ -21,11 +21,14 @@ namespace ConnectUs.Core
             }
             return requestNameJsonObject.ToString();
         }
-        public string GetError(byte[] data)
+        public ErrorResponse GetError(byte[] data)
         {
             var json = Encoding.GetString(data);
-            var request = JsonConvert.DeserializeObject<ErrorResponse>(json);
-            return request.Error;
+            var jsonObject = JToken.ReadFrom(new JsonTextReader(new StringReader(json)));
+            if (jsonObject.Value<string>("Name") == "ErrorResponse") {
+                return jsonObject.ToObject<ErrorResponse>();
+            }
+            return null;
         }
         public object FromBytes(Type type, byte[] data)
         {

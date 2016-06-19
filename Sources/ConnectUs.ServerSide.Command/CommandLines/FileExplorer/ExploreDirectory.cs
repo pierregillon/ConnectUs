@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ConnectUs.Core.ServerSide.Clients;
+using ConnectUs.Core.ServerSide.Requests;
 using ConnectUs.FileExplorer;
 
 namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
@@ -21,14 +22,19 @@ namespace ConnectUs.ServerSide.Command.CommandLines.FileExplorer
                 return;
             }
 
-            var request = new ExploreDirectoryRequest
-            {
-                DirectoryPath = directoryPath.Value,
-                GetDirectories = true,
-                GetFiles = true
-            };
-            var response = remoteClient.Send<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
-            WriteInfo(string.Join(Environment.NewLine, response.Files.Select(x => x.Name)));
+            try {
+                var request = new ExploreDirectoryRequest
+                {
+                    DirectoryPath = directoryPath.Value,
+                    GetDirectories = true,
+                    GetFiles = true
+                };
+                var response = remoteClient.Send<ExploreDirectoryRequest, ExploreDirectoryResponse>(request);
+                WriteInfo(string.Join(Environment.NewLine, response.Files.Select(x => x.Name)));
+            }
+            catch (UnknownCommand) {
+                WriteError("Unknown command 'dir'. The module 'ConnectUs.FileExplorer' seems to not be loaded.");
+            }
         }
     }
 }

@@ -27,10 +27,7 @@ namespace ConnectUs.Core.ServerSide.Requests
         {
             try {
                 var data = _connection.Read();
-                var error =_requestParser.GetError(data);
-                if (string.IsNullOrEmpty(error) == false) {
-                    throw new RequestException(error);
-                }
+                ThrowIfIsError(data);
                 return _requestParser.FromBytes<TResponse>(data);
             }
             catch (ConnectionException ex) {
@@ -50,6 +47,20 @@ namespace ConnectUs.Core.ServerSide.Requests
         public void Close()
         {
             _connection.Close();
+        }
+
+        // ----- Internal logic
+        private void ThrowIfIsError(byte[] data)
+        {
+            var error = _requestParser.GetError(data);
+            if (error != null) {
+                if (error.Code == 404) {
+                    throw new UnknownCommand(error.Message);
+                }
+                else {
+                    throw new RequestException(error.Message);
+                }
+            }
         }
     }
 }

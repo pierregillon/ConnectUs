@@ -16,7 +16,9 @@ namespace ConnectUs.ServerSide.Command.CommandLines
             if (_context.CurrentClient == null) {
                 WriteError("You should define the current client first using 'connect %index'.");
             }
-            HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
+            else {
+                HandleInternal(commandLine, _context.CurrentClient.RemoteClient);
+            }
         }
 
         protected abstract void HandleInternal(CommandLine commandLine, IRemoteClient remoteClient);

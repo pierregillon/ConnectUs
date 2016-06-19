@@ -13,4 +13,10 @@ Scenario: Execute unknown request on the client request processor throws excepti
 	Given A mocked command locator
 		And A client request processor
 	When I process the request "{"Name":"unknownRequest"}"
-	Then I get a process exception "{"Error":"The request 'unknownRequest' is unknown.","Name":"ErrorResponse"}"
+	Then I get the message "{"Code":404,"Message":"The request 'unknownRequest' is unknown.","Name":"ErrorResponse"}"
+
+Scenario: Execute known request that throw exception on the client returns correct error.
+	Given A mocked command locator
+		And A client request processor
+	When I process the request "{"Name":"throwErrorRequest"}"
+	Then I get the message "{"Code":-1,"Message":"An error occured!","Name":"ErrorResponse"}"

@@ -25,7 +25,7 @@ namespace ConnectUs.Core.ServerSide.Clients
                     return _requestDispatcher.ReceiveResponse<TResponse>();
                 }
                 catch (RequestException ex) {
-                    throw new RemoteClientException(string.Format("An error occured during the execution of the request {0}.", typeof (TRequest).Name), ex);
+                    throw new RemoteClientException($"An error occured during the execution of the request {typeof (TRequest).Name}.", ex);
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace ConnectUs.Core.ServerSide.Clients
         {
             var fileName = Path.GetFileName(sourceFilePath);
             if (fileName == null) {
-                throw new Exception(string.Format("The file '{0}' is not a valid file.", sourceFilePath));
+                throw new Exception($"The file '{sourceFilePath}' is not a valid file.");
             }
             lock (_locker) {
                 try {
@@ -43,7 +43,7 @@ namespace ConnectUs.Core.ServerSide.Clients
                     return response.FilePath;
                 }
                 catch (RequestException ex) {
-                    throw new RemoteClientException(string.Format("An error occured during the upload of {0}.", Path.GetFileName(sourceFilePath)), ex);
+                    throw new RemoteClientException($"An error occured during the upload of {Path.GetFileName(sourceFilePath)}.", ex);
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace ConnectUs.Core.ServerSide.Clients
                     if (File.Exists(localFilePath)) {
                         File.Delete(localFilePath);
                     }
-                    throw new RemoteClientException(string.Format("An error occured during the download of {0}.", Path.GetFileName(remoteFilePath)), ex);
+                    throw new RemoteClientException($"An error occured during the download of {Path.GetFileName(remoteFilePath)}.", ex);
                 }
             }
         }
